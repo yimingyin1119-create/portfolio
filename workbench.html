@@ -1,25 +1,682 @@
-<!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>消费券项目工作台</title>
 <style>
-:root{--paper:#F2F2EF;--ink:#161514;--muted:#64625D;--mark:#C8331F}
-@media (prefers-color-scheme: dark){:root{--paper:#121211;--ink:#ECEAE4;--muted:#A3A19A;--mark:#FF6B57;color-scheme:dark}}
-body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--paper);color:var(--ink);font:17px/1.75 "PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;padding:24px 16px}
-main{max-width:30em}
-h1{font-size:28px;margin:0 0 8px}
-p{margin:0 0 16px;color:var(--muted)}
-a{color:var(--mark);font-weight:600;text-decoration:none}
-a:hover{text-decoration:underline}
+/* Operate-mode workbench: shared project file, five-stage rail; each stage = intake form left, output sheet right. */
+:root{
+  --paper:#F6F7F9; --sheet:#FFFFFF; --ink:#141824; --muted:#5B6275; --rule:#D9DDE6;
+  --accent:#2340C9; --accent-soft:#E7EBFB; --marker:#FFD84A; --marker-ink:#3A2F00;
+  --ok:#1E7D4F; --ok-soft:#E3F3EA; --warn:#B4541A; --warn-soft:#FBEDE3; --bad:#B42323; --bad-soft:#FBE6E6;
+  --f-body:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
+  --f-mono:var(--f-body); --f-code:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#0E1118; --sheet:#161A24; --ink:#E8EBF2; --muted:#9AA2B6; --rule:#2A3040;
+  --accent:#8FA3FF; --accent-soft:#1E2747; --marker:#E9C53A; --marker-ink:#1C1600;
+  --ok:#5BC48E; --ok-soft:#163327; --warn:#F09A5E; --warn-soft:#3A2416; --bad:#FF7B7B; --bad-soft:#3D1A1A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#0E1118; --sheet:#161A24; --ink:#E8EBF2; --muted:#9AA2B6; --rule:#2A3040;
+  --accent:#8FA3FF; --accent-soft:#1E2747; --marker:#E9C53A; --marker-ink:#1C1600;
+  --ok:#5BC48E; --ok-soft:#163327; --warn:#F09A5E; --warn-soft:#3A2416; --bad:#FF7B7B; --bad-soft:#3D1A1A; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;padding-inline:16px;padding-block:28px 48px}
+.wrap{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.back{margin:0 0 10px;font-size:14px}
+.back a{color:var(--accent);text-decoration:none}
+.back a:hover{text-decoration:underline}
+.checks .grp{font-size:12px;font-weight:700;color:var(--muted);padding-top:10px}
+header.top h1{font-weight:700;font-size:26px;line-height:1.3;margin:0;text-wrap:balance}
+header.top p{margin:6px 0 0;color:var(--muted);max-width:62ch}
+.guide{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin-top:12px;padding:10px 14px;background:var(--sheet);border:1px solid var(--rule);font-size:13.5px}
+header.top .guide p{margin:0;color:var(--ink);max-width:80ch}
+
+.file{background:var(--sheet);border:1px solid var(--rule);border-top:3px solid var(--ink);padding:14px 16px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:10px}
+.file .lab{grid-column:1/-1;font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}
+.file .lab small{font-size:12px;font-weight:400;color:var(--muted)}
+@media (max-width:820px){.file{grid-template-columns:1fr 1fr}.file label:first-of-type{grid-column:1/-1}}
+
+nav.rail{display:grid;grid-template-columns:repeat(5,minmax(112px,1fr));overflow-x:auto;border-bottom:2px solid var(--ink)}
+nav.rail button{all:unset;cursor:pointer;padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;border-bottom:4px solid transparent;margin-bottom:-2px;min-width:0}
+nav.rail button .n{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+nav.rail button .t{font-weight:700;font-size:16px}
+nav.rail button .d{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav.rail button[aria-selected="true"]{border-bottom-color:var(--accent)}
+nav.rail button[aria-selected="true"] .n,nav.rail button[aria-selected="true"] .t{color:var(--accent)}
+nav.rail button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+form,.side{background:var(--sheet);border:1px solid var(--rule);padding:18px;display:flex;flex-direction:column;gap:13px;min-width:0}
+.side form{border:0;padding:10px 0 0}
+.formhead{font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.formhead span+span{font-size:12px;font-weight:400;color:var(--muted)}
+label{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:baseline;column-gap:6px;row-gap:5px;font-size:13px;font-weight:500;min-width:0}
+label small{font-weight:400;color:var(--muted)}
+label > input,label > select,label > textarea{grid-column:1/-1}
+.chips label{display:flex}
+.prep .ck > input{grid-column:auto}
+input,select,textarea{font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:2px;padding:7px 9px;width:100%;min-width:0}
+input[type=number]{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+textarea{min-height:96px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+fieldset{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;min-width:0}
+legend{font-size:13px;font-weight:500;padding:0;margin-bottom:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{flex-direction:row;align-items:center;font-weight:400}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{border:1px solid var(--rule);padding:3px 9px;font-size:13px;cursor:pointer;background:var(--paper);border-radius:2px}
+.chips input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--sheet)}
+.chips input:focus-visible + span{outline:2px solid var(--accent);outline-offset:1px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border-radius:2px;padding:8px 15px;font-size:14px;font-weight:700;border:1px solid var(--ink);background:var(--ink);color:var(--sheet)}
+button.ghost{background:transparent;color:var(--ink);font-weight:500}
+button.sm{padding:4px 10px;font-size:12px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.status{font-size:13px;color:var(--muted);min-height:1.4em}
+.status.err{color:var(--warn)}
+
+.checks{display:flex;flex-direction:column}
+.ck{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:5px 0;border-bottom:1px dashed var(--rule);font-size:13px}
+.ck select{width:auto;padding:3px 6px;font-size:12px}
+.ck.no span{color:var(--bad);font-weight:500}
+details{border-top:1px solid var(--rule);padding-top:8px}
+summary{cursor:pointer;font-size:13px;font-weight:500}
+.prep .ck{grid-template-columns:auto minmax(0,1fr);font-size:14px;cursor:pointer}
+.prep .ck input{width:auto}
+.prep .ck.done span{color:var(--muted);text-decoration:line-through}
+.prep .grp{font-size:12px;font-weight:700;color:var(--muted);padding-top:10px}
+
+.sheet{background:var(--sheet);border:1px solid var(--rule);min-width:0}
+.sheethead{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-start;padding:18px 22px;border-bottom:1px solid var(--rule)}
+.sheethead h2{font-weight:700;font-size:20px;margin:0;line-height:1.35;text-wrap:balance}
+.meta{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:var(--muted);margin-top:6px}
+.meta b{color:var(--ink);font-weight:500}
+.badge{font-size:12px;font-weight:500;color:var(--muted);border:1px solid var(--rule);padding:2px 9px;border-radius:999px;white-space:nowrap}
+.badge.live{color:var(--ok);border-color:var(--ok);background:var(--ok-soft)}
+.stalebar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;padding:10px 22px;background:var(--warn-soft);font-size:13px;border-bottom:1px solid var(--rule)}
+.sheet.stale section.ai .body{opacity:.45}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+section.step{padding:20px 22px;border-bottom:1px solid var(--rule)}
+section.step:last-child{border-bottom:0}
+.step h3{margin:0 0 10px;font-size:16px;font-weight:700;display:flex;flex-wrap:wrap;align-items:baseline;gap:8px}
+.step h3 small{font-weight:400;font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+.body{min-width:0}
+.body ul{margin:0;padding-left:18px}
+.body li{margin:2px 0}
+.lead{font-size:15px;max-width:72ch;margin:0}
+.note{font-size:12.5px;color:var(--muted);margin:10px 0 0}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:1px 8px;border-radius:999px;font-family:var(--f-mono)}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.cols h4{margin:0 0 4px;font-size:12px;font-family:var(--f-mono);color:var(--muted);font-weight:500}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.tile{border-top:2px solid var(--ink);padding-top:8px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.tile .m{font-size:12px;color:var(--muted)}
+.tile .v{font-family:var(--f-mono);font-size:21px;font-weight:600;font-variant-numeric:tabular-nums;line-height:1.3}
+.tile .h{font-size:12px;color:var(--muted)}
+.tile.ok{border-top-color:var(--ok)} .tile.warn{border-top-color:var(--warn)} .tile.bad{border-top-color:var(--bad)}
+.progress{display:flex;flex-direction:column;gap:10px}
+.pr{display:grid;grid-template-columns:72px minmax(0,1fr) 64px;gap:10px;align-items:center;font-size:13px}
+.pr .track{height:12px;background:var(--accent-soft);position:relative}
+.pr .track i{position:absolute;inset:0 auto 0 0;background:var(--accent)}
+.pr .track i.t{background:var(--muted)}
+.pr .val{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.funnel{display:flex;flex-direction:column;gap:6px}
+.fn{display:grid;grid-template-columns:76px minmax(0,1fr) 128px;gap:10px;align-items:center;font-size:13px}
+.fn .bar{height:18px;background:var(--accent);min-width:2px}
+.fn .bar.refund{background:var(--bad)}
+.fn .num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;font-size:12.5px}
+
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:12px;font-weight:500;color:var(--muted);font-family:var(--f-mono)}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.minibar{height:6px;background:var(--accent-soft);margin-top:5px;min-width:60px}
+.minibar i{display:block;height:100%;background:var(--accent)}
+tfoot td{font-weight:700;border-bottom:0}
+.calc td.f{color:var(--muted);font-size:13px}
+
+.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.ins{background:var(--paper);padding:10px 12px;display:flex;flex-direction:column;gap:4px}
+.ins .p{font-size:13px;font-weight:700}
+.ins .s{font-size:14px}
+.ins .i{font-size:13px;color:var(--accent);font-weight:500}
+.idea{display:flex;flex-direction:column;gap:6px}
+.idea .theme{font-weight:700;font-size:22px;line-height:1.35;text-wrap:balance}
+.idea mark{background:var(--marker);color:var(--marker-ink);padding:1px 6px}
+.idea .tag{font-family:var(--f-mono);font-size:13px;color:var(--accent)}
+.idea .why{color:var(--muted);font-size:14px;max-width:70ch}
+.briefs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.brief{border:1px solid var(--rule);padding:12px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.brief .angle{font-size:14px;background:var(--accent-soft);padding:6px 10px}
+.brief dl{margin:0;display:flex;flex-direction:column;gap:6px}
+.brief dt{font-size:12px;color:var(--muted);font-family:var(--f-mono)}
+.brief dd{margin:0}
+.brief ul{font-size:13.5px}
+.brief dd.avoid li::marker{content:"✕ ";color:var(--warn)}
+.brief .node{font-size:13px;border-top:1px dashed var(--rule);padding-top:6px}
+.prompts{display:flex;flex-direction:column;gap:8px}
+.prompt{border:1px solid var(--rule);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:9px 12px}
+.prompt .u{font-size:13px;font-weight:700}
+.prompt code{font-family:var(--f-code);font-size:12.5px;color:var(--muted);white-space:pre-wrap;word-break:break-word}
+.prompt button{grid-row:1/3;grid-column:2;align-self:start}
+.tl{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;padding:7px 0;border-bottom:1px dashed var(--rule)}
+.tl:last-child{border-bottom:0}
+.tl .d{font-family:var(--f-mono);font-size:12.5px;color:var(--accent)}
+.govnote{background:var(--paper);border:1px solid var(--rule);padding:10px 14px;font-size:14px;max-width:76ch}
+.eight{display:flex;flex-direction:column}
+.eight .e{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:8px 0;border-bottom:1px dashed var(--rule)}
+.eight .e:last-child{border-bottom:0}
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.verdict div{border:1px solid var(--rule);padding:10px 12px;font-size:14px}
+.verdict h4{margin:0 0 4px;font-size:13px}
+.streaming{padding:28px 22px;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.streaming .count{color:var(--accent);font-variant-numeric:tabular-nums}
+footer{font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;border-top:1px solid var(--rule);padding-top:14px}
+@media (max-width:520px){.row2,.row3{grid-template-columns:1fr}section.step{grid-template-columns:1fr}.tl,.eight .e{grid-template-columns:1fr;gap:0}.fn{grid-template-columns:64px minmax(0,1fr) 104px}}
+@media (prefers-reduced-motion:no-preference){.sheet.fresh section.step{animation:rise .3s ease both}}
+@keyframes rise{from{transform:translateY(6px)}to{transform:none}}
 </style>
-</head>
-<body>
-<main>
-  <h1>消费券项目工作台</h1>
-  <p>演示版整理中，稍后上线。</p>
-  <a href="index.html#growth">← 返回作品集</a>
-</main>
-</body>
-</html>
+
+<div class="wrap">
+  <header class="top">
+    <p class="back"><a href="index.html#growth">← 返回作品集</a></p>
+    <h1>消费券项目工作台</h1>
+    <p>把一个政府消费券项目从线索到复盘拆成五站。每一站配一个计算器或 AI 助手：线索评估、ROI 测算与立项摘要、达人 Brief、核销预警与漏斗排查、复盘四步与 KPT 小结。</p>
+    <div class="guide"><p>怎么看：左侧数字可以直接改，右侧的测算、进度和预警即时重算。这是演示版，文字结论显示示例输出；输入改动后，没跟着更新的文字会标灰。</p><button type="button" class="ghost sm" id="reset">恢复示例数据</button></div>
+  </header>
+
+  <div class="file" id="file">
+    <div class="lab"><span>项目档案 <small>五站共用</small></span><small>示例数据均为虚构</small></div>
+    <label for="pName">项目名称<input id="pName" value="苏州平江路 · 秋季夜游消费券"></label>
+    <label for="pCat">品类<select id="pCat"><option selected>文旅</option><option>餐饮</option><option>零售</option><option>家政服务</option><option>综合</option></select></label>
+    <label for="pBudget">政府资金 <small>万元</small><input id="pBudget" type="number" min="1" value="300"></label>
+    <label for="pStart">开始<input id="pStart" type="date" value="2026-09-20"></label>
+    <label for="pEnd">结束<input id="pEnd" type="date" value="2026-11-20"></label>
+  </div>
+
+  <nav class="rail" role="tablist" aria-label="项目阶段">
+    <button role="tab" id="t1" aria-controls="s1" aria-selected="true"><span class="n">01</span><span class="t">线索</span><span class="d">可行性与优先级</span></button>
+    <button role="tab" id="t2" aria-controls="s2" aria-selected="false"><span class="n">02</span><span class="t">立项</span><span class="d">ROI 测算与摘要</span></button>
+    <button role="tab" id="t3" aria-controls="s3" aria-selected="false"><span class="n">03</span><span class="t">筹备</span><span class="d">清单与达人 Brief</span></button>
+    <button role="tab" id="t4" aria-controls="s4" aria-selected="false"><span class="n">04</span><span class="t">执行</span><span class="d">核销预警与归因</span></button>
+    <button role="tab" id="t5" aria-controls="s5" aria-selected="false"><span class="n">05</span><span class="t">复盘</span><span class="d">复盘四步与 KPT</span></button>
+  </nav>
+
+  <div class="grid" role="tabpanel" id="s1" aria-labelledby="t1">
+    <form id="f1" novalidate>
+      <div class="formhead"><span>线索信息</span></div>
+      <div class="row2">
+        <label for="l_partner">合作方<input id="l_partner" value="市文化广电和旅游局"></label>
+        <label for="l_source">线索来源<select id="l_source"><option selected>政府主动联系</option><option>平台主动拓展</option><option>已有合作升级</option><option>第三方引荐</option></select></label>
+      </div>
+      <fieldset><legend>政府侧可投入</legend><div class="chips" id="l_gov">
+        <label for="g1"><input type="checkbox" id="g1" value="政策背书" checked><span>政策背书</span></label>
+        <label for="g2"><input type="checkbox" id="g2" value="资金配套" checked><span>资金配套</span></label>
+        <label for="g3"><input type="checkbox" id="g3" value="官方媒体矩阵" checked><span>官方媒体矩阵</span></label>
+        <label for="g4"><input type="checkbox" id="g4" value="场地与街区"><span>场地与街区</span></label>
+        <label for="g5"><input type="checkbox" id="g5" value="行业协会商家"><span>行业协会商家</span></label>
+        <label for="g6"><input type="checkbox" id="g6" value="线下广告位"><span>线下广告位</span></label>
+      </div></fieldset>
+      <fieldset><legend>平台侧可投入</legend><div class="chips" id="l_plat">
+        <label for="q1"><input type="checkbox" id="q1" value="本地流量与搜索" checked><span>本地流量与搜索</span></label>
+        <label for="q2"><input type="checkbox" id="q2" value="话题与榜单" checked><span>话题与榜单</span></label>
+        <label for="q3"><input type="checkbox" id="q3" value="达人资源" checked><span>达人资源</span></label>
+        <label for="q4"><input type="checkbox" id="q4" value="平台配补"><span>平台配补</span></label>
+        <label for="q5"><input type="checkbox" id="q5" value="UGC 玩法"><span>UGC 玩法</span></label>
+      </div></fieldset>
+      <label for="l_need">政府诉求与已知信息<textarea id="l_need">希望在国庆后到初冬淡季拉动夜间文旅消费，重点是平江路一带的餐饮、评弹演艺和夜游船。考核看核销金额和拉动倍数。资金分两批拨付，需要配合审计。</textarea></label>
+      <div class="actions"><button type="submit">评估这条线索</button></div>
+      <div class="status" data-status></div>
+    </form>
+    <article class="sheet" id="o1" aria-live="polite"></article>
+  </div>
+
+  <div class="grid" role="tabpanel" id="s2" aria-labelledby="t2" hidden>
+    <form id="f2" novalidate>
+      <div class="formhead"><span>测算参数</span><span>改数字即时重算</span></div>
+      <div class="row2">
+        <label for="r_match">平台配补 <small>万元</small><input id="r_match" type="number" min="0" value="30"></label>
+        <label for="r_rate">预计核销率 <small>%</small><input id="r_rate" type="number" min="0" max="120" value="80"></label>
+      </div>
+      <div class="row2">
+        <label for="r_lev">预计拉动比 <small>核销金额 ÷ 补贴</small><input id="r_lev" type="number" min="0" step="0.1" value="2.6"></label>
+        <label for="r_kol">达人与物料 <small>万元</small><input id="r_kol" type="number" min="0" value="50"></label>
+      </div>
+      <div class="row2">
+        <label for="r_staff">人力成本 <small>万元</small><input id="r_staff" type="number" min="0" value="12"></label>
+        <label for="r_loss">资损预估 <small>万元</small><input id="r_loss" type="number" min="0" value="3"></label>
+      </div>
+      <label for="r_type">项目类型<select id="r_type"><option selected>效果转化型</option><option>品牌传播型</option></select></label>
+      <div class="actions"><button type="submit">生成立项摘要</button></div>
+      <div class="status" data-status></div>
+    </form>
+    <article class="sheet" id="o2" aria-live="polite"></article>
+  </div>
+
+  <div class="grid" role="tabpanel" id="s3" aria-labelledby="t3" hidden>
+    <div class="side">
+      <div class="formhead"><span>发券前清单</span><span id="prepCount"></span></div>
+      <div class="checks prep" id="prep"></div>
+      <details open>
+        <summary>达人 Brief 输入</summary>
+        <form id="f3" novalidate>
+          <div class="row2">
+            <label for="b_goal">推广目标<select id="b_goal"><option>品牌曝光</option><option selected>消费券领取与核销</option><option>门店到店</option></select></label>
+            <label for="b_budget">达人预算 <small>万元</small><input id="b_budget" type="number" min="1" value="50"></label>
+          </div>
+          <label for="b_aud">目标人群<input id="b_aud" value="长三角 22 至 35 岁周末短途游人群，城市白领情侣与闺蜜"></label>
+          <fieldset><legend>投放平台</legend><div class="chips" id="b_plat">
+            <label for="bp1"><input type="checkbox" id="bp1" value="抖音" checked><span>抖音</span></label>
+            <label for="bp2"><input type="checkbox" id="bp2" value="小红书" checked><span>小红书</span></label>
+            <label for="bp3"><input type="checkbox" id="bp3" value="视频号"><span>视频号</span></label>
+            <label for="bp4"><input type="checkbox" id="bp4" value="B站"><span>B站</span></label>
+          </div></fieldset>
+          <label for="b_points">核心卖点 <small>一行一个</small><textarea id="b_points">评弹茶馆夜场，一壶茶听一折
+河道摇橹船夜航，灯笼倒影
+满 200 减 50 夜游消费券，限周五至周日
+苏式点心与桂花糖粥夜宵档</textarea></label>
+          <div class="actions"><button type="submit">生成达人方案</button></div>
+          <div class="status" data-status></div>
+        </form>
+      </details>
+    </div>
+    <article class="sheet" id="o3" aria-live="polite"></article>
+  </div>
+
+  <div class="grid" role="tabpanel" id="s4" aria-labelledby="t4" hidden>
+    <form id="f4" novalidate>
+      <div class="formhead"><span>日报数据</span><span>改数字即时重算</span></div>
+      <label for="x_day">统计日<input id="x_day" type="date" value="2026-10-20"></label>
+      <div class="row2">
+        <label for="x_warn">关注线 <small>落后多少 pp</small><input id="x_warn" type="number" min="0" step="1" value="8"></label>
+        <label for="x_bad">严重线 <small>落后多少 pp</small><input id="x_bad" type="number" min="0" step="1" value="18"></label>
+      </div>
+      <div class="row2">
+        <label for="x_claim">累计领取补贴 <small>万元</small><input id="x_claim" type="number" min="0" step="0.1" value="210"></label>
+        <label for="x_paysub">支付补贴 <small>万元</small><input id="x_paysub" type="number" min="0" step="0.1" value="150"></label>
+      </div>
+      <div class="row2">
+        <label for="x_paygmv">支付订单金额 <small>万元</small><input id="x_paygmv" type="number" min="0" step="0.1" value="420"></label>
+        <label for="x_wosub">核销补贴 <small>万元</small><input id="x_wosub" type="number" min="0" step="0.1" value="96"></label>
+      </div>
+      <div class="row2">
+        <label for="x_wogmv">核销订单金额 <small>万元</small><input id="x_wogmv" type="number" min="0" step="0.1" value="265"></label>
+        <label for="x_refund">退款金额 <small>万元</small><input id="x_refund" type="number" min="0" step="0.1" value="70"></label>
+      </div>
+      <fieldset><legend>商家核销分层（家数）</legend>
+        <div class="row2">
+          <label for="m0">0 核销<input id="m0" type="number" min="0" value="38"></label>
+          <label for="m1">低销 1 至 10 单<input id="m1" type="number" min="0" value="64"></label>
+          <label for="m2">中销 10 至 100 单<input id="m2" type="number" min="0" value="41"></label>
+          <label for="m3">高销 100 单以上<input id="m3" type="number" min="0" value="12"></label>
+        </div>
+      </fieldset>
+      <details open><summary>漏斗排查（哪一环掉得多就看哪一环；选「是」表示存在这个问题）</summary><div class="checks" id="ckFunnel"></div></details>
+      <div class="actions"><button type="submit">AI 归因与应对</button></div>
+      <div class="status" data-status></div>
+    </form>
+    <article class="sheet" id="o4" aria-live="polite"></article>
+  </div>
+
+  <div class="grid" role="tabpanel" id="s5" aria-labelledby="t5" hidden>
+    <form id="f5" novalidate>
+      <div class="formhead"><span>复盘补充数据</span><span>核销数据取自「执行」</span></div>
+      <label for="v_goal">本次活动目标<select id="v_goal"><option>拉新</option><option>促活</option><option selected>带动供给与消费</option></select></label>
+      <div class="row2">
+        <label for="v_new">新客占比 <small>%</small><input id="v_new" type="number" min="0" max="100" value="36"></label>
+        <label for="v_newref">新客退款率 <small>%</small><input id="v_newref" type="number" min="0" max="100" value="24"></label>
+      </div>
+      <div class="row3">
+        <label for="v_sub">提报商家<input id="v_sub" type="number" min="0" value="210"></label>
+        <label for="v_live">生效商家<input id="v_live" type="number" min="0" value="155"></label>
+        <label for="v_sold">动销商家<input id="v_sold" type="number" min="0" value="117"></label>
+      </div>
+      <label for="v_top">头部 10 家核销占比 <small>%</small><input id="v_top" type="number" min="0" max="100" value="48"></label>
+      <label for="v_note">其他观察<textarea id="v_note">评弹茶馆和摇橹船周末核销集中，工作日偏弱；部分餐饮商家不会操作核销。</textarea></label>
+      <div class="actions"><button type="submit">生成复盘报告</button></div>
+      <div class="status" data-status></div>
+    </form>
+    <article class="sheet" id="o5" aria-live="polite"></article>
+  </div>
+
+  <footer>
+    <span>尹伊茗 用 Claude 搭建 · 复盘采用公开的复盘四步与 KPT 框架，示例数据均为虚构 · AI 输出为初稿，执行前需人工核对</span>
+    <span>演示版 · 2026.10</span>
+  </footer>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const safeMark = s => esc(s).replace(/&lt;mark&gt;/g,"<mark>").replace(/&lt;\/mark&gt;/g,"</mark>");
+const list = a => (Array.isArray(a) ? a : []).map(x => `<li>${esc(x)}</li>`).join("");
+const num = id => Math.max(0, Number(document.getElementById(id).value) || 0);
+const f1 = n => (Math.round(n * 10) / 10).toLocaleString("zh-CN", {maximumFractionDigits:1});
+const pct = n => isFinite(n) ? (n * 100).toFixed(1) + "%" : "—";
+const days = (a, b) => Math.round((new Date(b) - new Date(a)) / 86400000);
+const checked = sel => [...document.querySelectorAll(sel + " input:checked")].map(i => i.value);
+
+function project(){ return { name: $("#pName").value.trim() || "未命名项目", cat: $("#pCat").value, budget: num("pBudget"), start: $("#pStart").value, end: $("#pEnd").value }; }
+/* Which inputs each stage's AI text depends on; text is marked stale when they change after it was written. */
+const SRC = {s1:["#file","#f1"], s2:["#file","#f2"], s3:["#file","#f3"], s4:["#file","#f4"], s5:["#file","#f4","#f5"]};
+const snap = k => SRC[k].map(s => [...document.querySelectorAll(`${s} input, ${s} select, ${s} textarea`)].map(e => e.type === "checkbox" ? e.checked : e.value).join("|")).join("#");
+const isStale = k => STATE[k].snap !== undefined && snap(k) !== STATE[k].snap;
+function staleBar(k){
+  if (!isStale(k)) return "";
+  return `<div class="stalebar" role="status"><span>输入已改动：数字已按新数据重算，标灰的文字仍基于原先的数据。${sample ? "点左侧按钮可按新数据重新生成。" : "演示版不重新生成文字部分。"}</span><button type="button" class="ghost sm" data-reset>恢复示例数据</button></div>`;
+}
+function head(key, title, meta, id){
+  const live = STATE[key].live;
+  return `<div class="sheethead"><div><h2>${esc(title)}</h2>${meta ? `<div class="meta">${meta}</div>` : ""}</div>
+  <div class="toolbar"><span class="badge ${live ? "live" : ""}">${live ? "AI 已生成" : "示例输出"}</span><button type="button" class="ghost sm" data-copy="${id}">复制全文</button></div></div>${staleBar(key)}`;
+}
+const AI_TEXT = new Set(["判断","匹配度与缺口","需与政府对齐的问题","下一步","项目背景","目标与资源","风险与结论","人群洞察","传播主线","分层达人 Brief","AIGC 视觉提示词","传播排期","归因结论","应对动作","给政府的异常说明","复盘四步","KPT 小结"]);
+const step = (title, sub, inner) => `<section class="step${AI_TEXT.has(title) ? " ai" : ""}"><div class="body"><h3>${esc(title)}${sub ? ` <small>${esc(sub)}</small>` : ""}</h3>${inner}</div></section>`;
+function paint(k, o, html){ o.innerHTML = html; o.classList.toggle("stale", isStale(k)); }
+function fresh(el){ el.classList.remove("fresh"); void el.offsetWidth; el.classList.add("fresh"); }
+
+async function copyText(text, btn){
+  try { await navigator.clipboard.writeText(text); }
+  catch { const ta = document.createElement("textarea"); ta.value = text; document.body.append(ta); ta.select(); try { document.execCommand("copy"); } catch {} ta.remove(); }
+  const o = btn.textContent; btn.textContent = "已复制"; setTimeout(() => btn.textContent = o, 1400);
+}
+document.addEventListener("click", e => { const b = e.target.closest("button[data-copy]"); if (!b) return; const src = document.getElementById(b.dataset.copy); if (src) copyText(src.innerText, b); });
+
+const tabs = [...document.querySelectorAll('[role="tab"]')];
+function show(i){
+  tabs.forEach((t, k) => { t.setAttribute("aria-selected", String(k === i)); t.tabIndex = k === i ? 0 : -1; document.getElementById(t.getAttribute("aria-controls")).hidden = k !== i; });
+  try { history.replaceState(null, "", "#s" + (i + 1)); } catch {}
+}
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => show(i));
+  t.addEventListener("keydown", e => { if (e.key === "ArrowRight" || e.key === "ArrowLeft") { const n = (i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length; show(n); tabs[n].focus(); } });
+});
+
+let sample = null;
+const ERR = {
+  not_granted:"你没有允许此页面使用 Claude，在线生成已关闭，示例和计算器仍可使用。",
+  sampling_disabled:"当前账号不能使用 Claude，在线生成不可用。",
+  rate_limited:"调用太频繁或已到用量上限，请稍后再点一次。",
+  session_expired:"登录已过期，请重新登录 Claude 后再试。",
+  invalid_json:"这次输出格式不完整，请再点一次。",
+  refused:"Claude 没有生成这份内容，请调整输入后再试。",
+  empty_completion:"没有得到输出，请精简输入后再试。"
+};
+const STATE = {};
+const R = {};
+async function runAI(key, form, outEl, prompt, validate){
+  const status = form.querySelector("[data-status]"), btn = form.querySelector('button[type="submit"]');
+  if (!sample) { status.className = "status"; status.textContent = NOAI; return; }
+  const at = snap(key);
+  btn.disabled = true; status.className = "status"; status.textContent = "正在思考，通常需要 20 至 90 秒…";
+  outEl.innerHTML = `<div class="streaming">AI 正在撰写… 已写 <span class="count">0</span> 字</div>`;
+  const cnt = outEl.querySelector(".count");
+  try {
+    const d = await sample.json(prompt, { cache:false, onText: ({text}) => { cnt.textContent = text.length.toLocaleString(); } });
+    if (!d || typeof d !== "object" || !validate(d)) throw {code:"invalid_json"};
+    STATE[key] = {d, live:true, snap:at}; R[key](); fresh(outEl);
+    status.textContent = "已生成。可复制全文，或修改输入后重新生成。";
+  } catch (err) {
+    const code = err?.code || "upstream_error";
+    status.className = "status err"; status.textContent = ERR[code] || "生成中断，请稍后再试一次。";
+    if (code === "not_granted" || code === "sampling_disabled") { sample = null; lockAI(); }
+    R[key]();
+  } finally { btn.disabled = false; }
+}
+const NOAI = "演示版不调用 AI，右侧是示例输出，数字部分可以直接改。";
+function lockAI(){
+  document.querySelectorAll("[data-status]").forEach(s => { if (!s.classList.contains("err")) s.textContent = sample ? "改好输入后点按钮，AI 会按你的数据重写右侧。" : "右侧为示例输出，数字部分可以直接改。"; });
+}
+const ROLE = "你是政府消费券与文旅营销项目的资深操盘手，熟悉政企合作、招商配券、达人营销和核销数据分析。全部用简体中文，务实具体，不用「全网最低」「第一」等绝对化用语，不写真实人名。";
+
+/* 01 线索 */
+STATE.s1 = {live:false, d:{priority:"P0",verdict:"建议推进。政府有专项资金和官方媒体矩阵，平台能配达人与本地流量，时间窗口正好覆盖国庆后的文旅淡季。",
+  fit:["资金来源明确，分批拨付可预期","目标品类（餐饮、演艺、夜游）与平台本地生活供给重合度高","政府官方号可承接宣发，平台话题可放大"],
+  gaps:["缺少行业协会背书，头部商家参与意愿未知","文旅核销集中在周末，工作日拉动有限","审计材料要求尚未明确"],
+  questions:["考核口径以核销金额为主，还是同时看拉动倍数？","两批资金的拨付节点，平台是否需要垫付？","审计对核销明细的格式和截止时间要求？","是否允许平台配补叠加使用？"],
+  nextSteps:["一周内与合作方确认考核口径与拨付节点","联合运营、产品、风控做可行性评估","准备合作方案与投标材料"]}};
+R.s1 = () => { const {d, live} = STATE.s1, p = project(), o = $("#o1");
+  const cls = d.priority === "P0" ? "ok" : d.priority === "P1" ? "warn" : "bad";
+  paint("s1", o, head("s1", "线索评估", `<span>项目 <b>${esc(p.name)}</b></span><span>合作方 <b>${esc($("#l_partner").value)}</b></span><span>来源 <b>${esc($("#l_source").value)}</b></span><span>政府资金 <b>${p.budget} 万</b></span>`, "o1")
+  + step("判断","", `<p class="lead"><span class="pill ${cls}">${esc(d.priority)}</span> ${esc(d.verdict)}</p>`)
+  + step("匹配度与缺口","", `<div class="cols"><div><h4>能做成的理由</h4><ul>${list(d.fit)}</ul></div><div><h4>缺口与风险</h4><ul>${list(d.gaps)}</ul></div></div>`)
+  + step("需与政府对齐的问题","带去下次沟通", `<ul>${list(d.questions)}</ul>`)
+  + step("下一步","", `<ul>${list(d.nextSteps)}</ul>`)); };
+$("#f1").addEventListener("submit", e => { e.preventDefault(); const p = project();
+  runAI("s1", e.target, $("#o1"), `${ROLE}
+评估下面这条政府消费券合作线索，判断优先级（P0 高优 / P1 中优 / P2 暂缓）。
+项目：${p.name}；品类：${p.cat}；政府资金：${p.budget} 万元；周期：${p.start} 至 ${p.end}
+合作方：${$("#l_partner").value}；线索来源：${$("#l_source").value}
+政府侧可投入：${checked("#l_gov").join("、") || "未知"}
+平台侧可投入：${checked("#l_plat").join("、") || "未知"}
+诉求与已知信息：${$("#l_need").value}
+只回复 JSON：{"priority":"P0","verdict":"一两句判断","fit":["3 条"],"gaps":["2 至 3 条"],"questions":["3 至 4 个需与政府对齐的问题"],"nextSteps":["3 条"]}`,
+  d => d.priority && Array.isArray(d.fit)); });
+
+/* 02 立项 */
+function calc2(){
+  const p = project(), match = num("r_match"), rate = num("r_rate") / 100, lev = num("r_lev"), kol = num("r_kol"), staff = num("r_staff"), loss = num("r_loss");
+  const pool = p.budget + match, woSub = pool * rate, woGmv = woSub * lev, platCost = match + kol + staff + loss;
+  return {p, match, rate, lev, kol, staff, loss, pool, woSub, woGmv, platCost, roi: platCost ? woGmv / platCost : 0, govLev: p.budget ? woGmv / p.budget : 0};
+}
+STATE.s2 = {live:false, d:{background:"合作方希望在国庆后的淡季拉动平江路一带夜间文旅消费，以政府资金加平台配补发放满减券，配合达人种草和官方媒体宣发。",
+  goals:["核销补贴不低于 250 万元","撬动核销 GMV 不低于 650 万元","新增参与商家不少于 150 家，动销率 70% 以上"],
+  resources:["政府：消费券资金 300 万元，官方号矩阵与线下广告位","平台：配补 30 万元，达人预算 50 万元，话题、搜索与本地流量资源"],
+  risks:["文旅品类核销滞后，需在周末与节假日集中推送","商家不会核销或库存不足，造成核销环节的瓶颈","领取超发需控制在设计比例内，避免核销预算穿透"],
+  decision:"建议立项，按效果转化型项目管理，执行期每日报送核销数据。"}};
+R.s2 = () => { const {d, live} = STATE.s2, c = calc2(), o = $("#o2");
+  const roiCls = c.roi >= 3 ? "ok" : c.roi >= 1.5 ? "warn" : "bad";
+  paint("s2", o, head("s2", "立项测算", `<span>项目 <b>${esc(c.p.name)}</b></span><span>类型 <b>${esc($("#r_type").value)}</b></span><span>周期 <b>${esc(c.p.start)} 至 ${esc(c.p.end)}</b></span><span>${days(c.p.start, c.p.end)} 天</span>`, "o2")
+  + step("测算结果","改左侧参数即时重算", `<div class="tablewrap"><table class="calc"><thead><tr><th>指标</th><th>结果</th><th>算法</th></tr></thead><tbody>
+      <tr><td>补贴池</td><td class="num">${f1(c.pool)} 万</td><td class="f">政府资金 ${f1(c.p.budget)} + 平台配补 ${f1(c.match)}</td></tr>
+      <tr><td>预计核销补贴</td><td class="num">${f1(c.woSub)} 万</td><td class="f">补贴池 × 核销率 ${pct(c.rate)}</td></tr>
+      <tr><td>预计核销 GMV</td><td class="num">${f1(c.woGmv)} 万</td><td class="f">核销补贴 × 拉动比 ${c.lev}</td></tr>
+      <tr><td>政府资金拉动倍数</td><td class="num">${c.govLev.toFixed(2)}</td><td class="f">核销 GMV ÷ 政府资金（GMV 含平台配补带动部分）</td></tr>
+      <tr><td>平台投入</td><td class="num">${f1(c.platCost)} 万</td><td class="f">配补 + 达人与物料 + 人力 + 资损预估</td></tr>
+      <tr><td><b>平台 ROI</b></td><td class="num"><b>${c.roi.toFixed(2)}</b> <span class="pill ${roiCls}">${c.roi >= 3 ? "健康" : c.roi >= 1.5 ? "一般" : "偏低"}</span></td><td class="f">核销 GMV ÷ 平台投入</td></tr></tbody></table></div>
+      <p class="note">ROI 分档为示例设定：3 以上健康，1.5 至 3 一般，低于 1.5 偏低。</p>`)
+  + step("项目背景","", `<p class="lead">${esc(d.background)}</p>`)
+  + step("目标与资源","", `<div class="cols"><div><h4>目标</h4><ul>${list(d.goals)}</ul></div><div><h4>资源</h4><ul>${list(d.resources)}</ul></div></div>`)
+  + step("风险与结论","", `<ul>${list(d.risks)}</ul><p class="lead" style="margin-top:10px"><b>结论：</b>${esc(d.decision)}</p>`)); };
+$("#f2").addEventListener("input", () => R.s2());
+$("#f2").addEventListener("submit", e => { e.preventDefault(); const c = calc2();
+  runAI("s2", e.target, $("#o2"), `${ROLE}
+为下面的政府消费券项目写一页立项摘要。
+项目：${c.p.name}；品类：${c.p.cat}；类型：${$("#r_type").value}；周期：${c.p.start} 至 ${c.p.end}
+政府资金 ${c.p.budget} 万，平台配补 ${c.match} 万，达人与物料 ${c.kol} 万，人力 ${c.staff} 万，资损预估 ${c.loss} 万
+测算：预计核销率 ${pct(c.rate)}，核销补贴 ${f1(c.woSub)} 万，核销 GMV ${f1(c.woGmv)} 万，政府资金拉动倍数 ${c.govLev.toFixed(2)}，平台 ROI ${c.roi.toFixed(2)}
+线索阶段信息：${$("#l_need").value}
+只回复 JSON：{"background":"两三句","goals":["3 条可量化目标"],"resources":["政府侧一条","平台侧一条"],"risks":["3 条"],"decision":"一句结论"}`,
+  d => d.background && Array.isArray(d.goals)); });
+
+/* 03 筹备 */
+const PREP = [
+  ["合同与资金", ["确认资金拨付方式与合同类型","合同签订与归档","资金到账确认与票据","补贴资金就位"]],
+  ["招商与配券", ["确定补贴预算，发起商家招募","配券规则：面额、门槛、有效期、库存、超发比例","券规则交叉复核"]],
+  ["物料与资源", ["主 KV 与物料设计、送审","创建话题，搭建活动主页","确认搜索与流量资源","整理客服答疑口径"]],
+  ["上线前", ["全链路走查：领券、下单、核销","关键节点安排技术值守","确认日报模板与报送对象"]]
+];
+const prepDone = new Set([0,1,2,3,4,5,7,8]);
+function renderPrep(){
+  let k = 0, html = "";
+  PREP.forEach(([g, items]) => { html += `<div class="grp">${esc(g)}</div>`; items.forEach(t => { const id = "pp" + k; html += `<label class="ck ${prepDone.has(k) ? "done" : ""}" for="${id}"><input type="checkbox" id="${id}" data-k="${k}" ${prepDone.has(k) ? "checked" : ""}><span>${esc(t)}</span></label>`; k++; }); });
+  $("#prep").innerHTML = html; $("#prepCount").textContent = `已完成 ${prepDone.size} / ${k}`;
+}
+$("#prep").addEventListener("change", e => { const k = Number(e.target.dataset.k); e.target.checked ? prepDone.add(k) : prepDone.delete(k); renderPrep(); document.getElementById("pp" + k)?.focus(); });
+renderPrep();
+
+STATE.s3 = {live:false, d:{
+  insights:[
+    {persona:"周五下班直奔高铁的上海情侣",story:"白天的平江路人挤人，他们想要的是晚上九点后安静的那一段：船摇过去，评弹声从窗里飘出来。",implication:"内容主打「夜里才有的苏州」，拍摄锁定 19:00 以后"},
+    {persona:"做攻略的闺蜜二人组",story:"出发前搜「平江路 夜游 攻略」，收藏的是路线图和人均花费，不是风景照。",implication:"笔记必须带路线、时长、人均和券的用法"},
+    {persona:"看价格下单的本地年轻人",story:"觉得平江路是「游客才去」的地方；一张满减券加一个新玩法，才会让他们再去一次。",implication:"短视频前 3 秒亮出券面和价格"}],
+  bigIdea:{theme:"平江路，九点以后才开场",slogan:"白天看人，夜里<mark>听苏州</mark>",hashtag:"#平江路夜游 #九点后的苏州",why:"把「游客多」反过来讲：夜场人少、有声音、有光，正好对应三类人群想要的安静、攻略感和新鲜感。"},
+  matrix:[{tier:"头部达人",count:2,budgetShare:40,role:"引爆话题、拉高搜索",contentType:"夜游全程 Vlog"},{tier:"腰部达人",count:8,budgetShare:35,role:"攻略种草、讲清券的用法",contentType:"图文 + 短视频"},{tier:"KOC / 素人",count:40,budgetShare:15,role:"铺量、真实体验",contentType:"打卡笔记"},{tier:"投流加热",count:0,budgetShare:10,role:"给跑量最好的 5 条内容加热",contentType:"平台投流"}],
+  briefs:[
+    {tier:"头部达人",angle:"「九点以后的苏州」一镜到底夜游 Vlog",sellingPoints:["摇橹船夜航，灯笼倒影","评弹茶馆一折现场","结尾亮出满 200 减 50 夜游券"],visuals:["19:30 后拍摄，保留河道暖光","券面特写不少于 2 秒"],script:["券的门槛和时间段说清楚：周五至周日、满 200 减 50"],avoid:["绝对化用语","与活动无关商户的招牌"],adNode:"发布后 24 小时看完播率，达标即加热"},
+    {tier:"腰部达人",angle:"「人均 150 玩一晚」夜游路线攻略",sellingPoints:["三站路线：糖粥夜宵、评弹、摇橹船","人均花费与时长","领券入口截图"],visuals:["首图放路线图和人均价格","领券步骤截 3 张图"],script:["标题含「平江路 夜游 攻略」","写清券的有效期和适用商户"],avoid:["未核实的营业时间","与券面不符的「免费」表述"],adNode:"周四晚发布，赶在周末出行决策前"},
+    {tier:"KOC / 素人",angle:"「被这一折评弹留住了」真实打卡",sellingPoints:["个人体验加一个最喜欢的瞬间","实际用券后的花费"],visuals:["竖版 3 至 6 张图","至少一张带券或订单截图"],script:["统一带话题 #平江路夜游"],avoid:["复制统一文案"],adNode:"分三批发布，保持话题热度"}],
+  aigc:[{use:"主 KV 初稿",prompt:"Suzhou Pingjiang Road canal at night, wooden boat with red lanterns, warm reflections on dark water, whitewashed walls, soft mist, cinematic, 3:4 vertical, space at top for Chinese headline"},
+        {use:"攻略封面底图",prompt:"flat illustrated night map of a canal street in Suzhou, three stops with small icons: rice porridge bowl, pipa, rowing boat, navy and warm yellow palette, 3:4"},
+        {use:"券面视觉",prompt:"coupon design, Chinese night market feel, lantern glow, navy background, golden accent, large number 50, minimal layout"}],
+  timeline:[{phase:"预热",days:"D-7 至 D-1",action:"KOC 第一批铺量，话题建立，券上线预约"},{phase:"引爆",days:"D0 至 D3",action:"头部达人发布，腰部攻略同步上线，投流加热"},{phase:"长尾",days:"D4 至 D14",action:"KOC 二三批发布，按核销数据调整加热内容"}]}};
+R.s3 = () => { const {d, live} = STATE.s3, p = project(), o = $("#o3"), budget = num("b_budget");
+  const m = Array.isArray(d.matrix) ? d.matrix : []; const ts = m.reduce((s,x)=>s+(Number(x.budgetShare)||0),0) || 100;
+  const rows = m.map(x => { const sh = Number(x.budgetShare)||0; return `<tr><td><b>${esc(x.tier)}</b></td><td class="num">${Number(x.count) ? esc(x.count)+" 位" : "—"}</td><td class="num">${sh}%<div class="minibar"><i style="width:${Math.min(100,sh)}%"></i></div></td><td class="num">${(budget*sh/ts).toFixed(1)} 万</td><td>${esc(x.role)}</td><td>${esc(x.contentType)}</td></tr>`; }).join("");
+  paint("s3", o, head("s3", "达人种草方案", `<span>项目 <b>${esc(p.name)}</b></span><span>目标 <b>${esc($("#b_goal").value)}</b></span><span>达人预算 <b>${budget} 万</b></span><span>平台 <b>${esc(checked("#b_plat").join(" / "))}</b></span>`, "o3")
+  + step("人群洞察","谁、在什么场景、要什么", `<div class="insights">${(d.insights||[]).map(i => `<div class="ins"><span class="p">${esc(i.persona)}</span><span class="s">${esc(i.story)}</span><span class="i">→ ${esc(i.implication)}</span></div>`).join("")}</div>`)
+  + step("传播主线","", `<div class="idea"><div class="theme">${esc(d.bigIdea?.theme)}</div><div>${safeMark(d.bigIdea?.slogan)}</div><div class="tag">${esc(d.bigIdea?.hashtag)}</div><div class="why">${esc(d.bigIdea?.why)}</div></div>`)
+  + step("达人矩阵与预算",`按 ${budget} 万元拆分`, `<div class="tablewrap"><table><thead><tr><th>层级</th><th>数量</th><th>占比</th><th>金额</th><th>角色</th><th>形式</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><td>合计</td><td class="num">${m.reduce((s,x)=>s+(Number(x.count)||0),0)} 位</td><td class="num">100%</td><td class="num">${budget.toFixed(1)} 万</td><td colspan="2"></td></tr></tfoot></table></div>`)
+  + step("分层达人 Brief","可直接发给达人", `<div class="briefs">${(d.briefs||[]).map(b => `<div class="brief"><b>${esc(b.tier)}</b><div class="angle">${esc(b.angle)}</div><dl><div><dt>必讲卖点</dt><dd><ul>${list(b.sellingPoints)}</ul></dd></div><div><dt>画面要求</dt><dd><ul>${list(b.visuals)}</ul></dd></div><div><dt>话术规范</dt><dd><ul>${list(b.script)}</ul></dd></div><div><dt>禁止事项</dt><dd class="avoid"><ul>${list(b.avoid)}</ul></dd></div></dl><div class="node"><b>投流配合：</b>${esc(b.adNode)}</div></div>`).join("")}</div>`)
+  + step("AIGC 视觉提示词","交给设计出初稿", `<div class="prompts">${(d.aigc||[]).map((x,i) => `<div class="prompt"><span class="u">${esc(x.use)}</span><code id="ai${i}">${esc(x.prompt)}</code><button type="button" class="ghost sm" data-copy="ai${i}">复制</button></div>`).join("")}</div>`)
+  + step("传播排期","", (d.timeline||[]).map(t => `<div class="tl"><span class="d">${esc(t.days)}</span><span><b>${esc(t.phase)}</b>　${esc(t.action)}</span></div>`).join(""))); };
+$("#f3").addEventListener("submit", e => { e.preventDefault(); const p = project();
+  const pts = $("#b_points").value.split("\n").map(s=>s.trim()).filter(Boolean);
+  runAI("s3", e.target, $("#o3"), `${ROLE}
+为下面的消费券项目做一份达人种草方案。
+项目：${p.name}；品类：${p.cat}；推广目标：${$("#b_goal").value}；达人预算：${num("b_budget")} 万元
+目标人群：${$("#b_aud").value}；平台：${checked("#b_plat").join("、")}
+核心卖点：
+${pts.map(x=>"- "+x).join("\n")}
+要求：洞察写成具体的人和场景；达人矩阵 3 至 4 层，budgetShare 为整数且合计 100，投流层 count 填 0；briefs 对应达人层级（不含投流层）；AIGC 提示词用英文。
+只回复 JSON：{"insights":[{"persona":"","story":"","implication":""}],"bigIdea":{"theme":"","slogan":"可用 <mark></mark> 包住关键字","hashtag":"","why":""},"matrix":[{"tier":"","count":0,"budgetShare":0,"role":"","contentType":""}],"briefs":[{"tier":"","angle":"","sellingPoints":[""],"visuals":[""],"script":[""],"avoid":[""],"adNode":""}],"aigc":[{"use":"","prompt":""}],"timeline":[{"phase":"","days":"D-7 至 D-1","action":""}]}
+insights 3 条，aigc 3 条，timeline 3 条。`,
+  d => Array.isArray(d.matrix) && Array.isArray(d.briefs)); });
+$("#f3").addEventListener("input", () => R.s3());
+$("#f1").addEventListener("input", () => R.s1());
+
+/* 04 执行 */
+const CK = [
+  ["触达", ["活动入口不显眼或层级太深","宣传渠道覆盖不到目标人群","活动信息发布太晚"]],
+  ["领取", ["券面额或门槛对目标人群没吸引力","领取步骤太多","库存太少，很快被领完"]],
+  ["支付", ["可用商家或商品太少","使用规则写得不清楚","用券门槛高于常见客单价"]],
+  ["核销", ["券有效期短于用户的消费周期","临期没有提醒","商家不熟悉核销操作"]]
+];
+const CK_DEF = {"活动入口不显眼或层级太深":"否","券面额或门槛对目标人群没吸引力":"否","领取步骤太多":"否","券有效期短于用户的消费周期":"是","临期没有提醒":"是","商家不熟悉核销操作":"待确认"};
+function ckRows(el){
+  let i = 0;
+  el.innerHTML = CK.map(([g, items]) => `<div class="grp">${esc(g)}</div>` + items.map(t => { const id = "ck" + (i++), v = CK_DEF[t] || "待确认";
+    return `<div class="ck ${v === "是" ? "no" : ""}"><span>${esc(t)}</span><select id="${id}" aria-label="${esc(g)}：${esc(t)}">${["是","否","待确认"].map(o => `<option ${o === v ? "selected" : ""}>${o}</option>`).join("")}</select></div>`; }).join("")).join("");
+}
+ckRows($("#ckFunnel"));
+const ckRead = el => [...el.querySelectorAll(".ck")].map(r => `${r.querySelector("span").textContent}：${r.querySelector("select").value}`);
+
+function calc4(){
+  const p = project(), day = $("#x_day").value;
+  const total = Math.max(1, days(p.start, p.end)), passed = Math.min(total, Math.max(0, days(p.start, day)));
+  const claim = num("x_claim"), paySub = num("x_paysub"), payGmv = num("x_paygmv"), woSub = num("x_wosub"), woGmv = num("x_wogmv"), refund = num("x_refund");
+  const timeP = passed / total, useP = p.budget ? woSub / p.budget : 0, gap = (useP - timeP) * 100;
+  const wl = num("x_warn"), bl = Math.max(num("x_bad"), wl);
+  const level = gap >= -wl ? ["正常","ok"] : gap >= -bl ? ["需关注","warn"] : ["严重滞后","bad"];
+  const daily = passed ? woSub / passed : 0, forecast = daily * total;
+  const tiers = [num("m0"), num("m1"), num("m2"), num("m3")], mTotal = tiers.reduce((a,b)=>a+b,0);
+  const pool = p.budget + num("r_match");
+  return {p, day, wl, bl, total, passed, claim, paySub, payGmv, woSub, woGmv, refund, timeP, useP, gap, level, daily, forecast, fRate: p.budget ? forecast / p.budget : 0,
+    payLev: paySub ? payGmv / paySub : 0, woLev: woSub ? woGmv / woSub : 0, refundRate: payGmv ? refund / payGmv : 0,
+    claimToPay: claim ? paySub / claim : 0, payToWo: paySub ? woSub / paySub : 0, pool, over: pool ? claim / pool - 1 : 0, tiers, mTotal};
+}
+function metricsText(c){
+  return `时间进度 ${pct(c.timeP)}，消耗进度（核销补贴 ÷ 政府资金）${pct(c.useP)}，进度偏差 ${c.gap.toFixed(1)}pp，预警：${c.level[0]}
+日均核销 ${f1(c.daily)} 万，预计总核销 ${f1(c.forecast)} 万，预计完成率 ${pct(c.fRate)}
+累计领取补贴 ${c.claim} 万（补贴池 ${f1(c.pool)} 万，${c.over > 0 ? "超出 " + pct(c.over) : "未超发"}），支付补贴 ${c.paySub} 万，支付金额 ${c.payGmv} 万，核销补贴 ${c.woSub} 万，核销金额 ${c.woGmv} 万，退款 ${c.refund} 万
+支付拉动比 ${c.payLev.toFixed(2)}，核销拉动比 ${c.woLev.toFixed(2)}，退款率 ${pct(c.refundRate)}，领取到支付（补贴口径）${pct(c.claimToPay)}，支付到核销（补贴口径）${pct(c.payToWo)}
+商家分层：0 核销 ${c.tiers[0]} 家，低销 ${c.tiers[1]}，中销 ${c.tiers[2]}，高销 ${c.tiers[3]}，共 ${c.mTotal} 家`;
+}
+STATE.s4 = {live:false, d:{location:"核销环节",
+  rootCauses:[{cause:"0 核销商家占比高",evidence:"155 家参与商家中 38 家 0 核销，占 24.5%"},{cause:"券有效期短于文旅消费决策周期",evidence:"有效期 7 天，评弹与夜游船集中在周末核销"},{cause:"领券后缺少到期提醒",evidence:"支付到核销仅 64%，大量券在有效期内未使用"}],
+  actions:[{who:"商家运营 / BD",what:"把 0 核销商家清单同步给 BD，逐家排查是否未上架、缺库存或不会操作核销",when:"48 小时内"},{who:"产品 / 配券",what:"评估下一批券有效期从 7 天延到 14 天，覆盖两个周末",when:"下批发券前"},{who:"运营 / 内容",what:"券到期前 2 天推送提醒；周五晚达人直播加一轮口播",when:"本周五"}],
+  govNote:"截至统计日，消费券领取进度正常，核销进度落后时间进度约 17 个百分点。主要原因是文旅类消费集中在周末，以及部分商家尚未完成核销操作。平台已安排对未核销商家逐一回访，并增加到期提醒，后续将每日同步核销进展。"}};
+R.s4 = () => { const {d, live} = STATE.s4, c = calc4(), o = $("#o4");
+  const max = Math.max(c.claim, c.payGmv, c.woGmv, 1);
+  const bar = (label, v, sub, cls="") => `<div class="fn"><span>${label}</span><div><div class="bar ${cls}" style="width:${Math.min(100, v / max * 100)}%"></div></div><span class="num">${f1(v)} 万${sub ? " · " + sub : ""}</span></div>`;
+  const tierNames = ["0 核销","低销","中销","高销"], tierCls = ["bad","warn","","ok"];
+  paint("s4", o, head("s4", "执行监控", `<span>统计日 <b>${esc(c.day)}</b></span><span>第 <b>${c.passed}</b> / ${c.total} 天</span><span>政府资金 <b>${f1(c.p.budget)} 万</b></span>`, "o4")
+  + step("进度预警","改左侧数据即时重算", `<div class="progress">
+      <div class="pr"><span>时间进度</span><div class="track"><i class="t" style="width:${Math.min(100,c.timeP*100)}%"></i></div><span class="val">${pct(c.timeP)}</span></div>
+      <div class="pr"><span>消耗进度</span><div class="track"><i style="width:${Math.min(100,c.useP*100)}%"></i></div><span class="val">${pct(c.useP)}</span></div></div>
+      <div class="tiles" style="margin-top:14px">
+      <div class="tile ${c.level[1]}"><span class="m">进度偏差</span><span class="v">${c.gap > 0 ? "+" : ""}${c.gap.toFixed(1)}pp</span><span class="h"><span class="pill ${c.level[1]}">${c.level[0]}</span></span></div>
+      <div class="tile"><span class="m">日均核销</span><span class="v">${f1(c.daily)} 万</span><span class="h">核销补贴 ÷ 已过天数</span></div>
+      <div class="tile ${c.fRate >= .9 ? "ok" : c.fRate >= .7 ? "warn" : "bad"}"><span class="m">预计完成率</span><span class="v">${pct(c.fRate)}</span><span class="h">预计总核销 ${f1(c.forecast)} 万</span></div>
+      <div class="tile ${c.over > 0 ? "warn" : ""}"><span class="m">领取 ÷ 补贴池</span><span class="v">${pct(c.claim / (c.pool || 1))}</span><span class="h">${c.over > 0 ? "已超发，确认是否为设计超发" : `补贴池 ${f1(c.pool)} 万，含平台配补`}</span></div></div>
+      <p class="note">消耗进度 = 核销补贴 ÷ 政府资金。预警线在左侧自己设（默认值为示例）：落后不超过 ${c.wl}pp 为正常，${c.wl} 至 ${c.bl}pp 需关注，超过 ${c.bl}pp 为严重滞后。</p>`)
+  + step("转化漏斗与效率","拉动比和退款率一起看", `<div class="funnel">${bar("领取补贴", c.claim)}${bar("支付补贴", c.paySub, pct(c.claimToPay))}${bar("核销补贴", c.woSub, pct(c.payToWo))}${bar("支付金额", c.payGmv)}${bar("核销金额", c.woGmv)}${bar("退款金额", c.refund, pct(c.refundRate), "refund")}</div>
+      <div class="tiles" style="margin-top:14px"><div class="tile"><span class="m">支付拉动比</span><span class="v">${c.payLev.toFixed(2)}</span><span class="h">支付金额 ÷ 支付补贴</span></div><div class="tile"><span class="m">核销拉动比</span><span class="v">${c.woLev.toFixed(2)}</span><span class="h">核销金额 ÷ 核销补贴</span></div><div class="tile ${c.refundRate > .3 ? "bad" : c.refundRate > .15 ? "warn" : "ok"}"><span class="m">退款率</span><span class="v">${pct(c.refundRate)}</span><span class="h">退款 ÷ 支付金额</span></div></div>`)
+  + step("商家核销分层",`共 ${c.mTotal} 家`, `<div class="tiles">${c.tiers.map((v,i) => `<div class="tile ${tierCls[i]}"><span class="m">${tierNames[i]}</span><span class="v">${v} 家</span><span class="h">${pct(v / (c.mTotal || 1))}${i===0 ? " · 清单同步 BD 排查" : i===3 ? " · 重点维护" : ""}</span></div>`).join("")}</div>`)
+  + step("归因结论",`定位：${d.location}`, `<div class="tablewrap"><table><thead><tr><th>根因</th><th>证据</th></tr></thead><tbody>${(d.rootCauses||[]).map(r => `<tr><td><b>${esc(r.cause)}</b></td><td>${esc(r.evidence)}</td></tr>`).join("")}</tbody></table></div>`)
+  + step("应对动作","找谁、做什么、什么时候", `<div class="tablewrap"><table><thead><tr><th>协同方</th><th>动作</th><th>时间</th></tr></thead><tbody>${(d.actions||[]).map(a => `<tr><td style="white-space:nowrap">${esc(a.who)}</td><td>${esc(a.what)}</td><td class="num">${esc(a.when)}</td></tr>`).join("")}</tbody></table></div>`)
+  + step("给政府的异常说明","可直接用于日报", `<div class="govnote" id="gov">${esc(d.govNote)}</div><div style="margin-top:8px"><button type="button" class="ghost sm" data-copy="gov">复制说明</button></div>`)); };
+$("#f4").addEventListener("input", e => {
+  const r = e.target.closest(".ck");
+  if (r) r.classList.toggle("no", e.target.value === "是");
+  R.s4(); R.s5();
+});
+$("#f4").addEventListener("submit", e => { e.preventDefault(); const c = calc4();
+  runAI("s4", e.target, $("#o4"), `${ROLE}
+下面是一个政府消费券项目的执行期数据。先判断问题主要出在漏斗哪一环（触达、领取、支付、核销），再给出根因、应对动作和一段给政府的异常说明。
+项目：${c.p.name}；品类：${c.p.cat}；周期 ${c.p.start} 至 ${c.p.end}；统计日 ${c.day}
+${metricsText(c)}
+漏斗排查：${ckRead($("#ckFunnel")).join("；")}
+要求：根因 2 至 3 条，每条附数据证据；应对动作 3 条，写明协同方（写角色）、具体动作和时间；给政府的说明用正式、平实的口吻，先讲现状再讲原因和措施，不推卸责任，不承诺做不到的数字。
+只回复 JSON：{"location":"触达 / 领取 / 支付 / 核销","rootCauses":[{"cause":"","evidence":""}],"actions":[{"who":"","what":"","when":""}],"govNote":""}`,
+  d => Array.isArray(d.rootCauses) && d.govNote); });
+
+/* 05 复盘 */
+STATE.s5 = {live:false, d:{
+  steps:[
+    {step:"回顾目标",text:"本次以带动夜间文旅消费和商家供给为主，拉新只作参考。政府资金 300 万，立项时定的目标是核销补贴不低于 250 万。"},
+    {step:"评估结果",text:"统计日累计领取补贴 210 万，支付金额 420 万，核销金额 265 万，退款 70 万。核销补贴 96 万，按当前日均预计全程约 195 万，完成率约 65%，低于目标。"},
+    {step:"分析原因",text:"领取到支付 71%，前段正常；支付到核销 64%，是掉得最多的一环。原因有三：文旅消费集中在周末而券有效期只有 7 天；临期没有提醒；38 家商家 0 核销。新客退款率 24%，高于整体的 16.7%，部分新客属于冲动领券。"},
+    {step:"总结规律",text:"文旅类消费券的瓶颈往往在核销而不在领取：有效期要覆盖至少两个周末，上线前先做商家核销培训，内容里讲清使用场景。"}],
+  kpt:{keep:"每 1 元核销补贴带动约 2.8 元消费，拉动比稳定；参与商家动销率 75%。",problem:"支付到核销只有 64%；头部 10 家贡献 48% 的核销，过于集中；新客退款率偏高。",try:"下一批券有效期改为 14 天；0 核销商家逐家培训；达人内容加上使用场景和到期提醒。"}}};
+R.s5 = () => { const {d, live} = STATE.s5, c = calc4(), o = $("#o5");
+  paint("s5", o, head("s5", "复盘报告", `<span>项目 <b>${esc(c.p.name)}</b></span><span>目标 <b>${esc($("#v_goal").value)}</b></span><span>核销拉动比 <b>${c.woLev.toFixed(2)}</b></span><span>退款率 <b>${pct(c.refundRate)}</b></span><span>动销率 <b>${pct(num("v_sold") / (num("v_live") || 1))}</b></span>`, "o5")
+  + step("复盘四步","回顾目标 → 评估结果 → 分析原因 → 总结规律", `<div class="eight">${(d.steps||[]).map((s,i) => `<div class="e"><b>${i+1}. ${esc(s.step)}</b><span>${esc(s.text)}</span></div>`).join("")}</div>`)
+  + step("KPT 小结","保持 · 问题 · 尝试", `<div class="verdict"><div><h4>保持（Keep）</h4>${esc(d.kpt?.keep)}</div><div><h4>问题（Problem）</h4>${esc(d.kpt?.problem)}</div><div><h4>尝试（Try）</h4>${esc(d.kpt?.try)}</div></div>`)); };
+$("#f5").addEventListener("input", () => R.s5());
+$("#f5").addEventListener("submit", e => { e.preventDefault(); const c = calc4();
+  runAI("s5", e.target, $("#o5"), `${ROLE}
+用复盘四步（回顾目标、评估结果、分析原因、总结规律）为下面的政府消费券项目写复盘，最后用 KPT（保持、问题、尝试）做小结。每步一到三句，必须引用具体数字；分析原因时按漏斗（触达、领取、支付、核销）找出掉得最多的一环。
+项目：${c.p.name}；品类：${c.p.cat}；活动目标：${$("#v_goal").value}
+${metricsText(c)}
+新客占比 ${num("v_new")}%，新客退款率 ${num("v_newref")}%
+商家：提报 ${num("v_sub")}，生效 ${num("v_live")}，动销 ${num("v_sold")}；头部 10 家核销占比 ${num("v_top")}%
+其他观察：${$("#v_note").value}
+只回复 JSON：{"steps":[{"step":"回顾目标","text":""}],"kpt":{"keep":"","problem":"","try":""}}  steps 正好 4 条。`,
+  d => Array.isArray(d.steps) && d.kpt); });
+
+/* boot */
+const renderAll = () => { R.s1(); R.s2(); R.s3(); R.s4(); R.s5(); };
+$("#file").addEventListener("input", () => { renderAll(); });
+document.querySelectorAll("input:not([type=checkbox]), textarea").forEach(e => e.autocomplete = "off");
+const SAMPLE = {};
+Object.keys(SRC).forEach(k => { STATE[k].snap = snap(k); SAMPLE[k] = STATE[k]; });
+function resetAll(){
+  document.querySelectorAll("#file input, #file select, form input, form select, form textarea").forEach(e => {
+    if (e.type === "checkbox") e.checked = e.defaultChecked;
+    else if (e.tagName === "SELECT") { const o = [...e.options].find(o => o.defaultSelected) || e.options[0]; e.value = o.value; }
+    else e.value = e.defaultValue;
+  });
+  document.querySelectorAll("#f4 .ck").forEach(r => r.classList.toggle("no", r.querySelector("select").value === "是"));
+  Object.keys(SAMPLE).forEach(k => STATE[k] = SAMPLE[k]);
+  document.querySelectorAll("[data-status]").forEach(s => s.className = "status");
+  lockAI(); renderAll();
+}
+document.addEventListener("click", e => { if (e.target.closest("#reset, [data-reset]")) resetAll(); });
+renderAll();
+const h = (location.hash.match(/^#s([1-5])$/) || [])[1]; if (h) show(Number(h) - 1);
+lockAI();
+(async () => {
+  try { sample = await window.claude?.use?.("sample"); } catch { sample = null; }
+  lockAI(); renderAll();
+})();
+</script>
+
+</body></html>

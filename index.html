@@ -514,7 +514,7 @@ a.sm{text-decoration:none;display:inline-block}
       <div class="dial">
         <label for="gap">拖动试试：核销落后多少</label><span class="lvl" id="lvl" data-s="warn">需关注</span>
         <input type="range" id="gap" min="0" max="30" step="1" value="17">
-        <div class="ticks" aria-hidden="true"><span style="left:0">0</span><span style="left:33.3%">10</span><span style="left:66.7%">20</span><span style="left:100%">30</span></div>
+        <div class="ticks" aria-hidden="true"><span style="left:0">0</span><span style="left:26.7%">8</span><span style="left:60%">18</span><span style="left:100%">30</span></div>
       </div>
     </div>
     <div class="trio">
@@ -900,16 +900,16 @@ jdAll.addEventListener("click", () => {
 });
 
 /* scenario dial: how far verification lags decides what each audience hears.
-   Thresholds follow the workbench: lag ≤ 10pp is normal, ≤ 20pp needs attention, beyond that is serious. */
+   Example warning lines, same defaults as the workbench: lag ≤ 8pp is normal, ≤ 18pp needs attention, beyond that is serious. */
 const TIME_P = 49.2;
 const LEVELS = [
-  { max:10, key:"ok", name:"正常",
+  { max:8, key:"ok", name:"正常",
     subj:"核销进度正常",
     mail:n => n === 0 ? "核销进度和时间进度基本持平，领取和核销都正常。周五照常同步数据。" : `核销比时间进度慢 ${n} 个百分点，在正常波动范围内，主要是文旅消费集中在周末。按现在的节奏，活动结束前能追平，周五照常同步数据。`,
     tech:[["动作","暂不新增需求，保持日报口径"],["关注","周末核销峰值是否正常"],["时间","周五复盘一次"]],
     say:"满 200 减 50，周五到周日能用。",
     rules:[["时机","按原排期发布"],["画面","带上领券入口"],["别说","「全网最低」"]] },
-  { max:20, key:"warn", name:"需关注",
+  { max:18, key:"warn", name:"需关注",
     subj:"核销进度说明与下一步",
     mail:n => `领取正常，核销慢了约 ${n} 个百分点，主要因为文旅消费集中在周末、部分商家不熟悉核销。我们已逐家回访商家并加了到期提醒，周五前给您一版新预估。`,
     tech:[["触发","券到期前 48 小时"],["人群","已支付、未核销的用户"],["内容","推送一次提醒，带券面额和门店入口"],["上线","周五 18:00 前"],["埋点","区分推送进入和自然进入"],["验收","次日看核销率变化"]],
