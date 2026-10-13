@@ -19,6 +19,9 @@
   --s-ok:#1E7D4F; --s-warn:#B4541A; --s-bad:#B42323;
   --f-sans:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",system-ui,sans-serif;
   --radius:12px;
+  --app-bg:#FFFFFF; --app-ink:#222222; --app-muted:#8A8A8A; --app-hair:#F2F3F5; --app-card:#F7F8FA; --app-line:#EBEDF0;
+  --app-ai:#4F46E5; --app-ai-l:#EEF0FF; --app-ai-d:#3730A3; --app-act:#1F2433;
+  --app-ad:#B45309; --app-ad-bg:#FFF9EF; --app-ad-line:#F1DFBF; --app-tag:#FBEBCF; --app-flash:#FFF1B8;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#121211; --sheet:#1B1B19; --ink:#ECEAE4; --muted:#A3A19A; --rule:#30302C;
@@ -275,6 +278,51 @@ h1,h2,h3{text-wrap:balance}
 .rules{list-style:none;margin:auto 0 0;padding:12px 0 0;border-top:1px dashed var(--rule);display:flex;flex-direction:column;gap:4px;font-size:15px}
 .rules b{font-size:13px;font-weight:400;color:var(--muted);margin-right:12px}
 
+/* AI demo: pitch on the left, a slice of the product on the right */
+.demo{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px 48px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:20px;padding:36px 38px}
+@media (max-width:860px){.demo{grid-template-columns:minmax(0,1fr);padding:28px 20px}}
+.demo .spec{justify-content:flex-start;margin-bottom:10px}
+.demo h3{margin:0;font-size:clamp(24px,3.2vw,34px);line-height:1.25}
+.pitch{margin:12px 0 0;max-width:36em}
+.dpts{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:16px}
+.dpts li{display:grid;grid-template-columns:2.6em minmax(0,1fr);gap:12px}
+.dpts b{font-size:14px;color:var(--mark);padding-top:2px}
+.flip{margin:18px 0 0;padding:12px 16px;border-left:3px solid var(--mark);background:var(--mark-soft);border-radius:0 10px 10px 0;font-size:15px;line-height:1.7;max-width:36em}
+.flip b{display:block;font-size:13px;color:var(--mark)}
+.role{margin:12px 0 0;font-size:14px;color:var(--muted)}
+.dact{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:20px}
+.dact span{font-size:14px;color:var(--muted)}
+.mini{margin:0;display:flex;flex-direction:column;align-items:center;gap:16px;min-width:0}
+.mph{width:100%;max-width:330px;border:7px solid var(--frame);border-radius:34px;background:var(--app-bg);color:var(--app-ink);padding:18px 14px 20px;font-size:13.5px;line-height:1.65;box-shadow:0 18px 40px color-mix(in srgb,var(--ink) 14%,transparent)}
+.mph p{margin:0}
+.mq{display:flex;justify-content:flex-end}
+.mq span{background:var(--app-ai-l);color:var(--app-ai-d);border-radius:14px 14px 4px 14px;padding:5px 12px}
+.mhd{display:flex;align-items:center;gap:6px;font-weight:700;font-size:14px;margin:12px 0 4px}
+.mhd span{font-weight:400;font-size:12px;color:var(--app-muted)}
+.mspark{display:inline-grid;color:var(--app-ai)}
+.msec{font-weight:700;font-size:14.5px;margin:8px 0 4px!important}
+.mpara{margin:0 -6px;padding:2px 6px;border-radius:6px}
+.mpara.pulse{animation:pulse 1.4s ease}
+@keyframes pulse{0%,35%{background:var(--app-flash)}100%{background:transparent}}
+.mph mark{background:var(--app-ai-l);color:var(--app-ink);font-weight:700;padding:0 4px;border-radius:4px;margin-right:5px}
+.mpm{font-size:11.5px;color:var(--app-muted);margin-top:4px!important}
+.mcard{margin-top:8px;background:var(--app-ad-bg);border:1px solid var(--app-ad-line);border-radius:10px;padding:10px;font-size:12.5px;line-height:1.5}
+.mcard p{margin-top:5px}
+.mcard .mch{display:flex;align-items:center;gap:5px}
+.mcard .ad{font-size:10px;background:var(--app-tag);color:var(--app-ad);border-radius:3px;padding:0 4px;line-height:16px}
+.mcard .av{width:17px;height:17px;border-radius:50%;background:var(--app-ink);color:var(--app-bg);font-size:10px;display:grid;place-items:center;line-height:1}
+.mcard .ct{font-size:11px;color:var(--app-muted)}
+.mcard .moff{color:var(--app-ad);font-weight:700}
+.mcard .mf{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--app-muted)}
+.mcard .mbtn{background:var(--app-act);color:var(--app-bg);border-radius:999px;padding:3px 10px;font-weight:600;font-size:11.5px}
+.bid{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;max-width:340px;text-align:center}
+.bidl{font-size:14px;font-weight:600}
+.bidseg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--well)}
+.bidseg button{font:inherit;font-size:14px;color:var(--muted);background:none;border:0;border-radius:999px;padding:3px 14px;cursor:pointer;transition:background-color .15s ease,color .15s ease}
+.bidseg button[aria-pressed="true"]{background:var(--sheet);color:var(--ink);font-weight:600;box-shadow:0 1px 2px color-mix(in srgb,var(--ink) 12%,transparent)}
+.bidseg button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
+.bidcap{font-size:14px;line-height:1.6;color:var(--muted);min-height:4.8em}
+
 /* workbench band */
 .band{background:var(--night);color:var(--on-night);border-radius:20px;padding:36px 38px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px 44px;align-items:center}
 @media (max-width:820px){.band{grid-template-columns:minmax(0,1fr);padding:28px 22px}}
@@ -360,6 +408,8 @@ a.sm{text-decoration:none;display:inline-block}
 .dw .res div{display:flex;flex-direction:column;gap:2px;padding-top:8px;border-top:2px solid var(--mark)}
 .dw .res b{font-size:24px;line-height:1.25;letter-spacing:-.01em}
 .dw .res span{font-size:14px;color:var(--muted)}
+.dw .src{margin:0;font-size:13px;color:var(--muted)}
+.dw .src b{font-weight:600;color:var(--ink);margin-right:8px}
 .appendix,.print-only{display:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
@@ -400,7 +450,12 @@ a.sm{text-decoration:none;display:inline-block}
   .feat .card .vis .label{top:10px;left:14px}
   .feat .card .vis.type .tx{font-size:20px}
   .grid.feat{margin-bottom:24px}
-  .trio,.band,.caps,.contact,.wins,#tools{break-inside:avoid}
+  .trio,.band,.caps,.contact,.wins,#tools,.demo{break-inside:avoid}
+  .bid,.dact{display:none!important}
+  .demo{padding:22px 24px;gap:24px;grid-template-columns:minmax(0,1fr) 250px}
+  .demo h3{font-size:22px}
+  .dpts{font-size:13px}
+  .flip{font-size:13px}
   .trio{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .doc{padding:14px;font-size:13px;gap:10px}
   .cue .say{font-size:16px}
@@ -427,6 +482,7 @@ a.sm{text-decoration:none;display:inline-block}
     <ol>
       <li><a href="#caps">能力</a></li>
       <li><a href="#work">案例</a></li>
+      <li><a href="#demo">AI Demo</a></li>
       <li><a href="#bridge">沟通</a></li>
       <li><a href="#growth">工作台</a></li>
     </ol>
@@ -483,12 +539,12 @@ a.sm{text-decoration:none;display:inline-block}
     <div class="head"><h2 id="h-caps">我能做什么</h2><p>对照蓝色光标「AI 营销解决方案专员」岗位职责<button type="button" class="jdall" id="jdAll" aria-pressed="false">对照岗位原文</button></p></div>
     <div class="caps">
       <div><button type="button" class="jd" aria-expanded="false" aria-controls="jd1">对应职责 1<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jd1" hidden><span>岗位原文</span>运用各类AI洞察工具，深潜数据海洋，挖掘那些隐藏在数字背后、足以打动人心的用户故事与市场趋势，为品牌量身定制AI驱动的营销战略。</blockquote><b>洞察</b><p>拆解增长设计和用户行为，从数据里找到能打动人的故事。</p>
-        <span class="ev"><i>见</i><button type="button" data-open="pdd">拼多多拆解</button><button type="button" data-open="news">新闻专业数据</button></span></div>
+        <span class="ev"><i>见</i><button type="button" data-open="pdd">拼多多拆解</button><button type="button" data-open="news">新闻专业数据</button><a href="#demo">痛点认领 Demo</a></span></div>
       <div><button type="button" class="jd" aria-expanded="false" aria-controls="jd2">对应职责 2<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jd2" hidden><span>岗位原文</span>与团队共同构思并执行引爆市场的AIGC整合营销战役。成为客户最信赖的AI营销顾问。</blockquote><b>战役</b><p>策划整合营销，用 AIGC 把创意更快变成样稿和物料。</p>
         <span class="ev"><i>见</i><button type="button" data-open="shaanxi">心动陕西</button><button type="button" data-open="eco">13 城物种海报</button></span></div>
       <div><button type="button" class="jd" aria-expanded="false" aria-controls="jd3">对应职责 3<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jd3" hidden><span>岗位原文</span>链接创意、媒介与技术中台，打破部门壁垒。你将把复杂的AI技术翻译成客户能懂的语言，也将客户的需求转化为技术团队可执行的指令，确保项目高效运转。</blockquote><b>沟通</b><p>把政府和客户的口径转成内部执行清单，再把方案讲成客户听得懂的话。</p>
         <span class="ev"><i>见</i><a href="#bridge">一件事说给三种人</a></span></div>
-      <div><button type="button" class="jd" aria-expanded="false" aria-controls="jdr">任职要求 2<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jdr" hidden><span>岗位原文</span>极速学习者：你是天生的“玩家”，能像玩乐高一样，快速上手并组合使用各类AI工具（如AIGC内容生成、数据分析模型等），并享受创造的过程。</blockquote><b>AI 工具</b><p>在 Claude、ChatGPT、Gemini 间按场景调配；搭过 AI Agent 区域商机监测，按周出风险清单。</p>
+      <div><button type="button" class="jd" aria-expanded="false" aria-controls="jdr">任职要求 2<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jdr" hidden><span>岗位原文</span>极速学习者：你是天生的“玩家”，能像玩乐高一样，快速上手并组合使用各类AI工具（如AIGC内容生成、数据分析模型等），并享受创造的过程。</blockquote><b>AI 工具</b><p>在 Claude、ChatGPT、Gemini 间按场景调配；搭过 AI Agent 区域商机监测，按周出风险清单；用 AI 搭出可上手的产品 Demo。</p>
         <span class="ev"><i>见</i><a href="#growth">消费券工作台</a><button type="button" data-open="craft">分镜提示词</button></span></div>
     </div>
   </section>
@@ -502,15 +558,56 @@ a.sm{text-decoration:none;display:inline-block}
       <button type="button" aria-pressed="true" data-f="all">全部</button>
       <button type="button" aria-pressed="false" data-f="insight">洞察</button>
       <button type="button" aria-pressed="false" data-f="campaign">战役</button>
+      <button type="button" aria-pressed="false" data-f="content">内容</button>
       <button type="button" aria-pressed="false" data-f="creative">创意</button>
     </div>
     <div class="grid" id="grid"></div>
   </section>
 
+  <section class="sec" id="demo" aria-labelledby="h-demo">
+    <div class="head"><h2 id="h-demo">AI 产品 Demo</h2><p>一个能直接上手的概念产品</p></div>
+    <div class="demo">
+      <div>
+        <div class="spec"><span>概念 Demo · AI 产品挑战作品 · 数据为模拟，品牌为虚构</span></div>
+        <h3>痛点认领：品牌买不到 AI 的答案</h3>
+        <p class="pitch">AI 搜索让用户直接问、直接拿到答案，品牌该怎么出现在回答里？我的做法是：不卖排序，也不改回答。品牌只能认领用户在帖子里反复吐槽的真实痛点，拿出服务方案；用户凭演出票根领取权益，到场核销了才算效果。</p>
+        <ul class="dpts">
+          <li><b>洞察</b><span>AI 把 126 种说法归并成 8 个痛点，提及够多才开放认领</span></li>
+          <li><b>规则</b><span>9 条信任规则，比如广告不改回答、每个回答最多 3 张广告卡</span></li>
+          <li><b>度量</b><span>按看到、领取、核销、分享四步算效果，用随机对照算增量</span></li>
+        </ul>
+        <p class="flip"><b>做的过程中推翻过</b>增量最初拿领取者和未领取者比。后来意识到主动领取的人本来就更爱发帖，这是把自选择当成了效果，于是改成同一场演出随机留出 5% 观众做对照组。</p>
+        <p class="role">独立完成选题、机制和规则设计；用 Claude 写搭建说明，再交给 AI 编程工具生成代码。</p>
+        <div class="dact"><a class="cta" href="painpoint.html">打开 Demo</a><span>手机和电脑都能打开，跟着导览约 2 分钟</span></div>
+        <p class="print-only">这是一个可交互的 Demo，网页版打开：<a href="https://yimingyin1119-create.github.io/portfolio/painpoint.html">https://yimingyin1119-create.github.io/portfolio/painpoint.html</a></p>
+      </div>
+      <figure class="mini" aria-label="Demo 截面：AI 回答里的一段攻略、提到这个痛点的帖子数，和一张标注「广告」的品牌卡">
+        <div class="mph" aria-hidden="true">
+          <div class="mq"><span>鸟巢演唱会攻略</span></div>
+          <div class="mhd"><span class="mspark"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5c.7 5 3.5 7.8 8.5 8.5-5 .7-7.8 3.5-8.5 8.5-.7-5-3.5-7.8-8.5-8.5 5-.7 7.8-3.5 8.5-8.5z"/></svg></span>AI 助手 <span>· 参考 28 篇帖子</span></div>
+          <p class="msec">🚇 交通出行</p>
+          <div class="mpara"><p><mark>散场打车</mark>散场时场馆周边交通管制，司机很难开进来。多篇帖子建议提前一两首歌往外走，到慧忠路路口再叫车。</p></div>
+          <p class="mpm">💬 11/28 篇帖子提到「散场打不到车」</p>
+          <div class="mcard">
+            <div class="mch"><span class="ad">广告</span><span class="av">轻</span><b>轻风出行</b><span class="ct">出行</span></div>
+            <p>慧忠路路口设专属接驳点，散场后加派运力</p>
+            <p class="moff">持票到接驳点优先派车，核销后车费减 15 元</p>
+            <div class="mf"><span>为什么看到 ›</span><span class="mbtn">持票领取</span></div>
+          </div>
+        </div>
+        <figcaption class="bid">
+          <span class="bidl">试试给这个品牌加价</span>
+          <span class="bidseg" role="group" aria-label="品牌出价"><button type="button" data-bid="1" aria-pressed="true">出价 ×1</button><button type="button" data-bid="3" aria-pressed="false">×3</button><button type="button" data-bid="10" aria-pressed="false">×10</button></span>
+          <span class="bidcap" id="bidCap" aria-live="polite">这是现在的样子：攻略照常写，广告卡挂在它解决的那个痛点下面。</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="sec" id="bridge" aria-labelledby="h-bridge">
     <div class="head"><h2 id="h-bridge">一件事，说给三种人听</h2><p>同一个问题，写成三份不同的东西</p></div>
     <div class="scen">
-      <p class="lead">消费券活动第 30 天，核销比计划慢了 <output class="wavy" id="gapOut" for="gap">17 个百分点</output>。客户、技术和达人需要听到的，是三件不同的事。</p>
+      <p class="lead">消费券活动第 28 天，核销比计划慢了 <output class="wavy" id="gapOut" for="gap">17 个百分点</output>。客户、技术和达人需要听到的，是三件不同的事。</p>
       <div class="dial">
         <label for="gap">拖动试试：核销落后多少</label><span class="lvl" id="lvl" data-s="warn">需关注</span>
         <input type="range" id="gap" min="0" max="30" step="1" value="17">
@@ -547,16 +644,16 @@ a.sm{text-decoration:none;display:inline-block}
       <div>
         <div class="spec"><span>示例项目 · 数据为虚构</span></div>
         <h2 id="h-growth">消费券项目工作台</h2>
-        <p>一个能真的用起来的工具：把政府消费券项目从线索到复盘拆成五站，数字改了即时重算；立项摘要、达人 Brief 和复盘报告由 AI 生成，演示版显示示例结果。</p>
+        <p>一个能真的用起来的工具：把政府消费券项目从线索到复盘拆成五站，数字改了即时重算；立项摘要、达人 Brief 和复盘报告由 AI 生成，演示版显示示例结果。示例项目是苏州平江路秋季夜游消费券，传播主线「白天看人，夜里听苏州」和分层达人 Brief 都在「筹备」一站。</p>
         <a class="cta" href="workbench.html">打开工作台</a>
         <p class="print-only">这是一个可交互的工具，网页版打开：<a href="https://yimingyin1119-create.github.io/portfolio/workbench.html">https://yimingyin1119-create.github.io/portfolio/workbench.html</a></p>
       </div>
       <figure class="mon" aria-label="工作台执行监控示例，跟随上面的滑块变化">
         <ol class="rail" aria-hidden="true"><li>线索</li><li>立项</li><li>筹备</li><li class="on">执行</li><li>复盘</li></ol>
-        <div class="monhead"><span>执行监控 · 第 30 / 61 天</span><span class="pill" id="monPill" data-s="warn">需关注</span></div>
+        <div class="monhead"><span>执行监控 · 第 28 / 61 天</span><span class="pill" id="monPill" data-s="warn">需关注</span></div>
         <div class="bars">
-          <div><span>时间进度</span><span class="trk"><i style="width:49.2%"></i></span><b>49.2%</b></div>
-          <div><span>消耗进度</span><span class="trk"><i class="u" id="monUse" style="width:32.2%"></i></span><b id="monUseV">32.2%</b></div>
+          <div><span>时间进度</span><span class="trk"><i style="width:45.9%"></i></span><b>45.9%</b></div>
+          <div><span>消耗进度</span><span class="trk"><i class="u" id="monUse" style="width:28.9%"></i></span><b id="monUseV">28.9%</b></div>
         </div>
         <figcaption><b id="monGap" data-s="warn">−17.0pp</b><span>上面那句「慢了 <span id="monCap">17</span> 个百分点」，就是工作台用消耗进度减时间进度算出来的</span></figcaption>
       </figure>
@@ -565,7 +662,7 @@ a.sm{text-decoration:none;display:inline-block}
 
   <section class="sec" id="tools" aria-labelledby="h-tools">
     <div class="head"><h2 id="h-tools">这个网站本身就是作品</h2><p>我负责判断和取舍，AI 负责读材料、写代码、出提示词</p></div>
-    <div class="tools"><span><b>Claude</b> 梳理材料，搭网站和工作台</span><span><b>ChatGPT · Gemini</b> 按场景调配</span><span><b>AIGC</b> 海报与分镜提示词</span><span><b>Excel · RawGraphs</b> 数据与图表</span></div>
+    <div class="tools"><span><b>Claude</b> 梳理材料，搭网站和工作台</span><span><b>AI 编程</b> 搭痛点认领 Demo</span><span><b>ChatGPT · Gemini</b> 按场景调配</span><span><b>AIGC</b> 海报与分镜提示词</span><span><b>Excel · RawGraphs</b> 数据与图表</span></div>
   </section>
 
   <section class="contact" id="contact" aria-labelledby="h-contact">
@@ -578,7 +675,7 @@ a.sm{text-decoration:none;display:inline-block}
   </section>
 </main>
 <section class="appendix" id="appendix" aria-label="案例详情"></section>
-<footer>© 2026 尹伊茗 · 作品为本人创作或主导完成；平江路案例与消费券工作台为示例项目，数据均为虚构</footer>
+<footer>© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，两者数据均为虚构或模拟</footer>
 
 <dialog class="drawer" id="drawer" aria-labelledby="dw-title"><div class="dw" id="dw"></div></dialog>
 
@@ -591,74 +688,97 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* ---------- cases ---------- */
 const CASES = [
   { id:"shaanxi", feat:true, cat:"campaign", tag:"省级文旅政企合作 · 2026 暑期", title:"#心动陕西畅游计划：一个省的暑期文旅消费季", type:"1 个主题<br>3 条主线<br><em>5 个抓手</em>", label:"畅游卡 · 2026 暑期", art:"rose", seed:1,
-    num:["500 万+","3 天直播 GMV，同比 +74%"], note:"政府出背书和资金，国企出景区，平台出流量和交易。",
-    res:[["1 亿","项目总曝光"],["+60%","陕西旅游相关搜索 PV"],["500 万+","3 天直播 GMV，同比 +74%"]],
+    num:["500 万+","项目整体：3 天直播 GMV，同比 +74%"], note:"政府出背书和资金，国企出景区，平台出流量和交易。",
+    resLabel:"项目整体结果（团队共同完成）", res:[["1 亿","项目总曝光"],["+60%","陕西旅游相关搜索 PV"],["500 万+","3 天直播 GMV，同比 +74%"]],
     one:"陕西省文旅厅指导、陕旅集团统筹的省级暑期文旅促消费专项，覆盖全省景区和酒店，周期约 4 个月。",
-    meta:[["我的角色","传播营销（内宣、设计、视频）；畅游卡与旅交会；项目周报与进度管理"],["合作方","陕西省文旅厅、陕旅集团"]],
+    meta:[["我的角色","传播营销与执行：物料、内宣与视频；畅游卡与旅交会；协议起草与直播落地；项目周报"],["所属","抖音生活服务实习 · 2026 暑期"],["合作方","陕西省文旅厅、陕旅集团"]],
+    out:["展板、折页、发言稿、PPT 等物料的设计对接，跟进多轮送审","内宣、设计和视频物料","合作协议起草，跟进签署","直播落地执行；项目周报与进度管理"],
     did:["统一主题 #心动陕西畅游计划，政务、媒体、达人矩阵联合发声","消费券叠加商家折扣、畅游卡和权益包，打通「内容种草—领券—到店核销—复购」","城市达人派对、城市直播间、线上旅交会，把景区、商圈和商家串成一条线","四阶段推进：预热蓄水、发布集中、消费引爆、持续转化"],
     use:"政企项目的关键是让每一方都拿到自己要的：政府要声量和消费拉动，国企要客流，商家要交易，平台要供给。" },
   { id:"tianjin", feat:true, cat:"campaign", tag:"城市电影消费券 · 方案", title:"津门光影：让没看过电影的人走进影院", type:"让没看过电影的<br>来<em>看电影</em>", label:"电影消费券 · 3 轮发券", art:"rose", seed:2,
     num:["3 轮 × 3 档","发券节奏与券面设计"], note:"传统票务平台服务的是已经爱看电影的人。",
     one:"为天津市委宣传部策划的电影消费券方案：借暑期、中秋、国庆三个档期和旅博会，撬动原本不看电影的人群。",
-    meta:[["我的角色","方案策划与撰写"],["客户","天津市委宣传部"]],
+    meta:[["我的角色","方案策划与撰写"],["所属","抖音生活服务实习 · 2026 暑期"],["客户","天津市委宣传部"],["阶段","方案"]],
+    out:["一份完整的城市电影消费券方案：三轮发券节奏、三档券面、发券渠道和票根互惠玩法"],
     did:["三轮发券对应旅博会首发、中秋家庭观影、国庆高峰，每轮按核销情况回滚剩余额度","满 30 减 15、满 60 减 30、满 100 减 50 三档券面，覆盖单人、情侣和家庭场景","发券入口铺到活动会场、商家页和直播间；旅博会现场直播间挂券，边逛展边买券","「逛展 + 观影」票根互惠，把电影消费和城市文旅连起来"],
     use:"消费券的价值不在发了多少，而在拉来了多少原本不会消费的人；用档期和场景找到这批人。" },
   { id:"perform", feat:true, cat:"campaign", tag:"行业协会合作 · 演出与城市消费", title:"为一场演唱会，去一座城：与中国演出行业协会的合作方案", type:"为一场演唱会，<br>去<em>一座城</em>", label:"演出票根 · 演出之城", art:"rose", seed:3,
     num:["2 种","合作模式：演出之城、演出商家引入"], note:"票根，就是最好的城市消费券。",
     one:"向中国演出行业协会提出的合作方案：一边用演唱会带动全城消费，一边借协会资源把更多演出商家引入平台。",
-    meta:[["我的角色","方案策划与撰写"],["合作方","中国演出行业协会"]],
+    meta:[["我的角色","方案策划与撰写"],["所属","抖音生活服务实习 · 2026 暑期"],["合作方","中国演出行业协会"],["阶段","合作方案"]],
+    out:["两种合作模式的方案：演出之城、演出商家引入","5 类演出、50 个候选项目的引入名单","面向商家的招商话术与标杆打法整理"],
     did:["演出之城：以太原演唱会为样板，专题页聚合票务和吃住游，全城商家推出票根福利，演唱会当天开主题接驳专线串联商圈，再加商圈线下应援","演出商家引入：把协会资源整理成 5 类演出、50 个候选项目的引入名单，按优先级跟进","把平台权益包装成商家听得懂的招商话术：佣金、流量与营销资源、1 对 1 运营陪跑","梳理标杆商家打法（选座小程序、官方账号加每日直播、职人账号矩阵），写进招商材料"],
     use:"演唱会的票卖完了，城市的生意才刚开始：年轻人会为一场演出专程去一座城，顺带完成吃住行游。" },
   { id:"pdd", cat:"insight", tag:"增长拆解 · 拼多多", title:"拼多多怎样把「玩游戏」变成「下单」", img:"pdd_share",
     num:["51","处分享入口，数量最多"], note:"游戏入口和购物入口放在同一层，玩和买的边界被抹掉了。",
     one:"用新账号把拼多多的游戏页全部走一遍，逐个记录能点的元素，看每个动作最后指向哪里。",
-    meta:[["角色","独立完成"],["方法","用户路径走查、元素统计"]],
+    meta:[["我的角色","独立完成"],["方法","用户路径走查、元素统计"]],
+    out:["游戏页可点元素的分类统计：4 类共 188 处，附截图标注"], src:"本人用新账号逐页走查、逐个计数",
     did:["社交分享 51 处、弹窗引导 43 处、签到 35 处、限时优惠与拼团返现 59 处","红色主按钮配又灰又小的关闭键，倒计时券利用「怕错过」的心理","分享只要两步：点按钮，跳微信"],
     use:"裂变路径越短越好，最好两步以内；奖励在用户「快完成」时出现；倒计时比折扣力度更能催促决策。",
     imgs:[["pdd_share","分享两步完成"],["pdd_countdown","黄色爆炸券面加倒计时"]] },
   { id:"changshu", cat:"campaign", tag:"城市传播 · 新浪江苏", title:"#常熟的常红范儿#：让大 V 替城市说话", img:"sina_plan", fit:true,
-    num:["4310 万","主话题阅读，登同城热搜 10 小时"], note:"城市宣传最怕自说自话。",
-    res:[["4310 万","主话题阅读"],["10 小时","同城热搜在榜"],["6 位","百万粉级大 V 联动"]],
+    num:["4310 万","项目整体：主话题阅读，同城热搜 10 小时"], note:"城市宣传最怕自说自话。",
+    resLabel:"项目整体结果（团队共同完成）", res:[["4310 万","主话题阅读"],["10 小时","同城热搜在榜"],["6 位","百万粉级大 V 联动"]],
     one:"为常熟市委宣传部策划的微博城市传播方案：跨领域大 V 走访三天，中间办一场沙龙。",
-    meta:[["角色","方案策划；现场把控沙龙议程与 KOL 节奏；话题发酵与数据追踪"],["客户","常熟市委宣传部"]],
+    meta:[["我的角色","方案策划；现场把控沙龙议程与 KOL 节奏；话题发酵与数据追踪"],["所属","新浪微博（新浪江苏）实习 · 2024 暑期"],["客户","常熟市委宣传部"]],
+    out:["线下打卡线路与互动机制的策划","达人传播矩阵与话题方向，匹配 6 位百万粉级大 V 的内容主题","沙龙议程与发言方向；活动后的话题发酵与数据追踪"], src:"微博话题页阅读数、同城热搜在榜时长",
     did:["大 V 围绕产业、人文、生态三条线走访","「围瓜闲话」沙龙：大 V、媒体、规划专家、文化学者同台","话题页、现场 Plog、快剪、金句海报，配合热搜和信息流"],
     use:"沙龙金句做成海报，专门为二次传播准备素材。",
     imgs:[["sina_plan","方案结构"],["sina_frame","活动框架一张表说清"]] },
+  { id:"ip", cat:"content", tag:"个人 IP · 小红书 / 视频号 / 抖音", title:"一个人的内容矩阵：旅行、留学和文化", type:"选题、拍摄、剪辑、<br><em>接商单</em>，都自己来", art:"feed", seed:5,
+    num:["44.6 万","视频号单条最高播放"], note:"博主和品牌合作，两边我都做过。",
+    one:"独立运营旅行、留学、文化方向的个人账号矩阵，三个平台的选题、脚本、拍摄剪辑和发布都自己做。",
+    meta:[["我的角色","独立运营"],["平台","小红书 · 微信视频号 · 抖音"],["时间","2022.12 至今"]],
+    resLabel:"账号数据（个人）", res:[["5.8 万","小红书单条最高点赞"],["44.6 万","视频号单条最高播放"],["600 万+","全网年播放"],["1 万+","全网粉丝"]], src:"各平台账号数据",
+    did:["三个方向：旅行、留学、文化","三个平台从选题、脚本、拍摄剪辑到发布，全流程自己做","独立对接并交付 6 个品类的品牌合作，跑通商业化闭环"],
+    use:"做过博主，写达人 Brief 时会把卖点、画面要求和话术规范写到对方能直接开拍。" },
   { id:"eco", cat:"campaign", tag:"政务传播 × AIGC · 新浪江苏", title:"13 个城市，13 种物种，一套 AIGC 视觉", img:"sina_hooks",
     num:["13","地市系列海报"], note:"环保话题的难点是「和我有什么关系」。",
     one:"为江苏省生态环境厅官微做的生物多样性日和全国生态日方案；如果今天重做，物种海报直接用 AIGC 出整套样稿。",
-    meta:[["角色","方案策划与撰写"],["客户","江苏省生态环境厅"]],
+    meta:[["我的角色","方案策划与撰写"],["所属","新浪微博（新浪江苏）实习 · 2024 暑期"],["客户","江苏省生态环境厅"]],
+    out:["生物多样性日与全国生态日的传播方案","13 个地市的物种海报构思","四条生态 citywalk 路线"],
     did:["每个地市配一种代表物种，做城市系列海报","大 V 走进景区直播科普","#江苏生态citywalk#：四条可以直接去走的生态路线"],
     use:"提示词里固定同一系列风格，13 张图才能放在一起；先出样稿和客户对齐，再精修。",
     imgs:[["sina_hooks","三大传播抓手"]],
     prompts:[["盐城 · 丹顶鹤","Red-crowned cranes landing on the reed marshes of Yancheng coastal wetland at dawn, soft mist, warm low sun, editorial wildlife poster, Chinese ink-wash texture blended with photography, blank space at top for a vertical Chinese title, 3:4"],
              ["南京 · 长江江豚","A Yangtze finless porpoise surfacing near the Nanjing riverbank, city skyline faint in the background, cool blue-green palette, same ink-wash editorial series style, space for a vertical Chinese title, 3:4"],
              ["宿迁 · 洪泽湖湿地","Hongze Lake wetland with egrets flying over lotus fields, summer haze, consistent series style: ink-wash texture, muted greens, one bright accent, space for a vertical Chinese title, 3:4"]] },
-  { id:"pingjiang", cat:"campaign", tag:"文旅达人种草 · 示例项目", title:"平江路，九点以后才开场", type:"白天看人，<br>夜里<em>听苏州</em>", art:"ripple", seed:4,
-    num:["4 层","达人矩阵拆分 50 万预算"], note:"把「游客太多」反过来讲。",
-    one:"为一个虚构的苏州平江路夜游消费券项目做的达人种草方案。",
-    meta:[["角色","策略与方案"],["性质","示例项目"]],
-    did:["从三类具体的人出发：直奔高铁的上海情侣、做攻略的闺蜜、觉得平江路只属于游客的本地年轻人","传播主线：白天看人，夜里听苏州","头部 40%、腰部 35%、素人 15%、投流 10%，每层一份可以直接发给达人的 Brief"],
-    use:"完整方案在消费券工作台的「筹备」一站，改输入后可以让大模型重写。", link:true },
   { id:"news", cat:"insight", tag:"话题洞察 · 数据新闻", title:"声量很大，需求很小：新闻专业还值得报吗", img:"news_rank",
     num:["3946 → 12190","某 211 高校新闻专业投档位次，四年"], note:"声量不等于需求。",
     one:"2023 年「新闻是天坑」反复上热搜。我们去找数据：投档位次、搜索指数、豆瓣「后悔」小组词频，再加采访。",
-    meta:[["角色","选题、数据与主笔"],["方法","数据整理、词频、采访"]],
+    meta:[["我的角色","选题、数据与主笔"],["方法","数据整理、词频、采访"]], src:"公开投档数据、搜索指数、豆瓣「后悔」小组帖子词频，加采访",
     did:["热搜讨论很响，专业搜索指数却一直平淡","新闻学投档位次 2021 年后持续下滑，和计算机、法学走势相反","「后悔」小组里讨论最多的是就业，「转码」频繁出现"],
     use:"做策略前把声量和需求分开看；数据回答「是什么」，采访回答「为什么」。",
     imgs:[["news_rank","热度先升后降"],["news_words","大家真正焦虑的是就业"]] },
+  { id:"tennis", cat:"content", tag:"运动员 IP · 抖音 · 2025 秋", title:"给一位 NCAA 冠军做抖音 IP", type:"把一位<em>全美冠军</em><br>介绍给抖音", art:"court", seed:6,
+    num:["500 万+","全平台累计播放，3 个月"], note:"3 个月、13 条短视频、2 人团队。",
+    one:"为 NCAA 全美男单冠军网球运动员打造抖音 IP，带 2 人团队负责选题策划、内容与人设。",
+    meta:[["我的角色","媒体团队 Leader，带 2 人团队"],["地点","亚特兰大（交换学期）"],["时间","2025.09 – 2025.12"]],
+    out:["选题策划、内容与人设打造","3 个月产出短视频 13 条"],
+    resLabel:"账号结果（团队）", res:[["500 万+","全平台累计播放"],["2,000+","涨粉"],["13 条","短视频，3 个月"]], src:"账号数据，统计周期 2025.09 – 2025.12",
+    did:["围绕「NCAA 全美男单冠军」这个身份做选题和人设","做出了冠军题材的爆款内容","通过抖音把粉丝引到私域粉丝群，为创业项目做内容获客"],
+    use:"运动员 IP 的价值不止播放量：把粉丝接到私域，内容才接得上后面的生意。" },
   { id:"kol", cat:"insight", tag:"KOL 风险 · 综艺与社交平台", title:"一个「才女」人设，是怎么在综艺里塌掉的", type:"人设越<em>精致</em>，<br>崩塌时越疼", art:"crack", seed:7,
     num:["3 步","从被喜欢到被反噬"], note:"人设是资产，也是负债。",
     one:"文案博主方琦在《乘风破浪》第六季的点评被批空泛，网友随后逐字比对她的成名金句，发现是拼接的。",
-    meta:[["角色","独立研究"],["对象","综艺与社交平台舆论"]],
+    meta:[["我的角色","独立研究"],["对象","综艺与社交平台舆论"]], src:"公开综艺片段与社交平台讨论",
     did:["制造亲密：治愈系金句让粉丝觉得「她懂我」","信任破裂：即时表现和人设对不上，网友开始逐字核查","算法放大：批评越多互动越高，推得越多，崩得越快"],
     use:"选 KOL 时看人设在不同场景下是否一致；合作前准备舆情预案。" },
   { id:"craft", cat:"creative", tag:"创意基本功 · 文案与分镜", title:"改稿和分镜：AIGC 之前的基本功", type:"<del>「难缠的上司」</del><ins>大酒肚和地中海</ins>", art:"edit",
     num:["382 → 523 字","一篇微小说的二稿"], note:"形容词换成画面。",
     one:"一篇写广告人妈妈的微小说的两版改稿，和一张改写成 AI 视频提示词的分镜表。",
-    meta:[["角色","原创"],["用途","文案、视频脚本"]],
+    meta:[["我的角色","原创"],["用途","文案、视频脚本"]],
     did:["把转述的对话改回场景，读者自己会生气","用折叠镜、凌乱的头发、口红写情绪，不写「痛哭」","王维诗的分镜表：景别、运镜、时长都定好，直接改写成视频提示词"],
-    use:"会写分镜的人，最清楚 AI 视频缺的是节奏和镜头关系。", shots:true }
+    use:"会写分镜的人，最清楚 AI 视频缺的是节奏和镜头关系。", shots:true },
+  { id:"chinadaily", cat:"content", tag:"海外社媒 · 中国日报 TikTok · 2024 暑期", title:"把中文热点讲给英语用户听", type:"同一个热点，<br>讲给<em>英语用户</em>听", art:"globe", seed:8,
+    num:["13 篇","中文热点本地化再创作"], note:"不是逐句翻译，是按英语用户的习惯重新讲。",
+    one:"在中国日报海外社交媒体部远程实习，参与 TikTok 官方账号的日常运营，把中文热点改写成英语受众的内容。",
+    meta:[["我的角色","新媒体运营实习生（远程）"],["所属","中国日报 China Daily 海外社交媒体部 · 2024.06 – 2024.09"],["账号","TikTok 官方账号，340 万粉丝"]],
+    out:["短视频 10+ 条：选题、脚本、剪辑、文案全流程","中文热点本地化再创作为英语内容 13 篇"],
+    resLabel:"我的内容数据", res:[["1.5 万","单条最高播放"],["10+ 条","短视频"],["13 篇","本地化再创作"]], src:"TikTok 公开播放数",
+    did:["短视频从选题、脚本到剪辑和文案，全流程自己做","中文热点按英语受众的习惯重新讲，而不是逐句翻译","沉淀了一套跨文化差异化表达的做法"],
+    use:"出海内容先想清楚对方熟悉什么，再决定怎么讲；同一个热点要按受众重写。" }
 ];
 
 const WORKBENCH = "workbench.html";
@@ -685,7 +805,9 @@ function detail(c, inDrawer = true){
   let h = (inDrawer ? `<div class="top"><span class="tg">${esc(c.tag)}</span><span class="pager"><button type="button" class="x" data-step="-1" aria-label="上一个案例">←</button><span>${pos} / ${CASES.length}</span><button type="button" class="x" data-step="1" aria-label="下一个案例">→</button></span><button type="button" class="x" data-close>关闭</button></div>` : `<span class="aptag">${esc(c.tag)}</span>`) + `
     <h3${inDrawer ? ' id="dw-title"' : ""}>${esc(c.title)}</h3><p class="one">${esc(c.one)}</p>
     <dl>${c.meta.map(([k,v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>`;
-  if (c.res) h += `<div class="res">${c.res.map(([v,l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>`;
+  if (c.out) h += `<h4>我的直接产出</h4><ul class="pts">${c.out.map(d => `<li>${esc(d)}</li>`).join("")}</ul>`;
+  if (c.res) h += `<h4>${esc(c.resLabel || "结果")}</h4><div class="res">${c.res.map(([v,l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("")}</div>`;
+  if (c.src) h += `<p class="src"><b>数据来源</b>${esc(c.src)}</p>`;
   h += `
     <h4>我做了什么、看到了什么</h4><ul class="pts">${c.did.map(d => `<li>${esc(d)}</li>`).join("")}</ul>
     <div class="use"><b>用在营销上</b>${esc(c.use)}</div>`;
@@ -732,7 +854,7 @@ addEventListener("resize", balance);
 $("#appendix").innerHTML = `<h2>案例详情</h2>` + CASES.map(c => `<article class="dw ap">${detail(c, false)}</article>`).join("");
 
 /* ornaments drawn in code: guilloche rosettes like the security print on a coupon,
-   night ripples for the canal walk, cracks for the collapsing persona */
+   cracks for the collapsing persona, a post grid, a court and a globe for the content work */
 function rng(seed){ let a = (seed * 2654435761) >>> 0 || 1; return () => { a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const cssVar = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function rosette(ctx, cx, cy, size, p, q, rings){
@@ -788,6 +910,43 @@ function paintArt(el){
     };
     const ox = w * .68, oy = h * .28;
     for (let i = 0; i < 7; i++) grow(ox, oy, i / 7 * Math.PI * 2 + R() * .4, Math.max(w, h) * (.35 + R() * .3), 1.6, 0);
+  } else if (art === "feed"){
+    /* a creator's grid of posts, a few of them liked */
+    const on = cssVar("--on-night"), mark = cssVar("--mark"), cols = 5, gap = 7, cw = (w - gap * (cols + 1)) / cols;
+    ctx.lineWidth = .8;
+    for (let c = 0; c < cols; c++){
+      let y = gap - R() * cw;
+      while (y < h){
+        const ch = cw * (1.15 + R() * .5), x = gap + c * (cw + gap);
+        ctx.strokeStyle = on; ctx.globalAlpha = .13; ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(x, y, cw, ch, 5); else ctx.rect(x, y, cw, ch);
+        ctx.stroke();
+        if (R() < .16){ ctx.fillStyle = mark; ctx.globalAlpha = .75; ctx.beginPath(); ctx.arc(x + cw - 9, y + ch - 9, 3, 0, Math.PI * 2); ctx.fill(); }
+        y += ch + gap;
+      }
+    }
+  } else if (art === "court"){
+    /* the near half of a tennis court in perspective, and the ball's arc over the net */
+    const on = cssVar("--on-night"), mark = cssVar("--mark"), top = h * .36, bot = h * 1.05, netH = h * .07;
+    const X = (u, v) => w * .5 + (u - .5) * w * (.42 + (v - top) / (bot - top) * .9);
+    const seg = (u1, v1, u2, v2) => { ctx.beginPath(); ctx.moveTo(X(u1, v1), v1); ctx.lineTo(X(u2, v2), v2); ctx.stroke(); };
+    ctx.strokeStyle = on; ctx.lineWidth = 1.2; ctx.globalAlpha = .34;
+    seg(0, top, 0, bot); seg(1, top, 1, bot); seg(.125, top, .125, bot); seg(.875, top, .875, bot);
+    const sv = top + (bot - top) * .5; seg(.125, sv, .875, sv); seg(.5, top, .5, sv);
+    ctx.globalAlpha = .45; ctx.beginPath(); ctx.moveTo(X(-.02, top), top - netH); ctx.lineTo(X(1.02, top), top - netH); ctx.stroke(); seg(0, top, 1, top);
+    ctx.globalAlpha = .16; for (let u = 0; u <= 1.0001; u += .04){ ctx.beginPath(); ctx.moveTo(X(u, top), top); ctx.lineTo(X(u, top), top - netH); ctx.stroke(); }
+    ctx.strokeStyle = mark; ctx.globalAlpha = .6; ctx.setLineDash([3, 5]); ctx.beginPath(); ctx.moveTo(w * .2, h * .95); ctx.quadraticCurveTo(w * .5, h * -.08, w * .84, h * .26); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = mark; ctx.globalAlpha = .95; ctx.beginPath(); ctx.arc(w * .84, h * .26, 4.5, 0, Math.PI * 2); ctx.fill();
+  } else if (art === "globe"){
+    /* meridians and parallels, with a dotted route coming in from the left */
+    const on = cssVar("--on-night"), mark = cssVar("--mark"), cx = w * .8, cy = h * .74, r = Math.min(w, h) * .62;
+    ctx.strokeStyle = on; ctx.lineWidth = .8; ctx.globalAlpha = .2; ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+    ctx.globalAlpha = .12;
+    for (let i = 1; i < 6; i++){ ctx.beginPath(); ctx.ellipse(cx, cy, r * Math.cos(i * Math.PI / 12), r, 0, 0, Math.PI * 2); ctx.stroke(); }
+    for (let i = -4; i <= 4; i++){ const a = i * Math.PI / 10, rx = r * Math.cos(a); ctx.beginPath(); ctx.ellipse(cx, cy - r * Math.sin(a), rx, rx * .12, 0, 0, Math.PI * 2); ctx.stroke(); }
+    const ex = cx - r * .45, ey = cy - r * .5;
+    ctx.strokeStyle = mark; ctx.globalAlpha = .55; ctx.setLineDash([2, 5]); ctx.beginPath(); ctx.moveTo(w * .07, h * .3); ctx.quadraticCurveTo(w * .4, h * .02, ex, ey); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = mark; ctx.globalAlpha = .9; [[w * .07, h * .3], [ex, ey]].forEach(([x, y]) => { ctx.beginPath(); ctx.arc(x, y, 3, 0, Math.PI * 2); ctx.fill(); });
   }
   ctx.globalAlpha = 1;
   owner.style.backgroundImage = `url(${cv.toDataURL("image/png")})`;
@@ -901,7 +1060,7 @@ jdAll.addEventListener("click", () => {
 
 /* scenario dial: how far verification lags decides what each audience hears.
    Example warning lines, same defaults as the workbench: lag ≤ 8pp is normal, ≤ 18pp needs attention, beyond that is serious. */
-const TIME_P = 49.2;
+const TIME_P = 45.9;
 const LEVELS = [
   { max:8, key:"ok", name:"正常",
     subj:"核销进度正常",
@@ -944,6 +1103,16 @@ function scenario(){
 gapIn.addEventListener("input", scenario);
 scenario();
 
+/* AI demo teaser: raising the bid never changes the answer */
+const BID = {1:"这是现在的样子：攻略照常写，广告卡挂在它解决的那个痛点下面。",
+  3:"出价 ×3：回答一个字没变，卡片位置也没变。出价只决定同一个痛点下由哪家品牌来展示。",
+  10:"出价 ×10：还是一样。想排到候补品牌前面，还要乘上核销率和好评率攒下的质量分。"};
+document.querySelectorAll("[data-bid]").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("[data-bid]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  $("#bidCap").textContent = BID[b.dataset.bid];
+  const p = $(".mpara"); if (!reduce){ p.classList.remove("pulse"); void p.offsetWidth; p.classList.add("pulse"); }
+}));
+
 /* drawer: step through cases without closing */
 function step(dir){
   const i = CASES.findIndex(c => c.id === currentCase), next = CASES[(i + dir + CASES.length) % CASES.length];
@@ -963,7 +1132,7 @@ if ("IntersectionObserver" in window){
     if (!e.isIntersecting) return;
     navLinks.forEach(a => a.getAttribute("href") === "#" + e.target.id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
   }), { rootMargin:"-45% 0px -50% 0px" });
-  ["caps", "work", "bridge", "growth"].forEach(id => spy.observe(document.getElementById(id)));
+  ["caps", "work", "demo", "bridge", "growth"].forEach(id => spy.observe(document.getElementById(id)));
 }
 
 /* evidence chips and result numbers open the matching case */

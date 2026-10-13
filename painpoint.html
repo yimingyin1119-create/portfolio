@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>痛点认领 Demo</title>
+<meta name="description" content="概念 Demo：在 AI 搜索的回答里，品牌买不到答案，只能认领用户的真实痛点、提供服务，并凭演出票根到场核销证明效果。">
+<meta property="og:title" content="痛点认领 Demo · 尹伊茗">
+<meta property="og:description" content="在 AI 回答里，品牌买不到答案，只能认领用户的真实痛点。数据均为模拟，品牌均为虚构。">
+<style>
+/* A product mock, so it commits to one light look: indigo marks what the AI wrote, warm amber marks
+   anything a brand paid for, green-teal marks the organiser, and plain ink carries the actions. */
+:root{
+  color-scheme:light;
+  --ai:#4F46E5; --ai-l:#EEF0FF; --ai-d:#3730A3; --ai-line:#C7CBF7; --act:#1F2433; --danger:#DC2626;
+  --ad:#B45309; --ad-bg:#FFF9EF; --ad-line:#F1DFBF; --ad-tag:#FBEBCF; --org:#0F766E; --org-l:#E3F3F0; --org-line:#9ED2C8;
+  --green:#16A34A; --green-l:#E7F6EC; --ink:#222; --sub:#555; --muted:#8A8A8A; --faint:#B0B3B8;
+  --line:#EBEDF0; --hair:#F2F3F5; --card:#F7F8FA; --stage:#EDEEF0; --white:#FFFFFF; --frame:#1F2023;
+  --flash:#FFE58F; --warn-bg:#FFF7E6; --warn:#B45309;
+  --f:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:var(--stage);color:var(--ink);font:14px/1.6 var(--f);-webkit-font-smoothing:antialiased;overflow:hidden;font-variant-numeric:tabular-nums}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button:disabled{cursor:default}
+a{color:inherit}
+#app{height:100%;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+@keyframes fade{from{opacity:0}}
+@keyframes up{from{transform:translateY(24px);opacity:.4}}
+@keyframes slide{from{transform:translateX(30px);opacity:.4}}
+@keyframes flash{0%,30%{opacity:.75}100%{opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* demo bar */
+.dbar{flex:none;height:56px;background:var(--white);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px}
+.bl{display:flex;align-items:center;gap:10px;min-width:0}
+.back{flex:none;color:var(--muted);text-decoration:none;font-size:13px;white-space:nowrap;padding-right:12px;border-right:1px solid var(--line)}
+.back:hover{color:var(--ink)}
+.tag{flex:none;font-size:12px;color:var(--ai);border:1px solid var(--ai);border-radius:4px;padding:0 6px;line-height:20px;white-space:nowrap}
+.ttl{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.bsub{font-size:12px;color:var(--muted);white-space:nowrap}
+.br{display:flex;align-items:center;gap:10px;flex:none}
+.seg{display:inline-flex;background:var(--hair);border-radius:8px;padding:2px}
+.seg button{padding:5px 12px;border-radius:6px;font-size:13px;color:var(--sub);white-space:nowrap;transition:background-color .15s}
+.seg button[aria-pressed="true"]{background:var(--white);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.seg .s{display:none}
+.tl{font-size:13px;color:var(--sub);padding:5px 6px;white-space:nowrap}
+.tl:hover{color:var(--ink)}
+.burger{display:none}
+@media (max-width:1199px){.ttl{display:none}}
+@media (max-width:1060px){.bsub{display:none}.seg button{padding:5px 9px;font-size:12px}}
+
+/* stage and frames */
+.stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.phone{position:relative;width:390px;max-width:calc(100% - 24px);height:min(844px,calc(100% - 24px));border-radius:40px;border:6px solid var(--frame);background:var(--white);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 50px rgba(0,0,0,.12)}
+#phScreen{flex:1;min-height:0;display:flex;flex-direction:column}
+.desk{position:relative;width:min(1000px,calc(100% - 40px));height:calc(100% - 24px);border-radius:12px;background:var(--white);overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.08);display:flex;flex-direction:column}
+#deskIn{flex:1;min-height:0;display:flex;flex-direction:column}
+.scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.toast{position:absolute;left:50%;bottom:110px;transform:translate(-50%,8px);background:rgba(28,28,30,.9);color:var(--white);font-size:13px;line-height:1.5;padding:8px 14px;border-radius:8px;width:max-content;max-width:80%;text-align:center;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.flash{position:relative}
+.flash::after{content:"";position:absolute;inset:-6px;border-radius:12px;background:var(--flash);pointer-events:none;mix-blend-mode:multiply;opacity:0;animation:flash 2s ease-out}
+
+/* phone: status and top bars */
+.sbar{flex:none;height:40px;display:flex;justify-content:space-between;align-items:center;padding:6px 28px 0;font-size:14px;font-weight:600}
+.sbi{display:flex;gap:6px;align-items:center}
+.tb{flex:none;height:48px;display:grid;grid-template-columns:88px minmax(0,1fr) 88px;align-items:center;padding:0 6px;border-bottom:1px solid var(--hair)}
+.tb .tt{display:flex;align-items:center;justify-content:center;gap:6px;font-size:16px;font-weight:600}
+.tb .rt{display:flex;justify-content:flex-end}
+.ib{position:relative;width:40px;height:40px;display:grid;place-items:center;font-size:22px;color:#333;line-height:1}
+.ib.more{font-size:15px;letter-spacing:1px}
+.spark{display:inline-grid;color:var(--ai)}
+.badge{position:absolute;top:4px;right:2px;min-width:16px;height:16px;border-radius:8px;background:var(--ai);color:var(--white);font-size:10px;font-weight:700;line-height:16px;padding:0 4px;text-align:center}
+#phScroll{padding:14px 14px 22px;background:var(--white)}
+
+/* phone: answer */
+.q{display:flex;justify-content:flex-end;margin-bottom:12px}
+.q span{background:var(--ai-l);color:var(--ai-d);border-radius:16px 16px 4px 16px;padding:9px 14px;font-size:15px;max-width:80%}
+.ans{font-size:15px;line-height:1.7}
+.refs{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--sub);background:var(--card);border-radius:999px;padding:4px 10px 4px 12px}
+.refs.static{cursor:default}
+.avs{display:inline-flex;padding-left:6px}
+.avs i{width:18px;height:18px;border-radius:50%;border:2px solid var(--white);margin-left:-6px;background:#FFD6D6}
+.avs i:nth-child(2){background:#D6ECFF}
+.avs i:nth-child(3){background:#DFF5E1}
+.chev{color:var(--faint)}
+.srcn{font-size:12px;color:var(--muted);margin:6px 0 0}
+.intro{margin:10px 0 2px}
+.as h3,.ans h3{font-size:16px;line-height:1.5;margin:18px 0 6px}
+.para{margin:0 0 12px}
+.para > p{margin:0}
+mark{background:var(--ai-l);color:var(--ink);font-weight:700;padding:1px 5px;border-radius:4px;margin-right:6px}
+.pm{font-size:12px;color:var(--muted);margin:6px 0 0!important}
+.offi{border-left:2px solid var(--org-line);padding:4px 10px;margin:8px 0 0}
+.offi p{margin:0}
+.offi .oh{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.offi .oh b{font-size:12px;color:var(--org)}
+.offi .oh span{font-size:12px;color:var(--muted)}
+.offi .ot{font-size:13px;color:var(--sub);line-height:1.6}
+.small{font-size:12px;color:var(--muted);line-height:1.6;margin:8px 0 0}
+.acts{display:flex;gap:14px;margin:12px 0 0;color:var(--muted)}
+.acts button{width:28px;height:28px;display:grid;place-items:center;border-radius:6px}
+.acts button:hover{background:var(--hair)}
+.fups{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin-top:14px}
+.fu{background:var(--hair);border-radius:999px;padding:6px 12px;font-size:13px;color:#333;text-align:left}
+
+/* scene 2: ranking */
+.rank{margin:12px 0 0;display:flex;flex-direction:column;gap:10px}
+.rk{display:grid;grid-template-columns:20px 36px minmax(0,1fr) 34px;gap:4px 8px;align-items:center}
+.rk .rn{font-size:12px;font-weight:700;color:var(--muted)}
+.rk b{font-size:14px}
+.rbar{height:6px;border-radius:3px;background:var(--hair);overflow:hidden}
+.rbar i{display:block;height:100%;background:var(--ai);border-radius:3px}
+.rk .rs{font-size:13px;font-weight:600;text-align:right}
+.rk p{grid-column:2/-1;margin:0;font-size:13px;color:var(--sub);line-height:1.5}
+.mn{font-size:12px;color:var(--muted)}
+
+/* the one brand card */
+.bcard{position:relative;background:var(--ad-bg);border:1px solid var(--ad-line);border-radius:12px;padding:12px;margin-top:8px;font-size:13px;line-height:1.55}
+.bh{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.adl{font-size:11px;background:var(--ad-tag);color:var(--ad);border-radius:3px;padding:0 4px;line-height:17px}
+.av{width:20px;height:20px;border-radius:50%;background:#2B2D33;color:var(--white);font-size:11px;display:grid;place-items:center;flex:none;line-height:1}
+.bn{font-size:14px}
+.bc{font-size:12px;color:var(--muted)}
+.newl{font-size:11px;color:var(--ad);border:1px solid var(--ad);border-radius:3px;padding:0 4px;line-height:16px}
+.btags{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.btags span{font-size:11px;color:#666;background:#ECEEF1;border-radius:3px;padding:0 5px}
+.sol{margin:8px 0 0;color:#333}
+.off{margin:4px 0 0;color:var(--ad);font-weight:700;font-size:14px}
+.whyt{margin:8px 0 0;padding:8px 10px;background:var(--white);border:1px solid var(--ad-line);border-radius:8px;color:var(--sub);font-size:12px;line-height:1.6}
+.bf{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;margin-top:10px}
+.lk{font-size:12px;color:var(--muted);white-space:nowrap}
+.lk:disabled{color:var(--faint)}
+.pbtn{margin-left:auto;height:32px;padding:0 14px;border-radius:999px;background:var(--act);color:var(--white);font-size:13px;font-weight:600;white-space:nowrap;flex:none;transition:transform .1s}
+.pbtn:active,.redbtn:active,.inkbtn:active{transform:scale(.97)}
+.pbtn.got{background:var(--white);border:1px solid #C9CDD4;color:var(--sub);font-weight:500}
+.pv{pointer-events:none}
+
+/* phone: bottom input */
+.ibar{flex:none;padding:8px 12px 10px;border-top:1px solid var(--hair);background:var(--white)}
+.fake{display:block;width:100%;text-align:left;height:40px;border-radius:20px;background:var(--hair);padding:0 16px;color:#999;font-size:14px}
+.ibar p{margin:5px 0 0;text-align:center;font-size:11px;color:var(--faint)}
+
+/* phone: sheets */
+.layer{position:absolute;inset:0;z-index:5}
+.mask{position:absolute;inset:0;background:rgba(0,0,0,.35);animation:fade .2s}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:80%;overflow-y:auto;background:var(--white);border-radius:16px 16px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom,0px));animation:up .22s ease-out}
+.sheet h4{margin:0 0 12px;font-size:16px;text-align:center}
+.x{position:absolute;right:6px;top:6px;width:36px;height:36px;font-size:22px;line-height:1;color:#999;border-radius:8px}
+.cites{list-style:none;margin:0;padding:0}
+.cites li{padding:10px 0;border-bottom:1px solid var(--hair)}
+.cites p{margin:0;font-size:14px;line-height:1.5}
+.cites .ctag{display:inline-block;margin-left:6px;font-size:11px;color:var(--sub);background:#ECEEF1;border-radius:3px;padding:0 5px;vertical-align:1px;font-weight:400}
+.cites span.by{font-size:12px;color:var(--muted)}
+.drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;height:140px;border:1.5px dashed #C9CDD4;border-radius:12px;color:var(--muted);font-size:13px}
+.drop .plus{font-size:28px;line-height:1;color:var(--faint)}
+.spinner{width:26px;height:26px;border-radius:50%;border:3px solid var(--ai-l);border-top-color:var(--ai);animation:spin .8s linear infinite}
+.tk{border-radius:12px;background:linear-gradient(135deg,#1E2A3A,#33465E);color:var(--white);padding:14px 16px;position:relative}
+.tk b{font-size:16px;display:block}
+.tk p{margin:2px 0 0;font-size:13px;opacity:.85}
+.okline{margin:10px 0 0;color:var(--green);font-weight:600;font-size:14px}
+.redbtn{height:40px;padding:0 20px;border-radius:999px;background:var(--act);color:var(--white);font-weight:600;font-size:14px;transition:transform .1s}
+.redbtn.wide{display:block;width:100%;height:44px;margin-top:12px}
+.tiny{margin:10px 0 0;text-align:center;font-size:11px;color:var(--faint)}
+
+/* phone: benefits and note */
+.tkinfo{font-size:12px;color:var(--sub);background:var(--card);border-radius:8px;padding:8px 10px;margin-bottom:12px}
+.bene{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.bene .st{margin-left:auto;font-size:12px;color:var(--muted)}
+.bene .st.ok{color:var(--green);font-weight:600}
+.bene dl{margin:10px 0 0;display:grid;gap:4px;font-size:13px}
+.bene dl div{display:grid;grid-template-columns:3em minmax(0,1fr);gap:8px}
+.bene dt{color:var(--muted)}
+.bene dd{margin:0}
+.code{display:flex;align-items:baseline;justify-content:space-between;margin-top:12px;padding:12px 14px;background:var(--card);border-radius:10px}
+.code span{font-size:12px;color:var(--muted)}
+.code b{font-size:24px;letter-spacing:3px}
+.bene .redbtn{margin-top:12px;width:100%}
+.bene .doneb{margin-top:12px;width:100%;height:40px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:14px}
+.post{display:flex;width:100%;align-items:center;justify-content:space-between;padding:14px;border-radius:12px;background:var(--ai-l);color:var(--ai-d);font-size:15px;text-align:left}
+.empty{text-align:center;color:var(--muted);padding:60px 0}
+.empty .emi{font-size:36px}
+.addimg{margin-top:10px;font-size:13px;color:var(--sub);border:1px dashed #C9CDD4;border-radius:8px;padding:5px 12px}
+.ntt,.ntb{display:block;width:100%;border:0;border-bottom:1px solid var(--hair);font:inherit;color:var(--ink);padding:12px 0;background:none;outline:none}
+.ntt{font-size:17px;font-weight:600}
+.ntb{font-size:15px;line-height:1.7;resize:none}
+.ntags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ntags span{font-size:12px;border-radius:4px;padding:2px 8px;background:var(--ai-l);color:var(--ai-d)}
+.ntags .gray{background:#ECEEF1;color:var(--sub)}
+.hint{margin:8px 0 0;font-size:12px;color:var(--sub);background:var(--card);border-radius:6px;padding:6px 10px}
+
+/* brand back office */
+.dtop{flex:none;height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;border-bottom:1px solid var(--line)}
+.dtop b{font-size:15px;white-space:nowrap}
+.dlabel{font-size:12px;color:var(--sub);background:var(--hair);border-radius:999px;padding:2px 10px;white-space:nowrap}
+.dt-short,.dl-short{display:none}
+.dbody{flex:1;min-height:0;display:grid;grid-template-columns:150px minmax(0,1fr)}
+.dnav{border-right:1px solid var(--line);padding:12px 8px;display:flex;flex-direction:column;gap:2px;background:#FAFBFC}
+.dnav button{text-align:left;padding:9px 12px;border-radius:8px;font-size:14px;color:var(--sub);white-space:nowrap}
+.dnav button:hover{background:var(--hair)}
+.dnav button[aria-current="true"]{background:var(--white);color:var(--ink);font-weight:600;box-shadow:inset 3px 0 0 var(--ink),0 1px 2px rgba(0,0,0,.05)}
+#dkScroll{padding:20px 24px 32px;font-size:14px}
+.dh{margin:0;font-size:18px;line-height:1.4}
+.muted{color:var(--muted)}
+.pmn{background:var(--card);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--sub);margin-bottom:14px;line-height:1.7}
+.pmn p{margin:0}
+.pmn .g{color:var(--green);font-weight:600}
+.twrap{overflow-x:auto}
+.ptab{width:100%;border-collapse:collapse;font-size:13px}
+.ptab th{font-weight:500;color:var(--muted);text-align:left;font-size:12px;padding:8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.ptab td{padding:10px 8px;border-bottom:1px solid var(--hair);vertical-align:middle}
+.ptab td:nth-child(-n+6){white-space:nowrap}
+.prow{cursor:pointer}
+.prow:hover td{background:#FAFBFC}
+.prow .car{display:inline-block;width:12px;color:var(--faint);transition:transform .15s}
+.prow[aria-expanded="true"] .car{transform:rotate(90deg)}
+.pname{font-weight:600;white-space:nowrap}
+.share{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.sbx{width:56px;height:4px;border-radius:2px;background:#EEF0F3;overflow:hidden;flex:none}
+.sbx i{display:block;height:100%;background:var(--ai)}
+.low{color:var(--danger);font-style:normal;font-size:11px}
+.tr-up{color:var(--danger)}
+.tr-down{color:var(--green)}
+.ty{font-size:12px;border-radius:4px;padding:1px 6px;background:#EEF0F3;color:var(--sub);white-space:nowrap}
+.ty.supply{background:#FFF1E6;color:#B4541A}
+.ty.discount{background:var(--ai-l);color:var(--ai-d)}
+.ty.venue{background:var(--org-l);color:var(--org)}
+.ty.sponsor{background:#F3EDFF;color:#6B3FD1}
+.stx{font-size:12px;color:var(--sub)}
+.redsm{height:28px;padding:0 12px;border-radius:6px;background:var(--act);color:var(--white);font-size:12px;font-weight:600;white-space:nowrap;margin-right:6px}
+.match{font-size:12px;color:var(--green);background:var(--green-l);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.act{display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.wl td,.vr td{background:#FCFCFD;font-size:12px;color:var(--sub);padding-top:6px}
+.lk2{color:var(--ai);font-size:12px;margin-left:6px}
+.ruled{margin:6px 0 0;padding:8px 10px;background:var(--card);border-radius:6px;font-size:12px;color:var(--sub)}
+.vt{margin:0 0 4px;font-size:12px;color:var(--muted)}
+.vlist{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.vlist li{font-size:12px;background:var(--white);border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:#333}
+.pcards{display:none;flex-direction:column;gap:10px}
+.pcard{border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}
+.pcard .r1{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pcard .r1 b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.pcard .r2{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:6px;font-size:12px}
+.pcard .r3{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.pcard .xtra{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px;color:var(--sub)}
+
+.ch{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.cgrid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;margin-top:16px;align-items:start}
+.cform{display:flex;flex-direction:column;gap:12px;margin:0}
+.cform label{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--sub)}
+.cform input,.cform textarea,.cform select{font:inherit;font-size:14px;color:var(--ink);border:1px solid #DCDFE4;border-radius:8px;padding:8px 10px;background:var(--white);width:100%}
+.cform textarea{resize:vertical;line-height:1.5}
+.cform input:focus,.cform textarea:focus,.cform select:focus{outline:2px solid var(--ai-line);border-color:var(--ai)}
+.cform :disabled{background:var(--card);color:var(--muted)}
+.hint2{margin:0;font-size:12px;color:var(--warn);background:var(--warn-bg);border-radius:6px;padding:6px 10px}
+fieldset{border:0;padding:0;margin:0;min-width:0}
+legend{font-size:13px;color:var(--sub);padding:0;margin-bottom:4px}
+.rds{display:flex;gap:16px;flex-wrap:wrap}
+.cform .rd{flex-direction:row;align-items:center;gap:6px;color:var(--ink);font-size:14px}
+.cform .rd input{width:auto;accent-color:var(--ink)}
+.cities{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.cities span{font-size:12px;background:var(--hair);border-radius:4px;padding:1px 8px}
+.cities p{flex-basis:100%;margin:2px 0 0;font-size:12px;color:var(--muted)}
+.cprev{position:sticky;top:0;background:var(--hair);border-radius:12px;padding:14px}
+.cprev h4{margin:0 0 8px;font-size:13px;color:var(--muted);font-weight:500}
+.cprev .scr{background:var(--white);border-radius:10px;padding:10px 12px}
+.cprev .pm{margin:0!important}
+.inkbtn{height:40px;padding:0 20px;border-radius:8px;background:var(--ink);color:var(--white);font-weight:600;font-size:14px;transition:transform .1s}
+.review{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:8px}
+.review li{display:flex;align-items:center;gap:8px;font-size:14px;color:#999}
+.review li.ok{color:var(--ink)}
+.review .ck{width:18px;height:18px;border-radius:50%;border:1.5px solid #C9CDD4;display:grid;place-items:center;font-size:11px;line-height:1}
+.review li.ok .ck{background:var(--green);border-color:var(--green);color:var(--white)}
+.review li.run .ck{border-color:var(--ai);border-top-color:transparent;animation:spin .8s linear infinite}
+.passed{color:var(--green);font-weight:700;margin:10px 0 0}
+.live{font-size:12px;color:var(--white);background:var(--green);border-radius:4px;padding:1px 6px}
+.rules{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}
+.rules h4{margin:0 0 4px;font-size:15px}
+.rgt{font-size:12px;color:var(--muted);margin:14px 0 2px}
+.rr{display:flex;width:100%;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--hair);font-size:14px;text-align:left}
+.rr i{font-style:normal;color:#999;transition:transform .2s}
+.rr[aria-expanded="true"] i{transform:rotate(180deg)}
+.rdt{margin:6px 0 4px;padding:8px 10px;background:var(--card);border-radius:6px;font-size:13px;color:var(--sub);line-height:1.6}
+
+.funnel{margin-top:6px}
+.fr{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;align-items:start;padding:10px 0;border-bottom:1px solid var(--hair)}
+.stg{width:28px;height:28px;border-radius:8px;background:var(--ink);color:var(--white);font-weight:700;display:grid;place-items:center}
+.fm p{margin:0;font-size:13px}
+.fm p b{margin-right:6px}
+.fm p span{color:var(--muted)}
+.fb{display:flex;align-items:center;gap:10px;margin-top:6px}
+.fbt{flex:1;min-width:0}
+.fbt i{display:block;height:12px;border-radius:3px;background:var(--ai);min-width:4px}
+.fb b{font-size:14px;white-space:nowrap}
+.rt2{font-size:12px;color:var(--sub);margin-top:4px!important}
+.rt2 .hi{color:var(--danger);font-weight:600}
+.box{border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px}
+.box h4{margin:0 0 10px;font-size:15px}
+.incg{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px;align-items:center}
+.incg b{font-size:26px;display:block;line-height:1.2}
+.incg p{margin:4px 0 0;font-size:12px;color:var(--muted);line-height:1.5}
+.incg .inc-a b{color:var(--ai-d)}
+.df{font-weight:700;font-size:15px;text-align:center;background:var(--ai-l);color:var(--ai-d);border-radius:8px;padding:8px 12px}
+.mv{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.pos{margin:16px 0 0;font-size:14px}
+.pos b{font-size:18px;color:var(--ai-d)}
+.nts{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.nt0{background:var(--card);border-radius:10px;padding:10px 12px;font-size:13px}
+.nt0 p{margin:4px 0 0}
+.who{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--sub)}
+.bdg{font-size:11px;border-radius:3px;padding:0 5px;background:var(--ai-l);color:var(--ai-d)}
+.bdg.gray{background:#ECEEF1;color:var(--sub)}
+
+/* guide */
+.guide{flex:none;background:var(--white);border-top:1px solid var(--line);box-shadow:0 -4px 16px rgba(0,0,0,.04);padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px))}
+.gin{max-width:1100px;margin:0 auto}
+.g1{display:flex;align-items:center;gap:10px;min-width:0}
+.g1 b{font-size:15px;white-space:nowrap}
+.g1 span{font-size:13px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.gx{margin-left:auto;flex:none;width:32px;height:32px;font-size:20px;line-height:1;color:#999;border-radius:8px}
+.gx:hover{background:var(--hair)}
+.gsteps{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.gsteps li{display:flex;gap:10px;background:var(--card);border-radius:10px;padding:10px 12px;min-width:0}
+.gn{flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:var(--white);font-size:12px;font-weight:700;display:grid;place-items:center;line-height:1}
+.gsteps .done .gn{background:var(--ai)}
+.gsteps b{font-size:14px}
+.gsteps p{margin:2px 0 4px;font-size:12px;color:var(--muted);line-height:1.5}
+.lk3{font-size:13px;color:var(--ai);font-weight:600}
+.gmore{margin:8px 0 0;font-size:12px;color:var(--muted)}
+.gsrc{margin:2px 0 0;font-size:11px;color:var(--faint)}
+
+/* mobile drawer */
+.drawer{position:fixed;inset:0;z-index:40}
+.dmask{position:absolute;inset:0;background:rgba(0,0,0,.35);animation:fade .2s}
+.dpanel{position:absolute;top:0;right:0;bottom:0;width:min(300px,86vw);background:var(--white);padding:calc(18px + env(safe-area-inset-top,0px)) 18px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:10px;animation:slide .22s ease-out;overflow-y:auto}
+.dpanel p{margin:0}
+.dpanel .seg{flex-direction:column;align-self:stretch}
+.dpanel .seg button{text-align:left;padding:8px 12px;font-size:14px}
+.dl{font-size:12px;color:var(--muted);margin-top:6px!important}
+.dbtn{align-self:stretch;text-align:left;padding:10px 12px;border-radius:8px;background:var(--hair);font-size:14px;text-decoration:none}
+
+@media (max-width:899px){
+  #app{height:100dvh}
+  .dbar{height:48px;padding:0 10px 0 12px}
+  .bl,.scn,.tl{display:none}
+  .br{flex:1;justify-content:space-between}
+  .seg .l{display:none}
+  .seg .s{display:inline}
+  .seg button{padding:5px 18px;font-size:14px}
+  .burger{display:grid;place-items:center;width:40px;height:40px;font-size:20px}
+  .stage{display:block}
+  .phone,.desk{width:100%;max-width:none;height:100%;border:0;border-radius:0;box-shadow:none}
+  .sbar{display:none}
+  #phScroll{padding:12px 16px 22px}
+  .guide{position:fixed;left:0;right:0;bottom:0;z-index:30;max-height:50vh;overflow-y:auto;border-radius:16px 16px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.16);padding:12px 16px calc(14px + env(safe-area-inset-bottom,0px));animation:up .22s ease-out}
+  .gsteps{grid-template-columns:minmax(0,1fr);gap:8px}
+  .g1 span{display:none}
+  .dtop{height:48px;padding:0 16px}
+  .dt-full,.dl-full{display:none}
+  .dt-short{display:inline;font-size:16px}
+  .dl-short{display:inline}
+  .dbody{display:flex;flex-direction:column}
+  .dnav{flex:none;flex-direction:row;gap:22px;padding:0 16px;border-right:0;border-bottom:1px solid var(--line);background:var(--white)}
+  .dnav button,.dnav button:hover{height:40px;padding:0;border-radius:0;background:none;box-shadow:none}
+  .dnav button[aria-current="true"]{background:none;font-weight:700;box-shadow:inset 0 -2px 0 var(--ink)}
+  #dkScroll{padding:14px 16px 28px;line-height:1.6}
+  .dh{font-size:17px}
+  .twrap{display:none}
+  .pcards{display:flex}
+  .cgrid{grid-template-columns:minmax(0,1fr)}
+  .cprev{position:static}
+  .inkbtn.go{width:100%;height:44px}
+  .incg{grid-template-columns:minmax(0,1fr)}
+  .df{order:3}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="dbar" id="bar"></header>
+  <main class="stage">
+    <div class="phone" id="phone" hidden>
+      <div id="phScreen"></div>
+      <div class="layer" id="phLayer" hidden></div>
+      <div class="toast" id="phToast" role="status" aria-live="polite"></div>
+    </div>
+    <div class="desk" id="desk" hidden>
+      <div id="deskIn"></div>
+      <div class="toast" id="dkToast" role="status" aria-live="polite"></div>
+    </div>
+  </main>
+  <section class="guide" id="guide" aria-label="导览" hidden></section>
+</div>
+<div class="drawer" id="drawer" hidden></div>
+<script>window.DATA = {"demoBar":{"tag":"概念 Demo","title":"在 AI 搜索的回答里，让品牌认领用户的真实痛点","subtitle":"数据均为模拟 · 品牌均为虚构","views":[{"id":"user","label":"用户视角 · 手机端","short":"用户"},{"id":"brand","label":"品牌后台 · 电脑端","short":"品牌"}],"guideButton":"导览","resetButton":"重置演示"},"guide":{"title":"60 秒导览","closeLabel":"×","steps":[{"title":"看广告卡","desc":"AI 回答里只有标「广告」的卡来自品牌，点「为什么看到」看它凭什么出现","go":"scene1-ad"},{"title":"品牌认领","desc":"切到品牌后台，认领和自己品类匹配的痛点「行李箱没地方放」","go":"brand-claim-luggage"},{"title":"看新卡上线","desc":"回到用户视角，新卡出现在对应痛点下方，AI 回答一个字没变","go":"scene1-newcard"},{"title":"看排序不变","desc":"切到商品回答：排名照旧，排第三的品牌只能给风险承诺","go":"scene2"}],"tryMore":"还可以试试：持票领取 → 在「我的权益」模拟核销 → 写演后分享（输入领过的品牌名）· 点「参考 28 篇帖子」看来源标注 · 品牌后台的痛点地图和行业案例","needClaimToast":"先完成第 2 步认领，新卡才会出现"},"meta":{"adLabel":"广告","scenes":[{"id":"scene1","label":"场景一 · 演唱会攻略"},{"id":"scene2","label":"场景二 · 商品推荐"}]},"chat":{"title":"AI 助手","inputPlaceholder":"发消息或按住说话…","footer":"内容由 AI 生成 · 广告均已标注","followUps":{"scene1":["鸟巢各区域对应哪个入口？","鸟巢看台哪个区性价比最高？"],"scene2":["吹风机的护发模式有用吗？","宿舍用多少瓦的吹风机合适？"]},"followToast":"演示版只预置了两个问题，可在顶部切换场景","actionToast":"演示中不可用"},"query":"鸟巢演唱会攻略","answer":{"noteCount":28,"intro":"去鸟巢看演唱会，难点主要在进场排队和散场离开。下面按时间顺序，整理了 28 篇帖子里的经验。","footer":"内容由 AI 根据帖子整理 · 广告卡不影响回答的内容和排序","sections":[{"id":"s1","title":"交通出行","paragraphs":[{"id":"p1","subtitle":"首选地铁","text":"地铁 8 号线奥林匹克公园站和奥体中心站都能到。内场观众从奥林匹克公园站出站更顺路。"},{"id":"p2","subtitle":"散场打车","text":"散场时场馆周边交通管制，司机很难开进来。多篇帖子建议提前一两首歌往外走，到慧忠路路口或北辰东路再叫车。","painId":"pain_taxi"}],"emoji":"🚇"},{"id":"s2","title":"入场排队","paragraphs":[{"id":"p3","subtitle":"两次检票","text":"通常要过初检和精检两道检票，全程实名，人证要一致。建议开演前两小时到场。","painId":"pain_checkin"},{"id":"p4","subtitle":"排队等待","text":"排队时间长，电子票、拍照、联系同伴都靠手机，不少人反映还没进场手机就快没电了。","painId":"pain_battery"}],"emoji":"🎫"},{"id":"s3","title":"座位视野","paragraphs":[{"id":"p5","subtitle":"内场还是看台","text":"内场离舞台近，但纵深长，后排视野容易被挡；低层看台能看到舞台全貌。后排想拍舞台，普通手机放大容易糊。","painId":"pain_view"}],"emoji":"📸"},{"id":"s4","title":"住宿","paragraphs":[{"id":"p6","subtitle":"怎么选","text":"演出当晚周边酒店普遍涨价、很难订。步行可达的最省心，预算有限可以选地铁两三站外的。","painId":"pain_hotel"}],"emoji":"🏨"},{"id":"s5","title":"物品准备","paragraphs":[{"id":"p7","subtitle":"必带与禁带","text":"身份证原件必带；瓶装水、长柄伞、自拍杆不能带进场。外地观众常拖着行李箱直接来，场馆寄存处空间有限。","painId":"pain_luggage"}],"emoji":"🎒"},{"id":"s6","title":"场外补给","paragraphs":[{"id":"p8","subtitle":"提前吃好","text":"提前两小时排队，开演前很容易饿，周边餐饮也在排队，建议提前吃好或带些零食。","painId":"pain_hungry"}],"emoji":"🍜"}],"sourceNote":"含 3 篇商业合作 · 1 篇领取过权益"},"citedNotes":[{"title":"鸟巢散场别在北门等车！实测慧忠路最快","author":"看演出的阿米","likes":"1.2万"},{"title":"跨城看演唱会，行李箱到底放哪","author":"从成都飞来的小陈","likes":"3,421"},{"title":"鸟巢看台视野实测：C 区到 F 区","author":"内场冲冲冲","likes":"8,906"},{"title":"鸟巢周边酒店怎么订不踩坑","author":"旅行的栗子","likes":"2,317","tag":"商业合作"},{"title":"慧忠路接驳点十分钟上车，散场不慌","author":"星河的小星星","likes":"965","tag":"领取过权益"},{"title":"两次检票流程图解，第一次去也不迷路","author":"北京看演出指南","likes":"5,102"}],"citedSheet":{"title":"参考帖子（28 篇）","footer":"共 28 篇，其中 3 篇商业合作、1 篇领取过权益，已在标题后标注。品牌蓝 V 帖子、合作帖子、提到所领品牌的帖子，被 AI 引用时一律标注来源。"},"officialNotes":[{"painId":"pain_checkin","org":"星河巡回演唱会主办方","label":"主办方补充","text":"今年新增 6 个检票口，北门排队最短；初检 16:30 开始，建议提前到场。"}],"whyShownTemplate":"{noteCount} 篇帖子中有 {answerMentions} 篇提到「{painName}」。{brand} 认领了这个痛点，并提交了服务方案，已通过平台审核。广告不影响 AI 回答的内容和排序。","audienceSentence":"这张卡只展示给{audience}。","audienceOptions":["全部持票观众","异地购票观众"],"feedback":{"button":"没帮助","toast":"已反馈，会用于调整这类卡片的展示"},"pains":[{"id":"pain_taxi","name":"散场打不到车","answerMentions":11,"totalMentions":1286,"trend":"上升","type":"supply","fitCategory":"出行","status":"claimed","waitlist":{"text":"另有 1 个出行品牌在候补：排序分较低，暂未展示；平台已推荐它认领上海站同一痛点"},"variants":["散场根本叫不到车","网约车等了一个多小时","司机说进不来，让我自己走出去"]},{"id":"pain_hotel","name":"演出当晚酒店涨价、难订","answerMentions":9,"totalMentions":942,"trend":"上升","type":"supply","fitCategory":"酒店住宿","status":"open","variants":["平时三百的房间，演唱会当晚要一千二","开票当天周边酒店就全满了","离场馆近的根本订不到"]},{"id":"pain_battery","name":"排队时手机没电","answerMentions":7,"totalMentions":655,"trend":"持平","type":"supply","fitCategory":"共享充电宝","status":"open","variants":["还没轮到检票，手机只剩 10%","电子票打不开，急死了","想拍照结果没电了"]},{"id":"pain_view","name":"后排拍不清舞台","answerMentions":6,"totalMentions":610,"trend":"持平","type":"sponsor","fitCategory":"手机","status":"claimed","variants":["内场后排基本只能看大屏","拍出来人像蚂蚁一样小","想拍返图，结果放大全糊了"]},{"id":"pain_checkin","name":"检票流程复杂、排队久","answerMentions":9,"totalMentions":520,"trend":"下降","type":"venue","fitCategory":"主办方","status":"official","variants":["两次检票排了一个多小时","不知道该走哪个口","初检精检搞不清楚"]},{"id":"pain_hungry","name":"排队太久饿了","answerMentions":6,"totalMentions":418,"trend":"持平","type":"discount","fitCategory":"餐饮","status":"open","variants":["排了两个小时，饿得不行","附近吃饭的地方全在排队","开场前来不及吃饭"]},{"id":"pain_luggage","name":"行李箱没地方放","answerMentions":5,"totalMentions":377,"trend":"上升","type":"supply","fitCategory":"快递物流","status":"open","variants":["拖着行李箱没法进场","寄存处说箱子太大不收","下了高铁直接来场馆，箱子不知道放哪"]},{"id":"pain_rain","name":"下雨没地方躲","answerMentions":2,"totalMentions":96,"trend":"持平","type":"discount","fitCategory":"雨具","status":"belowThreshold","variants":["排队时突然下雨","长柄伞不让带进去"]}],"claims":[{"painId":"pain_taxi","brand":"轻风出行","category":"出行","solution":"慧忠路路口设专属接驳点，散场后加派运力","offer":"持票到接驳点优先派车，核销后车费减 15 元","location":"慧忠路路口东南角","hours":"演出日 22:30-00:30","scope":"覆盖全部巡演城市"},{"painId":"pain_view","brand":"拾光手机","category":"手机 · 本次巡演官方赞助商","solution":"看台和内场后区入口旁设借机点，提供长焦机型现场借用","offer":"持票免押借用长焦机型（需实名登记），借用后 7 天内购机立减 300 元","location":"C 区、F 区看台入口旁","hours":"演出日 17:00-23:30","scope":"覆盖全部巡演城市","whyShown":"28 篇帖子中有 6 篇提到「后排拍不清舞台」。拾光手机是本次巡演官方赞助商，手机品类只由它认领，方案已通过平台审核。广告不影响 AI 回答的内容和排序。"}],"brandAccount":{"name":"速达快递","category":"快递物流","defaultClaim":{"painId":"pain_luggage","solution":"奥林匹克公园站 B 口设收件点，行李当场收走，散场前送到你的酒店前台","offer":"持票寄送行李到北京五环内酒店，首件 9.9 元（原价 39 元）","location":"奥林匹克公园站 B 口旁","hours":"演出日 13:00-19:00 收件","audience":"异地购票观众"}},"ticket":{"show":"星河巡回演唱会 · 北京站","venue":"国家体育场（鸟巢）","datetime":"10月17日 19:30"},"redeemNote":"到场后在平台官方核销工具出示核销码，并向工作人员出示实体票或入场手环。","benefitNote":"到场没有兑现，可申请补偿","tour":{"name":"星河巡回演唱会","cities":["北京","上海","成都","广州","杭州","武汉"],"scopeNote":"各城市场馆需分别达到认领门槛，未达标的城市不上线"},"postShow":{"draftTitle":"鸟巢看完星河，散场十分钟就上车了","draftBody":"按攻略提前两首歌往外走，在慧忠路路口很快就上了车。检票大概排了一小时，记得出门前把手机充满。","note":"演后分享不会因为提到任何品牌而获得奖励。如果你在帖子里提到了领取过权益的品牌，帖子会带上「领取过权益」标注，不计入痛点提及数和商品推荐比例。写得好的已到场帖子被 AI 引用时，你会收到通知，并获得平台流量奖励。","mentionHint":"你提到了{brand}，这篇帖子会标注「领取过权益」","locationTag":"已到场 · 国家体育场（鸟巢）"},"productAnswer":{"query":"什么吹风机好用","noteCount":46,"intro":"综合 46 篇帖子，大家最看重：吹得快不快、拿着累不累、吹完毛不毛躁，以及贵的到底值不值。社区里被推荐最多的是这三个品牌：","ranking":[{"brand":"风行","share":"42%","reason":"风力大，长发 5 分钟吹干"},{"brand":"轻羽","share":"31%","reason":"机身轻，手不容易酸"},{"brand":"小栗","share":"18%","reason":"护发模式口碑好，但价格偏高"}],"rankingNote":"推荐比例按社区帖子统计（不含领取过品牌权益的帖子），广告不影响此排序","painsTitle":"大家最常吐槽的问题","pains":[{"id":"pp_frizz","name":"吹完毛躁","mentions":17,"text":"发质偏干的人提到吹完容易毛躁，建议最后用冷风或低温档定型。"},{"id":"pp_price","name":"价格高，怕买了不适合","mentions":14,"text":"高价机型动辄上千元，不少人担心买回去发现不适合自己的发质，又不好退。","claim":{"brand":"小栗","offer":"站内官方店铺下单，30 天不满意全额退，上门取件","type":"降低决策风险的承诺","fulfil":"站内店铺履约","toast":"已跳转小栗官方店铺（演示）：30 天不满意全额退，上门取件","button":"去官方店铺"}},{"id":"pp_heavy","name":"太重手酸","mentions":12,"text":"长发吹干时间长，机身重的拿久了容易手酸。"}],"whyShown":"46 篇帖子中有 14 篇提到「价格高，怕买了不适合」。小栗认领了这个痛点，提供的是不满意全额退的承诺，不含功效宣传。广告不影响上方的推荐排序。","rule":"在商品类回答中，品牌不能争排名，也不能做功效宣传，只能提供降低决策风险的承诺。"},"backend":{"title":"品牌后台 · 痛点认领（概念）","brandLabel":"当前品牌：速达快递（演示账号）","tabs":["痛点地图","认领","行业案例"],"claimedTitle":"已上线：{painName}","goUser":"去用户视角查看"},"painMapNotes":{"scope":"按场馆累积（跨演出）· 近 90 天鸟巢相关帖子 3,420 篇","shareLabel":"回答引用占比","threshold":15,"variantsTitle":"这些说法被归并为同一个痛点（原话已脱敏，不展示作者）","officialStatus":"主办方已发布官方说明 · 不向品牌开放","pipeline":"AI 把 126 种不同说法归并为 8 个痛点，其中 7 个达到认领门槛","matchNote":"当前品牌品类：{category} · 为你匹配 {n} 个痛点","matchTag":"匹配你的品类","otherCategory":"待{fitCategory}品牌认领","fitLabel":"适合品类"},"rankNote":"排序分 = 出价 × 预估领取率 × 预估核销率。新品牌首次认领有试跑流量。","claimReview":{"steps":["方案审核","场地确认（演示）","履约保证金已冻结（演示）"],"done":"审核通过，已上线"},"caseStudy":{"title":"轻风出行 × 星河巡回演唱会北京站（3 场）","subtitle":"行业案例 · 认领痛点「散场打不到车」· 品牌授权展示","aips":[{"stage":"1","label":"认知","desc":"在 AI 回答中看到解决方案的持票观众","value":"64,000"},{"stage":"2","label":"兴趣","desc":"持票领取权益","value":"9,600","rate":"领取率 15.0%","benchmark":"同类痛点平均 10.0%"},{"stage":"3","label":"行动","desc":"到场出示核销码核销","value":"5,800","rate":"核销率 60.4%","benchmark":"同类痛点平均 45.0%"},{"stage":"4","label":"分享","desc":"演后分享中提到品牌","value":"780 篇","rate":"核销用户提及率 13.4%"}],"incremental":{"claimedLabel":"曝光组：看到品牌卡的观众的演后提及率","claimed":"1.22%","unclaimedLabel":"对照组：随机留出、不展示品牌卡的观众的演后提及率","unclaimed":"0.21%","diff":"+1.01 个百分点（约 5.8 倍）","note":"主动领取的人本来就更活跃、更爱发帖子，拿领取者和未领取者比会高估效果。所以同一场演出随机留出 5% 观众（品牌可选开启）：AI 回答完全一样，只是不展示品牌卡。两组只差在有没有看到这张卡，差值才是这次认领带来的增量。","title":"口碑增量（平台评估用）"},"positiveRate":"86%","notes":[{"author":"@看演出的阿米","text":"按攻略去慧忠路接驳点，散场十分钟就上车了，比去年在北门干等一小时强太多。"},{"author":"@星河的小星星","text":"轻风出行的接驳点有工作人员举牌，出示核销码和票就行，车直接在那里等。","mentionsBrand":true},{"author":"@从成都飞来的小陈","text":"券是小事，关键是那边真的有车。"}],"citedNote":"其中 4 篇演后分享已被之后的 AI 回答引用，提到品牌的已标注「领取过权益」；作者已获平台流量奖励","disclaimer":"案例数据为模拟，用于展示统计口径。","kpiNote":"对照组看不到品牌卡、无法核销，所以增量用提及率衡量；品牌考核看核销率和好评率，提及率只用于平台评估口碑。","merchantValue":{"title":"商家收益（模拟）","items":["带来行程 5,800 单，新客占比 41%","沉淀可再投放人群 6.4 万（可作为人群包再次投放）","每单获客成本 21 元（按核销计费 6 元 + 让利 15 元），低于模拟基准 35 元","计费方式：只为到场核销的权益付费，卡位不额外收费"]}},"ruleGroups":[{"title":"对用户 · 不被广告误导","rules":[{"short":"广告不改 AI 回答","detail":"品牌不能改动 AI 回答的文字和排序。品牌蓝 V 帖子、合作帖子、提到所领品牌的帖子，被 AI 引用时一律标注来源"},{"short":"每个回答最多 3 张广告","detail":"统一标注「广告」，只展示给相关的用户；可以查看出现原因，也可以反馈「没帮助」"},{"short":"商品回答只给风险承诺","detail":"不能争排名、不能做功效宣传，只能提供试用、包退这类承诺，并通过站内店铺履约"}]},{"title":"对品牌 · 凭解决问题上","rules":[{"short":"痛点够多才能认领","detail":"在 AI 回答引用的帖子里提及占比至少 15%，且同一场馆近 90 天至少 300 篇提到（不含合作帖子和刷量账号）；品牌只能认领与自身品类匹配的痛点"},{"short":"要提供服务，不能只发券","detail":"需要服务的痛点，必须提交服务方案、场地确认和履约保证金"},{"id":"ranking","short":"解决得好的排前面","detail":"同一痛点只展示一个品牌，按「出价 × 解决质量分（核销率、好评率）」排序；质量分跨场次、跨城市累积，新品牌有试跑流量"}]},{"title":"对生态 · 出了事有人兜底","rules":[{"short":"主办方的事，主办方回应","detail":"场馆和主办方职责内的痛点不卖给品牌，主办方可以免费发布官方说明；官方赞助商的品类排他"},{"short":"没兑现，先赔用户","detail":"核销用户评价至少 50 条且差评率超过 30% 的方案，从下一站起下线；没兑现的场次先赔付用户"},{"short":"被引用的作者有奖励","detail":"用户原话脱敏展示；演后分享被 AI 引用，作者获得平台流量奖励"}]}]};</script>
+<script>
+const D = window.DATA, BA = D.brandAccount;
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fill = (t, o) => String(t).replace(/\{(\w+)\}/g, (m, k) => k in o ? o[k] : m);
+const painById = id => D.pains.find(p => p.id === id);
+const mq = matchMedia("(max-width: 899px)");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const addOnce = (arr, v) => { if (!arr.includes(v)) arr.push(v); };
+const toggle = (set, v) => set.has(v) ? set.delete(v) : set.add(v);
+
+/* ---------- state: one localStorage key, anything malformed falls back to a fresh demo ---------- */
+const KEY = "tongdian_demo_v1";
+const fresh = () => ({version:1, view:"user", scene:"scene1", page:"answer", brandTab:0, guideClosed:false, guideDone:[], ticketVerified:false, benefits:[], seen:[], feedback:[], newClaims:[]});
+function load(){
+  try {
+    const s = JSON.parse(localStorage.getItem(KEY)), d = fresh();
+    if (!s || s.version !== 1) return d;
+    for (const k in d){ if (Array.isArray(d[k]) ? !Array.isArray(s[k]) : typeof s[k] !== typeof d[k]) return d; }
+    return Object.assign(d, s);
+  } catch { return fresh(); }
+}
+const S = load();
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(S)); } catch {} }
+const U = {why:new Set(), sheet:null, ticketStep:"upload", pending:null, painOpen:new Set(), waitOpen:new Set(), ruleOpen:new Set(), review:-1, drawer:false, noteT:null, noteB:null,
+  form:{painId:BA.defaultClaim.painId, solution:BA.defaultClaim.solution, offer:BA.defaultClaim.offer, location:BA.defaultClaim.location, hours:BA.defaultClaim.hours, audience:BA.defaultClaim.audience, scope:"仅本场"}};
+
+/* ---------- cards: the preset claims plus whatever the brand claimed in this browser ---------- */
+const cards = () => D.claims.map(c => ({...c, key:"c_" + c.painId})).concat(S.newClaims.map(c => ({...c, key:"n_" + c.painId, isNew:true})));
+const cardFor = painId => cards().find(c => c.painId === painId);
+const isClaimed = id => S.newClaims.some(c => c.painId === id);
+const statusOf = p => isClaimed(p.id) ? "claimed" : p.status;
+function productCard(){ const p = D.productAnswer.pains.find(x => x.claim); return {...p.claim, key:"p_" + p.id, painId:p.id}; }
+const cardByKey = k => k.startsWith("p_") ? productCard() : cards().find(c => c.key === k);
+function whyText(c){
+  if (c.key.startsWith("p_")) return D.productAnswer.whyShown;
+  const p = painById(c.painId);
+  let t = c.whyShown || fill(D.whyShownTemplate, {noteCount:D.answer.noteCount, answerMentions:p.answerMentions, painName:p.name, brand:c.brand});
+  if (c.audience) t += fill(D.audienceSentence, {audience:c.audience});
+  return t;
+}
+
+const SVG = (p, w = 18) => `<svg width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
+const ICON = {
+  spark:`<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5c.7 5 3.5 7.8 8.5 8.5-5 .7-7.8 3.5-8.5 8.5-.7-5-3.5-7.8-8.5-8.5 5-.7 7.8-3.5 8.5-8.5z"/><path d="M19 2.5c.25 1.6 1.1 2.45 2.7 2.7-1.6.25-2.45 1.1-2.7 2.7-.25-1.6-1.1-2.45-2.7-2.7 1.6-.25 2.45-1.1 2.7-2.7z" opacity=".55"/></svg>`,
+  signal:`<svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" width="3" height="11" rx="1"/></svg>`,
+  battery:`<svg width="25" height="12" viewBox="0 0 25 12" fill="currentColor" aria-hidden="true"><rect x=".5" y=".5" width="21" height="11" rx="3" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.6"/><rect x="22.5" y="4" width="1.6" height="4" rx=".8" opacity=".4"/></svg>`,
+  ticket:SVG(`<path d="M3 7.5A1.5 1.5 0 0 1 4.5 6h15A1.5 1.5 0 0 1 21 7.5V10a2 2 0 0 0 0 4v2.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 16.5V14a2 2 0 0 0 0-4z"/><path d="M15 6.5v11" stroke-dasharray="1.6 2.2"/>`, 22),
+  copy:SVG(`<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>`),
+  star:SVG(`<path d="M12 3.5l2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.8l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8z"/>`),
+  share:SVG(`<path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>`),
+  down:SVG(`<path d="M17 4h2.5A1.5 1.5 0 0 1 21 5.5v7a1.5 1.5 0 0 1-1.5 1.5H17zM17 14l-4 6.5a2 2 0 0 1-3.6-1.5l1.1-4H5.3a2 2 0 0 1-2-2.3l1.2-7A2 2 0 0 1 6.5 4H17"/>`),
+  again:SVG(`<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>`)
+};
+
+/* ---------- the brand card: one component for the answer, the product answer and the back-office preview ---------- */
+function cardHTML(c, o = {}){
+  const k = c.key, pv = !!o.preview, prod = k.startsWith("p_");
+  const act = a => pv ? ` tabindex="-1"` : ` data-action="${a}" data-k="${esc(k)}"`;
+  const isNew = c.isNew && !pv && !S.seen.includes(k);
+  const got = !prod && S.benefits.some(b => b.key === k);
+  const open = !pv && U.why.has(k), fb = S.feedback.includes(k);
+  const main = prod ? `<button type="button" class="pbtn"${act("product-go")}>${esc(c.button)}</button>`
+    : got ? `<button type="button" class="pbtn got"${act("to-benefits")}>已领取 · 查看核销码</button>`
+    : `<button type="button" class="pbtn"${act("take")}>持票领取</button>`;
+  return `<div class="bcard${pv ? " pv" : ""}"${pv ? "" : ` data-card="${esc(k)}"`}>
+    <div class="bh"><span class="adl">${esc(D.meta.adLabel)}</span><span class="av" aria-hidden="true">${esc(String(c.brand || "?").slice(0, 1))}</span><b class="bn">${esc(c.brand)}</b>${isNew ? `<span class="newl">新上线</span>` : ""}${c.category ? `<span class="bc">${esc(c.category)}</span>` : ""}</div>
+    ${prod ? `<div class="btags"><span>${esc(c.type)}</span><span>${esc(c.fulfil)}</span></div>` : ""}
+    ${c.solution ? `<p class="sol">${esc(c.solution)}</p>` : ""}
+    ${c.offer ? `<p class="off">${esc(c.offer)}</p>` : ""}
+    ${open ? `<p class="whyt">${esc(whyText(c))}</p>` : ""}
+    <div class="bf"><button type="button" class="lk"${act("why")} aria-expanded="${open}">为什么看到 ${open ? "⌃" : "›"}</button><button type="button" class="lk"${fb ? " disabled" : act("feedback")}>${fb ? "已反馈" : esc(D.feedback.button)}</button>${main}</div>
+  </div>`;
+}
+
+/* ---------- user view ---------- */
+function answerFoot(scene, footer){
+  const acts = [["copy","复制"],["star","收藏"],["share","分享"],["down","点踩"],["again","重新生成"]];
+  return `${footer ? `<p class="small">${esc(footer)}</p>` : ""}<div class="acts">${acts.map(([i, l]) => `<button type="button" data-action="toast" aria-label="${l}">${ICON[i]}</button>`).join("")}</div>
+    <div class="fups">${D.chat.followUps[scene].map(f => `<button type="button" class="fu" data-action="follow">${esc(f)}</button>`).join("")}</div>`;
+}
+function answerS1(){
+  const A = D.answer;
+  let h = `<div class="q"><span>${esc(D.query)}</span></div><article class="ans">
+    <button type="button" class="refs" data-action="cited"><span>参考 ${A.noteCount} 篇帖子</span><span class="avs" aria-hidden="true"><i></i><i></i><i></i></span><span class="chev">›</span></button>
+    <p class="srcn">${esc(A.sourceNote)}</p><p class="intro">${esc(A.intro)}</p>`;
+  for (const s of A.sections){
+    h += `<section class="as" id="sec-${s.id}"><h3>${s.emoji} ${esc(s.title)}</h3>`;
+    for (const p of s.paragraphs){
+      h += `<div class="para" id="para-${p.id}"><p><mark>${esc(p.subtitle)}</mark>${esc(p.text)}</p>`;
+      if (p.painId){
+        const pain = painById(p.painId);
+        h += `<p class="pm">💬 ${pain.answerMentions}/${A.noteCount} 篇帖子提到「${esc(pain.name)}」</p>`;
+        const off = D.officialNotes.find(o => o.painId === p.painId);
+        if (off) h += `<div class="offi"><p class="oh"><b>${esc(off.label)}</b><span>${esc(off.org)}</span></p><p class="ot">${esc(off.text)}</p></div>`;
+        const c = cardFor(p.painId);
+        if (c) h += cardHTML(c);
+      }
+      h += `</div>`;
+    }
+    h += `</section>`;
+  }
+  return h + answerFoot("scene1", A.footer) + `</article>`;
+}
+function answerS2(){
+  const P = D.productAnswer;
+  let h = `<div class="q"><span>${esc(P.query)}</span></div><article class="ans">
+    <p class="refs static" style="margin:0"><span>参考 ${P.noteCount} 篇帖子</span><span class="avs" aria-hidden="true"><i></i><i></i><i></i></span></p>
+    <p class="intro">${esc(P.intro)}</p>
+    <div class="rank" id="rank">${P.ranking.map((r, i) => `<div class="rk"><span class="rn">${i + 1}</span><b>${esc(r.brand)}</b><span class="rbar"><i style="width:${parseFloat(r.share)}%"></i></span><span class="rs">${esc(r.share)}</span><p>${esc(r.reason)}</p></div>`).join("")}</div>
+    <p class="small">${esc(P.rankingNote)}</p><h3>${esc(P.painsTitle)}</h3>`;
+  for (const p of P.pains){
+    h += `<div class="para" id="pp-${p.id}"><p><mark>${esc(p.name)}</mark><span class="mn">${p.mentions} 篇提到</span></p><p>${esc(p.text)}</p>${p.claim ? cardHTML({...p.claim, key:"p_" + p.id, painId:p.id}) : ""}</div>`;
+  }
+  return h + `<p class="small">${esc(P.rule)}</p>` + answerFoot("scene2", null) + `</article>`;
+}
+function benefitsPage(){
+  if (!S.benefits.length) return `<div class="empty"><div class="emi" aria-hidden="true">🎫</div><p>还没有领取权益</p></div>`;
+  const T = D.ticket;
+  let h = S.ticketVerified ? `<p class="tkinfo">已验证票根：${esc(T.show)} · ${esc(T.datetime)}</p>` : "";
+  h += S.benefits.map(b => `<div class="bene"><div class="bh"><span class="av" aria-hidden="true">${esc(b.brand.slice(0, 1))}</span><b class="bn">${esc(b.brand)}</b><span class="st${b.redeemed ? " ok" : ""}">${b.redeemed ? "已核销" : "待核销"}</span></div>
+    <p class="sol">${esc(b.solution)}</p><p class="off">${esc(b.offer)}</p>
+    <dl><div><dt>地点</dt><dd>${esc(b.location)}</dd></div><div><dt>时段</dt><dd>${esc(b.hours)}</dd></div></dl>
+    <div class="code"><span>核销码</span><b>${esc(b.code.replace(/(\d{3})(\d{3})/, "$1 $2"))}</b></div>
+    <p class="small">${esc(D.redeemNote)}</p><p class="small" style="margin-top:2px">${esc(D.benefitNote)}</p>
+    ${b.redeemed ? `<button type="button" class="doneb" disabled>已核销</button>` : `<button type="button" class="redbtn" data-action="redeem" data-k="${esc(b.key)}">模拟到场核销</button>`}</div>`).join("");
+  if (S.benefits.some(b => b.redeemed)) h += `<button type="button" class="post" data-action="to-note"><b>看完了？写下你的演后攻略</b><span aria-hidden="true">›</span></button>`;
+  return h;
+}
+function notePage(){
+  const P = D.postShow;
+  return `<input id="ntT" class="ntt" value="${esc(U.noteT ?? P.draftTitle)}" aria-label="标题">
+    <textarea id="ntB" class="ntb" rows="6" aria-label="正文">${esc(U.noteB ?? P.draftBody)}</textarea>
+    <button type="button" class="addimg" data-action="toast">＋ 添加图片</button>
+    <div class="ntags"><span>📍 ${esc(P.locationTag)}</span><span class="gray" id="ntTag" hidden>领取过权益</span></div>
+    <p class="hint" id="ntHint" hidden></p>
+    <p class="small">${esc(P.note)}</p>
+    <button type="button" class="redbtn wide" data-action="publish">发布</button>`;
+}
+/* the "领取过权益" label follows the text live, without re-rendering the inputs */
+function noteCheck(){
+  const ti = $("#ntT"), bo = $("#ntB"); if (!ti || !bo) return;
+  U.noteT = ti.value; U.noteB = bo.value;
+  const txt = ti.value + "\n" + bo.value, b = S.benefits.map(x => x.brand).find(n => txt.includes(n));
+  $("#ntTag").hidden = !b; const h = $("#ntHint"); h.hidden = !b; if (b) h.textContent = fill(D.postShow.mentionHint, {brand:b});
+}
+function phoneScreen(){
+  const n = S.benefits.length;
+  let top, body, input = "";
+  if (S.page === "answer"){
+    top = `<div class="tb"><div><button type="button" class="ib" data-action="toast" aria-label="返回">‹</button></div><div class="tt"><span class="spark" aria-hidden="true">${ICON.spark}</span>${esc(D.chat.title)}</div>
+      <div class="rt"><button type="button" class="ib" data-action="to-benefits" aria-label="我的权益，${n} 项">${ICON.ticket}${n ? `<span class="badge">${n}</span>` : ""}</button><button type="button" class="ib more" data-action="toast" aria-label="更多">···</button></div></div>`;
+    body = S.scene === "scene1" ? answerS1() : answerS2();
+    input = `<div class="ibar"><button type="button" class="fake" data-action="toast">${esc(D.chat.inputPlaceholder)}</button><p>${esc(D.chat.footer)}</p></div>`;
+  } else {
+    top = `<div class="tb"><div><button type="button" class="ib" data-action="back" aria-label="返回">‹</button></div><div class="tt">${S.page === "benefits" ? "我的权益" : "写演后分享"}</div><div></div></div>`;
+    body = S.page === "benefits" ? benefitsPage() : notePage();
+  }
+  return `<div class="sbar" aria-hidden="true"><span>9:41</span><span class="sbi">${ICON.signal}${ICON.battery}</span></div>${top}<div class="scroll pg" id="phScroll">${body}</div>${input}`;
+}
+function sheetHTML(){
+  let inner;
+  if (U.sheet === "cited"){
+    inner = `<h4>${esc(D.citedSheet.title)}</h4><ul class="cites">${D.citedNotes.map(n => `<li><p><b>${esc(n.title)}</b>${n.tag ? `<span class="ctag">${esc(n.tag)}</span>` : ""}</p><span class="by">${esc(n.author)} · ♡ ${esc(n.likes)}</span></li>`).join("")}</ul><p class="small">${esc(D.citedSheet.footer)}</p>`;
+  } else {
+    const T = D.ticket;
+    inner = `<h4>上传票根截图</h4>`;
+    if (U.ticketStep === "upload") inner += `<button type="button" class="drop" data-action="drop"><span class="plus">＋</span><span>点击上传票根截图</span></button><button type="button" class="redbtn wide" data-action="sample">使用示例票根</button>`;
+    else if (U.ticketStep === "reading") inner += `<div class="drop"><span class="spinner" aria-hidden="true"></span><span>识别场次中…</span></div>`;
+    else inner += `<div class="tk"><b>${esc(T.show)}</b><p>${esc(T.venue)}</p><p>${esc(T.datetime)}</p></div>
+      <p class="small">只识别演出场次，不读取座位和观演人信息</p><p class="okline">✓ 场次匹配，可领取本场权益</p>
+      <p class="small">票根真伪在到场核销时由现场工作人员核验（出示实体票或入场手环）。同一张票只能领取一次。</p>
+      <button type="button" class="redbtn wide" data-action="confirm">确认领取</button>`;
+    inner += `<p class="tiny">后续可接入票务平台授权，一键验证</p>`;
+  }
+  return `<div class="mask" data-action="close-sheet"></div><div class="sheet" role="dialog" aria-modal="true" aria-label="${U.sheet === "cited" ? "参考帖子" : "持票领取"}"><button type="button" class="x" data-action="close-sheet" aria-label="关闭">×</button>${inner}</div>`;
+}
+function renderLayer(){ const l = $("#phLayer"); l.hidden = !U.sheet; l.innerHTML = U.sheet ? sheetHTML() : ""; }
+
+/* ---------- brand back office ---------- */
+const TYPES = {supply:"需要服务", discount:"优惠能缓解", venue:"主办方负责", sponsor:"赞助商专属"};
+const trendCls = t => t === "上升" ? "tr-up" : t === "下降" ? "tr-down" : "muted";
+function painAct(p, withTag){
+  const N = D.painMapNotes, st = statusOf(p);
+  if (st === "claimed"){ const c = cardFor(p.id); return `<span class="stx">${p.type === "sponsor" ? `已由官方赞助商 ${esc(c?.brand)} 认领` : `已被 ${esc(c?.brand)} 认领`}</span>`; }
+  if (st === "open" && p.fitCategory === BA.category) return `<span class="act"><button type="button" class="redsm" data-action="go-claim">去认领</button>${withTag ? `<span class="match">${esc(N.matchTag)}</span>` : ""}</span>`;
+  if (st === "open") return `<span class="stx">${esc(fill(N.otherCategory, {fitCategory:p.fitCategory}))}</span>`;
+  if (st === "official") return `<span class="stx">${esc(N.officialStatus)}</span>`;
+  return `<span class="stx">未达认领门槛</span>`;
+}
+function painExtras(p){
+  const N = D.painMapNotes, rule = D.ruleGroups.flatMap(g => g.rules).find(r => r.id === "ranking");
+  const wait = p.waitlist ? `<div>${esc(p.waitlist.text)}<button type="button" class="lk2" data-action="wait" data-id="${p.id}" aria-expanded="${U.waitOpen.has(p.id)}">排序规则</button>${U.waitOpen.has(p.id) ? `<p class="ruled">${esc(rule.detail)}</p>` : ""}</div>` : "";
+  const vars = U.painOpen.has(p.id) ? `<div style="margin-top:${wait ? 8 : 0}px"><p class="vt">${esc(N.variantsTitle)}</p><ul class="vlist">${p.variants.map(v => `<li>${esc(v)}</li>`).join("")}</ul></div>` : "";
+  return [wait, vars];
+}
+function painMap(){
+  const N = D.painMapNotes, A = D.answer;
+  const n = D.pains.filter(p => p.fitCategory === BA.category).length;
+  const list = [...D.pains].sort((a, b) => b.totalMentions - a.totalMentions);
+  const share = p => Math.round(p.answerMentions / A.noteCount * 100);
+  const shareHTML = p => { const s = share(p); return `<span class="share"><span class="sbx"><i style="width:${s}%"></i></span>${s}%${s < N.threshold ? `<em class="low">未达 ${N.threshold}%</em>` : ""}</span>`; };
+  let rows = "", cardsH = "";
+  for (const p of list){
+    const [wait, vars] = painExtras(p), open = U.painOpen.has(p.id);
+    rows += `<tr class="prow" data-action="pain-row" data-id="${p.id}" aria-expanded="${open}"><td class="pname"><span class="car" aria-hidden="true">›</span>${esc(p.name)}</td><td>${shareHTML(p)}</td><td>${p.totalMentions.toLocaleString("en-US")}</td><td class="${trendCls(p.trend)}">${esc(p.trend)}</td><td><span class="ty ${p.type}">${TYPES[p.type]}</span></td><td>${esc(p.fitCategory)}</td><td>${painAct(p, true)}</td></tr>`;
+    if (wait) rows += `<tr class="wl"><td></td><td colspan="6">${wait}</td></tr>`;
+    if (vars) rows += `<tr class="vr"><td></td><td colspan="6">${vars}</td></tr>`;
+    const fit = statusOf(p) === "open" && p.fitCategory === BA.category;
+    cardsH += `<div class="pcard" data-action="pain-row" data-id="${p.id}" aria-expanded="${open}"><div class="r1"><b>${esc(p.name)}</b>${painAct(p, false)}</div>
+      <div class="r2">${shareHTML(p)}<span class="muted">近 90 天 ${p.totalMentions} 篇 · <span class="${trendCls(p.trend)}">${esc(p.trend)}</span></span></div>
+      <div class="r3"><span class="ty ${p.type}">${TYPES[p.type]}</span><span class="ty">${esc(p.fitCategory)}</span>${fit ? `<span class="match">${esc(N.matchTag)}</span>` : ""}</div>
+      ${wait || vars ? `<div class="xtra">${wait}${vars}</div>` : ""}</div>`;
+  }
+  return `<div class="pmn"><p>${esc(N.scope)}</p><p>${esc(N.pipeline)}</p><p class="g">${esc(fill(N.matchNote, {category:BA.category, n}))}</p></div>
+    <div class="twrap"><table class="ptab"><thead><tr><th>痛点</th><th>${esc(N.shareLabel)}</th><th>近 90 天</th><th>趋势</th><th>类型</th><th>${esc(N.fitLabel)}</th><th>状态或操作</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="pcards">${cardsH}</div>`;
+}
+const previewCard = () => ({key:"preview", painId:U.form.painId, brand:BA.name, category:BA.category, solution:U.form.solution, offer:U.form.offer, audience:U.form.audience});
+function previewHTML(c){
+  const p = painById(c.painId);
+  return `<div class="scr"><p class="pm">💬 ${p.answerMentions}/${D.answer.noteCount} 篇帖子提到「${esc(p.name)}」</p>${cardHTML(c, {preview:true})}</div>`;
+}
+function rulesHTML(){
+  return `<div class="rules"><h4>认领规则</h4>${D.ruleGroups.map((g, gi) => `<p class="rgt">${esc(g.title)}</p>${g.rules.map((r, ri) => { const id = gi + "-" + ri, o = U.ruleOpen.has(id);
+    return `<button type="button" class="rr" data-action="rule" data-id="${id}" aria-expanded="${o}"><span>${esc(r.short)}</span><i aria-hidden="true">⌄</i></button>${o ? `<p class="rdt">${esc(r.detail)}</p>` : ""}`; }).join("")}`).join("")}</div>`;
+}
+function claimPage(){
+  const p = painById(U.form.painId), N = D.painMapNotes, steps = D.claimReview.steps;
+  const claimed = S.newClaims.find(c => c.painId === p.id);
+  if (claimed && U.review < 0){
+    return `<div class="ch"><h3 class="dh">${esc(fill(D.backend.claimedTitle, {painName:p.name}))}</h3><span class="live">已上线</span></div>
+      <p class="muted" style="margin:4px 0 0">${p.answerMentions}/${D.answer.noteCount} 篇回答引用帖子提到 · 近 90 天 ${p.totalMentions} 篇</p>
+      <div class="cprev" style="max-width:380px;margin-top:16px"><h4>用户端展示</h4>${previewHTML({...claimed, key:"n_" + p.id})}</div>
+      <button type="button" class="inkbtn go" style="margin-top:14px" data-action="go-user">${esc(D.backend.goUser)}</button>` + rulesHTML();
+  }
+  const F = U.form, busy = U.review >= 0, dis = busy ? " disabled" : "";
+  let review = "";
+  if (!busy) review = `<button type="button" class="inkbtn" style="margin-top:10px" data-action="submit">提交审核</button>`;
+  else {
+    review = `<ol class="review">${steps.map((s, i) => `<li class="${i < U.review ? "ok" : i === U.review ? "run" : ""}"><span class="ck" aria-hidden="true">${i < U.review ? "✓" : ""}</span>${esc(s)}</li>`).join("")}</ol>`;
+    if (U.review >= steps.length) review += `<p class="passed">${esc(D.claimReview.done)}</p><button type="button" class="inkbtn go" style="margin-top:10px" data-action="go-user">${esc(D.backend.goUser)}</button>`;
+  }
+  return `<div class="ch"><h3 class="dh">认领痛点：${esc(p.name)}</h3><span class="match">${esc(N.matchTag)}</span></div>
+    <p class="muted" style="margin:4px 0 0">${p.answerMentions}/${D.answer.noteCount} 篇回答引用帖子提到 · 近 90 天 ${p.totalMentions} 篇</p>
+    <div class="cgrid"><form class="cform" id="cform" novalidate>
+      <p class="hint2">这个痛点需要增加供给，请说明你提供的服务，不能只发优惠券</p>
+      <label>解决方案<textarea name="solution" rows="3"${dis}>${esc(F.solution)}</textarea></label>
+      <label>权益<input name="offer" value="${esc(F.offer)}"${dis}></label>
+      <label>地点<input name="location" value="${esc(F.location)}"${dis}></label>
+      <label>时段<input name="hours" value="${esc(F.hours)}"${dis}></label>
+      <label>展示给<select name="audience"${dis}>${D.audienceOptions.map(o => `<option${o === F.audience ? " selected" : ""}>${esc(o)}</option>`).join("")}</select></label>
+      <fieldset><legend>范围</legend><div class="rds">${["仅本场","覆盖全部巡演城市"].map(v => `<label class="rd"><input type="radio" name="scope" value="${v}"${v === F.scope ? " checked" : ""}${dis}>${v}</label>`).join("")}</div>
+        <div class="cities" id="cities"${F.scope === "仅本场" ? " hidden" : ""}>${D.tour.cities.map(c => `<span>${esc(c)}</span>`).join("")}<p>${esc(D.tour.scopeNote)}</p></div></fieldset>
+    </form>
+    <div class="cprev"><h4>用户端实时预览</h4><div id="prevBox">${previewHTML(previewCard())}</div></div></div>
+    <p class="small" style="margin-top:16px">${esc(D.rankNote)}</p>${review}` + rulesHTML();
+}
+function casePage(){
+  const C = D.caseStudy, nums = C.aips.map(a => parseFloat(a.value.replace(/[^\d.]/g, ""))), max = Math.max(...nums);
+  const num = s => parseFloat((String(s).match(/[\d.]+/) || [])[0]);
+  const fun = C.aips.map((a, i) => {
+    let rate = "";
+    if (a.rate){ const hi = a.benchmark && num(a.rate) > num(a.benchmark); rate = `<p class="rt2"><span class="${hi ? "hi" : ""}">${esc(a.rate)}</span>${a.benchmark ? ` · ${esc(a.benchmark)}` : ""}</p>`; }
+    return `<div class="fr"><span class="stg">${esc(a.stage)}</span><div class="fm"><p><b>${esc(a.label)}</b><span>${esc(a.desc)}</span></p><div class="fb"><span class="fbt"><i style="width:${Math.max(nums[i] / max * 100, .6)}%"></i></span><b>${esc(a.value)}</b></div>${rate}</div></div>`;
+  }).join("");
+  const I = C.incremental, M = C.merchantValue;
+  return `<h3 class="dh">${esc(C.title)}</h3><p class="small" style="margin:4px 0 12px">${esc(C.subtitle)}</p>
+    <div class="funnel">${fun}</div>
+    <div class="box"><h4>${esc(I.title)}</h4><div class="incg"><div class="inc-a"><b>${esc(I.claimed)}</b><p>${esc(I.claimedLabel)}</p></div><div class="df">${esc(I.diff)}</div><div class="inc-b"><b>${esc(I.unclaimed)}</b><p>${esc(I.unclaimedLabel)}</p></div></div>
+      <p class="small">${esc(I.note)}</p><p class="small">${esc(C.kpiNote)}</p></div>
+    <div class="box"><h4>${esc(M.title)}</h4><ul class="mv">${M.items.map(t => `<li>${esc(t)}</li>`).join("")}</ul></div>
+    <p class="pos">正面评价占比 <b>${esc(C.positiveRate)}</b></p>
+    <h4 style="margin:18px 0 0;font-size:15px">演后分享</h4>
+    <div class="nts">${C.notes.map(n => `<div class="nt0"><div class="who"><b>${esc(n.author)}</b><span class="bdg">已到场</span>${n.mentionsBrand ? `<span class="bdg gray">领取过权益</span>` : ""}</div><p>${esc(n.text)}</p></div>`).join("")}</div>
+    <p class="small">${esc(C.citedNote)}</p><p class="small">${esc(C.disclaimer)}</p>`;
+}
+function desk(){
+  return `<div class="dtop"><b class="dt-full">${esc(D.backend.title)}</b><b class="dt-short">品牌后台</b><span class="dlabel dl-full">${esc(D.backend.brandLabel)}</span><span class="dlabel dl-short">${esc(BA.name)} · 演示账号</span></div>
+    <div class="dbody"><nav class="dnav" aria-label="品牌后台">${D.backend.tabs.map((t, i) => `<button type="button" data-action="tab" data-i="${i}" aria-current="${S.brandTab === i}">${esc(t)}</button>`).join("")}</nav>
+    <div class="scroll pg" id="dkScroll">${[painMap, claimPage, casePage][S.brandTab]()}</div></div>`;
+}
+
+/* ---------- demo chrome: bar, guide, drawer ---------- */
+function barHTML(){
+  const B = D.demoBar;
+  const views = B.views.map(v => `<button type="button" data-action="view" data-v="${v.id}" aria-pressed="${S.view === v.id}"><span class="l">${esc(v.label)}</span><span class="s">${esc(v.short)}</span></button>`).join("");
+  const scenes = S.view === "user" ? `<div class="seg scn" role="group" aria-label="场景">${D.meta.scenes.map(s => `<button type="button" data-action="scene" data-v="${s.id}" aria-pressed="${S.scene === s.id}">${esc(s.label)}</button>`).join("")}</div>` : "";
+  return `<div class="bl"><a class="back" href="index.html#demo">‹ 作品集</a><span class="tag">${esc(B.tag)}</span><b class="ttl">${esc(B.title)}</b><span class="bsub">${esc(B.subtitle)}</span></div>
+    <div class="br"><div class="seg" role="group" aria-label="视角">${views}</div>${scenes}<button type="button" class="tl" data-action="guide-open">${esc(B.guideButton)}</button><button type="button" class="tl" data-action="reset">${esc(B.resetButton)}</button><button type="button" class="burger" data-action="drawer" aria-label="菜单">☰</button></div>`;
+}
+function guideHTML(){
+  const G = D.guide;
+  return `<div class="gin"><div class="g1"><b>${esc(G.title)}</b><span>${esc(D.demoBar.title)}</span><button type="button" class="gx" data-action="guide-close" aria-label="关闭导览">${esc(G.closeLabel)}</button></div>
+    <ol class="gsteps">${G.steps.map((s, i) => { const done = S.guideDone.includes(i); return `<li class="${done ? "done" : ""}"><span class="gn" aria-hidden="true">${done ? "✓" : i + 1}</span><div><b>${esc(s.title)}</b><p>${esc(s.desc)}</p><button type="button" class="lk3" data-action="go" data-i="${i}">去看看 →</button></div></li>`; }).join("")}</ol>
+    <p class="gmore">${esc(G.tryMore)}</p><p class="gsrc">AI 产品挑战作品 · 本页按原设计说明和数据重建，方便直接打开。</p></div>`;
+}
+function drawerHTML(){
+  const B = D.demoBar;
+  return `<div class="dmask" data-action="drawer-close"></div><aside class="dpanel" aria-label="菜单"><button type="button" class="x" data-action="drawer-close" aria-label="关闭">×</button>
+    <span class="tag">${esc(B.tag)}</span><p><b>${esc(B.title)}</b></p><p class="small" style="margin:0">${esc(B.subtitle)}</p>
+    ${S.view === "user" ? `<p class="dl">场景</p><div class="seg">${D.meta.scenes.map(s => `<button type="button" data-action="scene" data-v="${s.id}" aria-pressed="${S.scene === s.id}">${esc(s.label)}</button>`).join("")}</div>` : ""}
+    <p class="dl">演示</p><button type="button" class="dbtn" data-action="guide-open">${esc(B.guideButton)}</button><button type="button" class="dbtn" data-action="reset">${esc(B.resetButton)}</button>
+    <a class="dbtn" href="index.html#demo">← 返回作品集</a></aside>`;
+}
+
+let lastKey = "";
+function render(){
+  if ($("#ntT")) noteCheck();
+  $("#bar").innerHTML = barHTML();
+  const user = S.view === "user", key = user ? `u|${S.scene}|${S.page}` : `b|${S.brandTab}`;
+  const old = $(user ? "#phScroll" : "#dkScroll"), keep = key === lastKey && old ? old.scrollTop : 0;
+  $("#phone").hidden = !user; $("#desk").hidden = user;
+  if (user){ $("#phScreen").innerHTML = phoneScreen(); renderLayer(); } else $("#deskIn").innerHTML = desk();
+  const sc = $(user ? "#phScroll" : "#dkScroll");
+  if (sc){ sc.scrollTop = keep; if (key === lastKey) sc.classList.remove("pg"); }
+  lastKey = key;
+  const g = $("#guide"); g.hidden = S.guideClosed; g.innerHTML = S.guideClosed ? "" : guideHTML();
+  renderDrawer();
+  if (user && S.page === "note") noteCheck();
+}
+function renderDrawer(){ const d = $("#drawer"); d.hidden = !U.drawer; d.innerHTML = U.drawer ? drawerHTML() : ""; }
+
+let toastT = 0;
+function toast(msg){
+  const t = $(S.view === "user" ? "#phToast" : "#dkToast");
+  $("#phToast").classList.remove("on"); $("#dkToast").classList.remove("on");
+  t.textContent = msg; void t.offsetWidth; t.classList.add("on");
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove("on"), 2400);
+}
+function focusEl(sel){
+  requestAnimationFrame(() => {
+    const sc = $("#phScroll"), el = sc && sc.querySelector(sel); if (!el) return;
+    const top = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - 72;
+    sc.scrollTo({top:Math.max(0, top), behavior:reduce ? "auto" : "smooth"});
+    el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+    setTimeout(() => el.classList.remove("flash"), 2100);
+  });
+}
+function grant(k){
+  if (!k || S.benefits.some(b => b.key === k)) return;
+  const c = cardByKey(k); if (!c) return;
+  S.benefits.push({key:k, brand:c.brand, solution:c.solution, offer:c.offer, location:c.location, hours:c.hours, code:String(100000 + Math.floor(Math.random() * 900000)), redeemed:false});
+}
+function toUser(scene){ S.view = "user"; S.scene = scene; S.page = "answer"; U.sheet = null; }
+function guideGo(i){
+  const go = D.guide.steps[i].go;
+  if (mq.matches) S.guideClosed = true;
+  if (go === "brand-claim-luggage"){ S.view = "brand"; S.brandTab = 1; addOnce(S.guideDone, i); save(); render(); return; }
+  if (go === "scene2"){ toUser("scene2"); addOnce(S.guideDone, i); save(); render(); focusEl("#rank"); return; }
+  toUser("scene1");
+  if (go === "scene1-ad"){ addOnce(S.guideDone, i); save(); render(); focusEl(".bcard"); return; }
+  const ok = isClaimed(BA.defaultClaim.painId);
+  if (ok) addOnce(S.guideDone, i);
+  save(); render(); focusEl("#sec-s5");
+  if (!ok) toast(D.guide.needClaimToast);
+}
+
+const ACT = {
+  view(el){ S.view = el.dataset.v; U.drawer = false; save(); render(); },
+  scene(el){ toUser(el.dataset.v); U.drawer = false; save(); render(); },
+  "guide-open"(){ S.guideClosed = false; U.drawer = false; save(); render(); },
+  "guide-close"(){ S.guideClosed = true; save(); render(); },
+  reset(){ try { localStorage.removeItem(KEY); } catch {} location.reload(); },
+  drawer(){ U.drawer = true; renderDrawer(); },
+  "drawer-close"(){ U.drawer = false; renderDrawer(); },
+  go(el){ guideGo(Number(el.dataset.i)); },
+  toast(){ toast(D.chat.actionToast); },
+  follow(){ toast(D.chat.followToast); },
+  cited(){ U.sheet = "cited"; renderLayer(); },
+  why(el){ toggle(U.why, el.dataset.k); render(); },
+  feedback(el){ addOnce(S.feedback, el.dataset.k); save(); render(); toast(D.feedback.toast); },
+  take(el){
+    if (S.ticketVerified){ grant(el.dataset.k); save(); render(); toast("领取成功，核销码在「我的权益」"); return; }
+    U.sheet = "ticket"; U.ticketStep = "upload"; U.pending = el.dataset.k; renderLayer();
+  },
+  drop(){ toast("演示版请点「使用示例票根」"); },
+  sample(){
+    U.ticketStep = "reading"; renderLayer();
+    setTimeout(() => { if (U.sheet === "ticket" && U.ticketStep === "reading"){ U.ticketStep = "matched"; renderLayer(); } }, 1000);
+  },
+  confirm(){ grant(U.pending); S.ticketVerified = true; U.sheet = null; save(); render(); toast("领取成功，核销码在「我的权益」"); },
+  "to-benefits"(){ S.page = "benefits"; U.sheet = null; save(); render(); },
+  back(){ S.page = S.page === "note" ? "benefits" : "answer"; save(); render(); },
+  redeem(el){ const b = S.benefits.find(x => x.key === el.dataset.k); if (b) b.redeemed = true; save(); render(); toast("核销成功（演示）"); },
+  "to-note"(){ S.page = "note"; U.noteT = U.noteB = null; save(); render(); },
+  publish(){ S.page = "answer"; U.noteT = U.noteB = null; save(); render(); toast("已发布（演示）"); },
+  "product-go"(){ toast(productCard().toast); },
+  tab(el){ S.brandTab = Number(el.dataset.i); if (U.review >= D.claimReview.steps.length) U.review = -1; save(); render(); },
+  "go-claim"(){ S.brandTab = 1; save(); render(); },
+  "pain-row"(el){ toggle(U.painOpen, el.dataset.id); render(); },
+  wait(el){ toggle(U.waitOpen, el.dataset.id); render(); },
+  rule(el){ toggle(U.ruleOpen, el.dataset.id); render(); },
+  submit(){
+    const F = U.form, n = D.claimReview.steps.length;
+    if (!F.solution.trim() || !F.offer.trim()){ toast("请填写解决方案和权益"); return; }
+    U.review = 0; render();
+    const tick = () => {
+      U.review++;
+      if (U.review >= n){
+        S.newClaims = S.newClaims.filter(c => c.painId !== F.painId).concat([{painId:F.painId, brand:BA.name, category:BA.category, solution:F.solution.trim(), offer:F.offer.trim(), location:F.location.trim(), hours:F.hours.trim(), audience:F.audience, scope:F.scope}]);
+        save();
+      }
+      if (S.view === "brand" && S.brandTab === 1) render();
+      if (U.review < n) setTimeout(tick, 500);
+    };
+    setTimeout(tick, 500);
+  },
+  "go-user"(){ U.review = -1; toUser("scene1"); save(); render(); focusEl("#para-p7"); }
+};
+
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-action]"); if (!el) return;
+  const a = el.dataset.action;
+  /* closing a sheet never depends on the rest of the demo working */
+  if (a === "close-sheet"){ U.sheet = null; renderLayer(); return; }
+  const card = el.closest("[data-card]");
+  if (card){ addOnce(S.seen, card.dataset.card); save(); }
+  try { ACT[a] && ACT[a](el, e); } catch (err) { console.error(err); }
+});
+document.addEventListener("input", e => {
+  const t = e.target;
+  if (t.id === "ntT" || t.id === "ntB") return noteCheck();
+  if (t.form && t.form.id === "cform" && t.name){
+    U.form[t.name] = t.value;
+    if (t.name === "scope") $("#cities").hidden = t.value === "仅本场";
+    const pb = $("#prevBox"); if (pb) pb.innerHTML = previewHTML(previewCard());
+  }
+});
+document.addEventListener("submit", e => e.preventDefault());
+document.addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if (U.sheet){ U.sheet = null; renderLayer(); } else if (U.drawer){ U.drawer = false; renderDrawer(); }
+});
+mq.addEventListener ? mq.addEventListener("change", render) : mq.addListener(render);
+render();
+</script>
+</body>
+</html>

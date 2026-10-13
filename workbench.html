@@ -26,6 +26,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-siz
 .back a{color:var(--accent);text-decoration:none}
 .back a:hover{text-decoration:underline}
 .checks .grp{font-size:12px;font-weight:700;color:var(--muted);padding-top:10px}
+tr.ref td{opacity:.65}
 header.top h1{font-weight:700;font-size:26px;line-height:1.3;margin:0;text-wrap:balance}
 header.top p{margin:6px 0 0;color:var(--muted);max-width:62ch}
 .guide{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin-top:12px;padding:10px 14px;background:var(--sheet);border:1px solid var(--rule);font-size:13.5px}
@@ -293,7 +294,7 @@ footer{font-size:12.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 2
   <div class="grid" role="tabpanel" id="s4" aria-labelledby="t4" hidden>
     <form id="f4" novalidate>
       <div class="formhead"><span>日报数据</span><span>改数字即时重算</span></div>
-      <label for="x_day">统计日<input id="x_day" type="date" value="2026-10-20"></label>
+      <label for="x_day">统计日<input id="x_day" type="date" value="2026-10-18"></label>
       <div class="row2">
         <label for="x_warn">关注线 <small>落后多少 pp</small><input id="x_warn" type="number" min="0" step="1" value="8"></label>
         <label for="x_bad">严重线 <small>落后多少 pp</small><input id="x_bad" type="number" min="0" step="1" value="18"></label>
@@ -365,8 +366,9 @@ const checked = sel => [...document.querySelectorAll(sel + " input:checked")].ma
 
 function project(){ return { name: $("#pName").value.trim() || "未命名项目", cat: $("#pCat").value, budget: num("pBudget"), start: $("#pStart").value, end: $("#pEnd").value }; }
 /* Which inputs each stage's AI text depends on; text is marked stale when they change after it was written. */
-const SRC = {s1:["#file","#f1"], s2:["#file","#f2"], s3:["#file","#f3"], s4:["#file","#f4"], s5:["#file","#f4","#f5"]};
-const snap = k => SRC[k].map(s => [...document.querySelectorAll(`${s} input, ${s} select, ${s} textarea`)].map(e => e.type === "checkbox" ? e.checked : e.value).join("|")).join("#");
+const SRC = {s1:["#file","#f1"], s2:["#file","#f2"], s3:["#file","#f3"], s4:["#file","#r_match","#f4"], s5:["#file","#r_match","#f4","#f5"]};
+const fields = s => { const el = document.querySelector(s); return el && el.matches("input, select, textarea") ? [el] : [...document.querySelectorAll(`${s} input, ${s} select, ${s} textarea`)]; };
+const snap = k => SRC[k].map(s => fields(s).map(e => e.type === "checkbox" ? e.checked : e.value).join("|")).join("#");
 const isStale = k => STATE[k].snap !== undefined && snap(k) !== STATE[k].snap;
 function staleBar(k){
   if (!isStale(k)) return "";
@@ -464,7 +466,10 @@ $("#f1").addEventListener("submit", e => { e.preventDefault(); const p = project
 function calc2(){
   const p = project(), match = num("r_match"), rate = num("r_rate") / 100, lev = num("r_lev"), kol = num("r_kol"), staff = num("r_staff"), loss = num("r_loss");
   const pool = p.budget + match, woSub = pool * rate, woGmv = woSub * lev, platCost = match + kol + staff + loss;
-  return {p, match, rate, lev, kol, staff, loss, pool, woSub, woGmv, platCost, roi: platCost ? woGmv / platCost : 0, govLev: p.budget ? woGmv / p.budget : 0};
+  /* a redeemed coupon spends both pots of money, so the GMV is split by who funded the subsidy */
+  const govShare = pool ? p.budget / pool : 0, platShare = pool ? match / pool : 0, govGmv = woGmv * govShare, platGmv = woGmv * platShare;
+  return {p, match, rate, lev, kol, staff, loss, pool, woSub, woGmv, platCost, govShare, platShare, govGmv, platGmv,
+    govLev: p.budget ? govGmv / p.budget : 0, roi: platCost ? platGmv / platCost : 0, grossRoi: platCost ? woGmv / platCost : 0};
 }
 STATE.s2 = {live:false, d:{background:"合作方希望在国庆后的淡季拉动平江路一带夜间文旅消费，以政府资金加平台配补发放满减券，配合达人种草和官方媒体宣发。",
   goals:["核销补贴不低于 250 万元","撬动核销 GMV 不低于 650 万元","新增参与商家不少于 150 家，动销率 70% 以上"],
@@ -472,26 +477,27 @@ STATE.s2 = {live:false, d:{background:"合作方希望在国庆后的淡季拉�
   risks:["文旅品类核销滞后，需在周末与节假日集中推送","商家不会核销或库存不足，造成核销环节的瓶颈","领取超发需控制在设计比例内，避免核销预算穿透"],
   decision:"建议立项，按效果转化型项目管理，执行期每日报送核销数据。"}};
 R.s2 = () => { const {d, live} = STATE.s2, c = calc2(), o = $("#o2");
-  const roiCls = c.roi >= 3 ? "ok" : c.roi >= 1.5 ? "warn" : "bad";
   paint("s2", o, head("s2", "立项测算", `<span>项目 <b>${esc(c.p.name)}</b></span><span>类型 <b>${esc($("#r_type").value)}</b></span><span>周期 <b>${esc(c.p.start)} 至 ${esc(c.p.end)}</b></span><span>${days(c.p.start, c.p.end)} 天</span>`, "o2")
   + step("测算结果","改左侧参数即时重算", `<div class="tablewrap"><table class="calc"><thead><tr><th>指标</th><th>结果</th><th>算法</th></tr></thead><tbody>
       <tr><td>补贴池</td><td class="num">${f1(c.pool)} 万</td><td class="f">政府资金 ${f1(c.p.budget)} + 平台配补 ${f1(c.match)}</td></tr>
       <tr><td>预计核销补贴</td><td class="num">${f1(c.woSub)} 万</td><td class="f">补贴池 × 核销率 ${pct(c.rate)}</td></tr>
       <tr><td>预计核销 GMV</td><td class="num">${f1(c.woGmv)} 万</td><td class="f">核销补贴 × 拉动比 ${c.lev}</td></tr>
-      <tr><td>政府资金拉动倍数</td><td class="num">${c.govLev.toFixed(2)}</td><td class="f">核销 GMV ÷ 政府资金（GMV 含平台配补带动部分）</td></tr>
+      <tr><td>按出资分摊 GMV</td><td class="num">${f1(c.govGmv)} / ${f1(c.platGmv)} 万</td><td class="f">政府资金占补贴池 ${pct(c.govShare)}，平台配补占 ${pct(c.platShare)}，核销 GMV 按这个比例分给两方</td></tr>
+      <tr><td>政府资金拉动倍数</td><td class="num">${c.govLev.toFixed(2)}</td><td class="f">政府分摊 GMV ÷ 政府资金</td></tr>
       <tr><td>平台投入</td><td class="num">${f1(c.platCost)} 万</td><td class="f">配补 + 达人与物料 + 人力 + 资损预估</td></tr>
-      <tr><td><b>平台 ROI</b></td><td class="num"><b>${c.roi.toFixed(2)}</b> <span class="pill ${roiCls}">${c.roi >= 3 ? "健康" : c.roi >= 1.5 ? "一般" : "偏低"}</span></td><td class="f">核销 GMV ÷ 平台投入</td></tr></tbody></table></div>
-      <p class="note">ROI 分档为示例设定：3 以上健康，1.5 至 3 一般，低于 1.5 偏低。</p>`)
+      <tr><td><b>平台 GMV 回报</b></td><td class="num"><b>${c.roi.toFixed(2)}</b></td><td class="f">平台分摊 GMV ÷ 平台投入</td></tr>
+      <tr class="ref"><td>全口径倍数（仅参考）</td><td class="num">${c.grossRoi.toFixed(2)}</td><td class="f">核销 GMV ÷ 平台投入：把政府资金带动的消费也算给平台，会高估</td></tr></tbody></table></div>
+      <p class="note">口径说明：一张券核销时同时用到政府资金和平台配补，GMV 按出资比例分摊（示例口径）。平台在政企项目里的回报主要不在 GMV，新增商家、新客和政府合作要另外评估，所以这里不给健康分档。</p>`)
   + step("项目背景","", `<p class="lead">${esc(d.background)}</p>`)
   + step("目标与资源","", `<div class="cols"><div><h4>目标</h4><ul>${list(d.goals)}</ul></div><div><h4>资源</h4><ul>${list(d.resources)}</ul></div></div>`)
   + step("风险与结论","", `<ul>${list(d.risks)}</ul><p class="lead" style="margin-top:10px"><b>结论：</b>${esc(d.decision)}</p>`)); };
-$("#f2").addEventListener("input", () => R.s2());
+$("#f2").addEventListener("input", () => { R.s2(); R.s4(); R.s5(); });
 $("#f2").addEventListener("submit", e => { e.preventDefault(); const c = calc2();
   runAI("s2", e.target, $("#o2"), `${ROLE}
 为下面的政府消费券项目写一页立项摘要。
 项目：${c.p.name}；品类：${c.p.cat}；类型：${$("#r_type").value}；周期：${c.p.start} 至 ${c.p.end}
 政府资金 ${c.p.budget} 万，平台配补 ${c.match} 万，达人与物料 ${c.kol} 万，人力 ${c.staff} 万，资损预估 ${c.loss} 万
-测算：预计核销率 ${pct(c.rate)}，核销补贴 ${f1(c.woSub)} 万，核销 GMV ${f1(c.woGmv)} 万，政府资金拉动倍数 ${c.govLev.toFixed(2)}，平台 ROI ${c.roi.toFixed(2)}
+测算：预计核销率 ${pct(c.rate)}，核销补贴 ${f1(c.woSub)} 万，核销 GMV ${f1(c.woGmv)} 万；按出资比例分摊后，政府资金拉动倍数 ${c.govLev.toFixed(2)}，平台分摊 GMV ÷ 平台投入 ${c.roi.toFixed(2)}
 线索阶段信息：${$("#l_need").value}
 只回复 JSON：{"background":"两三句","goals":["3 条可量化目标"],"resources":["政府侧一条","平台侧一条"],"risks":["3 条"],"decision":"一句结论"}`,
   d => d.background && Array.isArray(d.goals)); });
@@ -528,12 +534,12 @@ STATE.s3 = {live:false, d:{
         {use:"券面视觉",prompt:"coupon design, Chinese night market feel, lantern glow, navy background, golden accent, large number 50, minimal layout"}],
   timeline:[{phase:"预热",days:"D-7 至 D-1",action:"KOC 第一批铺量，话题建立，券上线预约"},{phase:"引爆",days:"D0 至 D3",action:"头部达人发布，腰部攻略同步上线，投流加热"},{phase:"长尾",days:"D4 至 D14",action:"KOC 二三批发布，按核销数据调整加热内容"}]}};
 R.s3 = () => { const {d, live} = STATE.s3, p = project(), o = $("#o3"), budget = num("b_budget");
-  const m = Array.isArray(d.matrix) ? d.matrix : []; const ts = m.reduce((s,x)=>s+(Number(x.budgetShare)||0),0) || 100;
+  const m = Array.isArray(d.matrix) ? d.matrix : []; const sumSh = m.reduce((s,x)=>s+(Number(x.budgetShare)||0),0), ts = sumSh || 100;
   const rows = m.map(x => { const sh = Number(x.budgetShare)||0; return `<tr><td><b>${esc(x.tier)}</b></td><td class="num">${Number(x.count) ? esc(x.count)+" 位" : "—"}</td><td class="num">${sh}%<div class="minibar"><i style="width:${Math.min(100,sh)}%"></i></div></td><td class="num">${(budget*sh/ts).toFixed(1)} 万</td><td>${esc(x.role)}</td><td>${esc(x.contentType)}</td></tr>`; }).join("");
   paint("s3", o, head("s3", "达人种草方案", `<span>项目 <b>${esc(p.name)}</b></span><span>目标 <b>${esc($("#b_goal").value)}</b></span><span>达人预算 <b>${budget} 万</b></span><span>平台 <b>${esc(checked("#b_plat").join(" / "))}</b></span>`, "o3")
   + step("人群洞察","谁、在什么场景、要什么", `<div class="insights">${(d.insights||[]).map(i => `<div class="ins"><span class="p">${esc(i.persona)}</span><span class="s">${esc(i.story)}</span><span class="i">→ ${esc(i.implication)}</span></div>`).join("")}</div>`)
   + step("传播主线","", `<div class="idea"><div class="theme">${esc(d.bigIdea?.theme)}</div><div>${safeMark(d.bigIdea?.slogan)}</div><div class="tag">${esc(d.bigIdea?.hashtag)}</div><div class="why">${esc(d.bigIdea?.why)}</div></div>`)
-  + step("达人矩阵与预算",`按 ${budget} 万元拆分`, `<div class="tablewrap"><table><thead><tr><th>层级</th><th>数量</th><th>占比</th><th>金额</th><th>角色</th><th>形式</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><td>合计</td><td class="num">${m.reduce((s,x)=>s+(Number(x.count)||0),0)} 位</td><td class="num">100%</td><td class="num">${budget.toFixed(1)} 万</td><td colspan="2"></td></tr></tfoot></table></div>`)
+  + step("达人矩阵与预算",`按 ${budget} 万元拆分`, `<div class="tablewrap"><table><thead><tr><th>层级</th><th>数量</th><th>占比</th><th>金额</th><th>角色</th><th>形式</th></tr></thead><tbody>${rows}</tbody><tfoot><tr><td>合计</td><td class="num">${m.reduce((s,x)=>s+(Number(x.count)||0),0)} 位</td><td class="num">${sumSh}%</td><td class="num">${budget.toFixed(1)} 万</td><td colspan="2">${sumSh !== 100 ? "占比合计不是 100%，金额已按比例折算" : ""}</td></tr></tfoot></table></div>`)
   + step("分层达人 Brief","可直接发给达人", `<div class="briefs">${(d.briefs||[]).map(b => `<div class="brief"><b>${esc(b.tier)}</b><div class="angle">${esc(b.angle)}</div><dl><div><dt>必讲卖点</dt><dd><ul>${list(b.sellingPoints)}</ul></dd></div><div><dt>画面要求</dt><dd><ul>${list(b.visuals)}</ul></dd></div><div><dt>话术规范</dt><dd><ul>${list(b.script)}</ul></dd></div><div><dt>禁止事项</dt><dd class="avoid"><ul>${list(b.avoid)}</ul></dd></div></dl><div class="node"><b>投流配合：</b>${esc(b.adNode)}</div></div>`).join("")}</div>`)
   + step("AIGC 视觉提示词","交给设计出初稿", `<div class="prompts">${(d.aigc||[]).map((x,i) => `<div class="prompt"><span class="u">${esc(x.use)}</span><code id="ai${i}">${esc(x.prompt)}</code><button type="button" class="ghost sm" data-copy="ai${i}">复制</button></div>`).join("")}</div>`)
   + step("传播排期","", (d.timeline||[]).map(t => `<div class="tl"><span class="d">${esc(t.days)}</span><span><b>${esc(t.phase)}</b>　${esc(t.action)}</span></div>`).join(""))); };
@@ -572,18 +578,18 @@ function calc4(){
   const p = project(), day = $("#x_day").value;
   const total = Math.max(1, days(p.start, p.end)), passed = Math.min(total, Math.max(0, days(p.start, day)));
   const claim = num("x_claim"), paySub = num("x_paysub"), payGmv = num("x_paygmv"), woSub = num("x_wosub"), woGmv = num("x_wogmv"), refund = num("x_refund");
-  const timeP = passed / total, useP = p.budget ? woSub / p.budget : 0, gap = (useP - timeP) * 100;
+  const pool = p.budget + num("r_match");
+  const timeP = passed / total, useP = pool ? woSub / pool : 0, gap = (useP - timeP) * 100;
   const wl = num("x_warn"), bl = Math.max(num("x_bad"), wl);
   const level = gap >= -wl ? ["正常","ok"] : gap >= -bl ? ["需关注","warn"] : ["严重滞后","bad"];
   const daily = passed ? woSub / passed : 0, forecast = daily * total;
   const tiers = [num("m0"), num("m1"), num("m2"), num("m3")], mTotal = tiers.reduce((a,b)=>a+b,0);
-  const pool = p.budget + num("r_match");
-  return {p, day, wl, bl, total, passed, claim, paySub, payGmv, woSub, woGmv, refund, timeP, useP, gap, level, daily, forecast, fRate: p.budget ? forecast / p.budget : 0,
+  return {p, day, wl, bl, total, passed, claim, paySub, payGmv, woSub, woGmv, refund, timeP, useP, gap, level, daily, forecast, fRate: pool ? forecast / pool : 0,
     payLev: paySub ? payGmv / paySub : 0, woLev: woSub ? woGmv / woSub : 0, refundRate: payGmv ? refund / payGmv : 0,
     claimToPay: claim ? paySub / claim : 0, payToWo: paySub ? woSub / paySub : 0, pool, over: pool ? claim / pool - 1 : 0, tiers, mTotal};
 }
 function metricsText(c){
-  return `时间进度 ${pct(c.timeP)}，消耗进度（核销补贴 ÷ 政府资金）${pct(c.useP)}，进度偏差 ${c.gap.toFixed(1)}pp，预警：${c.level[0]}
+  return `时间进度 ${pct(c.timeP)}，消耗进度（核销补贴 ÷ 补贴池）${pct(c.useP)}，进度偏差 ${c.gap.toFixed(1)}pp，预警：${c.level[0]}
 日均核销 ${f1(c.daily)} 万，预计总核销 ${f1(c.forecast)} 万，预计完成率 ${pct(c.fRate)}
 累计领取补贴 ${c.claim} 万（补贴池 ${f1(c.pool)} 万，${c.over > 0 ? "超出 " + pct(c.over) : "未超发"}），支付补贴 ${c.paySub} 万，支付金额 ${c.payGmv} 万，核销补贴 ${c.woSub} 万，核销金额 ${c.woGmv} 万，退款 ${c.refund} 万
 支付拉动比 ${c.payLev.toFixed(2)}，核销拉动比 ${c.woLev.toFixed(2)}，退款率 ${pct(c.refundRate)}，领取到支付（补贴口径）${pct(c.claimToPay)}，支付到核销（补贴口径）${pct(c.payToWo)}
@@ -597,7 +603,7 @@ R.s4 = () => { const {d, live} = STATE.s4, c = calc4(), o = $("#o4");
   const max = Math.max(c.claim, c.payGmv, c.woGmv, 1);
   const bar = (label, v, sub, cls="") => `<div class="fn"><span>${label}</span><div><div class="bar ${cls}" style="width:${Math.min(100, v / max * 100)}%"></div></div><span class="num">${f1(v)} 万${sub ? " · " + sub : ""}</span></div>`;
   const tierNames = ["0 核销","低销","中销","高销"], tierCls = ["bad","warn","","ok"];
-  paint("s4", o, head("s4", "执行监控", `<span>统计日 <b>${esc(c.day)}</b></span><span>第 <b>${c.passed}</b> / ${c.total} 天</span><span>政府资金 <b>${f1(c.p.budget)} 万</b></span>`, "o4")
+  paint("s4", o, head("s4", "执行监控", `<span>统计日 <b>${esc(c.day)}</b></span><span>第 <b>${c.passed}</b> / ${c.total} 天</span><span>补贴池 <b>${f1(c.pool)} 万</b></span>`, "o4")
   + step("进度预警","改左侧数据即时重算", `<div class="progress">
       <div class="pr"><span>时间进度</span><div class="track"><i class="t" style="width:${Math.min(100,c.timeP*100)}%"></i></div><span class="val">${pct(c.timeP)}</span></div>
       <div class="pr"><span>消耗进度</span><div class="track"><i style="width:${Math.min(100,c.useP*100)}%"></i></div><span class="val">${pct(c.useP)}</span></div></div>
@@ -606,7 +612,7 @@ R.s4 = () => { const {d, live} = STATE.s4, c = calc4(), o = $("#o4");
       <div class="tile"><span class="m">日均核销</span><span class="v">${f1(c.daily)} 万</span><span class="h">核销补贴 ÷ 已过天数</span></div>
       <div class="tile ${c.fRate >= .9 ? "ok" : c.fRate >= .7 ? "warn" : "bad"}"><span class="m">预计完成率</span><span class="v">${pct(c.fRate)}</span><span class="h">预计总核销 ${f1(c.forecast)} 万</span></div>
       <div class="tile ${c.over > 0 ? "warn" : ""}"><span class="m">领取 ÷ 补贴池</span><span class="v">${pct(c.claim / (c.pool || 1))}</span><span class="h">${c.over > 0 ? "已超发，确认是否为设计超发" : `补贴池 ${f1(c.pool)} 万，含平台配补`}</span></div></div>
-      <p class="note">消耗进度 = 核销补贴 ÷ 政府资金。预警线在左侧自己设（默认值为示例）：落后不超过 ${c.wl}pp 为正常，${c.wl} 至 ${c.bl}pp 需关注，超过 ${c.bl}pp 为严重滞后。</p>`)
+      <p class="note">消耗进度 = 核销补贴 ÷ 补贴池（政府资金 + 平台配补），和立项测算用同一个分母。预警线在左侧自己设（默认值为示例）：落后不超过 ${c.wl}pp 为正常，${c.wl} 至 ${c.bl}pp 需关注，超过 ${c.bl}pp 为严重滞后。</p>`)
   + step("转化漏斗与效率","拉动比和退款率一起看", `<div class="funnel">${bar("领取补贴", c.claim)}${bar("支付补贴", c.paySub, pct(c.claimToPay))}${bar("核销补贴", c.woSub, pct(c.payToWo))}${bar("支付金额", c.payGmv)}${bar("核销金额", c.woGmv)}${bar("退款金额", c.refund, pct(c.refundRate), "refund")}</div>
       <div class="tiles" style="margin-top:14px"><div class="tile"><span class="m">支付拉动比</span><span class="v">${c.payLev.toFixed(2)}</span><span class="h">支付金额 ÷ 支付补贴</span></div><div class="tile"><span class="m">核销拉动比</span><span class="v">${c.woLev.toFixed(2)}</span><span class="h">核销金额 ÷ 核销补贴</span></div><div class="tile ${c.refundRate > .3 ? "bad" : c.refundRate > .15 ? "warn" : "ok"}"><span class="m">退款率</span><span class="v">${pct(c.refundRate)}</span><span class="h">退款 ÷ 支付金额</span></div></div>`)
   + step("商家核销分层",`共 ${c.mTotal} 家`, `<div class="tiles">${c.tiers.map((v,i) => `<div class="tile ${tierCls[i]}"><span class="m">${tierNames[i]}</span><span class="v">${v} 家</span><span class="h">${pct(v / (c.mTotal || 1))}${i===0 ? " · 清单同步 BD 排查" : i===3 ? " · 重点维护" : ""}</span></div>`).join("")}</div>`)
@@ -632,7 +638,7 @@ ${metricsText(c)}
 STATE.s5 = {live:false, d:{
   steps:[
     {step:"回顾目标",text:"本次以带动夜间文旅消费和商家供给为主，拉新只作参考。政府资金 300 万，立项时定的目标是核销补贴不低于 250 万。"},
-    {step:"评估结果",text:"统计日累计领取补贴 210 万，支付金额 420 万，核销金额 265 万，退款 70 万。核销补贴 96 万，按当前日均预计全程约 195 万，完成率约 65%，低于目标。"},
+    {step:"评估结果",text:"统计日累计领取补贴 210 万，支付金额 420 万，核销金额 265 万，退款 70 万。核销补贴 96 万，按当前日均预计全程约 209 万，占补贴池约 63%，低于目标。"},
     {step:"分析原因",text:"领取到支付 71%，前段正常；支付到核销 64%，是掉得最多的一环。原因有三：文旅消费集中在周末而券有效期只有 7 天；临期没有提醒；38 家商家 0 核销。新客退款率 24%，高于整体的 16.7%，部分新客属于冲动领券。"},
     {step:"总结规律",text:"文旅类消费券的瓶颈往往在核销而不在领取：有效期要覆盖至少两个周末，上线前先做商家核销培训，内容里讲清使用场景。"}],
   kpt:{keep:"每 1 元核销补贴带动约 2.8 元消费，拉动比稳定；参与商家动销率 75%。",problem:"支付到核销只有 64%；头部 10 家贡献 48% 的核销，过于集中；新客退款率偏高。",try:"下一批券有效期改为 14 天；0 核销商家逐家培训；达人内容加上使用场景和到期提醒。"}}};
