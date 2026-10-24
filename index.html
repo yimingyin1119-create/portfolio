@@ -323,6 +323,15 @@ h1,h2,h3{text-wrap:balance}
 .bidseg button:focus-visible{outline:2px solid var(--mark);outline-offset:2px}
 .bidcap{font-size:14px;line-height:1.6;color:var(--muted);min-height:4.8em}
 
+/* the kitchen app: what happens to one meal, as a numbered loop */
+.loop{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;counter-reset:step;min-width:0}
+.loop li{position:relative;display:grid;grid-template-columns:34px minmax(0,1fr);column-gap:14px;padding-bottom:16px;counter-increment:step}
+.loop li::before{content:counter(step);grid-row:1 / span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:700;background:var(--mark-soft);color:var(--mark);position:relative;z-index:1}
+.loop li:not(:last-child)::after{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:var(--rule)}
+.loop li:last-child{padding-bottom:0}
+.loop b{font-size:16px;line-height:1.4;padding-top:5px}
+.loop span{font-size:14px;color:var(--muted);line-height:1.5}
+
 /* workbench band */
 .band{background:var(--night);color:var(--on-night);border-radius:20px;padding:36px 38px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:28px 44px;align-items:center}
 @media (max-width:820px){.band{grid-template-columns:minmax(0,1fr);padding:28px 22px}}
@@ -483,6 +492,7 @@ a.sm{text-decoration:none;display:inline-block}
       <li><a href="#caps">能力</a></li>
       <li><a href="#work">案例</a></li>
       <li><a href="#demo">AI Demo</a></li>
+      <li><a href="#kitchen">小程序</a></li>
       <li><a href="#bridge">沟通</a></li>
       <li><a href="#growth">工作台</a></li>
     </ol>
@@ -544,8 +554,8 @@ a.sm{text-decoration:none;display:inline-block}
         <span class="ev"><i>见</i><button type="button" data-open="shaanxi">心动陕西</button><button type="button" data-open="eco">13 城物种海报</button></span></div>
       <div><button type="button" class="jd" aria-expanded="false" aria-controls="jd3">对应职责 3<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jd3" hidden><span>岗位原文</span>链接创意、媒介与技术中台，打破部门壁垒。你将把复杂的AI技术翻译成客户能懂的语言，也将客户的需求转化为技术团队可执行的指令，确保项目高效运转。</blockquote><b>沟通</b><p>把政府和客户的口径转成内部执行清单，再把方案讲成客户听得懂的话。</p>
         <span class="ev"><i>见</i><a href="#bridge">一件事说给三种人</a></span></div>
-      <div><button type="button" class="jd" aria-expanded="false" aria-controls="jdr">任职要求 2<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jdr" hidden><span>岗位原文</span>极速学习者：你是天生的“玩家”，能像玩乐高一样，快速上手并组合使用各类AI工具（如AIGC内容生成、数据分析模型等），并享受创造的过程。</blockquote><b>AI 工具</b><p>在 Claude、ChatGPT、Gemini 间按场景调配；搭过 AI Agent 区域商机监测，按周出风险清单；用 AI 搭出可上手的产品 Demo。</p>
-        <span class="ev"><i>见</i><a href="#growth">消费券工作台</a><button type="button" data-open="craft">分镜提示词</button></span></div>
+      <div><button type="button" class="jd" aria-expanded="false" aria-controls="jdr">任职要求 2<i aria-hidden="true">原文</i></button><blockquote class="jdq" id="jdr" hidden><span>岗位原文</span>极速学习者：你是天生的“玩家”，能像玩乐高一样，快速上手并组合使用各类AI工具（如AIGC内容生成、数据分析模型等），并享受创造的过程。</blockquote><b>AI 工具</b><p>在 Claude、ChatGPT、Gemini 间按场景调配；搭过 AI Agent 区域商机监测，按周出风险清单；用 n8n 搭过一个点餐小程序的全部后端。</p>
+        <span class="ev"><i>见</i><a href="#kitchen">饭搭子小程序</a><a href="#growth">消费券工作台</a><button type="button" data-open="craft">分镜提示词</button></span></div>
     </div>
   </section>
 
@@ -601,6 +611,33 @@ a.sm{text-decoration:none;display:inline-block}
           <span class="bidcap" id="bidCap" aria-live="polite">这是现在的样子：攻略照常写，广告卡挂在它解决的那个痛点下面。</span>
         </figcaption>
       </figure>
+    </div>
+  </section>
+
+  <section class="sec" id="kitchen" aria-labelledby="h-kitchen">
+    <div class="head"><h2 id="h-kitchen">自己做的小程序</h2><p>用 n8n 当后端，从需求到上线</p></div>
+    <div class="demo kit">
+      <div>
+        <div class="spec"><span>个人项目 · 2026.10 · 演示版数据为预置</span></div>
+        <h3>饭搭子：和朋友搭伙做饭的点餐小程序</h3>
+        <p class="pitch">想吃什么就提一个要求，系统对照食材库算出缺什么，自动加进采购清单并推送到微信；有人接下、做好以后，按菜谱扣掉库存。菜谱、采购和库存，不用再靠脑子记。</p>
+        <ul class="dpts">
+          <li><b>后端</b><span>全部用 n8n 工作流搭建：点餐接口、登录校验子流程、通知推送等 7 条，节点用中文命名，部署在云服务器上</span></li>
+          <li><b>逻辑</b><span>缺料计算、单位换算、扣库存放在代码模块里，配了近 200 个自动化测试</span></li>
+          <li><b>前端</b><span>像素风网页，在微信里打开就能用，推送走 PushPlus</span></li>
+        </ul>
+        <p class="role">我提需求、做取舍、用真机验收；代码由 Claude Code 编写。</p>
+        <div class="dact"><a class="cta" href="kitchen/">打开演示版</a><span>和正式版同一套代码，数据只存在你的浏览器里</span></div>
+        <p class="print-only">演示版网页：<a href="https://yimingyin1119-create.github.io/portfolio/kitchen/">https://yimingyin1119-create.github.io/portfolio/kitchen/</a></p>
+      </div>
+      <ol class="loop" aria-label="一顿饭在系统里怎么走完">
+        <li><b>提要求</b><span>哪道菜、几个人、哪天哪一顿</span></li>
+        <li><b>算缺料</b><span>对照食材库，缺的进采购清单</span></li>
+        <li><b>推送</b><span>其他人在微信里收到</span></li>
+        <li><b>接下</b><span>谁有空谁做，也可以自己做</span></li>
+        <li><b>做好了</b><span>按菜谱自动扣库存</span></li>
+        <li><b>买回来</b><span>采购清单打勾，直接入库</span></li>
+      </ol>
     </div>
   </section>
 
@@ -662,7 +699,7 @@ a.sm{text-decoration:none;display:inline-block}
 
   <section class="sec" id="tools" aria-labelledby="h-tools">
     <div class="head"><h2 id="h-tools">这个网站本身就是作品</h2><p>我负责判断和取舍，AI 负责读材料、写代码、出提示词</p></div>
-    <div class="tools"><span><b>Claude</b> 梳理材料，搭网站和工作台</span><span><b>AI 编程</b> 搭痛点认领 Demo</span><span><b>ChatGPT · Gemini</b> 按场景调配</span><span><b>AIGC</b> 海报与分镜提示词</span><span><b>Excel · RawGraphs</b> 数据与图表</span></div>
+    <div class="tools"><span><b>Claude</b> 梳理材料，搭网站和工作台</span><span><b>AI 编程</b> 搭痛点认领 Demo</span><span><b>n8n</b> 饭搭子的后端工作流</span><span><b>ChatGPT · Gemini</b> 按场景调配</span><span><b>AIGC</b> 海报与分镜提示词</span><span><b>Excel · RawGraphs</b> 数据与图表</span></div>
   </section>
 
   <section class="contact" id="contact" aria-labelledby="h-contact">
@@ -675,7 +712,7 @@ a.sm{text-decoration:none;display:inline-block}
   </section>
 </main>
 <section class="appendix" id="appendix" aria-label="案例详情"></section>
-<footer>© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，两者数据均为虚构或模拟</footer>
+<footer>© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，两者数据均为虚构或模拟；饭搭子演示版的数据为预置</footer>
 
 <dialog class="drawer" id="drawer" aria-labelledby="dw-title"><div class="dw" id="dw"></div></dialog>
 
@@ -1132,7 +1169,7 @@ if ("IntersectionObserver" in window){
     if (!e.isIntersecting) return;
     navLinks.forEach(a => a.getAttribute("href") === "#" + e.target.id ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
   }), { rootMargin:"-45% 0px -50% 0px" });
-  ["caps", "work", "demo", "bridge", "growth"].forEach(id => spy.observe(document.getElementById(id)));
+  ["caps", "work", "demo", "kitchen", "bridge", "growth"].forEach(id => spy.observe(document.getElementById(id)));
 }
 
 /* evidence chips and result numbers open the matching case */
