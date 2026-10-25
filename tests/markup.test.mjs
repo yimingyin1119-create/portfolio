@@ -195,15 +195,19 @@ test('the kraft palette: kraft ground, parchment cards, sepia ink, route red', (
   const t = read('assets/css/tokens.css');
   const root = t.slice(t.indexOf(':root {'), t.indexOf('}', t.indexOf(':root {')));
   assert.ok(root.includes('color-scheme: light'));
-  for (const [k, v] of [['--bg', '#c09a6c'], ['--card', '#f1e3c4'], ['--ink', '#2e1f12'], ['--red', '#9a3a22']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
-  assert.ok(html.includes('<meta name="theme-color" content="#c09a6c">'));
+  for (const [k, v] of [['--bg', '#ceae82'], ['--card', '#f1e3c4'], ['--ink', '#2e1f12'], ['--red', '#9a3a22']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
+  assert.ok(html.includes('<meta name="theme-color" content="#ceae82">'));
+});
+
+test('the opening is a paper scroll: a rolled curl at the top and one at the bottom', () => {
+  const o = chapterHtml('opening');
+  assert.ok(/class="curl top"[^>]*aria-hidden="true"/.test(o) && /class="curl bottom"[^>]*aria-hidden="true"/.test(o));
 });
 
 test('flags fly over the opening and the treasure, and the page carries a route layer', () => {
   assert.ok(/<canvas class="flag"[^>]*data-title="EARTH ONLINE"[^>]*aria-hidden="true"/.test(chapterHtml('opening')));
   assert.ok(/class="treasure"[\s\S]*?<canvas class="flag small"/.test(chapterHtml('contact')));
   assert.ok(/<svg class="route"[^>]*aria-hidden="true"/.test(html));
-  assert.ok(!/roller/.test(html));
 });
 
 test('no red text: red is only for drawn lines (route, treasure, drawing accents)', () => {

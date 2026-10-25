@@ -6,7 +6,7 @@
 
 :root {
   color-scheme: light;
-  --bg: #c09a6c; --bg-2: #e6d2a8; --card: #f1e3c4;
+  --bg: #ceae82; --bg-2: #e6d2a8; --card: #f1e3c4;
   --line: #2e1f12; --line-dim: rgba(46, 31, 18, .3); --line-faint: rgba(46, 31, 18, .12);
   --ink: #2e1f12; --muted: #4f3a24; --faint: #6e5638;
   --accent: #5a3a1e; --btn: #3a2616; --btn-ink: #f4e8cc;

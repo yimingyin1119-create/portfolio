@@ -79,3 +79,4 @@ body { background-image: none; }
 .boot { clip-path: none !important; box-shadow: none; background: #fff; padding-top: 28px; }
 .boot > .sig { position: static; display: block; margin-bottom: 6px; }
 .boot .hud { position: static; margin: 0 0 12px; }
+.curl { display: none !important; }

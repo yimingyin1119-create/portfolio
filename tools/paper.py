@@ -47,5 +47,5 @@ def paper(base, mottle, grain, fib, name, q):
     im.save(OUT / name, 'WEBP', quality=q, method=6)
     print(name, (OUT / name).stat().st_size // 1024, 'KB')
 
-paper((190, 152, 106), 5.5, .7, [(1100, (12, 40), 1, (12, 30)), (220, (30, 80), 1, (10, 22))], 'kraft.webp', 84)
-paper((241, 227, 196), 3, .5, [(500, (12, 36), 1, (6, 16))], 'parchment.webp', 84)
+paper((206, 174, 130), 3.2, .3, [(700, (14, 44), 1, (6, 15)), (140, (30, 80), 1, (5, 11))], 'kraft.webp', 86)
+paper((245, 234, 208), 1.8, .2, [(350, (14, 40), 1, (3, 8))], 'parchment.webp', 86)

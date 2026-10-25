@@ -468,7 +468,7 @@ html.motion .quest:not(.in) .stamp { transform: rotate(-14deg) scale(1.8); opaci
 /* ===== the sea chart ===== */
 /* paper: kraft tile for the page, parchment tile for every card; dark worn edges stay put like a chart in the hand */
 body { background-image: url("../tex/kraft.webp"); background-size: 512px 512px; }
-body::before { opacity: .08; mix-blend-mode: multiply; }
+body::before { opacity: .035; mix-blend-mode: multiply; }
 body::after { content: ""; position: fixed; inset: 0; z-index: 99; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, transparent 58%, rgba(60, 38, 18, .38) 100%); }
 .chart-edge { position: fixed; inset: 0; z-index: 98; pointer-events: none; border: 7px solid #3a2616; box-shadow: inset 0 0 0 1.5px rgba(244, 232, 204, .5), inset 0 0 0 5px #3a2616, inset 0 0 0 6.5px rgba(244, 232, 204, .35); }
 @media (max-width: 600px) { .chart-edge { border-width: 4px; box-shadow: inset 0 0 0 1px rgba(244, 232, 204, .45); } }
@@ -537,3 +537,20 @@ html.motion .route-ship .hull { animation: bob 2.6s ease-in-out infinite; transf
 .frame-btn[aria-pressed="true"] { box-shadow: inset 0 0 0 2px var(--accent), 0 12px 26px -16px rgba(46, 31, 18, .55); }
 
 .the-end { color: var(--accent); }
+
+/* ===== the opening scroll: two rolled-paper curls; the bottom one rolls down to unfurl the sheet ===== */
+@property --u { syntax: "<number>"; inherits: true; initial-value: 0; }
+.boot { --u: 0; overflow: visible; clip-path: inset(-200px -40px calc(var(--u) * (100% - 30px) - 26px) -40px); }
+html.motion .boot { animation: unfurl 1.9s cubic-bezier(.55, .05, .2, 1) .35s both; }
+html.motion .boot.unrolled { animation: none; }
+@keyframes unfurl { from { --u: 1; } to { --u: 0; } }
+.curl { position: absolute; left: -8px; right: -8px; z-index: 3; pointer-events: none; border-radius: 999px;
+  background: linear-gradient(180deg, #b89a68 0%, #e9d8b2 22%, #fbf3df 42%, #efe0bd 62%, #c9ad7c 86%, #a4875a 100%);
+  box-shadow: 0 6px 12px -4px rgba(46, 31, 18, .45); }
+.curl::before, .curl::after { content: ""; position: absolute; top: 0; bottom: 0; width: 16px; border-radius: 50%;
+  background: repeating-radial-gradient(circle at 50% 50%, #a98c5c 0 1px, #f4e8cc 1px 3px); box-shadow: inset 0 0 0 1px rgba(90, 64, 34, .45); }
+.curl::before { left: -2px; } .curl::after { right: -2px; }
+.curl.top { top: -14px; height: 28px; }
+/* the bottom roll still holds the paper, so it starts fat and slims as it unwinds */
+.curl.bottom { height: calc(26px + var(--u) * 14px); bottom: calc(var(--u) * (100% - 30px) - 13px - var(--u) * 7px); }
+@media (max-width: 600px) { .curl { left: -4px; right: -4px; } .curl::before, .curl::after { width: 12px; } }
