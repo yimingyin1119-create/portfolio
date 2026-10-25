@@ -1,6 +1,8 @@
 /* Earth Online, an adventure at sea: kraft paper ground, lighter parchment for every card, sepia ink throughout.
    Text is never red; red is kept for drawn lines only (the route, the treasure mark, accents in the line drawings). */
 @font-face { font-family: "Yellowtail"; src: url("../fonts/yellowtail-latin-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+/* English quotes, apostrophes and dashes from a Latin face: the CJK text face sets them full-width */
+@font-face { font-family: "EO Latin Punct"; src: local("Georgia"), local("Times New Roman"), local("Noto Serif"), local("DejaVu Serif"); unicode-range: U+2013-2014, U+2018-201F, U+2026; }
 @font-face { font-family: "EO Text"; src: url("../fonts/text-500.woff2") format("woff2"); font-weight: 100 600; font-display: swap; }
 @font-face { font-family: "EO Text"; src: url("../fonts/text-700.woff2") format("woff2"); font-weight: 650 900; font-display: swap; }
 @font-face { font-family: "EO Song"; src: url("../fonts/display-song.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
@@ -49,3 +51,4 @@ h1, h2, h3 { text-wrap: balance; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+html[lang="en"] { --f-sans: "EO Latin Punct", "EO Text", Georgia, serif; --f-display: "EO Latin Punct", "EO Song", "EO Display", Georgia, serif; }

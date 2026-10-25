@@ -3,7 +3,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 
 const root = new URL('../', import.meta.url);
-const files = ['index.html', ...readdirSync(new URL('assets/js/', root)).map(f => `assets/js/${f}`), 'data/content.js', 'data/places.js'];
+const files = ['index.html', 'en.html', 'data/content.en.js', 'data/places.en.js', ...readdirSync(new URL('assets/js/', root)).map(f => `assets/js/${f}`), 'data/content.js', 'data/places.js'];
 
 export function pageChars() {
   const parts = files.map(f => readFileSync(new URL(f, root), 'utf8'));

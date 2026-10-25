@@ -4,13 +4,13 @@ const KEY = 'eo.achievements';
 const QUEST_IDS = QUESTS.map(q => q.id);
 
 export const RULES = [
-  { id: 'novice-done', title: '新手村毕业', test: s => s.novice },
-  { id: 'first-card', title: '打开第一张存档卡', test: s => s.cards.length >= 1 },
-  { id: 'five-cards', title: '翻开 5 张存档卡', test: s => s.cards.length >= 5 },
-  { id: 'ten-countries', title: '点亮 10 个国家', test: s => s.maxCount >= 10 },
-  { id: 'world-tour', title: '点亮全部 26 国', test: s => s.maxCount >= 26 },
-  { id: 'all-quests', title: '看完全部主线任务', test: s => QUEST_IDS.every(id => s.quests.includes(id)) },
-  { id: 'add-friend', title: '加了好友', test: s => s.friend },
+  { id: 'novice-done', title: '新手村毕业', en: 'Left the starter village', test: s => s.novice },
+  { id: 'first-card', title: '打开第一张存档卡', en: 'Opened a first save file', test: s => s.cards.length >= 1 },
+  { id: 'five-cards', title: '翻开 5 张存档卡', en: 'Opened 5 save files', test: s => s.cards.length >= 5 },
+  { id: 'ten-countries', title: '点亮 10 个国家', en: 'Lit up 10 countries', test: s => s.maxCount >= 10 },
+  { id: 'world-tour', title: '点亮全部 26 国', en: 'Lit up all 26 countries', test: s => s.maxCount >= 26 },
+  { id: 'all-quests', title: '看完全部主线任务', en: 'Finished every main quest', test: s => QUEST_IDS.every(id => s.quests.includes(id)) },
+  { id: 'add-friend', title: '加了好友', en: 'Made a friend', test: s => s.friend },
 ];
 
 // Every rule with whether it is unlocked, in rule order: what the nav badge lists.

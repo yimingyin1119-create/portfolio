@@ -22,7 +22,29 @@ export const LEVELS = [
     say: '满 200 减 50，这周末就能用。券马上过期，领了的赶紧用起来。',
     rules: [['时机', '周五晚加一场专场直播'], ['画面', '领券入口全程挂在直播间'], ['别说', '「全网最低」「最后一次」']] },
 ];
-export const levelFor = n => LEVELS.find(l => n <= l.max) ?? LEVELS[LEVELS.length - 1];
+export const LEVELS_EN = [
+  { max: 8, key: 'ok', name: 'On track',
+    subj: 'Redemption on track',
+    mail: n => n === 0 ? 'Redemption is keeping pace with the timeline; claims and redemptions both look normal. Usual data update on Friday.' : `Redemption is ${n} points behind the timeline, within the normal range: tourism spending bunches at weekends. At this pace we will catch up before the end. Usual data update on Friday.`,
+    tech: [['Action', 'No new requests; keep the daily report as is'], ['Watch', 'Whether the weekend redemption peak looks normal'], ['When', 'Review on Friday']],
+    say: '¥50 off every ¥200, valid Friday to Sunday.',
+    rules: [['When', 'Publish as scheduled'], ['On screen', 'Show the voucher link'], ['Don’t say', '“Lowest price anywhere”']] },
+  { max: 18, key: 'warn', name: 'Needs attention',
+    subj: 'Redemption update and next steps',
+    mail: n => `Claims are normal, but redemption is about ${n} points behind, mainly because tourism spending bunches at weekends and some merchants are new to redeeming. We have called every merchant and added expiry reminders, and will send you a new forecast before Friday.`,
+    tech: [['Trigger', '48 hours before the voucher expires'], ['Audience', 'Users who paid but have not redeemed'], ['Content', 'One reminder push with the voucher value and store link'], ['Ship', 'By 18:00 Friday'], ['Tracking', 'Separate push visits from organic visits'], ['Check', 'Next day, compare redemption rates']],
+    say: '¥50 off every ¥200, valid Friday to Sunday. Your voucher’s about to expire, so use it if you’ve got one.',
+    rules: [['When', 'One mention in Friday’s livestream'], ['On screen', 'Show the voucher link'], ['Don’t say', '“Lowest price anywhere”']] },
+  { max: 100, key: 'bad', name: 'Seriously behind',
+    subj: 'Redemption seriously behind: please confirm changes',
+    mail: n => `Redemption is about ${n} points behind. At this rate only about ${Math.round((TIME_P - n) / TIME_P * 100)}% of the budget will be used by the end. We suggest two changes: extend the next batch’s validity from 7 to 14 days, and shift budget towards merchants with high redemption. Full plan by end of day today; we need your sign-off.`,
+    tech: [['Trigger', 'Once now, again 48 hours before expiry'], ['Audience', 'Users who claimed but did not order, and those who paid but did not redeem'], ['Content', 'Reminder push with voucher value, store link and new validity'], ['Config', 'Next batch: validity from 7 to 14 days'], ['Ship', 'By 12:00 tomorrow'], ['Check', 'Daily redemption rate, compared over 3 days']],
+    say: '¥50 off every ¥200, good this weekend. Vouchers expire soon, so if you’ve claimed one, use it now.',
+    rules: [['When', 'An extra dedicated livestream on Friday night'], ['On screen', 'Voucher link pinned for the whole stream'], ['Don’t say', '“Lowest price anywhere”, “last chance”']] },
+];
+// `en` defaults to the page language in the browser; the page builder passes it explicitly.
+const pageIsEn = () => typeof document !== 'undefined' && document.documentElement.lang === 'en';
+export const levelFor = (n, en = pageIsEn()) => { const set = en ? LEVELS_EN : LEVELS; return set.find(l => n <= l.max) ?? set[set.length - 1]; };
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 export const techRows = L => L.tech.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join('');
@@ -38,13 +60,13 @@ export function initBridge() {
   let last = '';
   const render = () => {
     const n = Number(gap.value), L = levelFor(n);
-    $('#gapOut').textContent = `${n} 个百分点`;
+    $('#gapOut').textContent = pageIsEn() ? `${n} points` : `${n} 个百分点`;
     $('#lvl').textContent = L.name; $('#lvl').dataset.s = L.key;
     $('#mailSubj').textContent = L.subj; $('#mailBody').textContent = L.mail(n);
     $('#techRows').innerHTML = techRows(L);
     $('#cueSay').textContent = L.say;
     $('#cueRules').innerHTML = cueRules(L);
-    gap.setAttribute('aria-valuetext', `落后 ${n} 个百分点，${L.name}`);
+    gap.setAttribute('aria-valuetext', pageIsEn() ? `${n} points behind, ${L.name}` : `落后 ${n} 个百分点，${L.name}`);
     if (last && last !== L.key && !reduce) { trio.classList.remove('flash'); void trio.offsetWidth; trio.classList.add('flash'); }
     last = L.key;
   };

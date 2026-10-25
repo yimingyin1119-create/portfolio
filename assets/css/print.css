@@ -74,9 +74,11 @@ html.js .stage .top { clip-path: none; }
 .ch-head::after, .subh::after { content: ""; display: block; height: 60mm; margin-bottom: -60mm; }
 
 /* the chart dressing stays on screen */
-body::after, .chart-edge, .route, .flag, .water, .treasure { display: none !important; }
+body::after, .chart-edge, .route, .flag, .water, .treasure, .lang { display: none !important; }
 body { background-image: none; }
 .boot { clip-path: none !important; box-shadow: none; background: #fff; padding-top: 28px; }
 .boot > .sig { position: static; display: block; margin-bottom: 6px; }
 .boot .hud { position: static; margin: 0 0 12px; }
 .curl { display: none !important; }
+html[lang="en"] .foot::after { content: "Interactive version: https://yimingyin1119-create.github.io/portfolio/en.html"; }
+html[lang="en"] .play .cta::after { content: ": yimingyin1119-create.github.io/portfolio/" attr(href); }

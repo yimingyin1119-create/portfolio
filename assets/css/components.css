@@ -554,3 +554,5 @@ html.motion .boot.unrolled { animation: none; }
 /* the bottom roll still holds the paper, so it starts fat and slims as it unwinds */
 .curl.bottom { height: calc(26px + var(--u) * 14px); bottom: calc(var(--u) * (100% - 30px) - 13px - var(--u) * 7px); }
 @media (max-width: 600px) { .curl { left: -4px; right: -4px; } .curl::before, .curl::after { width: 12px; } }
+.q-head { flex-wrap: wrap; }
+.q-head h3 { white-space: nowrap; }

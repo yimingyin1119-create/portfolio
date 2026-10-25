@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Yiming Yin · Earth Online</title>
+<link rel="alternate" hreflang="zh-CN" href="./">
+<link rel="alternate" hreflang="en" href="en.html">
+<meta name="description" content="Yiming Yin’s portfolio: from making audiences clap to making users buy. Marketing by trade, a director by instinct, AI newly unlocked.">
+<meta property="og:title" content="Yiming Yin · Earth Online">
+<meta property="og:description" content="From making audiences clap to making users buy.">
+<meta name="theme-color" content="#ceae82">
+<link rel="preload" href="assets/fonts/yellowtail-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/text-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/display-song.woff2" as="font" type="font/woff2" crossorigin>
+<script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
+<link rel="stylesheet" href="assets/css/tokens.css?v=fc4017083f">
+<link rel="stylesheet" href="assets/css/layout.css?v=18519209a8">
+<link rel="stylesheet" href="assets/css/components.css?v=ee56b6b0dd">
+<link rel="stylesheet" href="assets/css/print.css?v=a11c5d8bf4" media="print">
+</head>
+<body>
+<nav class="bar" aria-label="Main navigation"><div class="bar-in">
+  <a class="brand" href="#opening">Yiming</a>
+  <div class="seg" role="group" aria-label="Who’s visiting"><button type="button" data-mode="interviewer" aria-pressed="true">Hiring</button><button type="button" data-mode="friend" aria-pressed="false">Friend</button></div>
+  <div class="ach-wrap"><button type="button" class="ach" aria-expanded="false" aria-controls="ach-list"><span class="ach-k">Achievements</span> <b class="ach-n">0/7</b></button>
+    <ol class="ach-list" id="ach-list" hidden><li data-ach="novice-done">Left the starter village</li><li data-ach="first-card">Opened a first save file</li><li data-ach="five-cards">Opened 5 save files</li><li data-ach="ten-countries">Lit up 10 countries</li><li data-ach="world-tour">Lit up all 26 countries</li><li data-ach="all-quests">Finished every main quest</li><li data-ach="add-friend">Made a friend</li></ol></div>
+  <a class="lang" href="index.html" hreflang="zh-CN" lang="zh-CN">中文</a>
+  <a class="cta" href="#contact">Contact</a>
+</div></nav>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div class="chart-edge" aria-hidden="true"></div>
+<main id="chapters">
+<svg class="route" aria-hidden="true" focusable="false"></svg>
+<section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
+  <div class="frame boot"><span class="curl top" aria-hidden="true"></span><span class="curl bottom" aria-hidden="true"></span>
+    <canvas class="flag" data-title="EARTH ONLINE" data-sub="· VOYAGE 2027 ·" width="300" height="190" aria-hidden="true"></canvas>
+    <ul class="hud" aria-label="Player stats"><li>Class of <b>2027</b></li><li><b>26</b> countries</li><li><b>4</b> internships</li></ul>
+    <div class="player">
+      <figure class="pframe tilt"><img src="assets/img/portrait-s.webp" srcset="assets/img/portrait-s.webp 480w, assets/img/portrait-l.webp 1200w" sizes="(max-width: 720px) 60vw, 300px" width="1200" height="1500" alt="Yiming Yin" fetchpriority="high" decoding="async"><figcaption class="plate">PLAYER · YIMING YIN</figcaption></figure>
+      <div class="player-tx">
+        <p class="online">PLAYER ONLINE<span class="caret" aria-hidden="true"></span></p>
+        <h1 id="h-opening">From making audiences clap<br>to making users buy.</h1>
+        <p class="lede">From directing a school short film to a whole province’s summer spending campaign</p>
+        <ul class="edu" aria-label="Education"><li><b>National University of Singapore</b><span>MSc Communication (Data track) · 2026–2027, in progress</span></li><li><b>University of Amsterdam</b><span>BSc Media and Information · 2023–2026</span></li></ul>
+        <ul class="attrs"><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-job"><span class="attr-k">Class</span><span class="attr-v">Marketing</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-job">Marketing internships at Douyin, Kuaishou and Sina Weibo; wrote several regional voucher campaign plans</p></li><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-talent"><span class="attr-k">Talent</span><span class="attr-v">Director</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-talent">A short film I wrote and directed in high school won first prize in Nanjing; at a 2025 badminton tournament in the Netherlands, my staff badge still said “directing team”</p></li><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-unlock"><span class="attr-k">Unlocked</span><span class="attr-v">AI</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-unlock">Paying for ChatGPT since 2023; building products with AI since 2026</p></li><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-quest"><span class="attr-k">Main quest</span><span class="attr-v">Turn content into business</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-quest">From brand deals as a creator to brokering between governments, merchants and creators on a platform</p></li></ul>
+        <div class="pick" role="group" aria-label="Who are you?"><button type="button" class="cta" data-pick="interviewer">I’m hiring <span aria-hidden="true">→</span></button><button type="button" class="ghost" data-pick="friend">Just saying hi <span aria-hidden="true">→</span></button></div>
+        <a class="play-link" href="#skills">▶ Try the 3 AI things I built first</a>
+      </div>
+    </div>
+    <span class="slash" aria-hidden="true">//</span>
+  </div>
+</section>
+<section class="chapter" id="skills" data-chapter="skills" aria-labelledby="h-skills"><span class="water r"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M8 36q8-7 16 0t16 0 16 0 16 0" pathLength="1"/><path d="M40 56q8-7 16 0t16 0 16 0 16 0" pathLength="1" class="a"/><path d="M14 76q8-7 16 0t16 0 16 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M54 22 C57.2 50 66 58.8 94 62 C66 65.2 57.2 74 54 102 C50.8 74 42 65.2 14 62 C42 58.8 50.8 50 54 22 Z" pathLength="1"/><path d="M98 9 C99.04 18.1 101.9 20.96 111 22 C101.9 23.04 99.04 25.9 98 35 C96.96 25.9 94.1 23.04 85 22 C94.1 20.96 96.96 18.1 98 9 Z" pathLength="1" class="a"/><path d="M100 88 C100.64 93.6 102.4 95.36 108 96 C102.4 96.64 100.64 98.4 100 104 C99.36 98.4 97.6 96.64 92 96 C97.6 95.36 99.36 93.6 100 88 Z" pathLength="1"/></svg><p class="kicker">SKILL TREE</p><h2 id="h-skills">Skill Tree · AI Unlocked</h2><p class="ch-sub">The newest skill: think with AI, then build with it. All three below open right away; their data is preset or simulated.</p></header>
+  <ol class="unlock" data-reveal><li><b>2023</b>started paying for ChatGPT</li><li><b>2026</b>started building products with AI</li></ol>
+  <div class="plays"><article class="play" data-reveal>
+    <p class="play-k"><span class="play-tag">Playable</span>01 · AI product demo · in Chinese</p>
+    <h3>Pain-Point Claim</h3><p>In an AI search answer, brands can’t buy the answer. They can only claim a real user pain point.</p>
+    <p class="play-try"><b>TRY THIS</b>In the AI search, tap “can’t get a cab after the show”, then “why am I seeing this” to see what earns a brand its spot.</p>
+    <a class="cta" href="painpoint.html">▶ Open it</a>
+  </article><article class="play" data-reveal>
+    <p class="play-k"><span class="play-tag">Playable</span>02 · n8n ordering app · demo in Chinese</p>
+    <h3>Meal Buddy</h3><p>Request → work out missing ingredients → notify → cook → deduct stock. The whole backend is n8n workflows.</p>
+    <p class="play-try"><b>TRY THIS</b>Order a dish and watch it work out what’s missing; once it’s cooked, the stock updates itself.</p>
+    <a class="cta" href="kitchen/">▶ Open it</a>
+  </article><article class="play" data-reveal>
+    <p class="play-k"><span class="play-tag">Playable</span>03 · AI marketing tool · in Chinese</p>
+    <h3>Voucher Campaign Workbench</h3><p>Breaks a government voucher campaign into five stages, from lead to review. Change a number and everything recalculates.</p>
+    <p class="play-try"><b>TRY THIS</b>Tap “assess this lead”, then go to the execution stage and tap “AI diagnosis” to see how it explains slow redemption.</p>
+    <a class="cta" href="workbench.html">▶ Open it</a>
+  </article></div>
+  <h3 class="subh">AI skills I use every day</h3>
+  <div class="tools"><article class="tool" data-reveal><svg class="icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="15" pathLength="1"/><circle cx="20" cy="20" r="8" pathLength="1"/><path d="M20 20l11-11" pathLength="1" class="a"/><circle cx="27" cy="15" r="2" pathLength="1" class="a"/></svg><h3>AI agent for regional opportunity monitoring</h3><p>Built during my Douyin internship; produces a weekly regional report.</p></article><article class="tool" data-reveal><svg class="icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><path d="M15 5h10M17 5v11L7 33c-1 2 0 3 2 3h22c2 0 3-1 2-3L23 16V5" pathLength="1"/><path d="M11 26h18" pathLength="1" class="a"/></svg><h3>“Distilled” AI skills</h3><p>I distil people’s and fields’ know-how into reusable AI skills, and pick Claude, ChatGPT or Gemini by task.</p></article><article class="tool" data-reveal><svg class="icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="4" y="7" width="32" height="26" rx="3" pathLength="1"/><path d="M4 14h32" pathLength="1"/><path d="M13 21l-4 4 4 4M27 21l4 4-4 4M22 20l-4 10" pathLength="1" class="a"/></svg><h3>This website</h3><p>I set the brief, made the calls, picked the photos and told the story; Claude wrote the code.</p></article></div>
+</section>
+<section class="chapter" id="quests" data-chapter="quests" aria-labelledby="h-quests"><span class="water l"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M22 62h76l-11 14H33z" pathLength="1"/><path d="M46 62V14M74 62V22" pathLength="1"/><path d="M48 18c15 6 15 18 0 22zM48 44c17 5 17 14 0 18zM76 26c12 5 12 15 0 19zM76 48c12 4 12 10 0 14z" pathLength="1"/><path d="M46 14l11 4-11 4" pathLength="1" class="a"/><path d="M6 82q7-6 14 0t14 0 14 0 14 0 14 0 14 0 14 0 14 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="30" pathLength="1"/><circle cx="60" cy="60" r="9" pathLength="1" class="a"/><path d="M60 8v104M8 60h104M23 23l74 74M97 23l-74 74" pathLength="1"/><circle cx="60" cy="60" r="22" pathLength="1"/></svg><p class="kicker">MAIN QUEST</p><h2 id="h-quests">Main Quest · Platforms</h2><p class="ch-sub">Four internships, newest first. The front of each card is what I did; flip it for the project’s overall results.</p></header>
+  <div class="quests"><article class="quest" data-quest="douyin" data-reveal>
+    <div class="quest-in">
+      <div class="side front">
+        <header class="q-head"><h3>Douyin<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">Summer 2026 · Beijing<br>Brand &amp; Marketing · Government &amp; Tourism Marketing Intern</p></header>
+        <figure class="pframe q-photo"><img src="assets/img/douyin-lobby-s.webp" srcset="assets/img/douyin-lobby-s.webp 480w, assets/img/douyin-lobby-l.webp 1200w" sizes="(max-width: 720px) 40vw, 180px" width="1200" height="800" alt="Douyininternship" loading="lazy" decoding="async"></figure>
+        <p class="side-k">What I did</p><ul class="ticks"><li>#ShaanxiCalling joint campaign (not the lead): partnership agreement, all materials through several rounds of approval, online venue build, on-site event execution</li><li>Wrote 4 regional voucher campaign plans on my own: budget, resource mix, creator line-up, content calendar</li><li>Creator seeding: picked creators, wrote briefs, kept the main venues launching on time</li><li>Built an AI agent for regional opportunity monitoring from scratch, with a weekly regional report</li></ul>
+      </div>
+      <div class="side back">
+        <p class="side-k">Project results (whole team)</p><ul class="ticks"><li>#ShaanxiCalling: reach in the hundreds of millions, Shaanxi travel searches up by more than half</li><li>3-day livestream GMV in the millions, well up year on year</li><li>Dozens of creator posts, tens of millions of views</li></ul>
+        <p class="src">Source: Whole-project figures, a team effort</p>
+        <button type="button" class="chip" data-open="shaanxi">Full case →</button>
+      </div>
+    </div>
+    <button type="button" class="flip" aria-pressed="false"><span>Flip for results</span> <span aria-hidden="true">↻</span></button>
+  </article><article class="quest" data-quest="kuaishou" data-reveal>
+    <div class="quest-in">
+      <div class="side front">
+        <header class="q-head"><h3>Kuaishou<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">Summer 2025 · Beijing<br>Government Relations Intern</p></header>
+        <figure class="pframe q-photo"><img src="assets/img/kuaishou-s.webp" srcset="assets/img/kuaishou-s.webp 480w, assets/img/kuaishou-l.webp 1200w" sizes="(max-width: 720px) 40vw, 180px" width="1200" height="809" alt="Kuaishouinternship" loading="lazy" decoding="async"></figure>
+        <p class="side-k">What I did</p><ul class="ticks"><li>Kuaishou E-commerce “Hidden Gem Towns”, Linyi (first stop of a top-tier platform project): helped plan the launch, a 72-hour origin livestream and a truck parade</li><li>Lead writer of the Linyi wicker-craft industry sub-plan</li><li>Joined venue negotiations for the scenic-area livestream, trading platform traffic for venue access, and coordinated co-posting with local official accounts</li></ul>
+      </div>
+      <div class="side back">
+        <p class="side-k">Project results (whole team)</p><ul class="ticks"><li>4.23 billion total project reach</li><li>31 Kuaishou trending topics</li></ul>
+        <p class="src">Source: Whole-project figures, a team effort</p>
+        
+      </div>
+    </div>
+    <button type="button" class="flip" aria-pressed="false"><span>Flip for results</span> <span aria-hidden="true">↻</span></button>
+  </article><article class="quest" data-quest="chinadaily" data-reveal>
+    <div class="quest-in">
+      <div class="side front">
+        <header class="q-head"><h3>China Daily<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">Summer 2024 · Remote<br>Overseas Social Media · New Media Intern</p></header>
+        
+        <p class="side-k">What I did</p><ul class="ticks"><li>Pitched stories on Chinese tech and industry (e.g. China-made robot dogs) and localised them in Chinese and English</li><li>Short videos end to end: idea, script, edit, caption</li></ul>
+      </div>
+      <div class="side back">
+        <p class="side-k">Project results (whole team)</p><ul class="ticks"><li>10+ TikTok videos (main account: 3.4 million followers)</li><li>13 English posts on X</li></ul>
+        <p class="src">Source: Public TikTok and X data</p>
+        <button type="button" class="chip" data-open="chinadaily">Full case →</button>
+      </div>
+    </div>
+    <button type="button" class="flip" aria-pressed="false"><span>Flip for results</span> <span aria-hidden="true">↻</span></button>
+  </article><article class="quest" data-quest="weibo" data-reveal>
+    <div class="quest-in">
+      <div class="side front">
+        <header class="q-head"><h3>Sina Weibo<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">Summer 2024 · Nanjing<br>KA Project Operations Intern</p></header>
+        <figure class="pframe q-photo"><img src="assets/img/weibo-yantai-s.webp" srcset="assets/img/weibo-yantai-s.webp 480w, assets/img/weibo-yantai-l.webp 1080w" sizes="(max-width: 720px) 40vw, 180px" width="1080" height="1167" alt="Sina Weibointernship" loading="lazy" decoding="async"></figure>
+        <p class="side-k">What I did</p><ul class="ticks"><li>Changshu city brand project: planned offline check-in routes and online hashtag angles</li><li>Coordinated six creators with a million-plus followers each and ran the on-site agenda and KOL pacing</li><li>Topics and KOL matching for Changshu, Kunshan and Xuzhou; competitive analysis of Douyin, RED and Bilibili</li></ul>
+      </div>
+      <div class="side back">
+        <p class="side-k">Project results (whole team)</p><ul class="ticks"><li>Changshu hashtag: 43.1 million reads, 10 hours on the local trending list</li><li>Two billion-plus total views across the IP matrix</li></ul>
+        <p class="src">Source: Weibo hashtag reads and time on the local trending list</p>
+        <button type="button" class="chip" data-open="changshu">Full case →</button>
+      </div>
+    </div>
+    <button type="button" class="flip" aria-pressed="false"><span>Flip for results</span> <span aria-hidden="true">↻</span></button>
+  </article></div>
+</section>
+<section class="chapter" id="posters" data-chapter="posters" aria-labelledby="h-posters"><span class="water r"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M12 62c10-24 58-28 80-8 6-8 14-11 20-9-4 6-6 12-4 18-8 0-14-2-18-6-18 18-68 16-78 5z" pathLength="1"/><circle cx="30" cy="56" r="1.8" pathLength="1"/><path d="M44 34c-2-8 4-10 2-16M44 34c4-6 10-4 12-10" pathLength="1" class="a"/><path d="M6 84q7-6 14 0t14 0 14 0 14 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><ellipse cx="60" cy="96" rx="40" ry="10" pathLength="1"/><path d="M20 96v-10c0-6 18-10 40-10s40 4 40 10v10" pathLength="1"/><ellipse cx="48" cy="62" rx="22" ry="7" pathLength="1" class="a"/><path d="M26 62v14c0 4 10 7 22 7s22-3 22-7V62" pathLength="1"/><ellipse cx="78" cy="38" rx="18" ry="6" pathLength="1"/><path d="M60 38v12c0 3 8 6 18 6s18-3 18-6V38" pathLength="1"/></svg><p class="kicker">TREASURE HAUL</p><h2 id="h-posters">The Haul · Results</h2><p class="ch-sub">Douyin figures are rounded on purpose; everything else is exact.</p></header>
+  <div class="posters"><figure class="poster" data-poster="dy-reach" data-count="false" data-reveal><svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg><span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">Hundreds of millions</b><figcaption>#ShaanxiCalling reach · whole project</figcaption></div></figure><figure class="poster" data-poster="dy-gmv" data-count="false" data-reveal><svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg><span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">Millions</b><figcaption>3-day livestream GMV</figcaption></div></figure><figure class="poster" data-poster="cs-read" data-count="true" data-reveal><svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg><span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">43.1M</b><figcaption>Changshu · hashtag reads</figcaption></div></figure><figure class="poster" data-poster="xhs-like" data-count="true" data-reveal><svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg><span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">58K</b><figcaption>RED · likes on one post</figcaption></div></figure><figure class="poster" data-poster="sph-play" data-count="true" data-reveal><svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg><span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">115K</b><figcaption>WeChat Channels · views on one video</figcaption></div></figure><figure class="poster" data-poster="countries" data-count="true" data-reveal><svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg><span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">26</b><figcaption>countries unlocked</figcaption></div></figure><figure class="poster" data-poster="interns" data-count="true" data-reveal><svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg><span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">4</b><figcaption>internships</figcaption></div></figure></div>
+</section>
+<section class="chapter" id="cases" data-chapter="cases" aria-labelledby="h-cases"><span class="water l"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><circle cx="60" cy="48" r="30" pathLength="1"/><circle cx="60" cy="48" r="24" pathLength="1"/><path d="M60.0 10.0 L62.7 41.5 L74.8 33.2 L66.5 45.3 L98.0 48.0 L66.5 50.7 L74.8 62.8 L62.7 54.5 L60.0 86.0 L57.3 54.5 L45.2 62.8 L53.5 50.7 L22.0 48.0 L53.5 45.3 L45.2 33.2 L57.3 41.5 Z" pathLength="1"/><path d="M60 10l4 10h-8z" pathLength="1" class="a"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M16 56h88v48H16z" pathLength="1"/><path d="M16 56c0-26 88-26 88 0" pathLength="1"/><path d="M16 70h88M40 56v48M80 56v48" pathLength="1"/><rect x="52" y="62" width="16" height="16" rx="2" pathLength="1" class="a"/></svg><p class="kicker">CAPTAIN’S LOG</p><h2 id="h-cases">Captain’s Log · Cases</h2><p class="ch-sub">Open a card to see what I did. Douyin figures are rounded, and every team result names my role.</p></header>
+  <h3 class="subh">Flagship projects · Douyin</h3>
+  <div class="cases feat"><a class="case" href="#case-shaanxi" data-id="shaanxi" data-cat="campaign" aria-haspopup="dialog"><div class="vis type art-rose" data-art="rose" data-seed="1"><span class="label">Travel pass · Summer 2026</span><span class="tx">1 theme<br>3 storylines<br><em>5 levers</em></span></div>
+    <span class="bd"><span class="tag">Provincial tourism partnership · Summer 2026</span><span class="h">#ShaanxiCalling: a province’s summer travel season</span><span class="note">Government brings backing and budget, the state tourism group brings the sights, the platform brings traffic and sales.</span>
+    <span class="num"><b>Reach in the hundreds of millions</b><span>Whole project: 3-day livestream GMV in the millions, well up year on year</span></span></span></a><a class="case" href="#case-tianjin" data-id="tianjin" data-cat="campaign" aria-haspopup="dialog"><div class="vis type art-rose" data-art="rose" data-seed="2"><span class="label">Cinema vouchers · in rounds</span><span class="tx">Get people who never<br>go to the movies<br>to <em>go</em></span></div>
+    <span class="bd"><span class="tag">City cinema vouchers · Proposal</span><span class="h">Tianjin on Screen: getting non-moviegoers into cinemas</span><span class="note">Ticketing platforms serve people who already love films.</span>
+    <span class="num"><b>Rounds × tiers</b><span>Voucher timing and denominations</span></span></span></a><a class="case" href="#case-perform" data-id="perform" data-cat="campaign" aria-haspopup="dialog"><div class="vis type art-rose" data-art="rose" data-seed="3"><span class="label">Show stubs · Concert cities</span><span class="tx">For one concert,<br>travel to<br><em>a whole city</em></span></div>
+    <span class="bd"><span class="tag">Industry association partnership · Live shows and city spending</span><span class="h">A concert, a trip to a city: a partnership proposal with the China Association of Performing Arts</span><span class="note">A ticket stub is the best city voucher there is.</span>
+    <span class="num"><b>2 models</b><span>Concert City and bringing show organisers onto the platform</span></span></span></a></div>
+  <div class="exhibit paper" data-reveal><div class="exhibit-tx"><p class="kicker">The lens · Pinduoduo teardown</p><p>Same pop-up: users see a reward, I see three design choices. Drag the lens, or switch to “Spot it” and find them yourself.</p><button type="button" class="chip" data-open="pdd">Full case →</button></div><figure class="xray">
+    <div class="lenscol">
+      <div class="spec"><span>Sample · a Pinduoduo game-page pop-up</span><span class="modes" role="group" aria-label="View"><button type="button" data-lens="lens" aria-pressed="true">Lens</button><button type="button" data-lens="game" aria-pressed="false">Spot it</button></span></div>
+      <div class="stage" tabindex="0" role="img" aria-label="Screenshot of a Pinduoduo game-page pop-up. Under the lens are three notes: the close button, the reward card and the red main button. Arrow keys move the lens.">
+        <img class="base" src="assets/img/pdd_popup-s.webp" srcset="assets/img/pdd_popup-s.webp 480w, assets/img/pdd_popup-l.webp 620w" sizes="280px" width="620" height="1150" alt="" loading="lazy" decoding="async">
+        <div class="top"><img src="assets/img/pdd_popup-s.webp" srcset="assets/img/pdd_popup-s.webp 480w, assets/img/pdd_popup-l.webp 620w" sizes="280px" width="620" height="1150" alt="" loading="lazy" decoding="async">
+          <span class="xpin" style="left:87%;top:12%" data-n="1">1</span><span class="xpin" style="left:50%;top:43%" data-n="2">2</span><span class="xpin" style="left:50%;top:76%" data-n="3">3</span>
+        </div>
+        <span class="ring" aria-hidden="true"></span>
+      </div>
+      <figcaption><span class="cap-lens">Move the lens: outside is what users see, inside is what I see</span><span class="cap-game">Tap wherever you think users are being nudged<br><b class="score" aria-live="polite">Found 0 / 3</b><button type="button" class="reveal-all" data-reveal-all>Show me</button></span></figcaption>
+    </div>
+    <div class="notecol">
+      <h4>Under the lens</h4>
+      <ol class="xnotes" aria-live="polite"><li data-n="1"><b>1</b><span>The close button is small and grey, so leaving is harder</span></li><li data-n="2"><b>2</b><span>“Ultimate item” makes you feel you’re about to win</span></li><li data-n="3"><b>3</b><span>A red button with a 2-second countdown pushes you to tap now</span></li></ol>
+    </div>
+  </figure></div>
+  <h3 class="subh">More cases</h3>
+  <div class="filters" role="group" aria-label="Filter by type"><button type="button" aria-pressed="true" data-f="all">All</button><button type="button" aria-pressed="false" data-f="insight">Insight</button><button type="button" aria-pressed="false" data-f="campaign">Campaign</button><button type="button" aria-pressed="false" data-f="content">Content</button><button type="button" aria-pressed="false" data-f="creative">Creative</button></div>
+  <div class="cases grid"><a class="case" href="#case-pdd" data-id="pdd" data-cat="insight" aria-haspopup="dialog"><div class="vis"><img src="assets/img/pdd_share-s.webp" srcset="assets/img/pdd_share-s.webp 480w, assets/img/pdd_share-l.webp 520w" sizes="(max-width: 720px) 90vw, 380px" width="520" height="1040" alt="" loading="lazy" decoding="async"></div>
+    <span class="bd"><span class="tag">Growth teardown · Pinduoduo</span><span class="h">How Pinduoduo turns “playing a game” into “placing an order”</span><span class="note">Game entry points and shopping entry points sit on the same layer, so the line between playing and buying disappears.</span>
+    <span class="num"><b>51</b><span>share buttons, the most of any type</span></span></span></a><a class="case" href="#case-changshu" data-id="changshu" data-cat="campaign" aria-haspopup="dialog"><div class="vis fit"><img src="assets/img/sina_plan-s.webp" srcset="assets/img/sina_plan-s.webp 480w, assets/img/sina_plan-l.webp 820w" sizes="(max-width: 720px) 90vw, 380px" width="820" height="326" alt="" loading="lazy" decoding="async"></div>
+    <span class="bd"><span class="tag">City communications · Sina Jiangsu</span><span class="h">#ChangshuInTheSpotlight: letting big creators speak for a city</span><span class="note">City promotion’s biggest risk is talking to itself.</span>
+    <span class="num"><b>43.1 million</b><span>Whole project: hashtag reads, 10 hours on the local trending list</span></span></span></a><a class="case" href="#case-ip" data-id="ip" data-cat="content" aria-haspopup="dialog"><div class="vis type art-feed" data-art="feed" data-seed="5"><span class="tx">Ideas, filming, editing,<br><em>brand deals</em>: all me</span></div>
+    <span class="bd"><span class="tag">Personal brand · RED / WeChat Channels / Douyin</span><span class="h">A one-person content studio: travel, studying abroad and culture</span><span class="note">I’ve worked both sides of creator–brand deals.</span>
+    <span class="num"><b>446K</b><span>top single-video views on WeChat Channels</span></span></span></a><a class="case" href="#case-eco" data-id="eco" data-cat="campaign" aria-haspopup="dialog"><div class="vis"><img src="assets/img/sina_hooks-s.webp" srcset="assets/img/sina_hooks-s.webp 480w, assets/img/sina_hooks-l.webp 900w" sizes="(max-width: 720px) 90vw, 380px" width="900" height="657" alt="" loading="lazy" decoding="async"></div>
+    <span class="bd"><span class="tag">Government comms × AIGC · Sina Jiangsu</span><span class="h">13 cities, 13 species, one AIGC visual system</span><span class="note">The hard part of environmental topics is “what has this got to do with me?”</span>
+    <span class="num"><b>13</b><span>city poster series</span></span></span></a><a class="case" href="#case-news" data-id="news" data-cat="insight" aria-haspopup="dialog"><div class="vis"><img src="assets/img/news_rank-s.webp" srcset="assets/img/news_rank-s.webp 480w, assets/img/news_rank-l.webp 820w" sizes="(max-width: 720px) 90vw, 380px" width="820" height="597" alt="" loading="lazy" decoding="async"></div>
+    <span class="bd"><span class="tag">Topic insight · Data journalism</span><span class="h">Loud on social, low on demand: is journalism still worth studying?</span><span class="note">Volume isn’t demand.</span>
+    <span class="num"><b>3,946 → 12,190</b><span>admission rank for journalism at one leading university, over four years</span></span></span></a><a class="case" href="#case-tennis" data-id="tennis" data-cat="content" aria-haspopup="dialog"><div class="vis type art-court" data-art="court" data-seed="6"><span class="tx">Introducing an<br><em>NCAA champion</em><br>to Douyin</span></div>
+    <span class="bd"><span class="tag">Athlete brand · Douyin · Fall 2025</span><span class="h">Building a Douyin presence for an NCAA champion</span><span class="note">3 months, 13 short videos, a team of 2.</span>
+    <span class="num"><b>5M+</b><span>views across platforms in 3 months</span></span></span></a><a class="case" href="#case-kol" data-id="kol" data-cat="insight" aria-haspopup="dialog"><div class="vis type art-crack" data-art="crack" data-seed="7"><span class="tx">The more <em>polished</em><br>the persona,<br>the harder the fall</span></div>
+    <span class="bd"><span class="tag">KOL risk · Reality TV and social media</span><span class="h">How a “talented writer” persona collapsed on reality TV</span><span class="note">A persona is an asset and a liability.</span>
+    <span class="num"><b>3 steps</b><span>from loved to backlash</span></span></span></a><a class="case" href="#case-craft" data-id="craft" data-cat="creative" aria-haspopup="dialog"><div class="vis type art-edit"><span class="tx"><del>“a difficult boss”</del><ins>a beer belly and a comb-over</ins></span></div>
+    <span class="bd"><span class="tag">Creative basics · Copy and storyboards</span><span class="h">Rewrites and storyboards: the basics before AIGC</span><span class="note">Swap adjectives for pictures.</span>
+    <span class="num"><b>382 → 523 characters</b><span>the second draft of a short story</span></span></span></a><a class="case" href="#case-chinadaily" data-id="chinadaily" data-cat="content" aria-haspopup="dialog"><div class="vis type art-globe" data-art="globe" data-seed="8"><span class="tx">Same story,<br>told for an<br><em>English-speaking</em> audience</span></div>
+    <span class="bd"><span class="tag">Overseas social · China Daily TikTok · Summer 2024</span><span class="h">Retelling Chinese trending stories for English-speaking audiences</span><span class="note">Not line-by-line translation: retold the way English-speaking audiences expect.</span>
+    <span class="num"><b>13</b><span>Chinese trending stories localised and retold</span></span></span></a></div>
+  <section class="dossier" aria-label="Case details"><h3 class="subh">Case details</h3><article class="case-file" id="case-shaanxi" data-case="shaanxi">
+    <p class="tag">Provincial tourism partnership · Summer 2026</p><h3>#ShaanxiCalling: a province’s summer travel season</h3><p class="one">A provincial summer travel-spending programme guided by the Shaanxi Department of Culture and Tourism and run by Shaanxi Tourism Group, covering sights and hotels across the province over about four months.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Not the lead, but I did all of this hands-on: resource negotiations, hosting officials, the online venue and offline materials, bringing the platform’s mascot into the livestream; internal comms and video; the travel pass and travel fair; weekly project reports</dd></div><div><dt>Where</dt><dd>Douyin internship · Summer 2026</dd></div><div><dt>Partners</dt><dd>Shaanxi Department of Culture and Tourism, Shaanxi Tourism Group</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>Early negotiations, securing resources with co-organisers</li><li>Itineraries and briefing packs for visiting officials</li><li>Built the online venue and worked with KOLs; designed offline materials and booths, wrote speeches and decks</li><li>Designed how the platform’s mascot joins the livestream, so viewers remember the platform</li><li>Coordinated design of display boards, leaflets, speeches and decks through several rounds of approval</li><li>Internal comms, design and video assets</li><li>Drafted the partnership agreement and saw it through to signing</li><li>Ran the livestream on the day; weekly reports and progress tracking</li></ul>
+    <h4>Project results (whole team)</h4><div class="res"><div><b>Hundreds of millions</b><span>total reach</span></div><div><b>Over half</b><span>rise in Shaanxi travel searches</span></div><div><b>Millions</b><span>3-day livestream GMV, well up year on year</span></div></div>
+    
+    <h4>What I did and found</h4><ul class="pts"><li>One theme, #ShaanxiCalling, carried by government accounts, media and a matrix of creators</li><li>Vouchers stacked with merchant discounts, a travel pass and perk bundles, connecting “content → claim a voucher → redeem in store → come back”</li><li>City creator parties, city livestream rooms and an online travel fair tie sights, shopping districts and merchants together</li><li>Four phases: warm-up, launch, spending peak, sustained conversion</li></ul>
+    <div class="use"><b>What it means for marketing</b>The key to a government–business project is that every party gets what it came for: government wants visibility and spending, the state group wants visitors, merchants want sales, the platform wants supply.</div>
+    
+    
+    
+    
+  </article><article class="case-file" id="case-tianjin" data-case="tianjin">
+    <p class="tag">City cinema vouchers · Proposal</p><h3>Tianjin on Screen: getting non-moviegoers into cinemas</h3><p class="one">A cinema-voucher proposal for the Tianjin Municipal Publicity Department, using the summer, Mid-Autumn and National Day release windows and the travel expo to reach people who don’t normally go to the cinema.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Proposal planning and writing</dd></div><div><dt>Where</dt><dd>Douyin internship · Summer 2026</dd></div><div><dt>Client</dt><dd>Tianjin Municipal Publicity Department</dd></div><div><dt>Stage</dt><dd>Proposal</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>A complete city cinema-voucher proposal: release rounds, tiered denominations, distribution channels and a ticket-stub perk scheme</li></ul>
+    
+    
+    <h4>What I did and found</h4><ul class="pts"><li>Rounds tied to the travel expo launch, Mid-Autumn family viewing and the National Day peak, with unused budget rolled forward based on redemption</li><li>Several denominations for solo, couple and family outings</li><li>Vouchers available at event venues, on merchant pages and in livestreams; at the expo, a livestream sells vouchers while people walk the halls</li><li>“Expo + film” ticket-stub perks that link cinema spending to city tourism</li></ul>
+    <div class="use"><b>What it means for marketing</b>A voucher’s value isn’t how many you hand out but how many people it brings in who wouldn’t have spent otherwise; release windows and occasions are how you find them.</div>
+    
+    
+    
+    
+  </article><article class="case-file" id="case-perform" data-case="perform">
+    <p class="tag">Industry association partnership · Live shows and city spending</p><h3>A concert, a trip to a city: a partnership proposal with the China Association of Performing Arts</h3><p class="one">A proposal to the China Association of Performing Arts: use concerts to lift spending across a city, and use the association’s network to bring more show organisers onto the platform.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Proposal planning and writing</dd></div><div><dt>Where</dt><dd>Douyin internship · Summer 2026</dd></div><div><dt>Partner</dt><dd>China Association of Performing Arts</dd></div><div><dt>Stage</dt><dd>Partnership proposal</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>Two partnership models: Concert City, and onboarding show organisers</li><li>An onboarding list across several show types and dozens of candidate productions</li><li>A merchant pitch and a write-up of what the best organisers do</li></ul>
+    
+    
+    <h4>What I did and found</h4><ul class="pts"><li>Concert City: using a Taiyuan concert as the model, one landing page bundles tickets with food, stays and sights, merchants across the city offer stub perks, themed shuttles link shopping districts on concert day, and districts host fan events</li><li>Onboarding organisers: the association’s network turned into a prioritised list across several show types and dozens of candidate productions</li><li>Platform benefits rewritten as a pitch merchants understand: commission, traffic and marketing support, one-to-one operations help</li><li>Best practice from leading organisers (seat-picking mini-programs, official accounts with daily livestreams, staff account matrices) written into the pitch</li></ul>
+    <div class="use"><b>What it means for marketing</b>When a concert sells out, the city’s business is just starting: young people travel to a city for one show and spend on food, stays, transport and sights while they’re there.</div>
+    
+    
+    
+    
+  </article><article class="case-file" id="case-pdd" data-case="pdd">
+    <p class="tag">Growth teardown · Pinduoduo</p><h3>How Pinduoduo turns “playing a game” into “placing an order”</h3><p class="one">With a fresh account I went through every Pinduoduo game page and logged every tappable element, following where each action leads.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Solo</dd></div><div><dt>Method</dt><dd>User-journey walkthrough, element count</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>Tappable elements on the game pages, sorted into 4 types: 188 in total, with annotated screenshots</li></ul>
+    
+    <p class="src"><b>Source</b>My own page-by-page walkthrough and count with a new account</p>
+    <h4>What I did and found</h4><ul class="pts"><li>51 social shares, 43 pop-up prompts, 35 check-ins, 59 limited-time deals and group-buy cashbacks</li><li>A red main button next to a small grey close button; countdown coupons play on fear of missing out</li><li>Sharing takes two steps: tap the button, land in WeChat</li></ul>
+    <div class="use"><b>What it means for marketing</b>Referral paths should be as short as possible, two steps at most; rewards should appear when the user is “almost done”; a countdown pushes decisions harder than a bigger discount.</div>
+    <figure class="xray">
+    <div class="lenscol">
+      <div class="spec"><span>Sample · a Pinduoduo game-page pop-up</span><span class="modes" role="group" aria-label="View"><button type="button" data-lens="lens" aria-pressed="true">Lens</button><button type="button" data-lens="game" aria-pressed="false">Spot it</button></span></div>
+      <div class="stage" tabindex="0" role="img" aria-label="Screenshot of a Pinduoduo game-page pop-up. Under the lens are three notes: the close button, the reward card and the red main button. Arrow keys move the lens.">
+        <img class="base" src="assets/img/pdd_popup-s.webp" srcset="assets/img/pdd_popup-s.webp 480w, assets/img/pdd_popup-l.webp 620w" sizes="280px" width="620" height="1150" alt="" loading="lazy" decoding="async">
+        <div class="top"><img src="assets/img/pdd_popup-s.webp" srcset="assets/img/pdd_popup-s.webp 480w, assets/img/pdd_popup-l.webp 620w" sizes="280px" width="620" height="1150" alt="" loading="lazy" decoding="async">
+          <span class="xpin" style="left:87%;top:12%" data-n="1">1</span><span class="xpin" style="left:50%;top:43%" data-n="2">2</span><span class="xpin" style="left:50%;top:76%" data-n="3">3</span>
+        </div>
+        <span class="ring" aria-hidden="true"></span>
+      </div>
+      <figcaption><span class="cap-lens">Move the lens: outside is what users see, inside is what I see</span><span class="cap-game">Tap wherever you think users are being nudged<br><b class="score" aria-live="polite">Found 0 / 3</b><button type="button" class="reveal-all" data-reveal-all>Show me</button></span></figcaption>
+    </div>
+    <div class="notecol">
+      <h4>Under the lens</h4>
+      <ol class="xnotes" aria-live="polite"><li data-n="1"><b>1</b><span>The close button is small and grey, so leaving is harder</span></li><li data-n="2"><b>2</b><span>“Ultimate item” makes you feel you’re about to win</span></li><li data-n="3"><b>3</b><span>A red button with a 2-second countdown pushes you to tap now</span></li></ol>
+    </div>
+  </figure>
+    
+    
+    <div class="imgs"><figure><img src="assets/img/pdd_share-s.webp" srcset="assets/img/pdd_share-s.webp 480w, assets/img/pdd_share-l.webp 520w" sizes="(max-width: 720px) 90vw, 280px" width="520" height="1040" alt="Sharing in two steps" loading="lazy" decoding="async"><figcaption>Sharing in two steps</figcaption></figure><figure><img src="assets/img/pdd_countdown-s.webp" srcset="assets/img/pdd_countdown-s.webp 480w, assets/img/pdd_countdown-l.webp 520w" sizes="(max-width: 720px) 90vw, 280px" width="520" height="827" alt="A yellow burst coupon with a countdown" loading="lazy" decoding="async"><figcaption>A yellow burst coupon with a countdown</figcaption></figure></div>
+  </article><article class="case-file" id="case-changshu" data-case="changshu">
+    <p class="tag">City communications · Sina Jiangsu</p><h3>#ChangshuInTheSpotlight: letting big creators speak for a city</h3><p class="one">A Weibo city campaign for the Changshu Municipal Publicity Department: creators from different fields toured the city for three days, with a salon in the middle.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Campaign planning; on-site salon agenda and KOL pacing; hashtag growth and tracking</dd></div><div><dt>Where</dt><dd>Sina Weibo (Sina Jiangsu) internship · Summer 2024</dd></div><div><dt>Client</dt><dd>Changshu Municipal Publicity Department</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>Offline check-in routes and interaction mechanics</li><li>A creator matrix and hashtag angles matched to six creators with a million-plus followers</li><li>Salon agenda and talking points; post-event hashtag growth and tracking</li></ul>
+    <h4>Project results (whole team)</h4><div class="res"><div><b>43.1 million</b><span>hashtag reads</span></div><div><b>10 hours</b><span>on the local trending list</span></div><div><b>6</b><span>creators with a million-plus followers each</span></div></div>
+    <p class="src"><b>Source</b>Weibo hashtag reads and time on the local trending list</p>
+    <h4>What I did and found</h4><ul class="pts"><li>Creators toured along three lines: industry, culture and ecology</li><li>A salon bringing creators, media, planners and cultural scholars onto one stage</li><li>Hashtag page, on-site photo logs, quick edits and quote posters, timed with trending lists and feeds</li></ul>
+    <div class="use"><b>What it means for marketing</b>Turn the salon’s best lines into posters: material made for the second wave of sharing.</div>
+    
+    
+    
+    <div class="imgs"><figure><img src="assets/img/sina_plan-s.webp" srcset="assets/img/sina_plan-s.webp 480w, assets/img/sina_plan-l.webp 820w" sizes="(max-width: 720px) 90vw, 280px" width="820" height="326" alt="Campaign structure" loading="lazy" decoding="async"><figcaption>Campaign structure</figcaption></figure><figure><img src="assets/img/sina_frame-s.webp" srcset="assets/img/sina_frame-s.webp 480w, assets/img/sina_frame-l.webp 900w" sizes="(max-width: 720px) 90vw, 280px" width="900" height="507" alt="The event on one page" loading="lazy" decoding="async"><figcaption>The event on one page</figcaption></figure></div>
+  </article><article class="case-file" id="case-ip" data-case="ip">
+    <p class="tag">Personal brand · RED / WeChat Channels / Douyin</p><h3>A one-person content studio: travel, studying abroad and culture</h3><p class="one">I run my own accounts on travel, studying abroad and culture, and handle ideas, scripts, filming, editing and publishing on all three platforms myself.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Solo</dd></div><div><dt>Platforms</dt><dd>RED (Xiaohongshu) · WeChat Channels · Douyin</dd></div><div><dt>Since</dt><dd>December 2022</dd></div></dl>
+    
+    <h4>Account numbers (personal)</h4><div class="res"><div><b>58K</b><span>top single-post likes on RED</span></div><div><b>446K</b><span>top single-video views on WeChat Channels</span></div><div><b>6M+</b><span>views a year across platforms</span></div><div><b>10K+</b><span>followers across platforms</span></div></div>
+    <p class="src"><b>Source</b>Each platform’s account data</p>
+    <h4>What I did and found</h4><ul class="pts"><li>Three themes: travel, studying abroad, culture</li><li>Everything from idea and script to filming, editing and publishing, on three platforms</li><li>Pitched and delivered brand deals in six categories myself, closing the commercial loop</li></ul>
+    <div class="use"><b>What it means for marketing</b>Having been a creator, I write creator briefs with selling points, shot requirements and wording rules clear enough to shoot from straight away.</div>
+    
+    
+    
+    
+  </article><article class="case-file" id="case-eco" data-case="eco">
+    <p class="tag">Government comms × AIGC · Sina Jiangsu</p><h3>13 cities, 13 species, one AIGC visual system</h3><p class="one">A plan for the Jiangsu Department of Ecology and Environment’s official Weibo around Biodiversity Day and National Ecology Day. If I redid it today, AIGC would draft the whole poster series.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Campaign planning and writing</dd></div><div><dt>Where</dt><dd>Sina Weibo (Sina Jiangsu) internship · Summer 2024</dd></div><div><dt>Client</dt><dd>Jiangsu Department of Ecology and Environment</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>The communications plan for Biodiversity Day and National Ecology Day</li><li>Species poster concepts for 13 cities</li><li>Four ecology city-walk routes</li></ul>
+    
+    
+    <h4>What I did and found</h4><ul class="pts"><li>Each city paired with a signature species for a city poster series</li><li>Creators livestreaming science from nature reserves</li><li>#JiangsuEcoCitywalk: four routes you can actually walk</li></ul>
+    <div class="use"><b>What it means for marketing</b>Lock the series style into the prompt so the 13 images sit together; align with the client on drafts first, then refine.</div>
+    
+    <h4>If I redid it with AI today: prompts for the species posters</h4><div class="prompt"><span class="u">Yancheng · Red-crowned crane</span><button type="button" class="chip" data-copy="pp-eco-0">Copy</button><code id="pp-eco-0">Red-crowned cranes landing on the reed marshes of Yancheng coastal wetland at dawn, soft mist, warm low sun, editorial wildlife poster, Chinese ink-wash texture blended with photography, blank space at top for a vertical Chinese title, 3:4</code></div><div class="prompt"><span class="u">Nanjing · Yangtze finless porpoise</span><button type="button" class="chip" data-copy="pp-eco-1">Copy</button><code id="pp-eco-1">A Yangtze finless porpoise surfacing near the Nanjing riverbank, city skyline faint in the background, cool blue-green palette, same ink-wash editorial series style, space for a vertical Chinese title, 3:4</code></div><div class="prompt"><span class="u">Suqian · Hongze Lake wetland</span><button type="button" class="chip" data-copy="pp-eco-2">Copy</button><code id="pp-eco-2">Hongze Lake wetland with egrets flying over lotus fields, summer haze, consistent series style: ink-wash texture, muted greens, one bright accent, space for a vertical Chinese title, 3:4</code></div>
+    
+    <div class="imgs"><figure><img src="assets/img/sina_hooks-s.webp" srcset="assets/img/sina_hooks-s.webp 480w, assets/img/sina_hooks-l.webp 900w" sizes="(max-width: 720px) 90vw, 280px" width="900" height="657" alt="The three campaign hooks" loading="lazy" decoding="async"><figcaption>The three campaign hooks</figcaption></figure></div>
+  </article><article class="case-file" id="case-news" data-case="news">
+    <p class="tag">Topic insight · Data journalism</p><h3>Loud on social, low on demand: is journalism still worth studying?</h3><p class="one">In 2023 “journalism is a dead end” kept trending. We went looking for data: admission ranks, search indices, word frequency in a Douban “regret” group, plus interviews.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Topic, data and lead writer</dd></div><div><dt>Method</dt><dd>Data analysis, word frequency, interviews</dd></div></dl>
+    
+    
+    <p class="src"><b>Source</b>Public admission data, search indices, word frequency in Douban “regret” group posts, plus interviews</p>
+    <h4>What I did and found</h4><ul class="pts"><li>Trending discussion was loud, but search interest in the major stayed flat</li><li>Journalism admission ranks have slid since 2021, the opposite of computer science and law</li><li>Jobs dominate the “regret” group, and “switching to coding” comes up again and again</li></ul>
+    <div class="use"><b>What it means for marketing</b>Separate volume from demand before building a strategy; data answers “what”, interviews answer “why”.</div>
+    
+    
+    
+    <div class="imgs"><figure><img src="assets/img/news_rank-s.webp" srcset="assets/img/news_rank-s.webp 480w, assets/img/news_rank-l.webp 820w" sizes="(max-width: 720px) 90vw, 280px" width="820" height="597" alt="Interest rose, then fell" loading="lazy" decoding="async"><figcaption>Interest rose, then fell</figcaption></figure><figure><img src="assets/img/news_words-s.webp" srcset="assets/img/news_words-s.webp 480w, assets/img/news_words-l.webp 820w" sizes="(max-width: 720px) 90vw, 280px" width="820" height="594" alt="What people really worry about is jobs" loading="lazy" decoding="async"><figcaption>What people really worry about is jobs</figcaption></figure></div>
+  </article><article class="case-file" id="case-tennis" data-case="tennis">
+    <p class="tag">Athlete brand · Douyin · Fall 2025</p><h3>Building a Douyin presence for an NCAA champion</h3><p class="one">Built a Douyin presence for an NCAA men’s singles champion tennis player, leading a two-person team on ideas, content and persona.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Media team lead, team of 2</dd></div><div><dt>Where</dt><dd>Atlanta (exchange semester)</dd></div><div><dt>When</dt><dd>September – December 2025</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>Ideas, content and persona</li><li>13 short videos in 3 months</li></ul>
+    <h4>Account results (team)</h4><div class="res"><div><b>5M+</b><span>views across platforms</span></div><div><b>2,000+</b><span>new followers</span></div><div><b>13</b><span>short videos in 3 months</span></div></div>
+    <p class="src"><b>Source</b>Account data, September – December 2025</p>
+    <h4>What I did and found</h4><ul class="pts"><li>Built the ideas and persona around being an NCAA men’s singles champion</li><li>Produced breakout champion-themed videos</li><li>Moved fans from Douyin into a private fan group, bringing in customers for a start-up</li></ul>
+    <div class="use"><b>What it means for marketing</b>An athlete’s brand is worth more than views: bring fans into a private group and the content can lead to business.</div>
+    
+    
+    
+    
+  </article><article class="case-file" id="case-kol" data-case="kol">
+    <p class="tag">KOL risk · Reality TV and social media</p><h3>How a “talented writer” persona collapsed on reality TV</h3><p class="one">Copywriting creator Fang Qi’s comments on season six of a reality show were called empty; viewers then checked her famous quotes word by word and found them stitched together.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Solo research</dd></div><div><dt>Subject</dt><dd>Reality TV and social media opinion</dd></div></dl>
+    
+    
+    <p class="src"><b>Source</b>Public show clips and social media discussion</p>
+    <h4>What I did and found</h4><ul class="pts"><li>Closeness: soothing one-liners make fans feel “she gets me”</li><li>Broken trust: live behaviour doesn’t match the persona, and viewers start fact-checking word by word</li><li>Algorithmic amplification: more criticism means more engagement, more reach and a faster fall</li></ul>
+    <div class="use"><b>What it means for marketing</b>When picking KOLs, check whether the persona holds up across settings, and prepare a response plan before signing.</div>
+    
+    
+    
+    
+  </article><article class="case-file" id="case-craft" data-case="craft">
+    <p class="tag">Creative basics · Copy and storyboards</p><h3>Rewrites and storyboards: the basics before AIGC</h3><p class="one">Two drafts of a short story about a mother in advertising, and a storyboard rewritten as AI video prompts.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>Original work</dd></div><div><dt>Use</dt><dd>Copy, video scripts</dd></div></dl>
+    
+    
+    
+    <h4>What I did and found</h4><ul class="pts"><li>Turned reported speech back into scenes, so readers get angry on their own</li><li>Showed emotion through a folding mirror, messy hair and lipstick, never “sobbed”</li><li>A storyboard for a Wang Wei poem, with framing, camera moves and timing set, rewritten straight into video prompts</li></ul>
+    <div class="use"><b>What it means for marketing</b>People who can storyboard know best what AI video is missing: rhythm and how shots relate.</div>
+    
+    
+    <h4>Storyboard rewritten as AI video prompts</h4><div class="tablewrap"><table class="shotlist"><thead><tr><th>Shot</th><th>My storyboard</th><th>Video prompt</th></tr></thead><tbody><tr><td>3</td><td>Medium shot, pan. The rainy season outside the window; grey sky, wet ground, kitchen smoke rising over the woods.</td><td class="p">Medium shot, slow pan across a wooden window, rainy season, damp overcast forest, thin kitchen smoke rising above the trees, muted greens</td></tr><tr><td>5</td><td>Wide shot, crane up. A line of egrets flies over the paddy fields.</td><td class="p">Wide shot, crane up over flooded rice paddies, a line of white egrets gliding across the frame, soft rain</td></tr><tr><td>9</td><td>Close-up, point of view. First light; the hibiscus opens.</td><td class="p">Close-up POV, early dawn light, a hibiscus flower slowly opening, shallow depth of field, gentle mist</td></tr><tr><td>18</td><td>Extreme close-up. Brush characters appear one by one.</td><td class="p">Extreme close-up, a calligraphy brush writing Chinese characters stroke by stroke on rice paper, warm candlelight, static camera</td></tr></tbody></table></div>
+    
+  </article><article class="case-file" id="case-chinadaily" data-case="chinadaily">
+    <p class="tag">Overseas social · China Daily TikTok · Summer 2024</p><h3>Retelling Chinese trending stories for English-speaking audiences</h3><p class="one">A remote internship in China Daily’s overseas social media department, helping run the official TikTok account and turning Chinese trending stories into content for English-speaking viewers.</p>
+    <dl class="meta"><div><dt>My role</dt><dd>New media intern (remote)</dd></div><div><dt>Where</dt><dd>China Daily overseas social media department · June – September 2024</dd></div><div><dt>Account</dt><dd>Official TikTok account, 3.4 million followers</dd></div></dl>
+    <h4>What I produced</h4><ul class="pts"><li>10+ short videos: ideas, scripts, edits and captions</li><li>13 Chinese trending stories localised and retold in English</li></ul>
+    <h4>My content’s numbers</h4><div class="res"><div><b>15K</b><span>top single-video views</span></div><div><b>10+</b><span>short videos</span></div><div><b>13</b><span>localised stories</span></div></div>
+    <p class="src"><b>Source</b>Public TikTok view counts</p>
+    <h4>What I did and found</h4><ul class="pts"><li>Did everything on each short video myself: idea, script, edit and caption</li><li>Retold Chinese stories the way English-speaking viewers expect, not line by line</li><li>Built up a repeatable way of adapting stories across cultures</li></ul>
+    <div class="use"><b>What it means for marketing</b>For overseas content, first work out what the audience already knows, then decide how to tell it; the same story needs rewriting for each audience.</div>
+    
+    
+    
+    
+  </article></section>
+  <dialog class="drawer" aria-labelledby="dw-title"><div class="dw"></div></dialog>
+</section>
+<section class="chapter" id="bridge" data-chapter="bridge" aria-labelledby="h-bridge"><span class="water r"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M10 74c6-30 22-30 26 0M42 74c6-36 24-36 28 0" pathLength="1"/><path d="M76 74c2-26 18-36 30-22l8-3-4 9c-6 2-10 0-12-4-4 6-6 12-6 20" pathLength="1"/><circle cx="101" cy="51" r="1.6" pathLength="1" class="a"/><path d="M6 82q7-6 14 0t14 0 14 0 14 0 14 0 14 0 14 0 14 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M18 50v24h16l48 24V26L34 50z" pathLength="1"/><path d="M34 74l8 26h12l-7-26" pathLength="1"/><path d="M94 46c8 9 8 23 0 32M104 36c14 15 14 37 0 52" pathLength="1" class="a"/></svg><p class="kicker">SEND WORD</p><h2 id="h-bridge">Send Word · One problem, three audiences</h2><p class="ch-sub">A sample scenario with made-up numbers. One problem, written up three different ways.</p></header>
+  <div class="scen">
+    <p class="lead">Day 28 of a voucher campaign, and redemption is <output class="wavy" id="gapOut" for="gap">17 points</output> behind plan. The client, the tech team and the creators each need to hear something different.</p>
+    <div class="dial">
+      <label for="gap">Drag it: how far behind is redemption?</label><span class="lvl" id="lvl" data-s="warn">Needs attention</span>
+      <input type="range" id="gap" min="0" max="30" step="1" value="17">
+      <div class="dticks" aria-hidden="true"><span style="left:0">0</span><span style="left:26.7%">8</span><span style="left:60%">18</span><span style="left:100%">30</span></div>
+    </div>
+  </div>
+  <div class="trio">
+    <article class="doc mail"><header class="dh"><span class="fmt">Weekly email</span><span class="who">For the client</span><span class="need">They need to know where things stand</span></header>
+      <dl class="mh"><div><dt>To</dt><dd>Client project team</dd></div><div><dt>Subject</dt><dd id="mailSubj">Redemption update and next steps</dd></div></dl>
+      <p id="mailBody">Claims are normal, but redemption is about 17 points behind, mainly because tourism spending bunches at weekends and some merchants are new to redeeming. We have called every merchant and added expiry reminders, and will send you a new forecast before Friday.</p></article>
+    <article class="doc ticket"><header class="dh"><span class="fmt">Ticket</span><span class="who">For the tech team</span><span class="need">They need something they can build today</span></header>
+      <dl class="fields" id="techRows"><div><dt>Trigger</dt><dd>48 hours before the voucher expires</dd></div><div><dt>Audience</dt><dd>Users who paid but have not redeemed</dd></div><div><dt>Content</dt><dd>One reminder push with the voucher value and store link</dd></div><div><dt>Ship</dt><dd>By 18:00 Friday</dd></div><div><dt>Tracking</dt><dd>Separate push visits from organic visits</dd></div><div><dt>Check</dt><dd>Next day, compare redemption rates</dd></div></dl></article>
+    <article class="doc cue"><header class="dh"><span class="fmt">Script card</span><span class="who">For the creators</span><span class="need">They need one line they can actually say</span></header>
+      <p class="say" id="cueSay">¥50 off every ¥200, valid Friday to Sunday. Your voucher’s about to expire, so use it if you’ve got one.</p><ul class="rules" id="cueRules"><li><b>When</b>One mention in Friday’s livestream</li><li><b>On screen</b>Show the voucher link</li><li><b>Don’t say</b>“Lowest price anywhere”</li></ul></article>
+  </div>
+</section>
+<section class="chapter" id="novice" data-chapter="novice" aria-labelledby="h-novice"><span class="water l"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><circle cx="60" cy="12" r="6" pathLength="1"/><path d="M60 18v58M46 30h28" pathLength="1"/><path d="M28 58c3 22 18 28 32 28s29-6 32-28" pathLength="1"/><path d="M28 58l-5 8M28 58l8 3M92 58l5 8M92 58l-8 3" pathLength="1" class="a"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M38 10h14l10 36H48zM82 10H68L58 46h14z" pathLength="1"/><circle cx="60" cy="76" r="30" pathLength="1"/><path d="M60.0 59.0 L64.1 70.3 L76.2 70.7 L66.7 78.2 L70.0 89.8 L60.0 83.0 L50.0 89.8 L53.3 78.2 L43.8 70.7 L55.9 70.3 Z" pathLength="1" class="a"/></svg><p class="kicker">NOVICE VILLAGE</p><h2 id="h-novice">Starter Village · Nanjing</h2><p class="ch-sub">Hosting and storytelling since I was small. Achievements packed before setting sail.</p></header>
+  <ul class="badges"><li class="badge" data-reveal><span class="b-seal" aria-hidden="true">★</span><div><b>Head of the school TV station</b><p>A nationally recognised student club; I ran it from 2022</p></div></li><li class="badge" data-reveal><span class="b-seal" aria-hidden="true">★</span><div><b>Short film, first prize</b><p>Wrote and directed a short film that won first prize among Nanjing school TV stations</p></div></li><li class="badge" data-reveal><img class="b-img" src="assets/img/first-lesson-s.webp" srcset="assets/img/first-lesson-s.webp 480w, assets/img/first-lesson-l.webp 1200w" sizes="(max-width: 720px) 50vw, 240px" width="1200" height="896" alt="On Xuexi Qiangguo" loading="lazy" decoding="async"><div><b>On Xuexi Qiangguo</b><p>Wrote and directed a stage play for the Nanjing Education Bureau’s first-day-of-school lesson</p></div></li><li class="badge" data-reveal><span class="b-seal" aria-hidden="true">★</span><div><b>Graduation ceremony director</b><p>Coordinated 5 departments and 200 staff, and made 5 videos</p></div></li><li class="badge" data-reveal><span class="b-seal" aria-hidden="true">★</span><div><b>New Year’s Eve recital</b><p>Helped plan a Jiangsu Broadcasting New Year’s Eve recital, watched live by over 20,000 people</p></div></li><li class="badge" data-reveal><img class="b-img" src="assets/img/peach-poster-s.webp" srcset="assets/img/peach-poster-s.webp 480w, assets/img/peach-poster-l.webp 1080w" sizes="(max-width: 720px) 50vw, 240px" width="1080" height="1190" alt="Theatre director" loading="lazy" decoding="async"><div><b>Theatre director</b><p>Directed Secret Love in Peach Blossom Land for my university drama club, to an audience of 500+; I also made the poster, tickets, stills and trailer</p></div></li></ul>
+</section>
+<section class="chapter" id="map" data-chapter="map" aria-labelledby="h-map"><span class="water r"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M8 36q8-7 16 0t16 0 16 0 16 0" pathLength="1"/><path d="M40 56q8-7 16 0t16 0 16 0 16 0" pathLength="1" class="a"/><path d="M14 76q8-7 16 0t16 0 16 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="62" r="40" pathLength="1"/><ellipse cx="60" cy="62" rx="17" ry="40" pathLength="1"/><path d="M20 62h80M27 42h66M27 82h66" pathLength="1"/><path d="M6 92C30 118 96 104 114 36" pathLength="1" class="a"/><path d="M106 34l10-6-2 11z" pathLength="1" class="a"/></svg><p class="kicker">SEA CHART</p><h2 id="h-map">Sea Chart · 26 countries visited</h2><p class="ch-sub">China plus 25 countries. Tap a country to fly there, tap a photo pin to open its save file, and drag the timeline to see each year light up.</p></header>
+  <div class="atlas" data-reveal>
+    <div class="map-view">
+      <div class="map-hud"><span class="pill"><b id="map-count">26</b> countries unlocked</span><button type="button" class="chip" data-reset-map hidden>Whole map</button><button type="button" class="chip" data-expand-map hidden>Expand map</button></div>
+      <div class="map-clip"><div class="map-stage" aria-hidden="true"></div></div>
+      <label class="scrub"><span class="scrub-y" id="map-year">2026</span><input type="range" min="2019" max="2026" step="1" value="2026" aria-label="Drag the timeline to see which countries each year unlocked"></label>
+    </div>
+    <ol class="countries" aria-label="Countries visited, by year of first visit"><li class="yr" data-year="2019"><span class="yr-n">2019</span><span class="yr-c"><button type="button" class="cty" data-country="cn">China</button><button type="button" class="cty" data-country="fr">France</button><button type="button" class="cty" data-country="va">Vatican City</button><button type="button" class="cty" data-country="mc">Monaco</button><button type="button" class="cty" data-country="it">Italy</button></span></li><li class="yr" data-year="2023"><span class="yr-n">2023</span><span class="yr-c"><button type="button" class="cty" data-country="nl">Netherlands</button><button type="button" class="cty" data-country="at">Austria</button><button type="button" class="cty" data-country="be">Belgium</button><button type="button" class="cty" data-country="cz">Czechia</button><button type="button" class="cty" data-country="mm">Myanmar</button></span></li><li class="yr" data-year="2024"><span class="yr-n">2024</span><span class="yr-c"><button type="button" class="cty" data-country="de">Germany</button><button type="button" class="cty" data-country="es">Spain</button><button type="button" class="cty" data-country="gr">Greece</button><button type="button" class="cty" data-country="gb">United Kingdom</button></span></li><li class="yr" data-year="2025"><span class="yr-n">2025</span><span class="yr-c"><button type="button" class="cty" data-country="us">United States</button><button type="button" class="cty" data-country="jp">Japan</button><button type="button" class="cty" data-country="dk">Denmark</button><button type="button" class="cty" data-country="fi">Finland</button><button type="button" class="cty" data-country="mt">Malta</button><button type="button" class="cty" data-country="no">Norway</button></span></li><li class="yr" data-year="2026"><span class="yr-n">2026</span><span class="yr-c"><button type="button" class="cty" data-country="sg">Singapore</button><button type="button" class="cty" data-country="ie">Ireland</button><button type="button" class="cty" data-country="my">Malaysia</button><button type="button" class="cty" data-country="pt">Portugal</button><button type="button" class="cty" data-country="th">Thailand</button><button type="button" class="cty" data-country="vn">Vietnam</button></span></li></ol>
+  </div>
+  <div class="card-layer" hidden></div>
+</section>
+<section class="chapter" id="abroad" data-chapter="abroad" aria-labelledby="h-abroad"><span class="water l"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M22 62h76l-11 14H33z" pathLength="1"/><path d="M46 62V14M74 62V22" pathLength="1"/><path d="M48 18c15 6 15 18 0 22zM48 44c17 5 17 14 0 18zM76 26c12 5 12 15 0 19zM76 48c12 4 12 10 0 14z" pathLength="1"/><path d="M46 14l11 4-11 4" pathLength="1" class="a"/><path d="M6 82q7-6 14 0t14 0 14 0 14 0 14 0 14 0 14 0 14 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M18 78h84l-12 18H30z" pathLength="1"/><path d="M46 78V18M76 78V28" pathLength="1"/><path d="M48 22c17 6 17 20 0 25zM48 52c19 5 19 16 0 21zM78 32c13 5 13 16 0 20zM78 56c13 4 13 12 0 16z" pathLength="1"/><path d="M46 18l12 4-12 4" pathLength="1" class="a"/><path d="M6 104q8-6 16 0t16 0 16 0 16 0 16 0 16 0 16 0" pathLength="1"/></svg><p class="kicker">FIRST VOYAGE</p><h2 id="h-abroad">First Voyage · Amsterdam</h2><p class="ch-sub">I did my bachelor’s in Amsterdam. Content, film, the stage: I did each of them here for the first time.</p></header>
+  <div class="voyage">
+    <article class="paper story" data-reveal><svg class="icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="11" y="3" width="18" height="34" rx="4" pathLength="1"/><path d="M17 31h6" pathLength="1"/><path d="M16 13l9 5-9 5z" pathLength="1" class="a"/></svg><p class="kicker">Late 2022 · Content creator</p><h3>First time on the side that gets the ad money</h3><p>Three platforms, RED (Xiaohongshu), WeChat Channels and Douyin, with every idea, shoot and edit done myself. I took paid work from study-abroad services and an AI reading app, and turned down supplement mail-order brands.</p></article>
+    <article class="paper story" data-reveal><svg class="icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="16" pathLength="1"/><circle cx="20" cy="20" r="3" pathLength="1" class="a"/><circle cx="20" cy="10" r="4" pathLength="1"/><circle cx="20" cy="30" r="4" pathLength="1"/><circle cx="10" cy="20" r="4" pathLength="1"/><circle cx="30" cy="20" r="4" pathLength="1"/></svg><p class="kicker">Film promotion · Netherlands</p><h3>Telling people in the Netherlands about Chinese films</h3><p>I helped the distributor promote Detective Chinatown 1900, Ne Zha 2 and Night King in Dutch cinemas: promo copy, screening invitations and video edits. For Ne Zha 2 the angle was students abroad and their parents:</p><blockquote>Seeing the world from our parents’ shoulders / in Chinese families, being lifted up is a baton passed down the generations</blockquote><img class="note-img" src="assets/img/nezha-note-s.webp" srcset="assets/img/nezha-note-s.webp 480w, assets/img/nezha-note-l.webp 402w" sizes="200px" width="402" height="534" alt="My post about watching Ne Zha 2 in the Netherlands" loading="lazy" decoding="async"></article>
+    <article class="paper story" data-reveal><svg class="icon" viewBox="0 0 40 40" aria-hidden="true" focusable="false"><rect x="14" y="3" width="12" height="20" rx="6" pathLength="1"/><path d="M8 18c0 7 5 12 12 12s12-5 12-12M20 30v7M13 37h14" pathLength="1"/><path d="M14 11h12" pathLength="1" class="a"/></svg><p class="kicker">Hosting · On camera</p><h3>Stepping in front of the camera</h3><p>Hosted the Netherlands-wide Chinese Spring Festival Gala two years running; co-hosted Hainan’s “Nihao China · Sunny Hainan” European showcase in Chinese and English; as a University of Amsterdam international student ambassador, planned and appeared in official content and hosted live Q&As in English.</p></article>
+  </div>
+  <div class="shots"><figure class="pframe shot" data-reveal><img src="assets/img/spring-gala-s.webp" srcset="assets/img/spring-gala-s.webp 480w, assets/img/spring-gala-l.webp 1200w" sizes="(max-width: 720px) 90vw, 360px" width="1200" height="800" alt="Hosting the Spring Festival Gala in the Netherlands" loading="lazy" decoding="async"><figcaption class="plate">Spring Festival Gala · Host</figcaption></figure><figure class="pframe shot" data-reveal><img src="assets/img/hainan-s.webp" srcset="assets/img/hainan-s.webp 480w, assets/img/hainan-l.webp 1200w" sizes="(max-width: 720px) 90vw, 360px" width="1200" height="800" alt="Speaking at the Hainan showcase" loading="lazy" decoding="async"><figcaption class="plate">Nihao China · Sunny Hainan · Showcase</figcaption></figure><figure class="pframe shot" data-reveal><img src="assets/img/ambassador-talk-s.webp" srcset="assets/img/ambassador-talk-s.webp 480w, assets/img/ambassador-talk-l.webp 900w" sizes="(max-width: 720px) 90vw, 360px" width="900" height="675" alt="Giving an ambassador talk in class" loading="lazy" decoding="async"><figcaption class="plate">UvA student ambassador</figcaption></figure><figure class="pframe shot" data-reveal><img src="assets/img/middelburg-s.webp" srcset="assets/img/middelburg-s.webp 480w, assets/img/middelburg-l.webp 1094w" sizes="(max-width: 720px) 90vw, 360px" width="1094" height="1080" alt="International Youth Freedom Conference" loading="lazy" decoding="async"><figcaption class="plate">Middelburg · 2025</figcaption></figure></div>
+</section>
+<section class="chapter" id="viewfinder" data-chapter="viewfinder" aria-labelledby="h-viewfinder"><span class="water r"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M10 74c6-30 22-30 26 0M42 74c6-36 24-36 28 0" pathLength="1"/><path d="M76 74c2-26 18-36 30-22l8-3-4 9c-6 2-10 0-12-4-4 6-6 12-6 20" pathLength="1"/><circle cx="101" cy="51" r="1.6" pathLength="1" class="a"/><path d="M6 82q7-6 14 0t14 0 14 0 14 0 14 0 14 0 14 0 14 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><path d="M14 84l52-30 6 11-52 30z" pathLength="1"/><path d="M66 54l26-15 7 13-26 15z" pathLength="1"/><path d="M92 39l12-7 8 14-12 7z" pathLength="1" class="a"/><path d="M40 82l10 24M36 106h20" pathLength="1"/></svg><p class="kicker">SPYGLASS</p><h2 id="h-viewfinder">Spyglass · Through my lens</h2><p class="ch-sub">Want to get to know me? Start here: I’m always taking photos, I spend weekends on the badminton court, and now and then I post something.</p></header>
+  <h3 class="subh">Photography · Me, mid-shot</h3>
+  <div class="vfs"><figure class="vf" data-reveal><img src="assets/img/amalfi-s.webp" srcset="assets/img/amalfi-s.webp 480w, assets/img/amalfi-l.webp 1200w" sizes="(max-width: 720px) 90vw, 380px" width="1200" height="900" alt="Taking photos by the sea in Amalfi" loading="lazy" decoding="async">
+    <span class="vf-c" aria-hidden="true"></span><span class="vf-n" aria-hidden="true">01 / 06</span>
+    <figcaption>Amalfi · 2019</figcaption></figure><figure class="vf" data-reveal><img src="assets/img/rain-lake-s.webp" srcset="assets/img/rain-lake-s.webp 480w, assets/img/rain-lake-l.webp 1200w" sizes="(max-width: 720px) 90vw, 380px" width="1200" height="900" alt="Shooting by a lake in the rain" loading="lazy" decoding="async">
+    <span class="vf-c" aria-hidden="true"></span><span class="vf-n" aria-hidden="true">02 / 06</span>
+    <figcaption>Rain · by the lake</figcaption></figure><figure class="vf" data-reveal><img src="assets/img/xuanwu-s.webp" srcset="assets/img/xuanwu-s.webp 480w, assets/img/xuanwu-l.webp 1200w" sizes="(max-width: 720px) 90vw, 380px" width="1200" height="1600" alt="Shooting the sunset at Xuanwu Lake" loading="lazy" decoding="async">
+    <span class="vf-c" aria-hidden="true"></span><span class="vf-n" aria-hidden="true">03 / 06</span>
+    <figcaption>Xuanwu Lake · Nanjing</figcaption></figure><figure class="vf" data-reveal><img src="assets/img/canon-s.webp" srcset="assets/img/canon-s.webp 480w, assets/img/canon-l.webp 1200w" sizes="(max-width: 720px) 90vw, 380px" width="1200" height="1600" alt="My Canon 5D" loading="lazy" decoding="async">
+    <span class="vf-c" aria-hidden="true"></span><span class="vf-n" aria-hidden="true">04 / 06</span>
+    <figcaption>Canon 5D</figcaption></figure><figure class="vf" data-reveal><img src="assets/img/fuji-s.webp" srcset="assets/img/fuji-s.webp 480w, assets/img/fuji-l.webp 1200w" sizes="(max-width: 720px) 90vw, 380px" width="1200" height="800" alt="My Fujifilm X-T30" loading="lazy" decoding="async">
+    <span class="vf-c" aria-hidden="true"></span><span class="vf-n" aria-hidden="true">05 / 06</span>
+    <figcaption>Fujifilm X-T30</figcaption></figure><figure class="vf" data-reveal><img src="assets/img/lianyungang-s.webp" srcset="assets/img/lianyungang-s.webp 480w, assets/img/lianyungang-l.webp 1200w" sizes="(max-width: 720px) 90vw, 380px" width="1200" height="1612" alt="Taking photos in Lianyungang" loading="lazy" decoding="async">
+    <span class="vf-c" aria-hidden="true"></span><span class="vf-n" aria-hidden="true">06 / 06</span>
+    <figcaption>Lianyungang · 2024</figcaption></figure></div>
+  <h3 class="subh">Badminton and ambassador work · 2025</h3>
+  <div class="sport">
+    <article class="paper archive-card" data-reveal>
+      <figure class="pframe"><img src="assets/img/badminton-s.webp" srcset="assets/img/badminton-s.webp 480w, assets/img/badminton-l.webp 1200w" sizes="(max-width: 720px) 90vw, 420px" width="1200" height="1600" alt="At the 2025 Chinese students’ badminton tournament" loading="lazy" decoding="async"><figcaption class="plate">Organising team · North Holland</figcaption></figure>
+      <div><p class="kicker">2025 Chinese students’ badminton tournament · Netherlands</p><h3>Running the schedule off court, playing on it</h3><p>On the organising team I built the schedule, ran promotion and umpired and kept score; I also played for the North Holland team.</p></div>
+    </article>
+    <article class="paper archive-card" data-reveal>
+      <figure class="pframe"><img src="assets/img/ambassadors-s.webp" srcset="assets/img/ambassadors-s.webp 480w, assets/img/ambassadors-l.webp 1200w" sizes="(max-width: 720px) 90vw, 420px" width="1200" height="803" alt="UvA international student ambassadors’ team photo (others blurred)" loading="lazy" decoding="async"><figcaption class="plate">UvA student ambassador</figcaption></figure>
+      <div><p class="kicker">University of Amsterdam · team photo</p><h3>Telling future students about the university</h3><p>As an international student ambassador I planned and appeared in official content, hosted live sessions in English, and gave talks to younger students.</p></div>
+    </article>
+  </div>
+  <h3 class="subh">Messages in Bottles · My posts</h3>
+  <div class="projector">
+    <div class="screen" aria-live="polite"><div class="screen-in"><img src="assets/img/xhs-top-s.webp" srcset="assets/img/xhs-top-s.webp 480w, assets/img/xhs-top-l.webp 603w" sizes="(max-width: 720px) 90vw, 420px" width="603" height="1092" alt="Bestie, promise me we’ll be cool old ladies like this" loading="lazy" decoding="async">
+    <div class="screen-cap"><p class="kicker">RED</p><h3>Bestie, promise me we’ll be cool old ladies like this</h3><b>58K likes</b></div></div></div>
+    <div class="reel-wrap">
+      <button type="button" class="chip reel-btn" data-reel="-1" aria-label="Previous">←</button>
+      <ol class="reel" aria-label="My posts: drag sideways or use the buttons"><li><button type="button" class="frame-btn" data-work="xhs-friends" aria-pressed="true">
+    <img src="assets/img/xhs-top-s.webp" srcset="assets/img/xhs-top-s.webp 480w, assets/img/xhs-top-l.webp 603w" sizes="200px" width="603" height="1092" alt="" loading="lazy" decoding="async">
+    <span class="frame-cap"><span class="frame-p">RED</span><span class="frame-t">Bestie, promise me we’ll be cool old ladies like this</span><b>58K likes</b></span></button></li><li><button type="button" class="frame-btn" data-work="sph-ambassador" aria-pressed="false">
+    <img src="assets/img/sph-ambassador-s.webp" srcset="assets/img/sph-ambassador-s.webp 480w, assets/img/sph-ambassador-l.webp 1041w" sizes="200px" width="1041" height="1260" alt="" loading="lazy" decoding="async">
+    <span class="frame-cap"><span class="frame-p">WeChat Channels</span><span class="frame-t">UvA student ambassador: the life my high-school self never imagined</span><b>115K views</b></span></button></li><li><button type="button" class="frame-btn" data-work="sph-teacher" aria-pressed="false">
+    <img src="assets/img/sph-teacher-s.webp" srcset="assets/img/sph-teacher-s.webp 480w, assets/img/sph-teacher-l.webp 1033w" sizes="200px" width="1033" height="1377" alt="" loading="lazy" decoding="async">
+    <span class="frame-cap"><span class="frame-p">WeChat Channels</span><span class="frame-t">I asked my professor how to improve my essay, and he went through it line by line with me</span><b>110K views</b></span></button></li><li><button type="button" class="frame-btn" data-work="xhs-abroad" aria-pressed="false">
+    <img src="assets/img/xhs-abroad-s.webp" srcset="assets/img/xhs-abroad-s.webp 480w, assets/img/xhs-abroad-l.webp 604w" sizes="200px" width="604" height="805" alt="" loading="lazy" decoding="async">
+    <span class="frame-cap"><span class="frame-p">RED</span><span class="frame-t">If you’re taking the road I took, I hope your studies abroad go smoothly</span><b>4,784 likes</b></span></button></li><li><button type="button" class="frame-btn" data-work="sph-hainan" aria-pressed="false">
+    <img src="assets/img/hainan-s.webp" srcset="assets/img/hainan-s.webp 480w, assets/img/hainan-l.webp 1200w" sizes="200px" width="1200" height="800" alt="" loading="lazy" decoding="async">
+    <span class="frame-cap"><span class="frame-p">WeChat Channels</span><span class="frame-t">Hainan showcase: the embassy’s cultural counsellor says “a bright future”</span><b>14K views</b></span></button></li><li><button type="button" class="frame-btn" data-work="nezha" aria-pressed="false">
+    <img src="assets/img/nezha-note-s.webp" srcset="assets/img/nezha-note-s.webp 480w, assets/img/nezha-note-l.webp 402w" sizes="200px" width="402" height="534" alt="" loading="lazy" decoding="async">
+    <span class="frame-cap"><span class="frame-p">RED</span><span class="frame-t">Watching Ne Zha 2 in the Netherlands: in Chinese families, being lifted up is a baton passed down</span><b>3,287 views</b></span></button></li></ol>
+      <button type="button" class="chip reel-btn" data-reel="1" aria-label="Next">→</button>
+    </div>
+  </div>
+</section>
+<section class="chapter" id="contact" data-chapter="contact" aria-labelledby="h-contact"><span class="water l"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M12 62c10-24 58-28 80-8 6-8 14-11 20-9-4 6-6 12-4 18-8 0-14-2-18-6-18 18-68 16-78 5z" pathLength="1"/><circle cx="30" cy="56" r="1.8" pathLength="1"/><path d="M44 34c-2-8 4-10 2-16M44 34c4-6 10-4 12-10" pathLength="1" class="a"/><path d="M6 84q7-6 14 0t14 0 14 0 14 0" pathLength="1"/></svg></span>
+  <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><rect x="12" y="44" width="70" height="40" rx="18" pathLength="1"/><path d="M82 56h16v16H82" pathLength="1"/><rect x="98" y="54" width="9" height="20" rx="2" pathLength="1"/><rect x="26" y="56" width="42" height="16" rx="7" pathLength="1" class="a"/><path d="M30 64h34" pathLength="1" class="a"/><path d="M6 100q8-6 16 0t16 0 16 0 16 0 16 0 16 0 16 0" pathLength="1"/></svg><p class="kicker">SIGNAL THE SHIP</p><h2 id="h-contact">Signal the Ship · Say hello</h2><p class="ch-sub">Copy my WeChat ID or email and mention you found me here.</p></header>
+  <div class="contact-row"><dl class="reach paper"><div><dt>WeChat</dt><dd><span id="c-wx">EmengYin</span><button type="button" class="chip" data-copy="c-wx">Copy</button></dd></div><div><dt>Email</dt><dd><span id="c-mail">2091595480@qq.com</span><button type="button" class="chip" data-copy="c-mail">Copy</button></dd></div><div><dt>PDF</dt><dd><span class="pdf">Printable portfolio, easy to forward</span><a class="chip" href="Yiming_Yin_Portfolio_EN.pdf" download="Yiming_Yin_Portfolio_EN.pdf">Download</a></dd></div></dl><span class="treasure" aria-hidden="true"><canvas class="flag small" data-title="TREASURE" data-sub="" width="150" height="96"></canvas><svg viewBox="0 0 120 120" focusable="false"><path d="M24 24C48 46 74 74 98 98" pathLength="1"/><path d="M98 22C74 48 48 72 22 96" pathLength="1"/></svg><b>X marks the spot</b></span></div>
+</section>
+</main>
+<p class="the-end" aria-hidden="true">Bon Voyage</p>
+<footer class="foot">© 2026 Yiming Yin · All work is my own or one I took part in, and team projects name my role. The Voucher Campaign Workbench (Pingjiang Road night-tour vouchers) is a sample project, Pain-Point Claim is a concept demo, and the Meal Buddy demo runs on preset data.</footer>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=39f069c054","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=52ca4775b7","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/main.js":"./assets/js/main.js?v=35f3db75fb","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=036d8cbff3","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/opening.js":"./assets/js/opening.js?v=b831b02a26","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=8638a29fad","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.en.js?v=a9b49b34b0","./data/places.js":"./data/places.en.js?v=02c8c1fa12","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="module" src="assets/js/main.js?v=35f3db75fb"></script>
+</body>
+</html>

@@ -37,3 +37,9 @@ html:not(.js) .ach-wrap { display: none; }
 .ach-list li.done { color: var(--ink); }
 .ach-list li.done::before { content: "★"; color: var(--gold); }
 @media (max-width: 520px) { .ach-k { display: none; } }
+
+/* language switch */
+.lang { display: inline-flex; align-items: center; padding: 4px 11px; border: 1px solid var(--line-dim); border-radius: 999px; font: 600 13px/1.4 var(--f-num); letter-spacing: .06em; color: var(--ink); text-decoration: none; }
+.lang:hover { border-color: var(--line); background: var(--line-faint); }
+.ach-wrap + .lang { margin-left: 4px; }
+@media (max-width: 420px) { .bar-in { gap: 8px; } .seg button { padding: 4px 9px; } .brand { font-size: 22px; } .lang { padding: 3px 8px; } }

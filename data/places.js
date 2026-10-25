@@ -44,5 +44,8 @@ export const PINS = [
   { id: 'singapore', city: '新加坡', countryId: 'sg', year: 2026, chapter: 'now' },
 ];
 
+// Display names for cities; the Chinese page shows the key itself.
+export const CITY_LABEL = {};
+
 const pinned = new Set(PINS.map(p => p.city));
 export const DOTS = COUNTRIES.flatMap(c => c.cities.filter(city => !pinned.has(city)).map(city => ({ city, countryId: c.id })));

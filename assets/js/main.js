@@ -8,6 +8,7 @@ import { initRoute } from './route.js';
 import { initFlags } from './flag.js';
 import { createTracker, progress } from './achievements.js';
 import { store } from './storage.js';
+import { L } from './i18n.js';
 
 document.documentElement.classList.add('js');
 
@@ -24,7 +25,7 @@ let showing = false;
 function nextToast() {
   if (showing || !queue.length) return;
   showing = true;
-  toast.textContent = `成就解锁 · ${queue.shift()}`;
+  toast.textContent = `${L('成就解锁', 'Achievement unlocked')} · ${queue.shift()}`;
   toast.classList.add('on');
   setTimeout(() => { toast.classList.remove('on'); setTimeout(() => { showing = false; nextToast(); }, 400); }, 3000);
 }
@@ -34,7 +35,7 @@ function paintBadge() {
   achBtn.querySelector('.ach-n').textContent = `${list.filter(r => r.done).length}/${list.length}`;
   for (const r of list) achList.querySelector(`[data-ach="${r.id}"]`)?.classList.toggle('done', r.done);
 }
-const tracker = createTracker(store, rule => { queue.push(rule.title); nextToast(); paintBadge(); });
+const tracker = createTracker(store, rule => { queue.push(L(rule.title, rule.en)); nextToast(); paintBadge(); });
 paintBadge();
 achBtn.addEventListener('click', () => {
   const open = achList.hidden;
@@ -67,5 +68,11 @@ document.addEventListener('click', async e => {
     if (el) { r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); }
   }
   if (b.closest('#contact')) tracker.record('add-friend');
-  const was = b.textContent; b.textContent = '已复制'; setTimeout(() => { b.textContent = was; }, 1400);
+  const was = b.textContent; b.textContent = L('已复制', 'Copied'); setTimeout(() => { b.textContent = was; }, 1400);
+});
+
+// language switch: land on the same chapter in the other language
+document.querySelector('.bar a.lang')?.addEventListener('click', e => {
+  const here = [...document.querySelectorAll('#chapters > [data-chapter]')].find(s => s.getBoundingClientRect().bottom > innerHeight * .3);
+  if (here) e.currentTarget.href = `${e.currentTarget.getAttribute('href').split('#')[0]}#${here.id}`;
 });

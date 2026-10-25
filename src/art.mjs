@@ -1,3 +1,4 @@
+import { t } from './i18n.mjs';
 // Line drawings in one hand (nautical: wheel, chest, spyglass, bottle…): 120×120, round 2px strokes in the chalk colour, one red accent (class "a").
 // Every shape carries pathLength="1" so CSS can draw it on when its chapter scrolls in.
 const star = (cx, cy, R, r) => 'M' + Array.from({ length: 10 }, (_, i) => {
@@ -62,4 +63,4 @@ const SEA = {
 };
 export const SEA_ORDER = ['ship', 'serpent', 'compass', 'whale', 'anchor', 'waves'];
 export const sea = name => `<svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false">${shapes(SEA[name])}</svg>`;
-export const treasure = () => `<span class="treasure" aria-hidden="true"><canvas class="flag small" data-title="TREASURE" data-sub="" width="150" height="96"></canvas><svg viewBox="0 0 120 120" focusable="false"><path d="M24 24C48 46 74 74 98 98" pathLength="1"/><path d="M98 22C74 48 48 72 22 96" pathLength="1"/></svg><b>宝藏在这里</b></span>`;
+export const treasure = () => `<span class="treasure" aria-hidden="true"><canvas class="flag small" data-title="TREASURE" data-sub="" width="150" height="96"></canvas><svg viewBox="0 0 120 120" focusable="false"><path d="M24 24C48 46 74 74 98 98" pathLength="1"/><path d="M98 22C74 48 48 72 22 96" pathLength="1"/></svg><b>${t('宝藏在这里')}</b></span>`;

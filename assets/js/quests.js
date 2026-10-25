@@ -1,4 +1,5 @@
 import { frame } from './count.js';
+import { L } from './i18n.js';
 
 const motion = () => document.documentElement.classList.contains('motion');
 
@@ -27,7 +28,7 @@ export function initQuests({ tracker } = {}) {
       const on = btn.getAttribute('aria-pressed') !== 'true';
       btn.setAttribute('aria-pressed', String(on));
       card.classList.toggle('flipped', on);
-      btn.firstElementChild.textContent = on ? '翻回正面' : '翻面看结果';
+      btn.firstElementChild.textContent = on ? L('翻回正面', 'Flip back') : L('翻面看结果', 'Flip for results');
       if (on) tracker?.record('quest-flip', { id: card.dataset.quest });
     });
   }

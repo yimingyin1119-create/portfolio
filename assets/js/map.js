@@ -1,9 +1,11 @@
 import { VIEW, LAND, POINTS, FOCUS } from '../map/world.js';
-import { COUNTRIES, PINS, DOTS } from '../../data/places.js';
+import { COUNTRIES, PINS, DOTS, CITY_LABEL } from '../../data/places.js';
+import { L } from './i18n.js';
 import { STORIES } from '../../data/content.js';
 import { unlockedAt, clampYear } from './timeline.js';
 
 const pct = (v, total) => `${(v / total) * 100}%`;
+const city = c => CITY_LABEL[c] ?? c;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 function renderStage(stage) {
@@ -14,9 +16,9 @@ function renderStage(stage) {
   const pins = PINS.map(p => {
     const [x, y] = POINTS[p.city];
     const thumb = p.photo ? `<img src="assets/img/${p.photo}-s.webp" alt="" width="40" height="40" loading="lazy">` : '<span class="pin-dot"></span>';
-    return `<button type="button" class="pin" data-pin="${p.id}" data-city="${esc(p.city)}" style="left:${pct(x, VIEW.width)};top:${pct(y, VIEW.height)}" aria-label="${esc(STORIES[p.id]?.title ?? p.city)}，打开存档卡">${thumb}<span class="pin-label">${esc(p.city)}</span></button>`;
+    return `<button type="button" class="pin" data-pin="${p.id}" data-city="${esc(p.city)}" style="left:${pct(x, VIEW.width)};top:${pct(y, VIEW.height)}" aria-label="${esc(STORIES[p.id]?.title ?? city(p.city))}${L('，打开存档卡', ', open save file')}">${thumb}<span class="pin-label">${esc(city(p.city))}</span></button>`;
   }).join('');
-  stage.innerHTML = `<svg viewBox="0 0 ${VIEW.width} ${VIEW.height}" role="img" aria-label="世界地图，标出去过的城市"><path class="land" d="${LAND}"/>${dots}</svg><div class="map-pins">${pins}</div>`;
+  stage.innerHTML = `<svg viewBox="0 0 ${VIEW.width} ${VIEW.height}" role="img" aria-label="${L('世界地图，标出去过的城市', 'World map marking the cities visited')}"><path class="land" d="${LAND}"/>${dots}</svg><div class="map-pins">${pins}</div>`;
   stage.removeAttribute('aria-hidden');
 }
 
@@ -80,8 +82,8 @@ export function initMap({ tracker } = {}) {
     const photo = pin.photo
       ? `<figure class="pframe develop"><img src="assets/img/${pin.photo}-l.webp" alt="${esc(story.title)}" loading="lazy"><figcaption class="plate">${esc(story.meta)}</figcaption></figure>` : '';
     layer.innerHTML = `<div class="card-back" data-close></div><article class="archive paper" role="dialog" aria-modal="true" aria-labelledby="card-t">
-      <button type="button" class="chip card-x" data-close>关闭</button>${photo}
-      <p class="kicker">SAVE FILE · ${esc(pin.city)}</p><h3 id="card-t">${esc(story.title)}</h3><p class="card-meta">${esc(story.meta)}</p><p>${esc(story.text)}</p></article>`;
+      <button type="button" class="chip card-x" data-close>${L('关闭', 'Close')}</button>${photo}
+      <p class="kicker">SAVE FILE · ${esc(city(pin.city))}</p><h3 id="card-t">${esc(story.title)}</h3><p class="card-meta">${esc(story.meta)}</p><p>${esc(story.text)}</p></article>`;
     layer.hidden = false;
     const img = layer.querySelector('.develop img');
     if (img) {

@@ -1,3 +1,4 @@
+import { L } from './i18n.js';
 // Case files: cards open their written-out file in a drawer, filters narrow the grid,
 // covers are drawn in code, and the x-ray lens works wherever it appears.
 const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -15,7 +16,7 @@ export function initCases({ tracker } = {}) {
     if (!file) return;
     lensOff?.abort();
     const pos = ids.indexOf(id) + 1;
-    dw.innerHTML = `<div class="top"><span class="tg">${file.querySelector('.tag').textContent}</span><span class="pager"><button type="button" class="chip" data-step="-1" aria-label="上一个案例">←</button><span>${pos} / ${ids.length}</span><button type="button" class="chip" data-step="1" aria-label="下一个案例">→</button></span><button type="button" class="chip" data-close>关闭</button></div>`;
+    dw.innerHTML = `<div class="top"><span class="tg">${file.querySelector('.tag').textContent}</span><span class="pager"><button type="button" class="chip" data-step="-1" aria-label="${L('上一个案例', 'Previous case')}">←</button><span>${pos} / ${ids.length}</span><button type="button" class="chip" data-step="1" aria-label="${L('下一个案例', 'Next case')}">→</button></span><button type="button" class="chip" data-close>${L('关闭', 'Close')}</button></div>`;
     const body = file.cloneNode(true);
     body.removeAttribute('id');
     body.querySelector('.tag').remove();
@@ -137,7 +138,7 @@ function xray(fig, { intro = false } = {}) {
     pins.forEach(p => { p.hidden = !found.has(p.dataset.n); });
     notes.forEach(n => { const on = found.has(n.dataset.n); n.classList.toggle('hid', !on); n.classList.toggle('on', on); });
     const all = found.size === pins.length;
-    score.textContent = all ? `${pins.length} / ${pins.length}，全部找到` : `已找到 ${found.size} / ${pins.length}`;
+    score.textContent = all ? L(`${pins.length} / ${pins.length}，全部找到`, `${pins.length} / ${pins.length}, all found`) : L(`已找到 ${found.size} / ${pins.length}`, `Found ${found.size} / ${pins.length}`);
     fig.classList.toggle('done', all);
     reveal.hidden = all;
   }
