@@ -1,17 +1,17 @@
-/* Earth Online × film studio, light: pearl gray ground, misty blue panels, dewdrop yellow paper for reading,
-   deep blue-gray ink for text and line work. Red marks what to look at or press; nothing else is red. */
+/* Earth Online × film studio, printed: warm cream ground like photo paper, sand panels, white sheets for reading,
+   warm charcoal ink for text and line work. Film red marks what to look at or press; nothing else is red. */
 @font-face { font-family: "Yellowtail"; src: url("../fonts/yellowtail-latin-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "EO Display"; src: url("../fonts/display-serif-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
 @font-face { font-family: "Oswald"; src: url("../fonts/oswald-latin-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
 :root {
   color-scheme: light;
-  --bg: #f5f5f5; --bg-2: #e0f7fa; --card: #ffffff;
-  --line: #1f2a30; --line-dim: rgba(31, 42, 48, .2); --line-faint: rgba(31, 42, 48, .09);
-  --ink: #1f2a30; --muted: #56636a; --faint: #8a969c;
-  --red: #e2231a; --red-soft: rgba(226, 35, 26, .1);
-  --paper: #fff9c4; --paper-ink: #1f2a30; --paper-muted: #5f6466; --paper-rule: #e8de98;
-  --gold: #c98a12;
+  --bg: #f3efe7; --bg-2: #e9e3d7; --card: #fbf9f4;
+  --line: #23201c; --line-dim: rgba(35, 32, 28, .2); --line-faint: rgba(35, 32, 28, .08);
+  --ink: #23201c; --muted: #6a645a; --faint: #9a9387;
+  --red: #c2362b; --red-soft: rgba(194, 54, 43, .09);
+  --paper: #fffdf8; --paper-ink: #23201c; --paper-muted: #6a645a; --paper-rule: #e6dfd1;
+  --gold: #b5852a;
   --f-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
   --f-num: "Oswald", "DIN Condensed", "Arial Narrow", var(--f-sans);
   --f-display: "EO Display", "Songti SC", "STSong", "Noto Serif CJK SC", serif;

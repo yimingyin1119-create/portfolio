@@ -1,4 +1,4 @@
-.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); background: rgba(245, 245, 245, .92); border-bottom: 1px solid var(--line-faint); backdrop-filter: blur(6px); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); background: rgba(243, 239, 231, .92); border-bottom: 1px solid var(--line-faint); backdrop-filter: blur(6px); }
 .bar-in { max-width: 1160px; margin: 0 auto; height: 60px; display: flex; align-items: center; gap: 16px; }
 .brand { font-family: var(--f-script); font-size: 30px; text-decoration: none; line-height: 1; margin-right: auto; }
 .seg { display: inline-flex; padding: 3px; border: 1px solid var(--line-dim); border-radius: 999px; }
