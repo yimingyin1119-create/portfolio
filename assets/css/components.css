@@ -43,7 +43,7 @@
 html.motion .proof { margin: 0; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s var(--ease), opacity .25s, margin .25s; }
 html.motion .attr-btn[aria-expanded="true"] + .proof { max-height: 8em; opacity: 1; margin: 6px 2px 0; }
 .pick { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-.ghost { display: inline-flex; align-items: center; gap: 8px; padding: 7px 17px; border-radius: 8px; border: 1.5px solid var(--line); background: none; font-weight: 800; font-style: italic; cursor: pointer; }
+.ghost { display: inline-flex; align-items: center; gap: 8px; padding: 7px 17px; border-radius: 8px; border: 1.5px solid var(--line); background: none; font-weight: 800; cursor: pointer; }
 .pick .cta { border: 0; cursor: pointer; }
 @media (max-width: 760px) {
   .player { grid-template-columns: minmax(0, 1fr); }

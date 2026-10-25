@@ -221,3 +221,11 @@ test('every stylesheet and script URL carries a hash of its content, so a deploy
   for (const p of modules) assert.equal(map[`./${p}`], `./${p}?v=${hash(p)}`, p);
   assert.ok(html.indexOf('type="importmap"') < html.indexOf('type="module"'));
 });
+
+test('no Chinese is set in fake italics: only the decorative // mark slants', () => {
+  for (const file of ['assets/css/layout.css', 'assets/css/components.css']) {
+    for (const [, sel, body] of read(file).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      if (/italic/.test(body)) assert.equal(sel.trim(), '.frame > .slash', `${file}: ${sel.trim()}`);
+    }
+  }
+});
