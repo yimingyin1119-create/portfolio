@@ -56,18 +56,18 @@ test('fonts are self-hosted woff2 and small', () => {
   assert.ok(files.length >= 2);
   let total = 0;
   for (const f of files) {
-    assert.ok(f.endsWith('.woff2') || f.endsWith('.txt') || f === 'display.chars', f);
+    assert.ok(/\.(woff2|txt|chars|missing)$/.test(f), f);
     if (!f.startsWith('display')) total += statSync(new URL(f, FONTS)).size;
   }
   assert.ok(total < 120 * 1024, `latin fonts total ${total}`);
 });
 
-test('the title face is cut to the characters the titles use, and the cut is current', async () => {
+test('the title faces are cut to the characters the titles use, and every title character is covered by one of them', async () => {
   const { displayChars } = await import('../tools/display-chars.mjs');
-  const woff = new URL('display-serif-900.woff2', FONTS);
-  assert.ok(existsSync(woff));
-  assert.ok(statSync(woff).size < 260 * 1024, `display font ${statSync(woff).size}`);
-  const cut = new Set(readFileSync(new URL('display.chars', FONTS), 'utf8'));
-  const missing = [...displayChars()].filter(c => !cut.has(c));
-  assert.deepEqual(missing, [], 'run tools/subset-display.py again');
+  const cut = name => new Set(readFileSync(new URL(`${name}.chars`, FONTS), 'utf8'));
+  const hand = cut('display-hand'), serif = cut('display-serif-900');
+  assert.ok(statSync(new URL('display-hand.woff2', FONTS)).size < 320 * 1024);
+  assert.ok(statSync(new URL('display-serif-900.woff2', FONTS)).size < 260 * 1024);
+  const uncovered = [...displayChars()].filter(c => !hand.has(c) && !serif.has(c));
+  assert.deepEqual(uncovered, [], 'run tools/subset-display.py again for both faces');
 });

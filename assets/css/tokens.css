@@ -1,6 +1,7 @@
 /* Earth Online, an adventure at sea: kraft paper ground, lighter parchment for every card, sepia ink throughout.
    Text is never red; red is kept for drawn lines only (the route, the treasure mark, accents in the line drawings). */
 @font-face { font-family: "Yellowtail"; src: url("../fonts/yellowtail-latin-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "EO Hand"; src: url("../fonts/display-hand.woff2") format("woff2"); font-weight: 400 900; font-display: swap; }
 @font-face { font-family: "EO Display"; src: url("../fonts/display-serif-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
 @font-face { font-family: "Oswald"; src: url("../fonts/oswald-latin-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
@@ -15,7 +16,7 @@
   --gold: #6f5420;
   --f-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
   --f-num: "Oswald", "DIN Condensed", "Arial Narrow", var(--f-sans);
-  --f-display: "EO Display", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+  --f-display: "EO Hand", "EO Display", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
   --f-script: "Yellowtail", "Snell Roundhand", "Brush Script MT", cursive;
   --r: 12px;
   --ease: cubic-bezier(.2, .8, .2, 1);

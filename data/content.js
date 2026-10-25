@@ -155,9 +155,9 @@ export const BADGES_NOVICE = [
 // The content reel: her own posts.
 export const WORKS = [
   { id: 'xhs-friends', platform: '小红书', title: '闺蜜我们老了也要成为这样超酷的老太好吗', stat: '5.8 万赞', photo: 'xhs-top' },
-  { id: 'sph-ambassador', platform: '视频号', title: 'UvA 国际学生大使：高中的你也想不到大学过上另一种生活', stat: '11.5 万播放', photo: 'sph-top' },
-  { id: 'sph-teacher', platform: '视频号', title: '下课问教授哪里可以改进，他一句一句听我解释', stat: '11 万播放' },
-  { id: 'xhs-abroad', platform: '小红书', title: '希望你留学顺遂 如果走我来时的路', stat: '4784 赞' },
+  { id: 'sph-ambassador', platform: '视频号', title: 'UvA 国际学生大使：高中的你也想不到大学过上另一种生活', stat: '11.5 万播放', photo: 'sph-ambassador' },
+  { id: 'sph-teacher', platform: '视频号', title: '下课问教授哪里可以改进，他一句一句听我解释', stat: '11 万播放', photo: 'sph-teacher' },
+  { id: 'xhs-abroad', platform: '小红书', title: '希望你留学顺遂 如果走我来时的路', stat: '4784 赞', photo: 'xhs-abroad' },
   { id: 'sph-hainan', platform: '视频号', title: '海南推介会：大使馆文化参赞说「未来可期」', stat: '1.4 万播放', photo: 'hainan' },
   { id: 'nezha', platform: '小红书', title: '在荷兰看《哪吒2》：中式家庭的托举是一代又一代传下的接力棒', stat: '3287 浏览', photo: 'nezha-note' },
 ];
