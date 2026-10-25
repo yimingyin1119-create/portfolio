@@ -669,3 +669,21 @@ html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; 
 .half .case-leaf .vis, .half .vis { flex: 1 1 0; min-height: 0; }
 .half .vis img { max-height: 100%; }
 @media (max-width: 720px) { .half .vis { flex: none; height: 240px; } }
+
+/* a tighter, fuller book */
+.logbook .book-stage { max-width: 940px; margin-inline: auto; }
+.book { aspect-ratio: 16 / 9; min-height: 360px; }
+.pg { gap: 9px; padding: clamp(18px, 2.2vw, 28px) clamp(18px, 2.3vw, 30px) clamp(32px, 3vw, 40px); }
+.half .vis { flex: 1 1 0; }
+.leaf-one { font-size: 13px; line-height: 1.65; }
+.leaf-title { font-size: clamp(19px, 1.9vw, 24px); }
+.leaf-note { font-size: 14.5px; }
+.leaf-role { margin: 0; font-size: 13px; line-height: 1.6; color: var(--paper-muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.leaf-role b { margin-right: 8px; color: var(--paper-ink); font-weight: 700; }
+.leaf-did { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.6; display: grid; gap: 3px; }
+.leaf-did li::marker { color: var(--accent); }
+.leaf-num { padding-top: 9px; }
+.leaf-num b { font-size: clamp(20px, 2vw, 26px); }
+.book-arrow { color: var(--ink); opacity: .75; padding: 10px 4px; transition: opacity .2s, transform .2s var(--ease); }
+.book-arrow:hover { opacity: 1; transform: scale(1.1); }
+@media (max-width: 720px) { .book { aspect-ratio: auto; min-height: 0; } .book-arrow svg { width: 16px; height: 36px; } }

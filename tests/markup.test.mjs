@@ -271,3 +271,14 @@ test('more cases are a logbook: one spread per case, turn controls, a magnifier,
   assert.ok(/class="loupe"[^>]*aria-hidden="true"/.test(book));
   assert.ok(!c.includes('class="cases grid"'));
 });
+
+test('each logbook spread also shows my role and the first things I did', async () => {
+  const { CASES } = await import('../data/content.js');
+  const c = chapterHtml('cases');
+  for (const x of CASES.filter(x => !x.feat)) {
+    const leaf = c.slice(c.indexOf(`<article class="case-leaf" data-id="${x.id}"`), c.indexOf('</article>', c.indexOf(`<article class="case-leaf" data-id="${x.id}"`)));
+    assert.ok(textOf(leaf).includes(x.meta[0][1].slice(0, 12)), `${x.id} role`);
+    assert.ok(/<ul class="leaf-did">/.test(leaf), `${x.id} did`);
+    for (const d of x.did.slice(0, 2)) assert.ok(textOf(leaf).includes(d.slice(0, 12)), d);
+  }
+});

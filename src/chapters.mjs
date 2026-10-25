@@ -112,15 +112,17 @@ const caseFile = c => `<article class="case-file" id="case-${c.id}" data-case="$
   </article>`;
 // The other cases sit in a logbook: one spread per case, cover on the left page, the story on the right.
 // Without JS every spread is listed; with it, logbook.js turns the pages and lays a magnifier on them.
-const ARROW = d => `<svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true"><polyline points="${d < 0 ? '11,3 3,22 11,41' : '3,3 11,22 3,41'}" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const ARROW = d => `<svg viewBox="0 0 22 48" width="22" height="48" fill="none" aria-hidden="true"><polyline points="${d < 0 ? '17,4 5,24 17,44' : '5,4 17,24 5,44'}" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const LOUPE = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="M13 13l4.4 4.4"/></svg>';
 const leaf = (c, i) => {
   const vis = c.type
     ? `<div class="vis type${c.art ? ` art-${c.art}` : ''}"${c.art && c.art !== 'edit' ? ` data-art="${c.art}" data-seed="${c.seed || 1}"` : ''}><span class="tx">${c.type}</span></div>`
     : `<div class="vis${c.fit ? ' fit' : ''}">${img(c.img, '', { sizes: '(max-width: 720px) 90vw, 420px' })}</div>`;
   return `<article class="case-leaf" data-id="${c.id}" data-cat="${c.cat}">
-    <div class="pg l"><p class="pg-tag">${esc(c.tag)}</p>${vis}<span class="pg-n">${2 * i + 1}</span></div>
-    <div class="pg r"><h3 class="leaf-title">${esc(c.title)}</h3><p class="leaf-note">${esc(c.note)}</p><p class="leaf-one">${esc(c.one)}</p>
+    <div class="pg l"><p class="pg-tag">${esc(c.tag)}</p>${vis}<p class="leaf-one">${esc(c.one)}</p><span class="pg-n">${2 * i + 1}</span></div>
+    <div class="pg r"><h3 class="leaf-title">${esc(c.title)}</h3><p class="leaf-note">${esc(c.note)}</p>
+      <p class="leaf-role"><b>${esc(c.meta[0][0])}</b>${esc(c.meta[0][1])}</p>
+      <ul class="leaf-did">${c.did.slice(0, 3).map(d => `<li>${esc(d)}</li>`).join('')}</ul>
       <p class="leaf-num"><b>${esc(c.num[0])}</b><span>${esc(c.num[1])}</span></p>
       <a class="leaf-more" href="#case-${c.id}" data-open="${c.id}">${t('看完整案例 →')}</a><span class="pg-n">${2 * i + 2}</span></div>
   </article>`;
