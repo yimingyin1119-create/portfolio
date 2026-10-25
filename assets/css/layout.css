@@ -1,4 +1,4 @@
-.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); background: rgba(243, 239, 231, .92); border-bottom: 1px solid var(--line-faint); backdrop-filter: blur(6px); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); background: rgba(232, 213, 174, .94); border-bottom: 1px solid var(--line-faint); backdrop-filter: blur(6px); }
 .bar-in { max-width: 1160px; margin: 0 auto; height: 60px; display: flex; align-items: center; gap: 16px; }
 .brand { font-family: var(--f-script); font-size: 30px; text-decoration: none; line-height: 1; margin-right: auto; }
 .seg { display: inline-flex; padding: 3px; border: 1px solid var(--line-dim); border-radius: 999px; }
@@ -15,11 +15,9 @@
 .ch-head h2 { margin: 0; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.12; font-family: var(--f-display); font-weight: 900; letter-spacing: -.01em; }
 .ch-sub { margin: 10px 0 0; color: var(--muted); max-width: 40em; }
 /* between chapters: a strip of sprocket holes, like the edge of a reel */
-.chapter + .chapter::before {
-  content: ""; position: absolute; top: clamp(24px, 4vw, 44px); left: 0; right: 0; height: 10px;
-  background: repeating-linear-gradient(90deg, var(--line-faint) 0 14px, transparent 14px 26px);
-  -webkit-mask: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent); mask: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
-}
+/* chapters sit on the open sea of the chart: the route and an ornament fill the water between them */
+#chapters { position: relative; }
+#chapters > .chapter { z-index: 1; }
 .paper { background: var(--paper); color: var(--paper-ink); border-radius: var(--r); padding: 22px 24px; }
 .foot { max-width: 1160px; margin: 96px auto 0; padding: 24px 0 48px; border-top: 1px solid var(--line-faint); font-size: 13px; color: var(--faint); }
 

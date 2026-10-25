@@ -1,12 +1,12 @@
 // Static HTML for every chapter, rendered at build time from data/. Interactions are layered on by assets/js.
 import { chapter, esc, img } from './html.mjs';
-import { icon, stamp } from './art.mjs';
+import { icon, stamp, treasure } from './art.mjs';
 import { PROFILE, QUESTS, POSTERS, BADGES_NOVICE, CASES, WORKS } from '../data/content.js';
 import { levelFor, techRows, cueRules } from '../assets/js/bridge.js';
 import { COUNTRIES } from '../data/places.js';
 
 export const opening = () => `<section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
-  <div class="frame boot">
+  <div class="frame boot"><span class="roller top" aria-hidden="true"></span><span class="roller bottom" aria-hidden="true"></span>
     <span class="sig" aria-hidden="true">Earth Online</span>
     <ul class="hud" aria-label="玩家数值"><li>Class of <b>2027</b></li><li><b>26</b> 国</li><li><b>4</b> 段实习</li></ul>
     <div class="player">
@@ -196,4 +196,4 @@ export const viewfinder = () => chapter('viewfinder', 'VIEWFINDER', '取景器',
       <button type="button" class="chip reel-btn" data-reel="1" aria-label="往后翻">→</button>
     </div>
   </div>`, { sub: '想认识我的话，从这里开始：我总在拍东西，周末在羽毛球场，偶尔发点内容。' });
-export const contact = () => chapter('contact', 'ADD FRIEND', '加个好友', `<dl class="reach paper"><div><dt>微信</dt><dd><span id="c-wx">EmengYin</span><button type="button" class="chip" data-copy="c-wx">复制</button></dd></div><div><dt>邮箱</dt><dd><span id="c-mail">2091595480@qq.com</span><button type="button" class="chip" data-copy="c-mail">复制</button></dd></div><div><dt>PDF</dt><dd><span class="pdf">作品集打印版，可转发</span><a class="chip" href="%E5%B0%B9%E4%BC%8A%E8%8C%97_%E4%BD%9C%E5%93%81%E9%9B%86_%E8%93%9D%E8%89%B2%E5%85%89%E6%A0%87.pdf" download="尹伊茗_作品集_蓝色光标.pdf">下载</a></dd></div></dl>`, { sub: '复制微信号或邮箱，说一声你是从这里来的。' });
+export const contact = () => chapter('contact', 'ADD FRIEND', '加个好友', `<div class="contact-row"><dl class="reach paper"><div><dt>微信</dt><dd><span id="c-wx">EmengYin</span><button type="button" class="chip" data-copy="c-wx">复制</button></dd></div><div><dt>邮箱</dt><dd><span id="c-mail">2091595480@qq.com</span><button type="button" class="chip" data-copy="c-mail">复制</button></dd></div><div><dt>PDF</dt><dd><span class="pdf">作品集打印版，可转发</span><a class="chip" href="%E5%B0%B9%E4%BC%8A%E8%8C%97_%E4%BD%9C%E5%93%81%E9%9B%86_%E8%93%9D%E8%89%B2%E5%85%89%E6%A0%87.pdf" download="尹伊茗_作品集_蓝色光标.pdf">下载</a></dd></div></dl>${treasure()}</div>`, { sub: '复制微信号或邮箱，说一声你是从这里来的。' });

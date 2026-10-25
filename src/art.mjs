@@ -45,3 +45,21 @@ export const icon = name => `<svg class="icon" viewBox="0 0 40 40" aria-hidden="
 
 // A rubber stamp for finished quests
 export const stamp = () => `<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="${star(50, 50, 11, 4.5)}"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg>`;
+
+// Sea-chart ornaments for the open water between chapters (120×90), and the treasure mark at the end of the route.
+const rose = (cx, cy, R, r) => 'M' + Array.from({ length: 16 }, (_, i) => {
+  const a = -Math.PI / 2 + i * Math.PI / 8, d = i % 4 === 0 ? R : i % 2 === 0 ? R * .55 : r;
+  return `${(cx + d * Math.cos(a)).toFixed(1)} ${(cy + d * Math.sin(a)).toFixed(1)}`;
+}).join(' L') + ' Z';
+const WAVES = 'M6 82q7-6 14 0t14 0 14 0 14 0 14 0 14 0 14 0 14 0';
+const SEA = {
+  ship: [['path', 'M22 62h76l-11 14H33z'], ['path', 'M46 62V14M74 62V22'], ['path', 'M48 18c15 6 15 18 0 22zM48 44c17 5 17 14 0 18zM76 26c12 5 12 15 0 19zM76 48c12 4 12 10 0 14z'], ['path', 'M46 14l11 4-11 4', 1], ['path', WAVES]],
+  serpent: [['path', 'M10 74c6-30 22-30 26 0M42 74c6-36 24-36 28 0'], ['path', 'M76 74c2-26 18-36 30-22l8-3-4 9c-6 2-10 0-12-4-4 6-6 12-6 20', 0], ['circle', 'cx="101" cy="51" r="1.6"', 1], ['path', WAVES]],
+  compass: [['circle', 'cx="60" cy="48" r="30"'], ['circle', 'cx="60" cy="48" r="24"'], ['path', rose(60, 48, 38, 7)], ['path', 'M60 10l4 10h-8z', 1]],
+  anchor: [['circle', 'cx="60" cy="12" r="6"'], ['path', 'M60 18v58M46 30h28'], ['path', 'M28 58c3 22 18 28 32 28s29-6 32-28', 0], ['path', 'M28 58l-5 8M28 58l8 3M92 58l5 8M92 58l-8 3', 1]],
+  whale: [['path', 'M12 62c10-24 58-28 80-8 6-8 14-11 20-9-4 6-6 12-4 18-8 0-14-2-18-6-18 18-68 16-78 5z'], ['circle', 'cx="30" cy="56" r="1.8"'], ['path', 'M44 34c-2-8 4-10 2-16M44 34c4-6 10-4 12-10', 1], ['path', 'M6 84q7-6 14 0t14 0 14 0 14 0']],
+  waves: [['path', 'M8 36q8-7 16 0t16 0 16 0 16 0'], ['path', 'M40 56q8-7 16 0t16 0 16 0 16 0', 1], ['path', 'M14 76q8-7 16 0t16 0 16 0']],
+};
+export const SEA_ORDER = ['ship', 'serpent', 'compass', 'whale', 'anchor', 'waves'];
+export const sea = name => `<svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false">${shapes(SEA[name])}</svg>`;
+export const treasure = () => `<span class="treasure" aria-hidden="true"><svg viewBox="0 0 120 120" focusable="false"><path d="M24 24C48 46 74 74 98 98" pathLength="1"/><path d="M98 22C74 48 48 72 22 96" pathLength="1"/></svg><b>宝藏在这里</b></span>`;

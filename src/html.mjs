@@ -1,6 +1,9 @@
 // Small helpers for the build-time page generator.
 import { readFileSync } from 'node:fs';
-import { chapterArt } from './art.mjs';
+import { chapterArt, sea } from './art.mjs';
+
+// Open water above each chapter gets one chart ornament, on alternating sides.
+const SEA = { skills: ['waves', 'r'], quests: ['ship', 'l'], posters: ['whale', 'r'], cases: ['compass', 'l'], bridge: ['serpent', 'r'], novice: ['anchor', 'l'], map: ['waves', 'r'], abroad: ['ship', 'l'], viewfinder: ['serpent', 'r'], contact: ['whale', 'l'] };
 
 export const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
@@ -28,7 +31,8 @@ export function img(id, alt, { eager = false, cls = '', sizes = '(max-width: 720
 
 // A chapter: kicker in display Latin, title in heavy italic Chinese.
 export function chapter(id, kicker, title, body, { sub = '' } = {}) {
-  return `<section class="chapter" id="${id}" data-chapter="${id}" aria-labelledby="h-${id}">
+  const water = SEA[id] ? `<span class="water ${SEA[id][1]}">${sea(SEA[id][0])}</span>` : '';
+  return `<section class="chapter" id="${id}" data-chapter="${id}" aria-labelledby="h-${id}">${water}
   <header class="ch-head" data-reveal>${chapterArt(id)}<p class="kicker">${esc(kicker)}</p><h2 id="h-${id}">${title}</h2>${sub ? `<p class="ch-sub">${sub}</p>` : ''}</header>
   ${body}
 </section>`;

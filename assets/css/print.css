@@ -72,3 +72,10 @@ html.js .stage .top { clip-path: none; }
 /* a heading needs room for some of its chapter: reserve 60mm below it, then give the space back */
 .ch-head, .subh { break-inside: avoid; }
 .ch-head::after, .subh::after { content: ""; display: block; height: 60mm; margin-bottom: -60mm; }
+
+/* the chart dressing stays on screen */
+body::after, .chart-edge, .route, .roller, .water, .treasure { display: none !important; }
+body { background-image: none; }
+.boot { clip-path: none !important; box-shadow: none; background: #fff; padding-top: 28px; }
+.boot > .sig { position: static; display: block; margin-bottom: 6px; }
+.boot .hud { position: static; margin: 0 0 12px; }

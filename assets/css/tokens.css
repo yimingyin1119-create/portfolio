@@ -1,17 +1,17 @@
-/* Earth Online × film studio, printed: warm cream ground like photo paper, sand panels, white sheets for reading,
-   warm charcoal ink for text and line work. Film red marks what to look at or press; nothing else is red. */
+/* Earth Online as an old sea chart: kraft parchment ground with burnt edges, sepia ink for text and line work,
+   lighter parchment sheets for reading. Route red marks the way, what to press, and the treasure; nothing else is red. */
 @font-face { font-family: "Yellowtail"; src: url("../fonts/yellowtail-latin-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "EO Display"; src: url("../fonts/display-serif-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
 @font-face { font-family: "Oswald"; src: url("../fonts/oswald-latin-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
 :root {
   color-scheme: light;
-  --bg: #f3efe7; --bg-2: #e9e3d7; --card: #fbf9f4;
-  --line: #23201c; --line-dim: rgba(35, 32, 28, .2); --line-faint: rgba(35, 32, 28, .08);
-  --ink: #23201c; --muted: #6a645a; --faint: #9a9387;
-  --red: #c2362b; --red-soft: rgba(194, 54, 43, .09);
-  --paper: #fffdf8; --paper-ink: #23201c; --paper-muted: #6a645a; --paper-rule: #e6dfd1;
-  --gold: #b5852a;
+  --bg: #e8d5ae; --bg-2: #dcc497; --card: #f1e4c6;
+  --line: #3a2716; --line-dim: rgba(58, 39, 22, .26); --line-faint: rgba(58, 39, 22, .1);
+  --ink: #3a2716; --muted: #6b5236; --faint: #94795a;
+  --red: #a33a22; --red-soft: rgba(163, 58, 34, .1);
+  --paper: #f4e9cf; --paper-ink: #3a2716; --paper-muted: #6b5236; --paper-rule: #d9c49c;
+  --gold: #8a6a2c;
   --f-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
   --f-num: "Oswald", "DIN Condensed", "Arial Narrow", var(--f-sans);
   --f-display: "EO Display", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
