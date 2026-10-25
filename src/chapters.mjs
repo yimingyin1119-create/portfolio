@@ -123,7 +123,7 @@ export const cases = () => chapter('cases', 'CAPTAIN’S LOG', '航海日志 · 
 
 export const bridge = () => {
   const n = 17, L = levelFor(n);
-  return chapter('bridge', 'SKILL', '一件事，说给三种人听', `<div class="scen">
+  return chapter('bridge', 'SEND WORD', '传令 · 一件事说给三种人', `<div class="scen">
     <p class="lead">消费券活动第 28 天，核销比计划慢了 <output class="wavy" id="gapOut" for="gap">${n} 个百分点</output>。客户、技术和达人需要听到的，是三件不同的事。</p>
     <div class="dial">
       <label for="gap">拖动试试：核销落后多少</label><span class="lvl" id="lvl" data-s="${L.key}">${esc(L.name)}</span>
@@ -145,7 +145,7 @@ export const novice = () => chapter('novice', 'NOVICE VILLAGE', '新手村 · �
 export const map = () => {
   const years = [...new Set(COUNTRIES.map(c => c.year))];
   const list = years.map(y => `<li class="yr" data-year="${y}"><span class="yr-n">${y}</span><span class="yr-c">${COUNTRIES.filter(c => c.year === y).map(c => `<button type="button" class="cty" data-country="${c.id}">${esc(c.name)}</button>`).join('')}</span></li>`).join('');
-  return chapter('map', 'WORLD MAP', '地球 Online · 足迹', `<div class="atlas" data-reveal>
+  return chapter('map', 'SEA CHART', '航海图 · 去过的 26 国', `<div class="atlas" data-reveal>
     <div class="map-view">
       <div class="map-hud"><span class="pill"><b id="map-count">26</b> 国已解锁</span><button type="button" class="chip" data-reset-map hidden>全图</button><button type="button" class="chip" data-expand-map hidden>展开地图</button></div>
       <div class="map-clip"><div class="map-stage" aria-hidden="true"></div></div>
@@ -196,4 +196,4 @@ export const viewfinder = () => chapter('viewfinder', 'SPYGLASS', '望远镜 · 
       <button type="button" class="chip reel-btn" data-reel="1" aria-label="往后翻">→</button>
     </div>
   </div>`, { sub: '想认识我的话，从这里开始：我总在拍东西，周末在羽毛球场，偶尔发点内容。' });
-export const contact = () => chapter('contact', 'SIGNAL THE SHIP', '加个好友', `<div class="contact-row"><dl class="reach paper"><div><dt>微信</dt><dd><span id="c-wx">EmengYin</span><button type="button" class="chip" data-copy="c-wx">复制</button></dd></div><div><dt>邮箱</dt><dd><span id="c-mail">2091595480@qq.com</span><button type="button" class="chip" data-copy="c-mail">复制</button></dd></div><div><dt>PDF</dt><dd><span class="pdf">作品集打印版，可转发</span><a class="chip" href="%E5%B0%B9%E4%BC%8A%E8%8C%97_%E4%BD%9C%E5%93%81%E9%9B%86_%E8%93%9D%E8%89%B2%E5%85%89%E6%A0%87.pdf" download="尹伊茗_作品集_蓝色光标.pdf">下载</a></dd></div></dl>${treasure()}</div>`, { sub: '复制微信号或邮箱，说一声你是从这里来的。' });
+export const contact = () => chapter('contact', 'SIGNAL THE SHIP', '发信号 · 加个好友', `<div class="contact-row"><dl class="reach paper"><div><dt>微信</dt><dd><span id="c-wx">EmengYin</span><button type="button" class="chip" data-copy="c-wx">复制</button></dd></div><div><dt>邮箱</dt><dd><span id="c-mail">2091595480@qq.com</span><button type="button" class="chip" data-copy="c-mail">复制</button></dd></div><div><dt>PDF</dt><dd><span class="pdf">作品集打印版，可转发</span><a class="chip" href="%E5%B0%B9%E4%BC%8A%E8%8C%97_%E4%BD%9C%E5%93%81%E9%9B%86_%E8%93%9D%E8%89%B2%E5%85%89%E6%A0%87.pdf" download="尹伊茗_作品集_蓝色光标.pdf">下载</a></dd></div></dl>${treasure()}</div>`, { sub: '复制微信号或邮箱，说一声你是从这里来的。' });

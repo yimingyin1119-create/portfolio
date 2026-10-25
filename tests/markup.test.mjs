@@ -250,3 +250,9 @@ test('no Chinese is set in fake italics: only the decorative // mark slants', ()
     }
   }
 });
+
+test('chapter titles follow "theme word · plain words"', () => {
+  for (const [id, t] of [['bridge', '传令 · 一件事说给三种人'], ['contact', '发信号 · 加个好友'], ['map', '航海图 · 去过的 26 国']]) {
+    assert.ok(textOf(chapterHtml(id)).includes(t), id);
+  }
+});
