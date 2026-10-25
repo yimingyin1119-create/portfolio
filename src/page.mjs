@@ -13,7 +13,8 @@ const HEAD = `<!doctype html>
 <meta property="og:description" content="从让观众鼓掌，到让用户下单。">
 <meta name="theme-color" content="#ceae82">
 <link rel="preload" href="assets/fonts/yellowtail-latin-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/display-hand.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/text-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/display-song.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/layout.css">

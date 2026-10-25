@@ -1,3 +1,5 @@
+Source Han Serif CN (body, Medium and Bold) and 江城斜宋体 (titles, built on Source Han Serif): Copyright 2017 Adobe Systems Incorporated, SIL Open Font License 1.1. Subset to the characters used and renamed EO text-500 / text-700 / display-song, as the licence requires of modified copies.
+
 Noto Serif SC (titles, subset to the characters used): Copyright 2017 Adobe Systems Incorporated and Google LLC, licensed under the SIL Open Font License, Version 1.1 (below).
 Yellowtail and Oswald: see the copyright lines below.
 
