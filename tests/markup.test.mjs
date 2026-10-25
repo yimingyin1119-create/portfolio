@@ -209,3 +209,15 @@ test('frames and borders are never red; red is kept for buttons, text and drawin
     }
   }
 });
+
+test('every stylesheet and script URL carries a hash of its content, so a deploy is never mixed with a cached old file', async () => {
+  const { createHash } = await import('node:crypto');
+  const { readdirSync } = await import('node:fs');
+  const hash = p => createHash('sha256').update(readFileSync(new URL(`../${p}`, import.meta.url))).digest('hex').slice(0, 10);
+  for (const m of html.matchAll(/<link rel="stylesheet" href="([^"?]+)\?v=([0-9a-f]+)"/g)) assert.equal(m[2], hash(m[1]), m[1]);
+  assert.equal((html.match(/<link rel="stylesheet" href="[^"?]+"/g) ?? []).length, 0, 'unversioned stylesheet');
+  const map = JSON.parse(html.match(/<script type="importmap">([\s\S]*?)<\/script>/)[1]).imports;
+  const modules = [...readdirSync(new URL('../assets/js/', import.meta.url)).map(f => `assets/js/${f}`), 'data/content.js', 'data/places.js', 'assets/map/world.js'];
+  for (const p of modules) assert.equal(map[`./${p}`], `./${p}?v=${hash(p)}`, p);
+  assert.ok(html.indexOf('type="importmap"') < html.indexOf('type="module"'));
+});
