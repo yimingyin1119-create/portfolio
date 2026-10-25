@@ -11,7 +11,7 @@ const HEAD = `<!doctype html>
 <meta name="description" content="尹伊茗的作品集：从让观众鼓掌，到让用户下单。营销策划、导演天赋、AI 新解锁。">
 <meta property="og:title" content="尹伊茗 · 地球 Online">
 <meta property="og:description" content="从让观众鼓掌，到让用户下单。">
-<meta name="theme-color" content="#e8d5ae">
+<meta name="theme-color" content="#93b3a6">
 <link rel="preload" href="assets/fonts/yellowtail-latin-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/display-serif-900.woff2" as="font" type="font/woff2" crossorigin>
 <script>/* start the scroll-unroll before first paint; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>

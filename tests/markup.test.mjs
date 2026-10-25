@@ -191,12 +191,12 @@ test('the opening states both degrees', () => {
   for (const s of ['新加坡国立大学', '传播学（数据方向）硕士', '阿姆斯特丹大学', '媒体与信息本科']) assert.ok(t.includes(s), s);
 });
 
-test('the treasure-map palette: parchment ground, sepia ink, route red', () => {
+test('the sea-chart palette: sea-green ground, parchment land, sepia ink, route red', () => {
   const t = read('assets/css/tokens.css');
   const root = t.slice(t.indexOf(':root {'), t.indexOf('}', t.indexOf(':root {')));
   assert.ok(root.includes('color-scheme: light'));
-  for (const [k, v] of [['--bg', '#e8d5ae'], ['--ink', '#3a2716'], ['--red', '#a33a22']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
-  assert.ok(html.includes('<meta name="theme-color" content="#e8d5ae">'));
+  for (const [k, v] of [['--bg', '#93b3a6'], ['--card', '#efdcb0'], ['--ink', '#33261a'], ['--red', '#9e3520']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
+  assert.ok(html.includes('<meta name="theme-color" content="#93b3a6">'));
 });
 
 test('the opening is a scroll with two rollers, and the page carries a route layer and a treasure mark', () => {

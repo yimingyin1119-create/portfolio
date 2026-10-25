@@ -1,17 +1,18 @@
-/* Earth Online as an old sea chart: kraft parchment ground with burnt edges, sepia ink for text and line work,
-   lighter parchment sheets for reading. Route red marks the way, what to press, and the treasure; nothing else is red. */
+/* Earth Online as a hand-coloured sea chart: the page is sea-green water, every card is tan parchment land
+   with a pale shallow-water halo, sepia ink for text and line work. Route red marks the way, the buttons and the treasure. */
 @font-face { font-family: "Yellowtail"; src: url("../fonts/yellowtail-latin-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "EO Display"; src: url("../fonts/display-serif-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
 @font-face { font-family: "Oswald"; src: url("../fonts/oswald-latin-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
 :root {
   color-scheme: light;
-  --bg: #e8d5ae; --bg-2: #dcc497; --card: #f1e4c6;
-  --line: #3a2716; --line-dim: rgba(58, 39, 22, .26); --line-faint: rgba(58, 39, 22, .1);
-  --ink: #3a2716; --muted: #6b5236; --faint: #94795a;
-  --red: #a33a22; --red-soft: rgba(163, 58, 34, .1);
-  --paper: #f4e9cf; --paper-ink: #3a2716; --paper-muted: #6b5236; --paper-rule: #d9c49c;
-  --gold: #8a6a2c;
+  --bg: #93b3a6; --bg-2: #e2c58f; --card: #efdcb0;
+  --sea-deep: #7a9d91; --shallow: rgba(214, 233, 216, .6);
+  --line: #33261a; --line-dim: rgba(51, 38, 26, .3); --line-faint: rgba(51, 38, 26, .12);
+  --ink: #33261a; --muted: #4c3d2b; --faint: #6b5a43;
+  --red: #9e3520; --red-soft: rgba(158, 53, 32, .1);
+  --paper: #f3e3bb; --paper-ink: #33261a; --paper-muted: #5e4c35; --paper-rule: #d6bb85;
+  --gold: #7d5f22;
   --f-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
   --f-num: "Oswald", "DIN Condensed", "Arial Narrow", var(--f-sans);
   --f-display: "EO Display", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
@@ -31,7 +32,7 @@ body {
 }
 /* film grain over everything, never in the way */
 body::before {
-  content: ""; position: fixed; inset: -50%; z-index: 100; pointer-events: none; opacity: .045;
+  content: ""; position: fixed; inset: 0; z-index: 100; pointer-events: none; opacity: .045;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 img { max-width: 100%; height: auto; display: block; }
