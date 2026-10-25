@@ -30,7 +30,7 @@ test('hidden starting states only exist under html.motion or html.js', () => {
   for (const file of ['assets/css/layout.css', 'assets/css/components.css']) {
     const css = read(file).replace(/\/\*[\s\S]*?\*\//g, '').replace(/@keyframes[^{]+\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, '');
     for (const [, selector, body] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-      if (/opacity:\s*0(?![.\d])|visibility:\s*hidden/.test(body) && !/:hover|:focus|\[hidden\]|\.toast|::before|::after/.test(selector)) {
+      if (/opacity:\s*0(?![.\d])|(?<![-\w])visibility:\s*hidden/.test(body) && !/:hover|:focus|\[hidden\]|\.toast|::before|::after/.test(selector)) {
         for (const s of selector.split(',')) assert.ok(/^html\.(motion|js)\b/.test(s.trim()), `${file}: ${s.trim()}`);
       }
     }
@@ -255,4 +255,19 @@ test('chapter titles follow "theme word · plain words"', () => {
   for (const [id, t] of [['bridge', '传令 · 一件事说给三种人'], ['contact', '发信号 · 加个好友'], ['map', '航海图 · 去过的 26 国']]) {
     assert.ok(textOf(chapterHtml(id)).includes(t), id);
   }
+});
+
+test('more cases are a logbook: one spread per case, turn controls, a magnifier, readable without JS', async () => {
+  const { CASES } = await import('../data/content.js');
+  const c = chapterHtml('cases');
+  const book = c.slice(c.indexOf('class="logbook"'), c.indexOf('class="dossier"'));
+  for (const x of CASES.filter(x => !x.feat)) {
+    assert.ok(new RegExp(`<article class="case-leaf"[^>]*data-id="${x.id}"[^>]*data-cat="${x.cat}"`).test(book), x.id);
+    assert.ok(new RegExp(`href="#case-${x.id}"[^>]*data-open="${x.id}"`).test(book), `${x.id} link`);
+  }
+  assert.equal((book.match(/<article class="case-leaf"/g) ?? []).length, CASES.filter(x => !x.feat).length);
+  assert.ok(book.includes('data-turn="-1"') && book.includes('data-turn="1"'));
+  assert.ok(/<button[^>]+data-loupe[^>]+aria-pressed="true"/.test(book));
+  assert.ok(/class="loupe"[^>]*aria-hidden="true"/.test(book));
+  assert.ok(!c.includes('class="cases grid"'));
 });

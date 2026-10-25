@@ -110,13 +110,42 @@ const caseFile = c => `<article class="case-file" id="case-${c.id}" data-case="$
     ${c.shots ? `<h4>${t('分镜改写成 AI 视频提示词')}</h4><div class="tablewrap"><table class="shotlist"><thead><tr><th>${t('镜号')}</th><th>${t('我的分镜')}</th><th>${t('视频提示词')}</th></tr></thead><tbody>${SHOTS().map(r => `<tr><td>${r[0]}</td><td>${esc(r[1])}</td><td class="p">${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>` : ''}
     ${c.imgs ? `<div class="imgs">${c.imgs.map(([k, cap]) => `<figure>${img(k, cap, { sizes: '(max-width: 720px) 90vw, 280px' })}<figcaption>${esc(cap)}</figcaption></figure>`).join('')}</div>` : ''}
   </article>`;
+// The other cases sit in a logbook: one spread per case, cover on the left page, the story on the right.
+// Without JS every spread is listed; with it, logbook.js turns the pages and lays a magnifier on them.
+const ARROW = d => `<svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true"><polyline points="${d < 0 ? '11,3 3,22 11,41' : '3,3 11,22 3,41'}" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const LOUPE = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="M13 13l4.4 4.4"/></svg>';
+const leaf = (c, i) => {
+  const vis = c.type
+    ? `<div class="vis type${c.art ? ` art-${c.art}` : ''}"${c.art && c.art !== 'edit' ? ` data-art="${c.art}" data-seed="${c.seed || 1}"` : ''}><span class="tx">${c.type}</span></div>`
+    : `<div class="vis${c.fit ? ' fit' : ''}">${img(c.img, '', { sizes: '(max-width: 720px) 90vw, 420px' })}</div>`;
+  return `<article class="case-leaf" data-id="${c.id}" data-cat="${c.cat}">
+    <div class="pg l"><p class="pg-tag">${esc(c.tag)}</p>${vis}<span class="pg-n">${2 * i + 1}</span></div>
+    <div class="pg r"><h3 class="leaf-title">${esc(c.title)}</h3><p class="leaf-note">${esc(c.note)}</p><p class="leaf-one">${esc(c.one)}</p>
+      <p class="leaf-num"><b>${esc(c.num[0])}</b><span>${esc(c.num[1])}</span></p>
+      <a class="leaf-more" href="#case-${c.id}" data-open="${c.id}">${t('看完整案例 →')}</a><span class="pg-n">${2 * i + 2}</span></div>
+  </article>`;
+};
+const logbook = list => `<div class="logbook">
+    <div class="book-stage">
+      <button type="button" class="book-arrow" data-turn="-1" aria-label="${t('上一页')}">${ARROW(-1)}</button>
+      <div class="book-3d" tabindex="0" aria-label="${t('案例日志，左右键翻页')}">
+        <div class="book" aria-live="polite"></div>
+        <div class="zoomwrap" aria-hidden="true"><div class="zoominner"></div></div>
+        <div class="loupe" aria-hidden="true"><span class="grip"></span><span class="ring"><span class="lens"></span></span></div>
+      </div>
+      <button type="button" class="book-arrow" data-turn="1" aria-label="${t('下一页')}">${ARROW(1)}</button>
+    </div>
+    <div class="book-tools"><span class="book-count">1 / ${list.length}</span><span class="tool-sep" aria-hidden="true"></span><button type="button" class="book-tool" data-loupe aria-pressed="true" aria-label="${t('放大镜')}">${LOUPE}</button></div>
+    <p class="book-hint">${t('拖动书页翻页 · 拖动放大镜看细节')}</p>
+    <div class="leaves">${list.map(leaf).join('')}</div>
+  </div>`;
 const FILTERS = () => [['all', t('全部')], ['insight', t('洞察')], ['campaign', t('战役')], ['content', t('内容')], ['creative', t('创意')]];
 export const cases = () => chapter('cases', 'CAPTAIN’S LOG', t('航海日志 · 案例'), `<h3 class="subh">${t('代表项目 · 抖音')}</h3>
   <div class="cases feat">${data().CASES.filter(c => c.feat).map(caseCard).join('')}</div>
   <div class="exhibit paper" data-reveal><div class="exhibit-tx"><p class="kicker">${t('透视镜 · 拼多多拆解')}</p><p>${t('同一张弹窗，用户看到的是奖励，我看到的是三处设计。拖动镜片看看，或者切到「找茬」自己找。')}</p><button type="button" class="chip" data-open="pdd">${t('看完整案例 →')}</button></div>${xray()}</div>
   <h3 class="subh">${t('更多案例')}</h3>
   <div class="filters" role="group" aria-label="${t('按方向筛选')}">${FILTERS().map(([f, t], i) => `<button type="button" aria-pressed="${i === 0}" data-f="${f}">${t}</button>`).join('')}</div>
-  <div class="cases grid">${data().CASES.filter(c => !c.feat).map(caseCard).join('')}</div>
+  ${logbook(data().CASES.filter(c => !c.feat))}
   <section class="dossier" aria-label="${t('案例详情')}"><h3 class="subh">${t('案例详情')}</h3>${data().CASES.map(caseFile).join('')}</section>
   <dialog class="drawer" aria-labelledby="dw-title"><div class="dw"></div></dialog>`, { sub: t('点开卡片看我做了什么。抖音项目只写概数，团队成果都标了我的角色。') });
 

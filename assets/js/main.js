@@ -2,6 +2,7 @@ import { initReveal } from './motion.js';
 import { initOpening } from './opening.js';
 import { initQuests } from './quests.js';
 import { initCases } from './cases.js';
+import { initLogbook } from './logbook.js';
 import { initBridge } from './bridge.js';
 import { initReel } from './reel.js';
 import { initRoute } from './route.js';
@@ -46,6 +47,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && !achList.h
 run('opening', () => initOpening({ tracker }));
 run('quests', () => initQuests({ tracker }));
 run('cases', () => initCases({ tracker }));
+run('logbook', () => initLogbook());
 run('bridge', () => initBridge());
 run('reel', () => initReel({ tracker }));
 run('route', () => initRoute());

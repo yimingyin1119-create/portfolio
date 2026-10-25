@@ -1,5 +1,5 @@
 import { L } from './i18n.js';
-// Case files: cards open their written-out file in a drawer, filters narrow the grid,
+// Case files: cards open their written-out file in a drawer,
 // covers are drawn in code, and the x-ray lens works wherever it appears.
 const reduce = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -61,18 +61,12 @@ export function initCases({ tracker } = {}) {
   });
   // quest cards, the lens exhibit and anything else can point at a case
   document.addEventListener('click', e => {
-    const b = e.target.closest('button[data-open]');
-    if (b && !dlg.contains(b)) open(b.dataset.open, b);
+    const b = e.target.closest('[data-open]');
+    if (!b || dlg.contains(b)) return;
+    e.preventDefault(); open(b.dataset.open, b);
   });
 
-  // filters
-  const grid = root.querySelector('.cases.grid');
-  const btns = [...root.querySelectorAll('.filters button')];
-  btns.forEach(b => b.addEventListener('click', () => {
-    btns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
-    grid.querySelectorAll('.case').forEach(c => { c.hidden = !(b.dataset.f === 'all' || c.dataset.cat === b.dataset.f); });
-    balance();
-  }));
+  // filters live in logbook.js: they choose which cases the book holds
   // a lone last card in a row spans the row instead of sitting by itself
   function balance() {
     root.querySelectorAll('.cases').forEach(g => {

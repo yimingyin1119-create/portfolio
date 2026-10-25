@@ -106,6 +106,12 @@ export const EN = {
   '案例详情': 'Case details',
   '点开卡片看我做了什么。抖音项目只写概数，团队成果都标了我的角色。': 'Open a card to see what I did. Douyin figures are rounded, and every team result names my role.',
 
+  '上一页': 'Previous page',
+  '下一页': 'Next page',
+  '案例日志，左右键翻页': 'Case logbook; arrow keys turn the pages',
+  '放大镜': 'Magnifier',
+  '拖动书页翻页 · 拖动放大镜看细节': 'Drag a page to turn it · drag the glass over it for detail',
+
   // bridge
   '传令 · 一件事说给三种人': 'Send Word · One problem, three audiences',
   '消费券活动第 28 天，核销比计划慢了': 'Day 28 of a voucher campaign, and redemption is',

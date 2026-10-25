@@ -16,8 +16,8 @@
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css?v=fc4017083f">
 <link rel="stylesheet" href="assets/css/layout.css?v=18519209a8">
-<link rel="stylesheet" href="assets/css/components.css?v=ee56b6b0dd">
-<link rel="stylesheet" href="assets/css/print.css?v=a11c5d8bf4" media="print">
+<link rel="stylesheet" href="assets/css/components.css?v=36e7ad3061">
+<link rel="stylesheet" href="assets/css/print.css?v=d6313624ed" media="print">
 </head>
 <body>
 <nav class="bar" aria-label="主导航"><div class="bar-in">
@@ -166,25 +166,65 @@
   </figure></div>
   <h3 class="subh">更多案例</h3>
   <div class="filters" role="group" aria-label="按方向筛选"><button type="button" aria-pressed="true" data-f="all">全部</button><button type="button" aria-pressed="false" data-f="insight">洞察</button><button type="button" aria-pressed="false" data-f="campaign">战役</button><button type="button" aria-pressed="false" data-f="content">内容</button><button type="button" aria-pressed="false" data-f="creative">创意</button></div>
-  <div class="cases grid"><a class="case" href="#case-pdd" data-id="pdd" data-cat="insight" aria-haspopup="dialog"><div class="vis"><img src="assets/img/pdd_share-s.webp" srcset="assets/img/pdd_share-s.webp 480w, assets/img/pdd_share-l.webp 520w" sizes="(max-width: 720px) 90vw, 380px" width="520" height="1040" alt="" loading="lazy" decoding="async"></div>
-    <span class="bd"><span class="tag">增长拆解 · 拼多多</span><span class="h">拼多多怎样把「玩游戏」变成「下单」</span><span class="note">游戏入口和购物入口放在同一层，玩和买的边界被抹掉了。</span>
-    <span class="num"><b>51</b><span>处分享入口，数量最多</span></span></span></a><a class="case" href="#case-changshu" data-id="changshu" data-cat="campaign" aria-haspopup="dialog"><div class="vis fit"><img src="assets/img/sina_plan-s.webp" srcset="assets/img/sina_plan-s.webp 480w, assets/img/sina_plan-l.webp 820w" sizes="(max-width: 720px) 90vw, 380px" width="820" height="326" alt="" loading="lazy" decoding="async"></div>
-    <span class="bd"><span class="tag">城市传播 · 新浪江苏</span><span class="h">#常熟的常红范儿#：让大 V 替城市说话</span><span class="note">城市宣传最怕自说自话。</span>
-    <span class="num"><b>4310 万</b><span>项目整体：主话题阅读，同城热搜 10 小时</span></span></span></a><a class="case" href="#case-ip" data-id="ip" data-cat="content" aria-haspopup="dialog"><div class="vis type art-feed" data-art="feed" data-seed="5"><span class="tx">选题、拍摄、剪辑、<br><em>接商单</em>，都自己来</span></div>
-    <span class="bd"><span class="tag">个人 IP · 小红书 / 视频号 / 抖音</span><span class="h">一个人的内容矩阵：旅行、留学和文化</span><span class="note">博主和品牌合作，两边我都做过。</span>
-    <span class="num"><b>44.6 万</b><span>视频号单条最高播放</span></span></span></a><a class="case" href="#case-eco" data-id="eco" data-cat="campaign" aria-haspopup="dialog"><div class="vis"><img src="assets/img/sina_hooks-s.webp" srcset="assets/img/sina_hooks-s.webp 480w, assets/img/sina_hooks-l.webp 900w" sizes="(max-width: 720px) 90vw, 380px" width="900" height="657" alt="" loading="lazy" decoding="async"></div>
-    <span class="bd"><span class="tag">政务传播 × AIGC · 新浪江苏</span><span class="h">13 个城市，13 种物种，一套 AIGC 视觉</span><span class="note">环保话题的难点是「和我有什么关系」。</span>
-    <span class="num"><b>13</b><span>地市系列海报</span></span></span></a><a class="case" href="#case-news" data-id="news" data-cat="insight" aria-haspopup="dialog"><div class="vis"><img src="assets/img/news_rank-s.webp" srcset="assets/img/news_rank-s.webp 480w, assets/img/news_rank-l.webp 820w" sizes="(max-width: 720px) 90vw, 380px" width="820" height="597" alt="" loading="lazy" decoding="async"></div>
-    <span class="bd"><span class="tag">话题洞察 · 数据新闻</span><span class="h">声量很大，需求很小：新闻专业还值得报吗</span><span class="note">声量不等于需求。</span>
-    <span class="num"><b>3946 → 12190</b><span>某 211 高校新闻专业投档位次，四年</span></span></span></a><a class="case" href="#case-tennis" data-id="tennis" data-cat="content" aria-haspopup="dialog"><div class="vis type art-court" data-art="court" data-seed="6"><span class="tx">把一位<em>全美冠军</em><br>介绍给抖音</span></div>
-    <span class="bd"><span class="tag">运动员 IP · 抖音 · 2025 秋</span><span class="h">给一位 NCAA 冠军做抖音 IP</span><span class="note">3 个月、13 条短视频、2 人团队。</span>
-    <span class="num"><b>500 万+</b><span>全平台累计播放，3 个月</span></span></span></a><a class="case" href="#case-kol" data-id="kol" data-cat="insight" aria-haspopup="dialog"><div class="vis type art-crack" data-art="crack" data-seed="7"><span class="tx">人设越<em>精致</em>，<br>崩塌时越疼</span></div>
-    <span class="bd"><span class="tag">KOL 风险 · 综艺与社交平台</span><span class="h">一个「才女」人设，是怎么在综艺里塌掉的</span><span class="note">人设是资产，也是负债。</span>
-    <span class="num"><b>3 步</b><span>从被喜欢到被反噬</span></span></span></a><a class="case" href="#case-craft" data-id="craft" data-cat="creative" aria-haspopup="dialog"><div class="vis type art-edit"><span class="tx"><del>「难缠的上司」</del><ins>大酒肚和地中海</ins></span></div>
-    <span class="bd"><span class="tag">创意基本功 · 文案与分镜</span><span class="h">改稿和分镜：AIGC 之前的基本功</span><span class="note">形容词换成画面。</span>
-    <span class="num"><b>382 → 523 字</b><span>一篇微小说的二稿</span></span></span></a><a class="case" href="#case-chinadaily" data-id="chinadaily" data-cat="content" aria-haspopup="dialog"><div class="vis type art-globe" data-art="globe" data-seed="8"><span class="tx">同一个热点，<br>讲给<em>英语用户</em>听</span></div>
-    <span class="bd"><span class="tag">海外社媒 · 中国日报 TikTok · 2024 暑期</span><span class="h">把中文热点讲给英语用户听</span><span class="note">不是逐句翻译，是按英语用户的习惯重新讲。</span>
-    <span class="num"><b>13 篇</b><span>中文热点本地化再创作</span></span></span></a></div>
+  <div class="logbook">
+    <div class="book-stage">
+      <button type="button" class="book-arrow" data-turn="-1" aria-label="上一页"><svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true"><polyline points="11,3 3,22 11,41" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="book-3d" tabindex="0" aria-label="案例日志，左右键翻页">
+        <div class="book" aria-live="polite"></div>
+        <div class="zoomwrap" aria-hidden="true"><div class="zoominner"></div></div>
+        <div class="loupe" aria-hidden="true"><span class="grip"></span><span class="ring"><span class="lens"></span></span></div>
+      </div>
+      <button type="button" class="book-arrow" data-turn="1" aria-label="下一页"><svg viewBox="0 0 14 44" width="14" height="44" fill="none" aria-hidden="true"><polyline points="3,3 11,22 3,41" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <div class="book-tools"><span class="book-count">1 / 9</span><span class="tool-sep" aria-hidden="true"></span><button type="button" class="book-tool" data-loupe aria-pressed="true" aria-label="放大镜"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8"/><path d="M13 13l4.4 4.4"/></svg></button></div>
+    <p class="book-hint">拖动书页翻页 · 拖动放大镜看细节</p>
+    <div class="leaves"><article class="case-leaf" data-id="pdd" data-cat="insight">
+    <div class="pg l"><p class="pg-tag">增长拆解 · 拼多多</p><div class="vis"><img src="assets/img/pdd_share-s.webp" srcset="assets/img/pdd_share-s.webp 480w, assets/img/pdd_share-l.webp 520w" sizes="(max-width: 720px) 90vw, 420px" width="520" height="1040" alt="" loading="lazy" decoding="async"></div><span class="pg-n">1</span></div>
+    <div class="pg r"><h3 class="leaf-title">拼多多怎样把「玩游戏」变成「下单」</h3><p class="leaf-note">游戏入口和购物入口放在同一层，玩和买的边界被抹掉了。</p><p class="leaf-one">用新账号把拼多多的游戏页全部走一遍，逐个记录能点的元素，看每个动作最后指向哪里。</p>
+      <p class="leaf-num"><b>51</b><span>处分享入口，数量最多</span></p>
+      <a class="leaf-more" href="#case-pdd" data-open="pdd">看完整案例 →</a><span class="pg-n">2</span></div>
+  </article><article class="case-leaf" data-id="changshu" data-cat="campaign">
+    <div class="pg l"><p class="pg-tag">城市传播 · 新浪江苏</p><div class="vis fit"><img src="assets/img/sina_plan-s.webp" srcset="assets/img/sina_plan-s.webp 480w, assets/img/sina_plan-l.webp 820w" sizes="(max-width: 720px) 90vw, 420px" width="820" height="326" alt="" loading="lazy" decoding="async"></div><span class="pg-n">3</span></div>
+    <div class="pg r"><h3 class="leaf-title">#常熟的常红范儿#：让大 V 替城市说话</h3><p class="leaf-note">城市宣传最怕自说自话。</p><p class="leaf-one">为常熟市委宣传部策划的微博城市传播方案：跨领域大 V 走访三天，中间办一场沙龙。</p>
+      <p class="leaf-num"><b>4310 万</b><span>项目整体：主话题阅读，同城热搜 10 小时</span></p>
+      <a class="leaf-more" href="#case-changshu" data-open="changshu">看完整案例 →</a><span class="pg-n">4</span></div>
+  </article><article class="case-leaf" data-id="ip" data-cat="content">
+    <div class="pg l"><p class="pg-tag">个人 IP · 小红书 / 视频号 / 抖音</p><div class="vis type art-feed" data-art="feed" data-seed="5"><span class="tx">选题、拍摄、剪辑、<br><em>接商单</em>，都自己来</span></div><span class="pg-n">5</span></div>
+    <div class="pg r"><h3 class="leaf-title">一个人的内容矩阵：旅行、留学和文化</h3><p class="leaf-note">博主和品牌合作，两边我都做过。</p><p class="leaf-one">独立运营旅行、留学、文化方向的个人账号矩阵，三个平台的选题、脚本、拍摄剪辑和发布都自己做。</p>
+      <p class="leaf-num"><b>44.6 万</b><span>视频号单条最高播放</span></p>
+      <a class="leaf-more" href="#case-ip" data-open="ip">看完整案例 →</a><span class="pg-n">6</span></div>
+  </article><article class="case-leaf" data-id="eco" data-cat="campaign">
+    <div class="pg l"><p class="pg-tag">政务传播 × AIGC · 新浪江苏</p><div class="vis"><img src="assets/img/sina_hooks-s.webp" srcset="assets/img/sina_hooks-s.webp 480w, assets/img/sina_hooks-l.webp 900w" sizes="(max-width: 720px) 90vw, 420px" width="900" height="657" alt="" loading="lazy" decoding="async"></div><span class="pg-n">7</span></div>
+    <div class="pg r"><h3 class="leaf-title">13 个城市，13 种物种，一套 AIGC 视觉</h3><p class="leaf-note">环保话题的难点是「和我有什么关系」。</p><p class="leaf-one">为江苏省生态环境厅官微做的生物多样性日和全国生态日方案；如果今天重做，物种海报直接用 AIGC 出整套样稿。</p>
+      <p class="leaf-num"><b>13</b><span>地市系列海报</span></p>
+      <a class="leaf-more" href="#case-eco" data-open="eco">看完整案例 →</a><span class="pg-n">8</span></div>
+  </article><article class="case-leaf" data-id="news" data-cat="insight">
+    <div class="pg l"><p class="pg-tag">话题洞察 · 数据新闻</p><div class="vis"><img src="assets/img/news_rank-s.webp" srcset="assets/img/news_rank-s.webp 480w, assets/img/news_rank-l.webp 820w" sizes="(max-width: 720px) 90vw, 420px" width="820" height="597" alt="" loading="lazy" decoding="async"></div><span class="pg-n">9</span></div>
+    <div class="pg r"><h3 class="leaf-title">声量很大，需求很小：新闻专业还值得报吗</h3><p class="leaf-note">声量不等于需求。</p><p class="leaf-one">2023 年「新闻是天坑」反复上热搜。我们去找数据：投档位次、搜索指数、豆瓣「后悔」小组词频，再加采访。</p>
+      <p class="leaf-num"><b>3946 → 12190</b><span>某 211 高校新闻专业投档位次，四年</span></p>
+      <a class="leaf-more" href="#case-news" data-open="news">看完整案例 →</a><span class="pg-n">10</span></div>
+  </article><article class="case-leaf" data-id="tennis" data-cat="content">
+    <div class="pg l"><p class="pg-tag">运动员 IP · 抖音 · 2025 秋</p><div class="vis type art-court" data-art="court" data-seed="6"><span class="tx">把一位<em>全美冠军</em><br>介绍给抖音</span></div><span class="pg-n">11</span></div>
+    <div class="pg r"><h3 class="leaf-title">给一位 NCAA 冠军做抖音 IP</h3><p class="leaf-note">3 个月、13 条短视频、2 人团队。</p><p class="leaf-one">为 NCAA 全美男单冠军网球运动员打造抖音 IP，带 2 人团队负责选题策划、内容与人设。</p>
+      <p class="leaf-num"><b>500 万+</b><span>全平台累计播放，3 个月</span></p>
+      <a class="leaf-more" href="#case-tennis" data-open="tennis">看完整案例 →</a><span class="pg-n">12</span></div>
+  </article><article class="case-leaf" data-id="kol" data-cat="insight">
+    <div class="pg l"><p class="pg-tag">KOL 风险 · 综艺与社交平台</p><div class="vis type art-crack" data-art="crack" data-seed="7"><span class="tx">人设越<em>精致</em>，<br>崩塌时越疼</span></div><span class="pg-n">13</span></div>
+    <div class="pg r"><h3 class="leaf-title">一个「才女」人设，是怎么在综艺里塌掉的</h3><p class="leaf-note">人设是资产，也是负债。</p><p class="leaf-one">文案博主方琦在《乘风破浪》第六季的点评被批空泛，网友随后逐字比对她的成名金句，发现是拼接的。</p>
+      <p class="leaf-num"><b>3 步</b><span>从被喜欢到被反噬</span></p>
+      <a class="leaf-more" href="#case-kol" data-open="kol">看完整案例 →</a><span class="pg-n">14</span></div>
+  </article><article class="case-leaf" data-id="craft" data-cat="creative">
+    <div class="pg l"><p class="pg-tag">创意基本功 · 文案与分镜</p><div class="vis type art-edit"><span class="tx"><del>「难缠的上司」</del><ins>大酒肚和地中海</ins></span></div><span class="pg-n">15</span></div>
+    <div class="pg r"><h3 class="leaf-title">改稿和分镜：AIGC 之前的基本功</h3><p class="leaf-note">形容词换成画面。</p><p class="leaf-one">一篇写广告人妈妈的微小说的两版改稿，和一张改写成 AI 视频提示词的分镜表。</p>
+      <p class="leaf-num"><b>382 → 523 字</b><span>一篇微小说的二稿</span></p>
+      <a class="leaf-more" href="#case-craft" data-open="craft">看完整案例 →</a><span class="pg-n">16</span></div>
+  </article><article class="case-leaf" data-id="chinadaily" data-cat="content">
+    <div class="pg l"><p class="pg-tag">海外社媒 · 中国日报 TikTok · 2024 暑期</p><div class="vis type art-globe" data-art="globe" data-seed="8"><span class="tx">同一个热点，<br>讲给<em>英语用户</em>听</span></div><span class="pg-n">17</span></div>
+    <div class="pg r"><h3 class="leaf-title">把中文热点讲给英语用户听</h3><p class="leaf-note">不是逐句翻译，是按英语用户的习惯重新讲。</p><p class="leaf-one">在中国日报海外社交媒体部远程实习，参与 TikTok 官方账号的日常运营，把中文热点改写成英语受众的内容。</p>
+      <p class="leaf-num"><b>13 篇</b><span>中文热点本地化再创作</span></p>
+      <a class="leaf-more" href="#case-chinadaily" data-open="chinadaily">看完整案例 →</a><span class="pg-n">18</span></div>
+  </article></div>
+  </div>
   <section class="dossier" aria-label="案例详情"><h3 class="subh">案例详情</h3><article class="case-file" id="case-shaanxi" data-case="shaanxi">
     <p class="tag">省级文旅政企合作 · 2026 暑期</p><h3>#心动陕西畅游计划：一个省的暑期文旅消费季</h3><p class="one">陕西省文旅厅指导、陕旅集团统筹的省级暑期文旅促消费专项，覆盖全省景区和酒店，周期约 4 个月。</p>
     <dl class="meta"><div><dt>我的角色</dt><dd>不是总负责人，这些事都亲手做过：资源谈判、领导接待、线上会场与线下物料、平台 IP 进直播间的设计；内宣与视频；畅游卡与旅交会；项目周报</dd></div><div><dt>所属</dt><dd>抖音实习 · 2026 暑期</dd></div><div><dt>合作方</dt><dd>陕西省文旅厅、陕旅集团</dd></div></dl>
@@ -450,7 +490,7 @@
 </main>
 <p class="the-end" aria-hidden="true">Bon Voyage</p>
 <footer class="foot">© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，饭搭子演示版的数据为预置</footer>
-<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=39f069c054","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=52ca4775b7","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/main.js":"./assets/js/main.js?v=35f3db75fb","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=036d8cbff3","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/opening.js":"./assets/js/opening.js?v=b831b02a26","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=8638a29fad","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
-<script type="module" src="assets/js/main.js?v=35f3db75fb"></script>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=52ca4775b7","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=599bc4e641","./assets/js/main.js":"./assets/js/main.js?v=2927599cc2","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=036d8cbff3","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/opening.js":"./assets/js/opening.js?v=b831b02a26","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=8638a29fad","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="module" src="assets/js/main.js?v=2927599cc2"></script>
 </body>
 </html>

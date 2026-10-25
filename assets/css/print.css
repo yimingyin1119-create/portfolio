@@ -15,7 +15,7 @@ body::before { display: none; }
 
 /* chrome and controls that only make sense on screen */
 .bar, #toast, .pick, .filters, .reel-btn, .scrub, .map-view, .map-hud, .card-layer, dialog, .flip, .modes, .ring, .dial, .exhibit, .screen,
-.cases, .attr-i, .reach .chip, button.chip, .caret { display: none !important; }
+.cases, .logbook, .attr-i, .reach .chip, button.chip, .caret { display: none !important; }
 
 /* everything that waits for scrolling or a click is shown as-is */
 [data-reveal] { opacity: 1 !important; transform: none !important; }
