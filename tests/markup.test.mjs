@@ -190,3 +190,11 @@ test('the opening states both degrees', () => {
   const t = textOf(chapterHtml('opening'));
   for (const s of ['新加坡国立大学', '传播学（数据方向）硕士', '阿姆斯特丹大学', '媒体与信息本科']) assert.ok(t.includes(s), s);
 });
+
+test('the light palette: pearl gray ground, misty blue panels, dewdrop yellow paper', () => {
+  const t = read('assets/css/tokens.css');
+  const root = t.slice(t.indexOf(':root {'), t.indexOf('}', t.indexOf(':root {')));
+  assert.ok(root.includes('color-scheme: light'));
+  for (const [k, v] of [['--bg', '#f5f5f5'], ['--bg-2', '#e0f7fa'], ['--paper', '#fff9c4']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
+  assert.ok(html.includes('<meta name="theme-color" content="#f5f5f5">'));
+});
