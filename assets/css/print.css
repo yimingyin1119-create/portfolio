@@ -1,0 +1,74 @@
+/* Print / PDF: the interviewer reading order on white paper. Nothing moves, nothing is hidden behind a click,
+   every case is written out, and the demos print their web address. */
+@page { size: A4; margin: 14mm 14mm 16mm; }
+:root {
+  color-scheme: light;
+  --bg: #fff; --bg-2: #f4f2ee; --card: #fff;
+  --line: #1b1a19; --line-dim: #cfc9bf; --line-faint: #e6e1d8;
+  --ink: #1b1a19; --muted: #55514b; --faint: #7a756d;
+  --paper: #f6f3ee;
+}
+html, body { background: #fff !important; color: var(--ink); }
+body { padding-inline: 0; font-size: 12.5px; line-height: 1.65; }
+body::before { display: none; }
+* { animation: none !important; transition: none !important; }
+
+/* chrome and controls that only make sense on screen */
+.bar, #toast, .pick, .filters, .reel-btn, .scrub, .map-view, .map-hud, .card-layer, dialog, .flip, .modes, .ring, .dial, .exhibit, .screen,
+.cases, .attr-i, .reach .chip, button.chip, .caret { display: none !important; }
+
+/* everything that waits for scrolling or a click is shown as-is */
+[data-reveal] { opacity: 1 !important; transform: none !important; }
+.proof { max-height: none !important; opacity: 1 !important; margin: 4px 2px 0 !important; overflow: visible !important; }
+.poster .beam { opacity: 1 !important; }
+.poster .sheet { filter: none !important; }
+.develop img { filter: none !important; }
+html.js .dossier { display: grid !important; }
+.atlas, .atlas.compact { display: block; }
+.atlas.compact .countries { display: grid; }
+.countries { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+html.js .stage .top { clip-path: none; }
+
+/* flip cards print both faces, front then back */
+.quest-in { transform: none !important; display: block !important; }
+.side { transform: none !important; backface-visibility: visible !important; position: static !important; }
+.side.back { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line-dim); }
+
+.chapter { padding-block: 22px 0; }
+.chapter + .chapter::before { display: none; }
+.ch-head { margin-bottom: 14px; }
+.ch-head h2 { font-size: 26px; }
+.opening { padding-top: 0; }
+.player { grid-template-columns: 150px minmax(0, 1fr); gap: 22px; }
+.player-tx h1 { font-size: 34px; }
+.tilt { transform: none; }
+
+/* keep cards whole across pages */
+.quest, .poster, .tool, .badge, .story, .doc, .vf, .archive-card, .reel li, .yr, .prompt, .res, .meta, .use, figure, li { break-inside: avoid; }
+.ch-head, .subh, .case-file h3, .case-file h4 { break-after: avoid; }
+#cases .subh, .reach div:has(.pdf) { display: none; }
+.case-file { border: 1px solid var(--line-dim); }
+.vfs { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.shots { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.shot { transform: none !important; }
+.doc { transform: none !important; }
+.reel { flex-wrap: wrap; overflow: visible; background: none; padding: 0; }
+.reel li { flex: 0 0 calc((100% - 5 * 12px) / 6); }
+.frame-btn { border: 1px solid var(--line-dim); background: #fff; }
+.case-file { padding: 14px 16px; gap: 8px; }
+.case-file .imgs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.case-file .imgs img { max-height: 70mm; width: auto; margin-inline: auto; }
+.xray { grid-template-columns: 52mm minmax(0, 1fr); }
+.stage { max-width: 52mm; }
+.sport { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.archive-card .pframe img { max-height: 55mm; }
+
+/* the web-only pieces print their address */
+.play .cta::after { content: "：yimingyin1119-create.github.io/portfolio/" attr(href); font-weight: 400; font-style: normal; }
+.play .cta { padding: 0; background: none; color: var(--red); }
+.play { box-shadow: none; background: #fff; break-inside: avoid; }
+.play-link { display: none; }
+.foot::after { content: "网页版（可交互）：https://yimingyin1119-create.github.io/portfolio/"; display: block; margin-top: 4px; }
+/* a heading needs room for some of its chapter: reserve 60mm below it, then give the space back */
+.ch-head, .subh { break-inside: avoid; }
+.ch-head::after, .subh::after { content: ""; display: block; height: 60mm; margin-bottom: -60mm; }
