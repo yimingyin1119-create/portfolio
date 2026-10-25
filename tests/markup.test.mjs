@@ -198,3 +198,14 @@ test('the light palette: warm cream ground, sand panels, white paper, film red',
   for (const [k, v] of [['--bg', '#f3efe7'], ['--bg-2', '#e9e3d7'], ['--paper', '#fffdf8'], ['--red', '#c2362b']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
   assert.ok(html.includes('<meta name="theme-color" content="#f3efe7">'));
 });
+
+test('frames and borders are never red; red is kept for buttons, text and drawing accents', () => {
+  for (const file of ['assets/css/tokens.css', 'assets/css/layout.css', 'assets/css/components.css']) {
+    const css = read(file);
+    for (const [, sel, body] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      for (const decl of body.split(';')) {
+        if (/^\s*(border[\w-]*|outline|box-shadow)\s*:/.test(decl)) assert.ok(!decl.includes('var(--red)'), `${file}: ${sel.trim()} → ${decl.trim()}`);
+      }
+    }
+  }
+});
