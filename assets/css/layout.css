@@ -1,17 +1,17 @@
-.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); background: rgba(147, 179, 166, .94); border-bottom: 1px solid var(--line-faint); backdrop-filter: blur(6px); }
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); background: rgba(226, 205, 162, .95); border-bottom: 1px solid var(--line-faint); backdrop-filter: blur(6px); }
 .bar-in { max-width: 1160px; margin: 0 auto; height: 60px; display: flex; align-items: center; gap: 16px; }
 .brand { font-family: var(--f-script); font-size: 30px; text-decoration: none; line-height: 1; margin-right: auto; }
 .seg { display: inline-flex; padding: 3px; border: 1px solid var(--line-dim); border-radius: 999px; }
 .seg button { border: 0; background: none; padding: 4px 14px; border-radius: 999px; font-size: 14px; color: var(--muted); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--line); color: var(--bg); font-weight: 700; }
-.cta { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 8px; background: var(--red); color: #fff; text-decoration: none; font-weight: 800; white-space: nowrap; transition: transform .15s var(--ease); }
+.cta { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 8px; background: var(--btn); color: var(--btn-ink); text-decoration: none; font-weight: 800; white-space: nowrap; transition: transform .15s var(--ease); }
 .cta:active { transform: scale(.97); }
 @media (max-width: 520px) { .bar .cta { display: none; } .brand { font-size: 26px; } }
 
 #chapters { max-width: 1160px; margin: 0 auto; }
 .chapter { position: relative; padding-block: clamp(64px, 9vw, 112px) 0; }
 .ch-head { margin-bottom: 32px; }
-.kicker { margin: 0 0 6px; font-family: var(--f-num); font-weight: 600; letter-spacing: .18em; font-size: 13px; color: var(--red); }
+.kicker { margin: 0 0 6px; font-family: var(--f-num); font-weight: 600; letter-spacing: .18em; font-size: 13px; color: var(--accent); }
 .ch-head h2 { margin: 0; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.12; font-family: var(--f-display); font-weight: 900; letter-spacing: -.01em; }
 .ch-sub { margin: 10px 0 0; color: var(--muted); max-width: 40em; }
 /* between chapters: a strip of sprocket holes, like the edge of a reel */

@@ -1,4 +1,4 @@
-// Line drawings in one hand: 120×120, round 2px strokes in the chalk colour, one red accent (class "a").
+// Line drawings in one hand (nautical: wheel, chest, spyglass, bottle…): 120×120, round 2px strokes in the chalk colour, one red accent (class "a").
 // Every shape carries pathLength="1" so CSS can draw it on when its chapter scrolls in.
 const star = (cx, cy, R, r) => 'M' + Array.from({ length: 10 }, (_, i) => {
   const a = -Math.PI / 2 + i * Math.PI / 5, d = i % 2 ? r : R;
@@ -8,26 +8,26 @@ const sparkle = (cx, cy, s) => `M${cx} ${cy - s} C${cx + s * .08} ${cy - s * .3}
 
 // Each drawing is a list of [shape, attributes, accent?]
 const DRAW = {
-  // a game controller: the internships are the main quest
-  quests: [['path', 'M32 46h56c15 0 23 13 25 30 2 17-9 25-19 17l-12-12H38l-12 12c-10 8-21 0-19-17 2-17 10-30 25-30z'], ['path', 'M34 62h16M42 54v16'], ['circle', 'cx="80" cy="58" r="4"', 1], ['circle', 'cx="91" cy="68" r="4"', 1], ['path', 'M54 32c0-8 12-8 12 0v14']],
-  // a stage spotlight on a stand, throwing light down
-  posters: [['path', 'M42 16h36l9 26H33z'], ['path', 'M60 42v10M52 52h16'], ['path', 'M34 56L14 108M86 56l20 52', 1], ['path', 'M14 108c20 8 72 8 92 0'], ['path', 'M60 4v12']],
+  // a ship's wheel: the internships are the main voyage
+  quests: [['circle', 'cx="60" cy="60" r="30"'], ['circle', 'cx="60" cy="60" r="9"', 1], ['path', 'M60 8v104M8 60h104M23 23l74 74M97 23l-74 74'], ['circle', 'cx="60" cy="60" r="22"']],
+  // a pile of coins: the haul
+  posters: [['ellipse', 'cx="60" cy="96" rx="40" ry="10"'], ['path', 'M20 96v-10c0-6 18-10 40-10s40 4 40 10v10'], ['ellipse', 'cx="48" cy="62" rx="22" ry="7"', 1], ['path', 'M26 62v14c0 4 10 7 22 7s22-3 22-7V62'], ['ellipse', 'cx="78" cy="38" rx="18" ry="6"'], ['path', 'M60 38v12c0 3 8 6 18 6s18-3 18-6V38']],
   // a big sparkle and a small one: new skill unlocked
   skills: [['path', sparkle(54, 62, 40)], ['path', sparkle(98, 22, 13), 1], ['path', sparkle(100, 96, 8)]],
-  // a clapperboard
-  cases: [['rect', 'x="14" y="50" width="92" height="56" rx="4"'], ['path', 'M14 64h92M24 78h34M24 90h50M74 78h22', 0], ['path', 'M13 47l88-20 4 15-88 20z', 1], ['path', 'M33 43l6-15M55 38l6-15M77 33l6-15']],
+  // a treasure chest
+  cases: [['path', 'M16 56h88v48H16z'], ['path', 'M16 56c0-26 88-26 88 0'], ['path', 'M16 70h88M40 56v48M80 56v48'], ['rect', 'x="52" y="62" width="16" height="16" rx="2"', 1]],
   // a megaphone with sound coming out
   bridge: [['path', 'M18 50v24h16l48 24V26L34 50z'], ['path', 'M34 74l8 26h12l-7-26'], ['path', 'M94 46c8 9 8 23 0 32M104 36c14 15 14 37 0 52', 1]],
   // a medal on a ribbon
   novice: [['path', 'M38 10h14l10 36H48zM82 10H68L58 46h14z'], ['circle', 'cx="60" cy="76" r="30"'], ['path', star(60, 76, 17, 7), 1]],
   // the globe with a flight path around it
   map: [['circle', 'cx="60" cy="62" r="40"'], ['ellipse', 'cx="60" cy="62" rx="17" ry="40"'], ['path', 'M20 62h80M27 42h66M27 82h66'], ['path', 'M6 92C30 118 96 104 114 36', 1], ['path', 'M106 34l10-6-2 11z', 1]],
-  // a plane climbing away
-  abroad: [['path', 'M14 84l70-48c9-6 20-5 22 0 2 5-3 12-12 17L26 98z'], ['path', 'M52 60L34 38l-10 4 14 30M70 64l4 30 10-4 0-34'], ['path', 'M6 110c18-2 30-8 40-18', 1]],
-  // a camera
-  viewfinder: [['rect', 'x="10" y="38" width="100" height="66" rx="9"'], ['path', 'M40 38l7-13h26l7 13'], ['circle', 'cx="60" cy="71" r="22"'], ['circle', 'cx="60" cy="71" r="12"', 1], ['rect', 'x="88" y="47" width="12" height="8" rx="2"'], ['path', 'M20 38v-6h12v6']],
-  // an envelope with a stamp
-  contact: [['rect', 'x="8" y="30" width="104" height="70" rx="5"'], ['path', 'M8 35l52 36 52-36'], ['rect', 'x="84" y="40" width="20" height="24" rx="2"', 1], ['path', 'M18 88h26']],
+  // a ship under sail: the first voyage out
+  abroad: [['path', 'M18 78h84l-12 18H30z'], ['path', 'M46 78V18M76 78V28'], ['path', 'M48 22c17 6 17 20 0 25zM48 52c19 5 19 16 0 21zM78 32c13 5 13 16 0 20zM78 56c13 4 13 12 0 16z'], ['path', 'M46 18l12 4-12 4', 1], ['path', 'M6 104q8-6 16 0t16 0 16 0 16 0 16 0 16 0 16 0']],
+  // a spyglass
+  viewfinder: [['path', 'M14 84l52-30 6 11-52 30z'], ['path', 'M66 54l26-15 7 13-26 15z'], ['path', 'M92 39l12-7 8 14-12 7z', 1], ['path', 'M40 82l10 24M36 106h20']],
+  // a message in a bottle, adrift
+  contact: [['rect', 'x="12" y="44" width="70" height="40" rx="18"'], ['path', 'M82 56h16v16H82'], ['rect', 'x="98" y="54" width="9" height="20" rx="2"'], ['rect', 'x="26" y="56" width="42" height="16" rx="7"', 1], ['path', 'M30 64h34', 1], ['path', 'M6 100q8-6 16 0t16 0 16 0 16 0 16 0 16 0 16 0']],
 };
 const ICONS = {
   radar: [['circle', 'cx="20" cy="20" r="15"'], ['circle', 'cx="20" cy="20" r="8"'], ['path', 'M20 20l11-11', 1], ['circle', 'cx="27" cy="15" r="2"', 1]],
@@ -62,4 +62,4 @@ const SEA = {
 };
 export const SEA_ORDER = ['ship', 'serpent', 'compass', 'whale', 'anchor', 'waves'];
 export const sea = name => `<svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false">${shapes(SEA[name])}</svg>`;
-export const treasure = () => `<span class="treasure" aria-hidden="true"><svg viewBox="0 0 120 120" focusable="false"><path d="M24 24C48 46 74 74 98 98" pathLength="1"/><path d="M98 22C74 48 48 72 22 96" pathLength="1"/></svg><b>宝藏在这里</b></span>`;
+export const treasure = () => `<span class="treasure" aria-hidden="true"><canvas class="flag small" data-title="TREASURE" data-sub="" width="150" height="96"></canvas><svg viewBox="0 0 120 120" focusable="false"><path d="M24 24C48 46 74 74 98 98" pathLength="1"/><path d="M98 22C74 48 48 72 22 96" pathLength="1"/></svg><b>宝藏在这里</b></span>`;

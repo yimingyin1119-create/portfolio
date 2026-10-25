@@ -6,8 +6,8 @@ import { levelFor, techRows, cueRules } from '../assets/js/bridge.js';
 import { COUNTRIES } from '../data/places.js';
 
 export const opening = () => `<section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
-  <div class="frame boot"><span class="roller top" aria-hidden="true"></span><span class="roller bottom" aria-hidden="true"></span>
-    <span class="sig" aria-hidden="true">Earth Online</span>
+  <div class="frame boot">
+    <canvas class="flag" data-title="EARTH ONLINE" data-sub="· VOYAGE 2027 ·" width="300" height="190" aria-hidden="true"></canvas>
     <ul class="hud" aria-label="玩家数值"><li>Class of <b>2027</b></li><li><b>26</b> 国</li><li><b>4</b> 段实习</li></ul>
     <div class="player">
       <figure class="pframe tilt">${img('portrait', '尹伊茗', { eager: true, sizes: '(max-width: 720px) 60vw, 300px' })}<figcaption class="plate">PLAYER · 尹伊茗</figcaption></figure>
@@ -41,9 +41,9 @@ export const quests = () => chapter('quests', 'MAIN QUEST', '主线任务 · 平
     </div>
     <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button>
   </article>`).join('')}</div>`, { sub: '四段实习，倒着看。卡片正面是我做了什么，翻过来是项目整体的结果。' });
-const LAMP = '<svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M36 2h8v8h-8z M40 10v6 M14 44c0-15 12-27 26-27s26 12 26 27z M10 44h60" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
+const LAMP = '<svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg>';
 
-export const posters = () => chapter('posters', 'HALL OF FAME', '成绩海报', `<div class="posters">${POSTERS.map(p => `<figure class="poster" data-poster="${p.id}" data-count="${p.count}" data-reveal>${LAMP}<span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">${esc(p.value)}</b><figcaption>${esc(p.label)}</figcaption></div></figure>`).join('')}</div>`, { sub: '抖音项目的数字是概数；其他是原始数字。' });
+export const posters = () => chapter('posters', 'TREASURE HAUL', '战利品 · 成绩', `<div class="posters">${POSTERS.map(p => `<figure class="poster" data-poster="${p.id}" data-count="${p.count}" data-reveal>${LAMP}<span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">${esc(p.value)}</b><figcaption>${esc(p.label)}</figcaption></div></figure>`).join('')}</div>`, { sub: '抖音项目的数字是概数；其他是原始数字。' });
 // The three works a visitor can open and play with get the spotlight; the rest are listed below them.
 const PLAYS = [
   { t: '痛点认领', k: 'AI 产品 Demo', d: 'AI 搜索的回答里，品牌买不到答案，只能认领用户的真实痛点。', try: '在 AI 搜索里点「散场打不到车」，再点「为什么看到」，看品牌凭什么出现。', href: 'painpoint.html' },
@@ -112,7 +112,7 @@ const caseFile = c => `<article class="case-file" id="case-${c.id}" data-case="$
     ${c.imgs ? `<div class="imgs">${c.imgs.map(([k, cap]) => `<figure>${img(k, cap, { sizes: '(max-width: 720px) 90vw, 280px' })}<figcaption>${esc(cap)}</figcaption></figure>`).join('')}</div>` : ''}
   </article>`;
 const FILTERS = [['all', '全部'], ['insight', '洞察'], ['campaign', '战役'], ['content', '内容'], ['creative', '创意']];
-export const cases = () => chapter('cases', 'CASE FILES', '案例存档', `<h3 class="subh">代表项目 · 抖音</h3>
+export const cases = () => chapter('cases', 'CAPTAIN’S LOG', '航海日志 · 案例', `<h3 class="subh">代表项目 · 抖音</h3>
   <div class="cases feat">${CASES.filter(c => c.feat).map(caseCard).join('')}</div>
   <div class="exhibit paper" data-reveal><div class="exhibit-tx"><p class="kicker">透视镜 · 拼多多拆解</p><p>同一张弹窗，用户看到的是奖励，我看到的是三处设计。拖动镜片看看，或者切到「找茬」自己找。</p><button type="button" class="chip" data-open="pdd">看完整案例 →</button></div>${xray()}</div>
   <h3 class="subh">更多案例</h3>
@@ -166,7 +166,7 @@ export const abroad = () => chapter('abroad', 'FIRST VOYAGE', '第一次出海 �
 const PHOTOS = [['amalfi', '阿马尔菲 · 2019', '在阿马尔菲海边拍照'], ['rain-lake', '雨天 · 湖边', '雨中在湖边拍照'], ['xuanwu', '玄武湖 · 南京', '在玄武湖边拍日落'],
   ['canon', 'Canon 5D', '手里的佳能 5D'], ['fuji', 'Fujifilm X-T30', '手里的富士 X-T30'], ['lianyungang', '连云港 · 2024', '在连云港拍照']];
 const vf = ([id, label, alt], i) => `<figure class="vf" data-reveal>${img(id, alt, { sizes: '(max-width: 720px) 90vw, 380px' })}
-    <span class="vf-c" aria-hidden="true"></span><span class="vf-rec" aria-hidden="true">REC</span><span class="vf-n" aria-hidden="true">${String(i + 1).padStart(2, '0')} / ${String(PHOTOS.length).padStart(2, '0')}</span>
+    <span class="vf-c" aria-hidden="true"></span><span class="vf-n" aria-hidden="true">${String(i + 1).padStart(2, '0')} / ${String(PHOTOS.length).padStart(2, '0')}</span>
     <figcaption>${esc(label)}</figcaption></figure>`;
 // The content reel: a strip of film, one frame per post. Picking a frame projects it on the screen above.
 const reelFrame = (w, i) => `<li><button type="button" class="frame-btn" data-work="${w.id}" aria-pressed="${i === 0}">
@@ -174,7 +174,7 @@ const reelFrame = (w, i) => `<li><button type="button" class="frame-btn" data-wo
     <span class="frame-cap"><span class="frame-p">${esc(w.platform)}</span><span class="frame-t">${esc(w.title)}</span><b>${esc(w.stat)}</b></span></button></li>`;
 const screen = w => `<div class="screen-in">${w.photo ? img(w.photo, w.title, { sizes: '(max-width: 720px) 90vw, 420px' }) : `<span class="screen-tx">${esc(w.platform)}</span>`}
     <div class="screen-cap"><p class="kicker">${esc(w.platform)}</p><h3>${esc(w.title)}</h3><b>${esc(w.stat)}</b></div></div>`;
-export const viewfinder = () => chapter('viewfinder', 'VIEWFINDER', '取景器', `<h3 class="subh">摄影 · 我拍照的样子</h3>
+export const viewfinder = () => chapter('viewfinder', 'SPYGLASS', '望远镜 · 取景', `<h3 class="subh">摄影 · 我拍照的样子</h3>
   <div class="vfs">${PHOTOS.map(vf).join('')}</div>
   <h3 class="subh">羽毛球与校园大使 · 2025</h3>
   <div class="sport">
@@ -187,7 +187,7 @@ export const viewfinder = () => chapter('viewfinder', 'VIEWFINDER', '取景器',
       <div><p class="kicker">阿姆斯特丹大学 · 上岗合照</p><h3>给想来的人讲这所学校</h3><p>国际学生大使：策划出镜官方内容、主持英文直播，也在课堂上给学弟学妹做宣讲。</p></div>
     </article>
   </div>
-  <h3 class="subh">放映机 · 我发过的内容</h3>
+  <h3 class="subh">漂流瓶 · 我发过的内容</h3>
   <div class="projector">
     <div class="screen" aria-live="polite">${screen(WORKS[0])}</div>
     <div class="reel-wrap">
@@ -196,4 +196,4 @@ export const viewfinder = () => chapter('viewfinder', 'VIEWFINDER', '取景器',
       <button type="button" class="chip reel-btn" data-reel="1" aria-label="往后翻">→</button>
     </div>
   </div>`, { sub: '想认识我的话，从这里开始：我总在拍东西，周末在羽毛球场，偶尔发点内容。' });
-export const contact = () => chapter('contact', 'ADD FRIEND', '加个好友', `<div class="contact-row"><dl class="reach paper"><div><dt>微信</dt><dd><span id="c-wx">EmengYin</span><button type="button" class="chip" data-copy="c-wx">复制</button></dd></div><div><dt>邮箱</dt><dd><span id="c-mail">2091595480@qq.com</span><button type="button" class="chip" data-copy="c-mail">复制</button></dd></div><div><dt>PDF</dt><dd><span class="pdf">作品集打印版，可转发</span><a class="chip" href="%E5%B0%B9%E4%BC%8A%E8%8C%97_%E4%BD%9C%E5%93%81%E9%9B%86_%E8%93%9D%E8%89%B2%E5%85%89%E6%A0%87.pdf" download="尹伊茗_作品集_蓝色光标.pdf">下载</a></dd></div></dl>${treasure()}</div>`, { sub: '复制微信号或邮箱，说一声你是从这里来的。' });
+export const contact = () => chapter('contact', 'SIGNAL THE SHIP', '加个好友', `<div class="contact-row"><dl class="reach paper"><div><dt>微信</dt><dd><span id="c-wx">EmengYin</span><button type="button" class="chip" data-copy="c-wx">复制</button></dd></div><div><dt>邮箱</dt><dd><span id="c-mail">2091595480@qq.com</span><button type="button" class="chip" data-copy="c-mail">复制</button></dd></div><div><dt>PDF</dt><dd><span class="pdf">作品集打印版，可转发</span><a class="chip" href="%E5%B0%B9%E4%BC%8A%E8%8C%97_%E4%BD%9C%E5%93%81%E9%9B%86_%E8%93%9D%E8%89%B2%E5%85%89%E6%A0%87.pdf" download="尹伊茗_作品集_蓝色光标.pdf">下载</a></dd></div></dl>${treasure()}</div>`, { sub: '复制微信号或邮箱，说一声你是从这里来的。' });

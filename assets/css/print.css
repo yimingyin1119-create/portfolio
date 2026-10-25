@@ -74,7 +74,7 @@ html.js .stage .top { clip-path: none; }
 .ch-head::after, .subh::after { content: ""; display: block; height: 60mm; margin-bottom: -60mm; }
 
 /* the chart dressing stays on screen */
-body::after, .chart-edge, .route, .roller, .water, .treasure { display: none !important; }
+body::after, .chart-edge, .route, .flag, .water, .treasure { display: none !important; }
 body { background-image: none; }
 .boot { clip-path: none !important; box-shadow: none; background: #fff; padding-top: 28px; }
 .boot > .sig { position: static; display: block; margin-bottom: 6px; }

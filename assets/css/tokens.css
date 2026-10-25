@@ -1,18 +1,18 @@
-/* Earth Online as a hand-coloured sea chart: the page is sea-green water, every card is tan parchment land
-   with a pale shallow-water halo, sepia ink for text and line work. Route red marks the way, the buttons and the treasure. */
+/* Earth Online, an adventure at sea: kraft paper ground, lighter parchment for every card, sepia ink throughout.
+   Text is never red; red is kept for drawn lines only (the route, the treasure mark, accents in the line drawings). */
 @font-face { font-family: "Yellowtail"; src: url("../fonts/yellowtail-latin-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "EO Display"; src: url("../fonts/display-serif-900.woff2") format("woff2"); font-weight: 900; font-display: swap; }
 @font-face { font-family: "Oswald"; src: url("../fonts/oswald-latin-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 
 :root {
   color-scheme: light;
-  --bg: #93b3a6; --bg-2: #e2c58f; --card: #efdcb0;
-  --sea-deep: #7a9d91; --shallow: rgba(214, 233, 216, .6);
-  --line: #33261a; --line-dim: rgba(51, 38, 26, .3); --line-faint: rgba(51, 38, 26, .12);
-  --ink: #33261a; --muted: #4c3d2b; --faint: #6b5a43;
-  --red: #9e3520; --red-soft: rgba(158, 53, 32, .1);
-  --paper: #f3e3bb; --paper-ink: #33261a; --paper-muted: #5e4c35; --paper-rule: #d6bb85;
-  --gold: #7d5f22;
+  --bg: #c09a6c; --bg-2: #e6d2a8; --card: #f1e3c4;
+  --line: #2e1f12; --line-dim: rgba(46, 31, 18, .3); --line-faint: rgba(46, 31, 18, .12);
+  --ink: #2e1f12; --muted: #4f3a24; --faint: #6e5638;
+  --accent: #5a3a1e; --btn: #3a2616; --btn-ink: #f4e8cc;
+  --red: #9a3a22; --red-soft: rgba(90, 58, 30, .1);
+  --paper: #f4e8cc; --paper-ink: #2e1f12; --paper-muted: #5a442c; --paper-rule: #d8c095;
+  --gold: #6f5420;
   --f-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
   --f-num: "Oswald", "DIN Condensed", "Arial Narrow", var(--f-sans);
   --f-display: "EO Display", "Songti SC", "STSong", "Noto Serif CJK SC", serif;

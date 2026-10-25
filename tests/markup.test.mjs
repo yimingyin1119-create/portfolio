@@ -191,19 +191,29 @@ test('the opening states both degrees', () => {
   for (const s of ['新加坡国立大学', '传播学（数据方向）硕士', '阿姆斯特丹大学', '媒体与信息本科']) assert.ok(t.includes(s), s);
 });
 
-test('the sea-chart palette: sea-green ground, parchment land, sepia ink, route red', () => {
+test('the kraft palette: kraft ground, parchment cards, sepia ink, route red', () => {
   const t = read('assets/css/tokens.css');
   const root = t.slice(t.indexOf(':root {'), t.indexOf('}', t.indexOf(':root {')));
   assert.ok(root.includes('color-scheme: light'));
-  for (const [k, v] of [['--bg', '#93b3a6'], ['--card', '#efdcb0'], ['--ink', '#33261a'], ['--red', '#9e3520']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
-  assert.ok(html.includes('<meta name="theme-color" content="#93b3a6">'));
+  for (const [k, v] of [['--bg', '#c09a6c'], ['--card', '#f1e3c4'], ['--ink', '#2e1f12'], ['--red', '#9a3a22']]) assert.ok(new RegExp(`${k}:\\s*${v}`, 'i').test(root), k);
+  assert.ok(html.includes('<meta name="theme-color" content="#c09a6c">'));
 });
 
-test('the opening is a scroll with two rollers, and the page carries a route layer and a treasure mark', () => {
-  const o = chapterHtml('opening');
-  assert.equal((o.match(/class="roller (top|bottom)"/g) ?? []).length, 2);
+test('flags fly over the opening and the treasure, and the page carries a route layer', () => {
+  assert.ok(/<canvas class="flag"[^>]*data-title="EARTH ONLINE"[^>]*aria-hidden="true"/.test(chapterHtml('opening')));
+  assert.ok(/class="treasure"[\s\S]*?<canvas class="flag small"/.test(chapterHtml('contact')));
   assert.ok(/<svg class="route"[^>]*aria-hidden="true"/.test(html));
-  assert.ok(chapterHtml('contact').includes('class="treasure"'));
+  assert.ok(!/roller/.test(html));
+});
+
+test('no red text: red is only for drawn lines (route, treasure, drawing accents)', () => {
+  for (const file of ['assets/css/layout.css', 'assets/css/components.css']) {
+    for (const [, sel, body] of read(file).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      for (const decl of body.split(';')) {
+        if (/^\s*(color|fill|background(-color)?)\s*:/.test(decl)) assert.ok(!decl.includes('var(--red)'), `${file}: ${sel.trim()} → ${decl.trim()}`);
+      }
+    }
+  }
 });
 
 test('frames and borders are never red; red is kept for buttons, text and drawing accents', () => {

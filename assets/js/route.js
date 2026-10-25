@@ -47,7 +47,9 @@ export function initRoute() {
     ink = document.createElementNS(NS, 'path'); ink.setAttribute('d', d); ink.setAttribute('class', 'route-ink');
     mask.append(ink); defs.append(mask);
     path = document.createElementNS(NS, 'path'); path.setAttribute('d', d); path.setAttribute('class', 'route-line'); path.setAttribute('mask', 'url(#route-drawn)');
-    ship = document.createElementNS(NS, 'path'); ship.setAttribute('d', SHIP); ship.setAttribute('class', 'route-ship');
+    ship = document.createElementNS(NS, 'g'); ship.setAttribute('class', 'route-ship');
+    const hull = document.createElementNS(NS, 'path'); hull.setAttribute('d', SHIP); hull.setAttribute('class', 'hull');
+    ship.append(hull);                                             // the group follows the route; the hull bobs inside it
     svg.append(defs, path, ship);
     total = path.getTotalLength();
     ink.style.strokeDasharray = `${total} ${total}`;
