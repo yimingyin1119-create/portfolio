@@ -3,7 +3,24 @@ export const MODES = {
   interviewer: ['opening', 'skills', 'quests', 'posters', 'cases', 'bridge', 'novice', 'map', 'abroad', 'viewfinder', 'contact'],
   friend: ['opening', 'map', 'abroad', 'viewfinder', 'novice', 'quests', 'posters', 'skills', 'cases', 'bridge', 'contact'],
 };
+// Interviewers get the work first; the personal chapters wait behind a 「更多关于我」 entry placed just before them.
+const FOLDED = { interviewer: ['novice', 'map', 'abroad', 'viewfinder'], friend: [] };
 const KEY = 'eo.mode';
+
+export const foldedFor = mode => [...(FOLDED[mode] ?? FOLDED.interviewer)];
+
+// Puts the entry in front of the folded chapters and hides them unless `open`; in friend mode the entry goes away.
+export function applyFold(container, mode, open) {
+  const fold = container.querySelector(':scope > .more-about');
+  if (!fold) return;
+  const ids = foldedFor(mode);
+  const first = ids.length ? container.querySelector(`:scope > [data-chapter="${ids[0]}"]`) : null;
+  fold.hidden = !first;
+  if (first) container.insertBefore(fold, first);
+  for (const el of container.querySelectorAll(':scope > [data-chapter]')) el.hidden = ids.includes(el.dataset.chapter) && !open;
+  fold.classList.toggle('open', open);
+  fold.querySelector('.more-btn')?.setAttribute('aria-expanded', String(open));
+}
 
 export function orderFor(mode) {
   return MODES[mode] ?? MODES.interviewer;

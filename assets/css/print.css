@@ -82,3 +82,5 @@ body { background-image: none; }
 .curl { display: none !important; }
 html[lang="en"] .foot::after { content: "Interactive version: https://yimingyin1119-create.github.io/portfolio/en.html"; }
 html[lang="en"] .play .cta::after { content: ": yimingyin1119-create.github.io/portfolio/" attr(href); }
+.more-about { display: none !important; }
+#chapters > [data-chapter][hidden] { display: block !important; }

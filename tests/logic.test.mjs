@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeStore } from '../assets/js/storage.js';
 import { unlockedAt, clampYear, YEARS } from '../assets/js/timeline.js';
-import { MODES, orderFor, loadMode, saveMode } from '../assets/js/modes.js';
+import { MODES, orderFor, loadMode, saveMode, foldedFor } from '../assets/js/modes.js';
 import { parseCount, frame } from '../assets/js/count.js';
 import { createTracker, RULES, progress } from '../assets/js/achievements.js';
 
@@ -110,4 +110,12 @@ test('achievement progress lists every rule with its state, in rule order', () =
   const list = progress(['add-friend', 'first-card']);
   assert.deepEqual(list.map(r => r.id), RULES.map(r => r.id));
   assert.deepEqual(list.filter(r => r.done).map(r => r.id), ['first-card', 'add-friend']);
+});
+
+test('interviewers see six chapters after the opening; the personal ones are folded, friends see everything', () => {
+  const folded = foldedFor('interviewer');
+  assert.deepEqual(folded, ['novice', 'map', 'abroad', 'viewfinder']);
+  assert.deepEqual(MODES.interviewer.filter(id => id !== 'opening' && !folded.includes(id)), ['skills', 'quests', 'posters', 'cases', 'bridge', 'contact']);
+  assert.deepEqual(foldedFor('friend'), []);
+  assert.deepEqual(foldedFor('???'), folded);
 });

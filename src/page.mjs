@@ -1,6 +1,6 @@
 import * as ch from './chapters.mjs';
 import { t, isEn } from './i18n.mjs';
-import { MODES } from '../assets/js/modes.js';
+import { MODES, foldedFor } from '../assets/js/modes.js';
 import { RULES } from '../assets/js/achievements.js';
 
 const HEAD = () => `<!doctype html>
@@ -35,9 +35,21 @@ const NAV = () => `<nav class="bar" aria-label="${t('主导航')}"><div class="b
 </div></nav>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>`;
 
+const FOLD_NAMES = { novice: '新手村', map: '航海图', abroad: '第一次出海', viewfinder: '望远镜' };
+const moreAbout = ids => `<aside class="more-about" aria-label="${t('更多关于我')}">
+  <button type="button" class="more-btn" aria-expanded="false" aria-controls="${ids.join(' ')}">
+    <span class="kicker">MORE ABOUT ME</span>
+    <span class="more-t"><b class="when-shut">${t('更多关于我 →')}</b><b class="when-open">${t('收起 ↑')}</b></span>
+    <span class="more-list">${ids.map(id => t(FOLD_NAMES[id])).join(' · ')}</span>
+    <span class="more-sub">${t('成长、旅行、摄影和羽毛球：想多认识我一点的话，从这里展开。')}</span>
+  </button>
+</aside>`;
+
 // Chapters are written in the interviewer order; visitors who pick "friend" get them reordered in the browser.
 export function renderPage() {
-  const body = MODES.interviewer.map(id => ch[id]()).join('\n');
+  // the 「更多关于我」 entry sits in front of the chapters interviewer mode folds away (moved by modes.js on mode change)
+  const folded = foldedFor('interviewer');
+  const body = MODES.interviewer.map(id => (id === folded[0] ? moreAbout(folded) + '\n' : '') + ch[id]()).join('\n');
   return `${HEAD()}
 <body>
 ${NAV()}

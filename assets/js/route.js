@@ -15,7 +15,7 @@ export function initRoute() {
     svg.replaceChildren();
     const box = main.getBoundingClientRect();
     const opening = main.querySelector('[data-chapter="opening"] .boot');
-    const heads = [...main.querySelectorAll(':scope > [data-chapter]:not([data-chapter="opening"]) > .ch-head')];
+    const heads = [...main.querySelectorAll(':scope > [data-chapter]:not([data-chapter="opening"]) > .ch-head')].filter(h => h.offsetParent);   // folded chapters are skipped
     const treasure = main.querySelector('.treasure svg');
     const margin = Math.min(box.left, innerWidth - box.right);
     svg.classList.toggle('off', margin < 34 || !opening || !treasure);

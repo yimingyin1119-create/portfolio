@@ -687,3 +687,17 @@ html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; 
 .book-arrow { color: var(--ink); opacity: .75; padding: 10px 4px; transition: opacity .2s, transform .2s var(--ease); }
 .book-arrow:hover { opacity: 1; transform: scale(1.1); }
 @media (max-width: 720px) { .book { aspect-ratio: auto; min-height: 0; } .book-arrow svg { width: 16px; height: 36px; } }
+
+/* 「更多关于我」: a signpost in interviewer mode; the personal chapters wait behind it */
+.more-about { position: relative; z-index: 1; padding-block: clamp(56px, 8vw, 96px) 0; }
+html:not(.js) .more-about { display: none; }
+.more-btn { display: grid; justify-items: center; gap: 6px; width: min(560px, 100%); margin: 0 auto; padding: 26px 24px 24px; border: 1.5px dashed var(--line); border-radius: 12px; cursor: pointer; text-align: center; color: var(--ink);
+  background-color: var(--card); background-image: url("../tex/parchment.webp"); background-size: 512px 512px; box-shadow: 0 14px 28px -18px rgba(46, 31, 18, .55); transition: transform .25s var(--ease), box-shadow .25s; }
+.more-btn:hover { transform: translateY(-3px); box-shadow: 0 22px 34px -20px rgba(46, 31, 18, .6); }
+.more-btn .kicker { margin: 0; }
+.more-t b { font-family: var(--f-display); font-weight: 900; font-size: clamp(24px, 2.8vw, 32px); }
+.more-about .when-open, .more-about.open .when-shut { display: none; }
+.more-about.open .when-open { display: inline; }
+.more-list { font-weight: 700; letter-spacing: .08em; color: var(--accent); }
+.more-sub { font-size: 14px; color: var(--muted); }
+.more-about.open .more-sub, .more-about.open .more-list { display: none; }

@@ -43,7 +43,7 @@ test('reduced motion is honoured', () => {
 });
 
 test('contact details are present and the phone number is not', () => {
-  assert.ok(html.includes('EmengYin') && html.includes('2091595480@qq.com'));
+  assert.ok(html.includes('EmengYin') && html.includes('yinyiming2003@qq.com'));
 });
 
 test('opening shows the player card, the headline and both visitor buttons', async () => {
@@ -281,4 +281,15 @@ test('each logbook spread also shows my role and the first things I did', async 
     assert.ok(/<ul class="leaf-did">/.test(leaf), `${x.id} did`);
     for (const d of x.did.slice(0, 2)) assert.ok(textOf(leaf).includes(d.slice(0, 12)), d);
   }
+});
+
+test('interviewer mode folds the personal chapters behind a 「更多关于我」 entry placed right after the bridge', () => {
+  const at = id => html.indexOf(`data-chapter="${id}"`);
+  const fold = html.indexOf('<aside class="more-about"');
+  assert.ok(fold > at('bridge') && fold < at('novice'));
+  const aside = html.slice(fold, html.indexOf('</aside>', fold));
+  assert.ok(/<button[^>]+class="more-btn"[^>]+aria-expanded="false"/.test(aside));
+  assert.ok(textOf(aside).includes('更多关于我'));
+  const en = read('en.html');
+  assert.ok(textOf(en.slice(en.indexOf('<aside class="more-about"'), en.indexOf('</aside>', en.indexOf('<aside class="more-about"')))).includes('More about me'));
 });

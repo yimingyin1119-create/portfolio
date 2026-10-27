@@ -207,6 +207,15 @@ export const EN = {
   '复制微信号或邮箱，说一声你是从这里来的。': 'Copy my WeChat ID or email and mention you found me here.',
   '宝藏在这里': 'X marks the spot',
 
+  '更多关于我': 'More about me',
+  '更多关于我 →': 'More about me →',
+  '收起 ↑': 'Fold away ↑',
+  '新手村': 'Starter Village',
+  '航海图': 'Sea Chart',
+  '第一次出海': 'First Voyage',
+  '望远镜': 'Spyglass',
+  '成长、旅行、摄影和羽毛球：想多认识我一点的话，从这里展开。': 'Growing up, travel, photography and badminton: open this if you’d like to know me a little better.',
+
   // page shell
   '尹伊茗 · 地球 Online': 'Yiming Yin · Earth Online',
   '尹伊茗的作品集：从让观众鼓掌，到让用户下单。营销策划、导演天赋、AI 新解锁。': 'Yiming Yin’s portfolio: from making audiences clap to making users buy. Marketing by trade, a director by instinct, AI newly unlocked.',
