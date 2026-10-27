@@ -19,7 +19,7 @@ if 'fvar' in font: font = instantiateVariableFont(font, {'wght': float(sys.argv[
 cmap = font.getBestCmap()
 have = ''.join(c for c in chars if ord(c) in cmap)
 missing = ''.join(c for c in chars if ord(c) not in cmap)
-opts = subset.Options(); opts.flavor = 'woff2'; opts.layout_features = ['kern', 'palt', 'vert']; opts.name_IDs = [0, 1, 2, 3, 4, 5, 6, 13, 14]
+opts = subset.Options(); opts.flavor = 'woff2'; opts.hinting = False; opts.desubroutinize = True; opts.layout_features = ['kern', 'palt', 'vert']; opts.name_IDs = [0, 1, 2, 3, 4, 5, 6, 13, 14]
 sub = subset.Subsetter(opts); sub.populate(text=have); sub.subset(font)
 for rec in font['name'].names:
     if rec.nameID in (1, 3, 4, 6, 16, 17):

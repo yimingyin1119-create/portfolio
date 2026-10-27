@@ -451,7 +451,7 @@ html.motion .ch-head:not(.in) .ch-art * { stroke-dashoffset: 1; }
 .stamp circle, .stamp path { fill: none; stroke: var(--accent); stroke-width: 3; }
 .stamp circle + circle { stroke-width: 1.5; }
 .stamp path { fill: var(--accent); stroke: none; }
-.stamp text { fill: var(--accent); font: 600 15px/1 var(--f-num); letter-spacing: .08em; }
+.stamp text { fill: var(--accent); font: 600 15px/1 var(--f-label); letter-spacing: .08em; }
 html.motion .quest:not(.in) .stamp { transform: rotate(-14deg) scale(1.8); opacity: 0; }
 .quest .stamp { transition: transform .45s cubic-bezier(.3, 1.6, .5, 1) .5s, opacity .3s .5s; }
 
@@ -701,3 +701,14 @@ html:not(.js) .more-about { display: none; }
 .more-list { font-weight: 700; letter-spacing: .08em; color: var(--accent); }
 .more-sub { font-size: 14px; color: var(--muted); }
 .more-about.open .more-sub, .more-about.open .more-list { display: none; }
+
+/* handwriting where the page is meant to feel written: the logbook, margin notes, proofs, quotes, save files */
+.pg, .play-try, .xnotes li span, .proof, .story blockquote, .archive p { font-family: var(--f-hand); }
+.pg .leaf-num b, .pg .pg-n { font-family: var(--f-num); }
+.pg .leaf-title { font-family: var(--f-display); }
+.leaf-role b, .play-try b, .pg-tag { font-family: var(--f-label); letter-spacing: .08em; }
+html[lang="en"] .player-tx h1 { font-style: italic; letter-spacing: -.01em; }
+html[lang="en"] .ch-head h2, html[lang="en"] .leaf-title, html[lang="en"] .q-head h3 { letter-spacing: 0; }
+.kicker { font-weight: 400; letter-spacing: .2em; font-size: 13.5px; }
+.brand { font-family: var(--f-script); font-weight: 400; }
+.the-end { font-family: var(--f-script); }

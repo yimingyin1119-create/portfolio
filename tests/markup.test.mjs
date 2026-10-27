@@ -243,10 +243,10 @@ test('every stylesheet and script URL carries a hash of its content, so a deploy
   assert.ok(html.indexOf('type="importmap"') < html.indexOf('type="module"'));
 });
 
-test('no Chinese is set in fake italics: only the decorative // mark slants', () => {
+test('no Chinese is set in fake italics: only the decorative // mark and English-page rules slant', () => {
   for (const file of ['assets/css/layout.css', 'assets/css/components.css']) {
     for (const [, sel, body] of read(file).matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
-      if (/italic/.test(body)) assert.equal(sel.trim(), '.frame > .slash', `${file}: ${sel.trim()}`);
+      if (/italic/.test(body)) assert.ok(sel.trim() === '.frame > .slash' || /^html\[lang="en"\]/.test(sel.trim()), `${file}: ${sel.trim()}`);   // English has a real italic
     }
   }
 });

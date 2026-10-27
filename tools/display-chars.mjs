@@ -6,7 +6,7 @@ import * as EN from '../data/content.en.js';
 
 // Elements styled with var(--f-display); keep in sync with the CSS.
 const TAGS = ['h1', 'h2', 'h3'];
-const CLASSES = ['attr-v', 'tx', 'big', 'screen-tx', 'frame-tx'];
+const CLASSES = ['attr-v', 'tx', 'big', 'screen-tx', 'frame-tx', 'more-t'];
 
 const text = s => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
 

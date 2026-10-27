@@ -22,9 +22,9 @@ function cloth(w, h, title, sub, dpr) {
   // lettering
   x.globalAlpha = 1; x.fillStyle = '#f1e3c4'; x.textAlign = 'center'; x.textBaseline = 'middle';
   const size = Math.min(h * (sub ? .26 : .34), w / (title.length * .62));
-  x.font = `900 ${size}px "EO Display", "Songti SC", Georgia, serif`;
+  x.font = `400 ${size * 1.12}px "EO Pirata", "Old English Text MT", Georgia, serif`;
   x.fillText(title, w / 2, sub ? h * .44 : h / 2);
-  if (sub) { x.font = `600 ${size * .38}px "Oswald", "Arial Narrow", sans-serif`; x.globalAlpha = .8; x.fillText(sub, w / 2, h * .7); }
+  if (sub) { x.font = `400 ${size * .42}px "EO Fell", Georgia, serif`; x.globalAlpha = .8; x.fillText(sub, w / 2, h * .7); }
   // slub noise
   const id = x.getImageData(0, 0, c.width, c.height), d = id.data;
   for (let i = 0; i < d.length; i += 4) { const n = (Math.random() * 2 - 1) * 9; d[i] += n; d[i + 1] += n; d[i + 2] += n; }
@@ -74,6 +74,6 @@ export function initFlags() {
   const flags = [...document.querySelectorAll('canvas.flag')];
   if (!flags.length) return;
   // wait for the title face so the lettering is painted in it
-  const ready = document.fonts?.load ? document.fonts.load('900 20px "EO Display"').catch(() => {}) : Promise.resolve();
+  const ready = document.fonts?.load ? Promise.all([document.fonts.load('20px "EO Pirata"'), document.fonts.load('20px "EO Fell"')]).catch(() => {}) : Promise.resolve();
   ready.then(() => flags.forEach(initFlag));
 }

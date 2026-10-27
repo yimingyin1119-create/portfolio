@@ -57,16 +57,17 @@ test('fonts are self-hosted woff2 and small', () => {
   let total = 0;
   for (const f of files) {
     assert.ok(/\.(woff2|txt|chars|missing)$/.test(f), f);
-    if (!/^(display|text)/.test(f)) total += statSync(new URL(f, FONTS)).size;
+    if (!/^(display|text|hand)/.test(f)) total += statSync(new URL(f, FONTS)).size;
   }
   assert.ok(total < 120 * 1024, `latin fonts total ${total}`);
 });
 
-test('the text and title faces are cut to the characters the page uses, and the cuts are current', async () => {
+test('the text, title and hand faces are cut to the characters the page uses, and the cuts are current', async () => {
   const { displayChars } = await import('../tools/display-chars.mjs');
   const { pageChars } = await import('../tools/page-chars.mjs');
+  const { handChars } = await import('../tools/hand-chars.mjs');
   const cut = name => new Set(readFileSync(new URL(`${name}.chars`, FONTS), 'utf8') + readFileSync(new URL(`${name}.missing`, FONTS), 'utf8'));
-  for (const [name, need, max] of [['display-song', displayChars(), 120], ['text-500', pageChars(), 400], ['text-700', pageChars(), 400]]) {
+  for (const [name, need, max] of [['display-old', displayChars(), 260], ['hand-400', handChars(), 220], ['text-500', pageChars(), 400], ['text-700', pageChars(), 400]]) {
     assert.ok(statSync(new URL(`${name}.woff2`, FONTS)).size < max * 1024, name);
     const c = cut(name);
     assert.deepEqual([...need].filter(x => !c.has(x)), [], `run tools/subset-display.py again for ${name}`);

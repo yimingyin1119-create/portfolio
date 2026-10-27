@@ -11,7 +11,7 @@
 #chapters { max-width: 1160px; margin: 0 auto; }
 .chapter { position: relative; padding-block: clamp(64px, 9vw, 112px) 0; }
 .ch-head { margin-bottom: 32px; }
-.kicker { margin: 0 0 6px; font-family: var(--f-num); font-weight: 600; letter-spacing: .18em; font-size: 13px; color: var(--accent); }
+.kicker { margin: 0 0 6px; font-family: var(--f-label); font-weight: 600; letter-spacing: .18em; font-size: 13px; color: var(--accent); }
 .ch-head h2 { margin: 0; font-size: clamp(30px, 4.4vw, 52px); line-height: 1.12; font-family: var(--f-display); font-weight: 900; letter-spacing: -.01em; }
 .ch-sub { margin: 10px 0 0; color: var(--muted); max-width: 40em; }
 /* between chapters: a strip of sprocket holes, like the edge of a reel */
@@ -39,7 +39,7 @@ html:not(.js) .ach-wrap { display: none; }
 @media (max-width: 520px) { .ach-k { display: none; } }
 
 /* language switch */
-.lang { display: inline-flex; align-items: center; padding: 4px 11px; border: 1px solid var(--line-dim); border-radius: 999px; font: 600 13px/1.4 var(--f-num); letter-spacing: .06em; color: var(--ink); text-decoration: none; }
+.lang { display: inline-flex; align-items: center; padding: 4px 11px; border: 1px solid var(--line-dim); border-radius: 999px; font: 600 13px/1.4 var(--f-label); letter-spacing: .06em; color: var(--ink); text-decoration: none; }
 .lang:hover { border-color: var(--line); background: var(--line-faint); }
 .ach-wrap + .lang { margin-left: 4px; }
 @media (max-width: 420px) { .bar-in { gap: 8px; } .seg button { padding: 4px 9px; } .brand { font-size: 22px; } .lang { padding: 3px 8px; } }
