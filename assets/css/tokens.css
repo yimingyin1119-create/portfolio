@@ -15,10 +15,10 @@
   color-scheme: light;
   --bg: #ceae82; --bg-2: #e6d2a8; --card: #f1e3c4;
   --line: #2e1f12; --line-dim: rgba(46, 31, 18, .3); --line-faint: rgba(46, 31, 18, .12);
-  --ink: #2e1f12; --muted: #4f3a24; --faint: #6e5638;
+  --ink: #2e1f12; --muted: #3f2c18; --faint: #574128;
   --accent: #5a3a1e; --btn: #3a2616; --btn-ink: #f4e8cc;
   --red: #9a3a22; --red-soft: rgba(90, 58, 30, .1);
-  --paper: #f4e8cc; --paper-ink: #2e1f12; --paper-muted: #5a442c; --paper-rule: #d8c095;
+  --paper: #f4e8cc; --paper-ink: #2e1f12; --paper-muted: #4a3622; --paper-rule: #d8c095;
   --gold: #6f5420;
   --f-sans: "EO Text", "Songti SC", "STSong", "Noto Serif CJK SC", serif;
   --f-label: "EO Fell", Georgia, var(--f-sans);

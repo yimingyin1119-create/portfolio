@@ -1,6 +1,6 @@
 Fonts (all subset to the characters used, and renamed EO <name> as the OFL asks of modified copies):
 - 京華老宋体 (titles, display-old): © 2022 TerryWang, published by its author as free for commercial use.
-- 霞鹜文楷 LXGW WenKai (hand-400): © 2021 LXGW, SIL Open Font License 1.1.
+- 霞鹜文楷 LXGW WenKai Medium (hand-400): © 2021 LXGW, SIL Open Font License 1.1.
 - IM FELL English Roman/Italic (latin-fell-*): © 2007 Igino Marini, SIL OFL 1.1, Reserved Font Name IM FELL.
 - Pirata One (latin-pirata-400): © 2012 Rodrigo Fuenzalida, Nicolas Massi, SIL OFL 1.1.
 

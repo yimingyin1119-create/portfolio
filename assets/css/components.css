@@ -733,3 +733,22 @@ html[lang="en"] .ch-head h2, html[lang="en"] .leaf-title, html[lang="en"] .q-hea
 .contact-row .reach { flex: 0 1 520px; }
 .more-about { padding-block: clamp(40px, 5vw, 64px) 0; }
 @media (min-width: 961px) { .exhibit { width: fit-content; max-width: 100%; margin-inline: auto; } }
+
+/* ===== readability: nothing under 12.5px, small print a size up, labels on gold in light ink ===== */
+.plate, .pin-label { font-size: 12.5px; }
+.attr-k, .side-k, .poster figcaption, .vf figcaption, .frame-p, .frame-t, .label, .fmt, .dh .fmt, .vf-n, .pg-tag, .play-try b, .leaf-role b { font-size: 13.5px; }
+.q-meta, .src, .chip, .case .tag, .case-file > .tag, .book-count, .lvl, .pill, .online, .card-meta, .mh, .fields dt, .reach dt, .case-file dt { font-size: 14px; }
+.kicker { font-size: 14.5px; letter-spacing: .16em; color: var(--accent); }
+.book-hint { font-size: 13.5px; color: var(--muted); }
+.foot { font-size: 13.5px; color: var(--muted); }
+.ch-sub { font-size: 15.5px; color: var(--muted); }
+/* the hand face reads best a little larger */
+.proof, .leaf-one, .leaf-role, .leaf-did, .xnotes li { font-size: 15px; line-height: 1.6; }
+.play-try { font-size: 15px; }
+.play-tag, .lvl { color: #fff8e6; }
+.lvl[data-s="ok"] { color: var(--bg); }
+.scrub-y { color: var(--ink); }
+.frame-cap { font-size: 13px; }
+.pg-n { font-size: 13px; }
+.feat .case .vis .label { font-size: 13px; }
+html[lang="en"] .leaf-did, html[lang="en"] .leaf-role { font-size: 14px; }
