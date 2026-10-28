@@ -718,7 +718,7 @@ html[lang="en"] .ch-head h2, html[lang="en"] .leaf-title, html[lang="en"] .q-hea
 .ch-head { margin-bottom: 24px; }
 /* wide screens: the subtitle sits beside the title instead of under it, filling the heading's empty middle */
 @media (min-width: 900px) {
-  .ch-head:has(.ch-sub) { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: clamp(24px, 3vw, 44px); align-items: end; }
+  .ch-head:has(.ch-sub) { display: grid; grid-template-columns: minmax(0, max-content) minmax(15em, 1fr); column-gap: clamp(24px, 3vw, 44px); align-items: end; }
   .ch-head:has(.ch-sub) > .kicker, .ch-head:has(.ch-sub) > h2 { grid-column: 1; }
   .ch-head:has(.ch-sub) > .ch-sub { grid-column: 2; grid-row: 1 / span 2; align-self: end; margin: 0 0 8px; padding-left: clamp(16px, 2vw, 24px); border-left: 1.5px solid var(--line-dim); max-width: 34em; line-height: 1.7; }
 }
