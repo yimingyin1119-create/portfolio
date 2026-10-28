@@ -826,3 +826,11 @@ dialog.guide[open] { animation: guide-in .3s var(--ease); }
 .g-item p { margin: 2px 0 0; font-family: var(--f-hand); font-size: 15px; line-height: 1.55; color: var(--paper-muted); }
 .g-go { white-space: nowrap; font-size: 14px; font-weight: 700; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 560px) { .g-item { grid-template-columns: 28px minmax(0, 1fr); } .g-go { grid-column: 2; justify-self: start; } }
+
+/* One face per line. IM Fell has no Chinese, so a label such as 「KOL 风险 · 2025 秋」 drew its letters and digits in
+   Fell and its Chinese in the body serif. On the Chinese page Fell keeps only the all-caps English chapter kickers;
+   every other label is set in the body face. Poster values are one face too, words and numbers alike. */
+html:not([lang="en"]) :is(.kicker, .pg-tag, .play-try b, .leaf-role b) { font-family: var(--f-sans); letter-spacing: .1em; }
+html:not([lang="en"]) :is(.ch-head, .g-head, .more-btn) .kicker { font-family: var(--f-label); letter-spacing: .18em; }
+.g-n { font-family: var(--f-num); font-weight: 600; }
+.poster[data-count="false"] .big { font-family: var(--f-num); font-weight: 600; }
