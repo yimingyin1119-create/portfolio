@@ -33,7 +33,6 @@ export const EN = {
 
   // posters
   '战利品 · 成绩': 'The Haul · Results',
-  '抖音项目的数字是概数；其他是原始数字。': 'Douyin figures are rounded on purpose; everything else is exact.',
 
   // skills
   '痛点认领': 'Pain-Point Claim',

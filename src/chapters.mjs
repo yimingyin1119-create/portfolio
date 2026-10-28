@@ -42,7 +42,7 @@ export const quests = () => chapter('quests', 'MAIN QUEST', t('主线任务 · �
   </article>`).join('')}</div>`, { sub: t('四段实习，倒着看。卡片正面是我做了什么，翻过来是项目整体的结果。') });
 const LAMP = '<svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg>';
 
-export const posters = () => chapter('posters', 'TREASURE HAUL', t('战利品 · 成绩'), `<div class="posters">${data().POSTERS.map(p => `<figure class="poster" data-poster="${p.id}" data-count="${p.count}" data-reveal>${LAMP}<span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">${esc(p.value)}</b><figcaption>${esc(p.label)}</figcaption></div></figure>`).join('')}</div>`, { sub: t('抖音项目的数字是概数；其他是原始数字。') });
+export const posters = () => chapter('posters', 'TREASURE HAUL', t('战利品 · 成绩'), `<div class="posters">${data().POSTERS.map(p => `<figure class="poster" data-poster="${p.id}" data-count="${p.count}" data-reveal>${LAMP}<span class="beam" aria-hidden="true"></span><div class="sheet"><b class="big">${esc(p.value)}</b><figcaption>${esc(p.label)}</figcaption></div></figure>`).join('')}</div>`);
 // The three works a visitor can open and play with get the spotlight; the rest are listed below them.
 const PLAYS = () => [
   { t: t('痛点认领'), k: t('AI 产品 Demo'), d: t('AI 搜索的回答里，品牌买不到答案，只能认领用户的真实痛点。'), try: t('在 AI 搜索里点「散场打不到车」，再点「为什么看到」，看品牌凭什么出现。'), href: 'painpoint.html' },

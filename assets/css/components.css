@@ -752,3 +752,7 @@ html[lang="en"] .ch-head h2, html[lang="en"] .leaf-title, html[lang="en"] .q-hea
 .pg-n { font-size: 13px; }
 .feat .case .vis .label { font-size: 13px; }
 html[lang="en"] .leaf-did, html[lang="en"] .leaf-role { font-size: 14px; }
+
+/* the flag flies above the scroll: leave room for the part that sticks up (78% of its 0.633:1 height) plus the bar */
+.opening { --flag-w: clamp(200px, 24vw, 300px); padding-top: calc(var(--flag-w) * .633 * .78 + 24px); }
+.boot > .flag { width: var(--flag-w); }
