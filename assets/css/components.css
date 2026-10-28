@@ -538,22 +538,54 @@ html.motion .route-ship .hull { animation: bob 2.6s ease-in-out infinite; transf
 
 .the-end { color: var(--accent); }
 
-/* ===== the opening scroll: two rolled-paper curls; the bottom one rolls down to unfurl the sheet ===== */
+/* ===== the opening scroll: a sheet wound on two wooden rods with turned knobs. A twine tie slips off, then the bottom
+   rod rolls down: the paper on it thins as it pays out, its fibres turn with it, the sheet darkens where it bends into the
+   roll, and the rod settles with a small bounce. ===== */
 @property --u { syntax: "<number>"; inherits: true; initial-value: 0; }
-.boot { --u: 0; overflow: visible; clip-path: inset(-200px -40px calc(var(--u) * (100% - 30px) - 26px) -40px); }
-html.motion .boot { animation: unfurl 1.9s cubic-bezier(.55, .05, .2, 1) .35s both; }
+.boot { --u: 0; --stub: clamp(4px, calc(var(--gutter) - 22px), 30px); overflow: visible; clip-path: inset(-200px -80px calc(var(--u) * (100% - 30px) - 26px) -80px); }
+html.motion .boot { animation: unfurl 2.2s cubic-bezier(.5, .02, .2, 1) .7s both; }
 html.motion .boot.unrolled { animation: none; }
-@keyframes unfurl { from { --u: 1; } to { --u: 0; } }
-.curl { position: absolute; left: -8px; right: -8px; z-index: 3; pointer-events: none; border-radius: 999px;
-  background: linear-gradient(180deg, #b89a68 0%, #e9d8b2 22%, #fbf3df 42%, #efe0bd 62%, #c9ad7c 86%, #a4875a 100%);
-  box-shadow: 0 6px 12px -4px rgba(46, 31, 18, .45); }
-.curl::before, .curl::after { content: ""; position: absolute; top: 0; bottom: 0; width: 16px; border-radius: 50%;
-  background: repeating-radial-gradient(circle at 50% 50%, #a98c5c 0 1px, #f4e8cc 1px 3px); box-shadow: inset 0 0 0 1px rgba(90, 64, 34, .45); }
-.curl::before { left: -2px; } .curl::after { right: -2px; }
-.curl.top { top: -14px; height: 28px; }
+@keyframes unfurl {
+  0% { --u: 1; }
+  86% { --u: -.008; animation-timing-function: ease-in-out; }
+  94% { --u: .004; animation-timing-function: ease-in-out; }
+  100% { --u: 0; }
+}
+.curl { position: absolute; left: calc(var(--stub) * -1 - 6px); right: calc(var(--stub) * -1 - 6px); z-index: 3; pointer-events: none;
+  /* the wooden rod, seen beyond the paper at both ends */
+  background: linear-gradient(180deg, #2e1a0c 0%, #6b3f1f 22%, #b07a46 42%, #7a4a26 62%, #3b2414 100%) center / 100% 46% no-repeat; }
+/* turned knobs */
+.curl::before, .curl::after { content: ""; position: absolute; top: 50%; width: 22px; height: 26px; translate: 0 -50%; border-radius: 46% / 50%;
+  background: radial-gradient(ellipse at 38% 30%, #d39a5e 0 7%, #9a6334 26%, #5a3318 62%, #24130a 100%);
+  box-shadow: inset -2px -3px 4px rgba(0, 0, 0, .35), 0 5px 7px -3px rgba(30, 18, 8, .55); }
+.curl::before { left: 0; } .curl::after { right: 0; }
+/* the paper wound on the rod: a shaded cylinder whose fibres move as it turns, with the rolled layers showing at its ends */
+.roll { position: absolute; top: 0; bottom: 0; left: calc(var(--stub) + 6px); right: calc(var(--stub) + 6px); border-radius: 5px / 50%;
+  background:
+    repeating-linear-gradient(180deg, rgba(110, 80, 40, .13) 0 1px, transparent 1px 4px, rgba(255, 250, 235, .18) 4px 5px, transparent 5px 9px) 0 calc(var(--u) * 1400px) / 100% 100%,
+    linear-gradient(180deg, #9c7e50 0%, #d8c194 16%, #f7eed6 38%, #f1e3c4 56%, #c9ab7a 80%, #8a6c42 100%);
+  box-shadow: 0 7px 10px -6px rgba(46, 31, 18, .5); }
+.roll::before, .roll::after { content: ""; position: absolute; top: 0; bottom: 0; width: 9px; border-radius: 50%;
+  background: repeating-radial-gradient(ellipse at 50% 50%, #8e7046 0 .8px, #f1e3c4 .8px 2.4px); box-shadow: inset 0 0 0 1px rgba(90, 64, 34, .5); }
+.roll::before { left: -3px; } .roll::after { right: -3px; }
+.curl.top { top: -15px; height: 30px; }
 /* the bottom roll still holds the paper, so it starts fat and slims as it unwinds */
-.curl.bottom { height: calc(26px + var(--u) * 14px); bottom: calc(var(--u) * (100% - 30px) - 13px - var(--u) * 7px); }
-@media (max-width: 600px) { .curl { left: -4px; right: -4px; } .curl::before, .curl::after { width: 12px; } }
+.curl.bottom { height: calc(24px + var(--u) * 20px); bottom: calc(var(--u) * (100% - 30px) - 12px - var(--u) * 10px); }
+/* the sheet curving down into the bottom roll */
+.lip { position: absolute; left: calc(var(--stub) + 6px); right: calc(var(--stub) + 6px); bottom: 70%; height: 30px; opacity: calc(1 - var(--u));
+  background: linear-gradient(180deg, transparent, rgba(46, 31, 18, .1) 55%, rgba(46, 31, 18, .28)); }
+/* the twine tie holding the closed scroll; it only exists until the scroll opens */
+.tie { display: none; }
+html.motion .boot:not(.unrolled) .tie { display: block; position: absolute; left: 50%; top: -50px; bottom: -4px; width: 12px; translate: -50% 0; border-radius: 3px;
+  background: repeating-linear-gradient(60deg, #7d5e34 0 2px, #b8935c 2px 4px); box-shadow: 0 2px 4px rgba(30, 18, 8, .4);
+  animation: untie .55s cubic-bezier(.5, 0, .9, .5) .2s forwards; }
+html.motion .boot:not(.unrolled) .tie::after { content: ""; position: absolute; left: 50%; top: 42%; width: 22px; height: 14px; translate: -50% 0; border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 35%, #c9a46a, #7d5e34 70%); }
+@keyframes untie { to { transform: translateY(60px) rotate(18deg); opacity: 0; } }
+@media (max-width: 600px) {
+  .curl::before, .curl::after { width: 14px; height: 20px; }
+  .roll::before, .roll::after { width: 7px; }
+}
 .q-head { flex-wrap: wrap; }
 .q-head h3 { white-space: nowrap; }
 
@@ -562,7 +594,7 @@ html.motion .boot.unrolled { animation: none; }
 /* without JS (and before it starts) every spread is simply listed */
 .leaves { display: grid; gap: 18px; }
 .case-leaf { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-radius: 6px; overflow: hidden; box-shadow: 0 14px 30px -18px rgba(46, 31, 18, .6); }
-@media (max-width: 720px) { .case-leaf { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 900px) { .case-leaf { grid-template-columns: minmax(0, 1fr); } }
 .logbook:not(.ready) .book-stage, .logbook:not(.ready) .book-tools, .logbook:not(.ready) .book-hint { display: none; }
 html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; height: 0; overflow: hidden; visibility: hidden; pointer-events: none; }
 
@@ -623,7 +655,7 @@ html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; 
 .face .lit { position: absolute; inset: 0; pointer-events: none; background: rgba(58, 40, 18, var(--dark, 0)); }
 
 /* phones: one page at a time, the spread stacked; a swipe slides the next one in */
-@media (max-width: 720px) {
+@media (max-width: 900px) {
   .book-stage { position: relative; }
   .book-arrow { position: absolute; top: 50%; z-index: 9; transform: translateY(-50%); padding: 12px 4px; background: rgba(244, 232, 204, .85); border-radius: 999px; }
   .book-arrow[data-turn="-1"] { left: -6px; } .book-arrow[data-turn="1"] { right: -6px; }
@@ -668,7 +700,7 @@ html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; 
 .lens::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(36% 26% at 29% 19%, rgba(255, 255, 255, .32), transparent 76%), radial-gradient(22% 15% at 75% 86%, rgba(255, 255, 255, .12), transparent 80%); }
 .half .vis { flex: 1 1 0; min-height: 0; }
 .half .vis img { max-height: 100%; }
-@media (max-width: 720px) { .half .vis { flex: none; height: 240px; } }
+@media (max-width: 900px) { .half .vis { flex: none; height: 240px; } }
 
 /* a tighter, fuller book */
 .logbook .book-stage { max-width: 940px; margin-inline: auto; }
@@ -686,7 +718,7 @@ html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; 
 .leaf-num b { font-size: clamp(20px, 2vw, 26px); }
 .book-arrow { color: var(--ink); opacity: .75; padding: 10px 4px; transition: opacity .2s, transform .2s var(--ease); }
 .book-arrow:hover { opacity: 1; transform: scale(1.1); }
-@media (max-width: 720px) { .book { aspect-ratio: auto; min-height: 0; } .book-arrow svg { width: 16px; height: 36px; } }
+@media (max-width: 900px) { .book { aspect-ratio: auto; min-height: 0; } .book-arrow svg { width: 16px; height: 36px; } }
 
 /* 「更多关于我」: a signpost in interviewer mode; the personal chapters wait behind it */
 .more-about { position: relative; z-index: 1; padding-block: clamp(56px, 8vw, 96px) 0; }
@@ -795,7 +827,7 @@ html:not(.js) .music, html:not(.js) .music-hint { display: none; }
 .doodle .a { stroke: var(--red); }
 .pg.r .leaf-title { padding-right: 78px; }
 .leaf-title::after { content: ""; display: block; width: 150px; height: 12px; margin-top: 4px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='12' viewBox='0 0 160 12'%3E%3Cpath d='M2 7c18-8 30 6 48 0s30-8 48 0 28 6 44-2q8-4 14 2' fill='none' stroke='%239a3a22' stroke-opacity='.75' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 150px 12px no-repeat; }
-@media (max-width: 720px) { .doodle { width: 60px; } .pg.r .leaf-title { padding-right: 62px; } .seal { width: 46px; height: 46px; } }
+@media (max-width: 900px) { .doodle { width: 60px; } .pg.r .leaf-title { padding-right: 62px; } .seal { width: 46px; height: 46px; } }
 html[lang="en"] .pg.r .leaf-title { padding-right: 64px; font-size: clamp(18px, 1.75vw, 22px); }
 html[lang="en"] .doodle { width: 62px; }
 html[lang="en"] .leaf-title::after { margin-top: 2px; }
@@ -836,3 +868,32 @@ html:not([lang="en"]) :is(.ch-head, .g-head, .more-btn) .kicker { font-family: v
 .poster[data-count="false"] .big { font-family: var(--f-num); font-weight: 600; }
 /* English field names (Audience, Tracking) are wider than two Chinese characters */
 html[lang="en"] .fields div { grid-template-columns: 5.4em minmax(0, 1fr); }
+
+/* ===== type floor. Secondary text sat at 12–14px, which reads small in a Chinese serif. Marks and counters now start
+   at 14px, labels, captions, tags and chips at 15px, and running text inside cards at 16px. The nav keeps its sizes so
+   it still fits a 360px phone; only the "?" glyph and the dial's axis numbers stay smaller. ===== */
+.hud li, .hud b, .pframe .plate, .pin-label, .xpin, .pg-n, .xnotes b, .lang, .ach-k { font-size: 14px; }
+.dticks span { font-size: 13px; }
+.flip span, .vis .label, .num span, .spec span, .modes button, .use b, .case-file .src, .case-file .src b,
+.case-file .imgs figcaption, .prompt code, .shotlist th, .shotlist td, .yr-c .cty, .res span, .meta dt, .mh dt, .fields dt, .reach dt,
+.attr-k, .play-try b, .side-k, .sheet figcaption, .book-hint, .dh .fmt, .vf-n, .vf figcaption, .frame-cap span, .foot,
+.music-hint, .online, .edu b, .edu span, .q-meta, .side .src, .chip, .bd .tag, .case-file .tag, .cap-lens, .cap-game, .score,
+.reveal-all, .filters button, .book-count, .case-file dt, .case-file h4, .dial .lvl, .dh .need, .mh dd, .rules li, .more-sub,
+.map-hud .pill, .pg-tag, .leaf-role b { font-size: 15px; }
+.badge p, .proof, .play p, .play-link, .tool p, .ticks li, .bd .note, .doc p, .fields dd, .paper p, .case-file dd, .exhibit-tx span { font-size: 16px; }
+.xnotes li b, .pg .leaf-num span { font-size: 14px; }
+.feat .case .vis .label, .case .num span, .case-file .use b, .case-file .res span, .shotlist td.p, .rules li b { font-size: 15px; }
+/* narrow phones: the English nav (Hiring / Friend / 中文) ran 30px past the screen */
+@media (max-width: 520px) { .bar-in { gap: 10px; } .lang { white-space: nowrap; font-size: 13px; } html[lang="en"] .seg button { padding-inline: 8px; } .music-hint { font-size: 14px; } }
+@media (max-width: 420px) { .bar-in { gap: 6px; } .seg button { padding: 4px 7px; font-size: 13px; } html[lang="en"] .seg button { padding-inline: 7px; } .lang { padding: 3px 7px; } .brand { font-size: 21px; } }
+@media (max-width: 600px) { .music-hint { font-size: 13px; } }
+@media (max-width: 900px) { html[lang="en"] .bar-in { gap: 12px; } }
+@media (max-width: 420px) { html[lang="en"] .bar-in { gap: 4px; } html[lang="en"] .seg button { padding-inline: 5px; } html[lang="en"] .lang { padding-inline: 5px; } }
+@media (max-width: 380px) { .opening { --flag-w: 150px; } }
+/* long English values (Turn content into sales) wrap inside the attribute button instead of running out of it */
+.attr-btn .attr-v { flex: 1 1 auto; min-width: 0; }
+html.motion .attr-btn[aria-expanded="true"] + .proof { max-height: 16em; }
+@media (max-width: 1000px) { html[lang="en"] .attrs { grid-template-columns: minmax(0, 1fr); } }
+/* phones: the school line wraps under its name, and the photo's name plate keeps to the photo's width */
+.edu li { flex-wrap: wrap; min-width: 0; max-width: 100%; }
+@media (max-width: 600px) { .pframe .plate { font-size: 13px; letter-spacing: .06em; max-width: 100%; } }

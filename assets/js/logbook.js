@@ -1,7 +1,7 @@
 // The case logbook. Each case is a spread (cover on the left page, story on the right). A turn swings a leaf
 // about the gutter, built as a chain of narrow strips that each lean a little further, so the paper bends
 // instead of pivoting like a door; light and shade follow each strip's angle. A magnifier lies on the book and
-// shows a 2× copy of whatever is under it. Narrow screens get one page at a time and a swipe instead.
+// shows a 2× copy of whatever is under it. Phones and tablets get one page at a time and a swipe instead.
 import { L } from './i18n.js';
 
 const N = 12;        // strips in the turning leaf
@@ -19,7 +19,7 @@ export function initLogbook() {
   const count = root.querySelector('.book-count'), hint = root.querySelector('.book-hint');
   const leaves = [...root.querySelectorAll('.case-leaf')];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const narrow = () => matchMedia('(max-width: 720px)').matches;
+  const narrow = () => matchMedia('(max-width: 900px)').matches;
   const finePointer = matchMedia('(pointer: fine)').matches;
 
   let deck = leaves.slice(), idx = 0, turn = null, motion = null, raf = 0, last = 0;
