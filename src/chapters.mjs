@@ -19,6 +19,7 @@ export const opening = () => `<section class="chapter opening" id="opening" data
         <ul class="attrs">${data().PROFILE.map(p => `<li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-${p.key}"><span class="attr-k">${esc(p.label)}</span><span class="attr-v">${esc(p.value)}</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-${p.key}">${esc(p.proof)}</p></li>`).join('')}</ul>
         <div class="pick" role="group" aria-label="${t('你是谁')}"><button type="button" class="cta" data-pick="interviewer">${t('我是面试官')} <span aria-hidden="true">→</span></button><button type="button" class="ghost" data-pick="friend">${t('我是新朋友')} <span aria-hidden="true">→</span></button></div>
         <a class="play-link" href="#skills">${t('▶ 先玩一下我做的 3 个 AI 作品')}</a>
+        <button type="button" class="guide-open">🧭 ${t('不知道从哪开始？打开探索指南')}</button>
       </div>
     </div>
     <span class="slash" aria-hidden="true">//</span>
@@ -128,7 +129,7 @@ const leaf = (c, i) => {
       <a class="leaf-more" href="#case-${c.id}" data-open="${c.id}">${t('看完整案例 →')}</a><span class="pg-n">${2 * i + 2}</span></div>
   </article>`;
 };
-const logbook = list => `<div class="logbook">
+const logbook = list => `<div class="logbook" id="logbook">
     <div class="book-stage">
       <button type="button" class="book-arrow" data-turn="-1" aria-label="${t('上一页')}">${ARROW(-1)}</button>
       <div class="book-3d" tabindex="0" aria-label="${t('案例日志，左右键翻页')}">
@@ -145,7 +146,7 @@ const logbook = list => `<div class="logbook">
 const FILTERS = () => [['all', t('全部')], ['insight', t('洞察')], ['campaign', t('战役')], ['content', t('内容')], ['creative', t('创意')]];
 export const cases = () => chapter('cases', 'CAPTAIN’S LOG', t('航海日志 · 案例'), `<h3 class="subh">${t('代表项目 · 抖音')}</h3>
   <div class="cases feat">${data().CASES.filter(c => c.feat).map(caseCard).join('')}</div>
-  <div class="exhibit paper" data-reveal><div class="exhibit-tx"><p class="kicker">${t('透视镜 · 拼多多拆解')}</p><p>${t('同一张弹窗，用户看到的是奖励，我看到的是三处设计。拖动镜片看看，或者切到「找茬」自己找。')}</p><button type="button" class="chip" data-open="pdd">${t('看完整案例 →')}</button></div>${xray()}</div>
+  <div class="exhibit paper" id="lens" data-reveal><div class="exhibit-tx"><p class="kicker">${t('透视镜 · 拼多多拆解')}</p><p>${t('同一张弹窗，用户看到的是奖励，我看到的是三处设计。拖动镜片看看，或者切到「找茬」自己找。')}</p><button type="button" class="chip" data-open="pdd">${t('看完整案例 →')}</button></div>${xray()}</div>
   <h3 class="subh">${t('更多案例')}</h3>
   <div class="filters" role="group" aria-label="${t('按方向筛选')}">${FILTERS().map(([f, t], i) => `<button type="button" aria-pressed="${i === 0}" data-f="${f}">${t}</button>`).join('')}</div>
   ${logbook(data().CASES.filter(c => !c.feat))}
@@ -219,7 +220,7 @@ export const viewfinder = () => chapter('viewfinder', 'SPYGLASS', t('望远镜 �
     </article>
   </div>
   <h3 class="subh">${t('漂流瓶 · 我发过的内容')}</h3>
-  <div class="projector">
+  <div class="projector" id="bottles">
     <div class="screen" aria-live="polite">${screen(data().WORKS[0])}</div>
     <div class="reel-wrap">
       <button type="button" class="chip reel-btn" data-reel="-1" aria-label="${t('往前翻')}">←</button>

@@ -25,6 +25,31 @@ const HEAD = () => `<!doctype html>
 <link rel="stylesheet" href="assets/css/print.css" media="print">
 </head>`;
 
+// The explorer's guide: every interaction on the page, how to do it, and a link to where it lives.
+const GUIDE = [
+  ['opening', '选身份', '点「我是面试官」或「我是新朋友」，章节会按你的身份重新排列。'],
+  ['opening', '看属性', '点首屏四个属性卡上的「?」，看每一项背后的证据。'],
+  ['skills', '试玩 AI 作品', '三张「可以体验」卡片都能直接打开玩，卡片里写了第一步做什么。'],
+  ['quests', '翻任务卡', '点主线任务卡底部的「翻面看结果」，看每段实习的整体结果。'],
+  ['lens', '透视镜', '拖动镜片看弹窗里藏的设计；切到「找茬」自己把它们点出来。'],
+  ['logbook', '翻航海日志', '拖动书页、点左右箭头或用方向键翻页；上面的筛选可以只看某一类案例。'],
+  ['logbook', '放大镜', '在电脑上拖动书上的放大镜，看截图里的小字。'],
+  ['cases', '打开案例详情', '点任意案例卡或「看完整案例 →」，在侧边抽屉里读完整内容，左右键翻页。'],
+  ['bridge', '传令滑块', '拖动滑块，看同一件事写给客户、技术和达人的三份文案怎么跟着变。'],
+  ['map', '航海图', '点国家飞过去，点带照片的图钉打开存档卡，拖底部时间轴看每年点亮了哪里。'],
+  ['bottles', '漂流瓶', '左右拖动绳子上的卡片，点一张把它放到上面的屏幕。'],
+  ['contact', '加个好友', '一键复制微信号或邮箱。'],
+  [null, '背景音乐', '点导航栏的音柱按钮，或旗子旁的「♪」，播放一首航海歌。'],
+  [null, '中英切换', '点导航栏的「EN / 中文」，换语言后停在同一章节。'],
+  [null, '成就', '做上面这些事会解锁成就，导航栏的「成就」里能看到进度。'],
+];
+const guide = () => `<dialog class="guide" aria-labelledby="guide-title">
+  <div class="g-in">
+    <header class="g-head"><p class="kicker">EXPLORER'S GUIDE</p><h2 id="guide-title">${t('探索指南')}</h2><p class="g-sub">${t('这张地图上能玩的东西都在这里。点「去看看」直接过去。')}</p><button type="button" class="chip g-x" data-close>${t('关闭')}</button></header>
+    <ol class="g-list">${GUIDE.map(([to, name, how], i) => `<li class="g-item"><span class="g-n">${String(i + 1).padStart(2, '0')}</span><div><b>${t(name)}</b><p>${t(how)}</p></div>${to ? `<a class="g-go" href="#${to}">${t('去看看 →')}</a>` : ''}</li>`).join('')}</ol>
+  </div>
+</dialog>`;
+
 const NAV = () => `<nav class="bar" aria-label="${t('主导航')}"><div class="bar-in">
   <a class="brand" href="#opening">Yiming</a>
   <div class="seg" role="group" aria-label="${t('访客身份')}"><button type="button" data-mode="interviewer" aria-pressed="true">${t('面试官')}</button><button type="button" data-mode="friend" aria-pressed="false">${t('新朋友')}</button></div>
@@ -32,9 +57,11 @@ const NAV = () => `<nav class="bar" aria-label="${t('主导航')}"><div class="b
   <div class="ach-wrap"><button type="button" class="ach" aria-expanded="false" aria-controls="ach-list"><span class="ach-k">${t('成就')}</span> <b class="ach-n">0/${RULES.length}</b></button>
     <ol class="ach-list" id="ach-list" hidden>${RULES.map(r => `<li data-ach="${r.id}">${isEn() ? r.en : r.title}</li>`).join('')}</ol></div>
   ${isEn() ? '<a class="lang" href="index.html" hreflang="zh-CN" lang="zh-CN">中文</a>' : '<a class="lang" href="en.html" hreflang="en" lang="en">EN</a>'}
+  <button type="button" class="guide-btn" aria-haspopup="dialog" aria-label="${t('探索指南')}"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M13.5 6.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></svg><span>${t('指南')}</span></button>
   <a class="cta" href="#contact">${t('联系我')}</a>
 </div></nav>
-<div id="toast" class="toast" role="status" aria-live="polite"></div>`;
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+${guide()}`;
 
 const FOLD_NAMES = { novice: '新手村', map: '航海图', abroad: '第一次出海', viewfinder: '望远镜' };
 const moreAbout = ids => `<aside class="more-about" aria-label="${t('更多关于我')}">

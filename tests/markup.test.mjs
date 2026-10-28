@@ -317,3 +317,15 @@ test('every logbook spread is decorated: a wax seal with its number on the left 
     assert.ok(new RegExp(`<svg class="doodle ${x.cat}"[^>]*aria-hidden="true"`).test(leaf), `${x.id} doodle`);
   });
 });
+
+test('an explorer guide lists every interaction, each linking to where it lives, in both languages', () => {
+  for (const page of [html, read('en.html')]) {
+    const nav = page.slice(page.indexOf('<nav class="bar"'), page.indexOf('</nav>'));
+    assert.ok(/<button[^>]+class="guide-btn"[^>]+aria-haspopup="dialog"/.test(nav));
+    const d = page.slice(page.indexOf('<dialog class="guide"'), page.indexOf('</dialog>', page.indexOf('<dialog class="guide"')));
+    const items = d.match(/<li class="g-item"/g) ?? [];
+    assert.ok(items.length >= 12, `${items.length} items`);
+    for (const [, id] of d.matchAll(/<a class="g-go" href="#([\w-]+)"/g)) assert.ok(page.includes(`id="${id}"`), `#${id} exists`);
+    assert.ok(/<button[^>]+class="guide-open"/.test(page.slice(page.indexOf('data-chapter="opening"'), page.indexOf('</section>', page.indexOf('data-chapter="opening"')))));
+  }
+});

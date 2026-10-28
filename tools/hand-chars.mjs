@@ -5,8 +5,8 @@ import * as ZH from '../data/content.js';
 import * as EN from '../data/content.en.js';
 
 // Blocks styled with var(--f-hand); keep in sync with the CSS.
-const BLOCKS = ['<article class="case-leaf"', '<p class="play-try"', '<ol class="xnotes"', '<p class="proof"', '<blockquote'];
-const END = { '<article class="case-leaf"': '</article>', '<p class="play-try"': '</p>', '<ol class="xnotes"': '</ol>', '<p class="proof"': '</p>', '<blockquote': '</blockquote>' };
+const BLOCKS = ['<ol class="g-list"', '<article class="case-leaf"', '<p class="play-try"', '<ol class="xnotes"', '<p class="proof"', '<blockquote'];
+const END = { '<ol class="g-list"': '</ol>', '<article class="case-leaf"': '</article>', '<p class="play-try"': '</p>', '<ol class="xnotes"': '</ol>', '<p class="proof"': '</p>', '<blockquote': '</blockquote>' };
 
 const text = s => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
 

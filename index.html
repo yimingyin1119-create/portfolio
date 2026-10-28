@@ -16,8 +16,8 @@
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css?v=daa73062c7">
 <link rel="stylesheet" href="assets/css/layout.css?v=6b45028c15">
-<link rel="stylesheet" href="assets/css/components.css?v=7636418cf6">
-<link rel="stylesheet" href="assets/css/print.css?v=0a2854a3f4" media="print">
+<link rel="stylesheet" href="assets/css/components.css?v=7897780bc9">
+<link rel="stylesheet" href="assets/css/print.css?v=a6f20566e5" media="print">
 </head>
 <body>
 <nav class="bar" aria-label="主导航"><div class="bar-in">
@@ -27,9 +27,16 @@
   <div class="ach-wrap"><button type="button" class="ach" aria-expanded="false" aria-controls="ach-list"><span class="ach-k">成就</span> <b class="ach-n">0/7</b></button>
     <ol class="ach-list" id="ach-list" hidden><li data-ach="novice-done">新手村毕业</li><li data-ach="first-card">打开第一张存档卡</li><li data-ach="five-cards">翻开 5 张存档卡</li><li data-ach="ten-countries">点亮 10 个国家</li><li data-ach="world-tour">点亮全部 26 国</li><li data-ach="all-quests">看完全部主线任务</li><li data-ach="add-friend">加了好友</li></ol></div>
   <a class="lang" href="en.html" hreflang="en" lang="en">EN</a>
+  <button type="button" class="guide-btn" aria-haspopup="dialog" aria-label="探索指南"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="8"/><path d="M13.5 6.5l-2.2 4.8-4.8 2.2 2.2-4.8z"/></svg><span>指南</span></button>
   <a class="cta" href="#contact">联系我</a>
 </div></nav>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<dialog class="guide" aria-labelledby="guide-title">
+  <div class="g-in">
+    <header class="g-head"><p class="kicker">EXPLORER'S GUIDE</p><h2 id="guide-title">探索指南</h2><p class="g-sub">这张地图上能玩的东西都在这里。点「去看看」直接过去。</p><button type="button" class="chip g-x" data-close>关闭</button></header>
+    <ol class="g-list"><li class="g-item"><span class="g-n">01</span><div><b>选身份</b><p>点「我是面试官」或「我是新朋友」，章节会按你的身份重新排列。</p></div><a class="g-go" href="#opening">去看看 →</a></li><li class="g-item"><span class="g-n">02</span><div><b>看属性</b><p>点首屏四个属性卡上的「?」，看每一项背后的证据。</p></div><a class="g-go" href="#opening">去看看 →</a></li><li class="g-item"><span class="g-n">03</span><div><b>试玩 AI 作品</b><p>三张「可以体验」卡片都能直接打开玩，卡片里写了第一步做什么。</p></div><a class="g-go" href="#skills">去看看 →</a></li><li class="g-item"><span class="g-n">04</span><div><b>翻任务卡</b><p>点主线任务卡底部的「翻面看结果」，看每段实习的整体结果。</p></div><a class="g-go" href="#quests">去看看 →</a></li><li class="g-item"><span class="g-n">05</span><div><b>透视镜</b><p>拖动镜片看弹窗里藏的设计；切到「找茬」自己把它们点出来。</p></div><a class="g-go" href="#lens">去看看 →</a></li><li class="g-item"><span class="g-n">06</span><div><b>翻航海日志</b><p>拖动书页、点左右箭头或用方向键翻页；上面的筛选可以只看某一类案例。</p></div><a class="g-go" href="#logbook">去看看 →</a></li><li class="g-item"><span class="g-n">07</span><div><b>放大镜</b><p>在电脑上拖动书上的放大镜，看截图里的小字。</p></div><a class="g-go" href="#logbook">去看看 →</a></li><li class="g-item"><span class="g-n">08</span><div><b>打开案例详情</b><p>点任意案例卡或「看完整案例 →」，在侧边抽屉里读完整内容，左右键翻页。</p></div><a class="g-go" href="#cases">去看看 →</a></li><li class="g-item"><span class="g-n">09</span><div><b>传令滑块</b><p>拖动滑块，看同一件事写给客户、技术和达人的三份文案怎么跟着变。</p></div><a class="g-go" href="#bridge">去看看 →</a></li><li class="g-item"><span class="g-n">10</span><div><b>航海图</b><p>点国家飞过去，点带照片的图钉打开存档卡，拖底部时间轴看每年点亮了哪里。</p></div><a class="g-go" href="#map">去看看 →</a></li><li class="g-item"><span class="g-n">11</span><div><b>漂流瓶</b><p>左右拖动绳子上的卡片，点一张把它放到上面的屏幕。</p></div><a class="g-go" href="#bottles">去看看 →</a></li><li class="g-item"><span class="g-n">12</span><div><b>加个好友</b><p>一键复制微信号或邮箱。</p></div><a class="g-go" href="#contact">去看看 →</a></li><li class="g-item"><span class="g-n">13</span><div><b>背景音乐</b><p>点导航栏的音柱按钮，或旗子旁的「♪」，播放一首航海歌。</p></div></li><li class="g-item"><span class="g-n">14</span><div><b>中英切换</b><p>点导航栏的「EN / 中文」，换语言后停在同一章节。</p></div></li><li class="g-item"><span class="g-n">15</span><div><b>成就</b><p>做上面这些事会解锁成就，导航栏的「成就」里能看到进度。</p></div></li></ol>
+  </div>
+</dialog>
 <div class="chart-edge" aria-hidden="true"></div>
 <main id="chapters">
 <svg class="route" aria-hidden="true" focusable="false"></svg>
@@ -48,6 +55,7 @@
         <ul class="attrs"><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-job"><span class="attr-k">主职业</span><span class="attr-v">营销策划</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-job">抖音、快手、新浪微博的营销实习，写过多套区域消费券方案</p></li><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-talent"><span class="attr-k">天赋</span><span class="attr-v">导演</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-talent">高中导演编剧的微电影获南京市一等奖；2025 全荷羽毛球赛，工作证上写的还是「导演组」</p></li><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-unlock"><span class="attr-k">新解锁</span><span class="attr-v">AI</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-unlock">2023 年开始付费用 ChatGPT，2026 年开始用 AI 写代码做产品</p></li><li class="attr"><button type="button" class="attr-btn" aria-expanded="false" aria-controls="proof-quest"><span class="attr-k">主线任务</span><span class="attr-v">让内容变成生意</span><span class="attr-i" aria-hidden="true">?</span></button><p class="proof" id="proof-quest">从博主接商单，到在平台上撮合政府、商家和达人</p></li></ul>
         <div class="pick" role="group" aria-label="你是谁"><button type="button" class="cta" data-pick="interviewer">我是面试官 <span aria-hidden="true">→</span></button><button type="button" class="ghost" data-pick="friend">我是新朋友 <span aria-hidden="true">→</span></button></div>
         <a class="play-link" href="#skills">▶ 先玩一下我做的 3 个 AI 作品</a>
+        <button type="button" class="guide-open">🧭 不知道从哪开始？打开探索指南</button>
       </div>
     </div>
     <span class="slash" aria-hidden="true">//</span>
@@ -149,7 +157,7 @@
     <span class="num"><b>分轮 × 分档</b><span>发券节奏与券面设计</span></span></span></a><a class="case" href="#case-perform" data-id="perform" data-cat="campaign" aria-haspopup="dialog"><div class="vis type art-rose" data-art="rose" data-seed="3"><span class="label">演出票根 · 演出之城</span><span class="tx">为一场演唱会，<br>去<em>一座城</em></span></div>
     <span class="bd"><span class="tag">行业协会合作 · 演出与城市消费</span><span class="h">为一场演唱会，去一座城：与中国演出行业协会的合作方案</span><span class="note">票根，就是最好的城市消费券。</span>
     <span class="num"><b>2 种</b><span>合作模式：演出之城、演出商家引入</span></span></span></a></div>
-  <div class="exhibit paper" data-reveal><div class="exhibit-tx"><p class="kicker">透视镜 · 拼多多拆解</p><p>同一张弹窗，用户看到的是奖励，我看到的是三处设计。拖动镜片看看，或者切到「找茬」自己找。</p><button type="button" class="chip" data-open="pdd">看完整案例 →</button></div><figure class="xray">
+  <div class="exhibit paper" id="lens" data-reveal><div class="exhibit-tx"><p class="kicker">透视镜 · 拼多多拆解</p><p>同一张弹窗，用户看到的是奖励，我看到的是三处设计。拖动镜片看看，或者切到「找茬」自己找。</p><button type="button" class="chip" data-open="pdd">看完整案例 →</button></div><figure class="xray">
     <div class="lenscol">
       <div class="spec"><span>样本 · 拼多多游戏页弹窗</span><span class="modes" role="group" aria-label="查看方式"><button type="button" data-lens="lens" aria-pressed="true">透视镜</button><button type="button" data-lens="game" aria-pressed="false">找茬</button></span></div>
       <div class="stage" tabindex="0" role="img" aria-label="拼多多游戏页弹窗截图。透视镜下有三处批注：关闭键、奖励卡和红色主按钮。用方向键可以移动透视镜。">
@@ -168,7 +176,7 @@
   </figure></div>
   <h3 class="subh">更多案例</h3>
   <div class="filters" role="group" aria-label="按方向筛选"><button type="button" aria-pressed="true" data-f="all">全部</button><button type="button" aria-pressed="false" data-f="insight">洞察</button><button type="button" aria-pressed="false" data-f="campaign">战役</button><button type="button" aria-pressed="false" data-f="content">内容</button><button type="button" aria-pressed="false" data-f="creative">创意</button></div>
-  <div class="logbook">
+  <div class="logbook" id="logbook">
     <div class="book-stage">
       <button type="button" class="book-arrow" data-turn="-1" aria-label="上一页"><svg viewBox="0 0 22 48" width="22" height="48" fill="none" aria-hidden="true"><polyline points="17,4 5,24 17,44" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <div class="book-3d" tabindex="0" aria-label="案例日志，左右键翻页">
@@ -507,7 +515,7 @@
     </article>
   </div>
   <h3 class="subh">漂流瓶 · 我发过的内容</h3>
-  <div class="projector">
+  <div class="projector" id="bottles">
     <div class="screen" aria-live="polite"><div class="screen-in"><img src="assets/img/xhs-top-s.webp" srcset="assets/img/xhs-top-s.webp 480w, assets/img/xhs-top-l.webp 603w" sizes="(max-width: 720px) 90vw, 420px" width="603" height="1092" alt="闺蜜我们老了也要成为这样超酷的老太好吗" loading="lazy" decoding="async">
     <div class="screen-cap"><p class="kicker">小红书</p><h3>闺蜜我们老了也要成为这样超酷的老太好吗</h3><b>5.8 万赞</b></div></div></div>
     <div class="reel-wrap">
@@ -536,7 +544,7 @@
 </main>
 <p class="the-end" aria-hidden="true">Bon Voyage</p>
 <footer class="foot">© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，饭搭子演示版的数据为预置</footer>
-<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=599bc4e641","./assets/js/main.js":"./assets/js/main.js?v=e6c6f56f15","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=901f9f0ef7","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
-<script type="module" src="assets/js/main.js?v=e6c6f56f15"></script>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/guide.js":"./assets/js/guide.js?v=5423e36a7f","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=599bc4e641","./assets/js/main.js":"./assets/js/main.js?v=c33b602484","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=901f9f0ef7","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="module" src="assets/js/main.js?v=c33b602484"></script>
 </body>
 </html>
