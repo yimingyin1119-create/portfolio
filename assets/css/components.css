@@ -834,3 +834,5 @@ html:not([lang="en"]) :is(.kicker, .pg-tag, .play-try b, .leaf-role b) { font-fa
 html:not([lang="en"]) :is(.ch-head, .g-head, .more-btn) .kicker { font-family: var(--f-label); letter-spacing: .18em; }
 .g-n { font-family: var(--f-num); font-weight: 600; }
 .poster[data-count="false"] .big { font-family: var(--f-num); font-weight: 600; }
+/* English field names (Audience, Tracking) are wider than two Chinese characters */
+html[lang="en"] .fields div { grid-template-columns: 5.4em minmax(0, 1fr); }
