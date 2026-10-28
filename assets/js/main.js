@@ -7,6 +7,7 @@ import { initBridge } from './bridge.js';
 import { initReel } from './reel.js';
 import { initRoute } from './route.js';
 import { initFlags } from './flag.js';
+import { initMusic } from './music.js';
 import { createTracker, progress } from './achievements.js';
 import { store } from './storage.js';
 import { L } from './i18n.js';
@@ -52,6 +53,7 @@ run('bridge', () => initBridge());
 run('reel', () => initReel({ tracker }));
 run('route', () => initRoute());
 run('flags', () => initFlags());
+run('music', () => initMusic());
 run('reveal', () => initReveal(document));
 
 // The map pulls in ~110 KB of geometry; load it on its own so a failure there never takes the rest down.

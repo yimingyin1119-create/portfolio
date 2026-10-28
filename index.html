@@ -16,13 +16,14 @@
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css?v=daa73062c7">
 <link rel="stylesheet" href="assets/css/layout.css?v=6b45028c15">
-<link rel="stylesheet" href="assets/css/components.css?v=a022d9bee2">
-<link rel="stylesheet" href="assets/css/print.css?v=db4b964676" media="print">
+<link rel="stylesheet" href="assets/css/components.css?v=17c3f6df7e">
+<link rel="stylesheet" href="assets/css/print.css?v=0a2854a3f4" media="print">
 </head>
 <body>
 <nav class="bar" aria-label="主导航"><div class="bar-in">
   <a class="brand" href="#opening">Yiming</a>
   <div class="seg" role="group" aria-label="访客身份"><button type="button" data-mode="interviewer" aria-pressed="true">面试官</button><button type="button" data-mode="friend" aria-pressed="false">新朋友</button></div>
+  <button type="button" class="music" aria-pressed="false" aria-label="播放背景音乐" data-src="assets/audio/shanty.m4a"><svg viewBox="0 0 20 16" aria-hidden="true"><rect class="b1" x="2" y="5" width="3" height="10" rx="1"/><rect class="b2" x="8.5" y="1" width="3" height="14" rx="1"/><rect class="b3" x="15" y="7" width="3" height="8" rx="1"/></svg></button>
   <div class="ach-wrap"><button type="button" class="ach" aria-expanded="false" aria-controls="ach-list"><span class="ach-k">成就</span> <b class="ach-n">0/7</b></button>
     <ol class="ach-list" id="ach-list" hidden><li data-ach="novice-done">新手村毕业</li><li data-ach="first-card">打开第一张存档卡</li><li data-ach="five-cards">翻开 5 张存档卡</li><li data-ach="ten-countries">点亮 10 个国家</li><li data-ach="world-tour">点亮全部 26 国</li><li data-ach="all-quests">看完全部主线任务</li><li data-ach="add-friend">加了好友</li></ol></div>
   <a class="lang" href="en.html" hreflang="en" lang="en">EN</a>
@@ -35,6 +36,7 @@
 <section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
   <div class="frame boot"><span class="curl top" aria-hidden="true"></span><span class="curl bottom" aria-hidden="true"></span>
     <canvas class="flag" data-title="EARTH ONLINE" data-sub="· VOYAGE 2027 ·" width="300" height="190" aria-hidden="true"></canvas>
+    <button type="button" class="music-hint">♪ 听一段航海的声音</button>
     <ul class="hud" aria-label="玩家数值"><li>Class of <b>2027</b></li><li><b>26</b> 国</li><li><b>4</b> 段实习</li></ul>
     <div class="player">
       <figure class="pframe tilt"><img src="assets/img/portrait-s.webp" srcset="assets/img/portrait-s.webp 480w, assets/img/portrait-l.webp 1200w" sizes="(max-width: 720px) 60vw, 300px" width="1200" height="1500" alt="尹伊茗" fetchpriority="high" decoding="async"><figcaption class="plate">PLAYER · 尹伊茗</figcaption></figure>
@@ -516,7 +518,7 @@
 </main>
 <p class="the-end" aria-hidden="true">Bon Voyage</p>
 <footer class="foot">© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，饭搭子演示版的数据为预置</footer>
-<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=599bc4e641","./assets/js/main.js":"./assets/js/main.js?v=2927599cc2","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/opening.js":"./assets/js/opening.js?v=901f9f0ef7","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
-<script type="module" src="assets/js/main.js?v=2927599cc2"></script>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=599bc4e641","./assets/js/main.js":"./assets/js/main.js?v=e6c6f56f15","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=901f9f0ef7","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="module" src="assets/js/main.js?v=e6c6f56f15"></script>
 </body>
 </html>

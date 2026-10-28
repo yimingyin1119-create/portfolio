@@ -756,3 +756,22 @@ html[lang="en"] .leaf-did, html[lang="en"] .leaf-role { font-size: 14px; }
 /* the flag flies above the scroll: leave room for the part that sticks up (78% of its 0.633:1 height) plus the bar */
 .opening { --flag-w: clamp(200px, 24vw, 300px); padding-top: calc(var(--flag-w) * .633 * .78 + 24px); }
 .boot > .flag { width: var(--flag-w); }
+
+/* music: a three-bar equaliser in the bar, dancing while it plays; a hint by the flag */
+.music { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 30px; padding: 0; border: 1px solid var(--line-dim); border-radius: 999px; background: none; color: var(--muted); cursor: pointer; }
+.music:hover, .music.on { border-color: var(--line); color: var(--ink); }
+.music svg { width: 16px; height: 13px; fill: currentColor; overflow: visible; }
+.music rect { transform-origin: 50% 100%; transform-box: fill-box; }
+.music:not(.on) rect { transform: scaleY(.45); }
+.music.on .b1 { animation: eq 0.9s ease-in-out infinite; }
+.music.on .b2 { animation: eq 0.7s ease-in-out -.3s infinite; }
+.music.on .b3 { animation: eq 1.1s ease-in-out -.5s infinite; }
+@keyframes eq { 0%, 100% { transform: scaleY(.35); } 50% { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .music.on rect { animation: none; transform: none; } }
+html:not(.js) .music, html:not(.js) .music-hint { display: none; }
+.music-hint { position: absolute; top: 0; left: calc(clamp(4px, 2vw, 22px) + var(--flag-w, 300px) + 12px); transform: translateY(-160%); z-index: 4;
+  padding: 4px 12px; border: 1px dashed var(--line); border-radius: 999px; background: var(--card); color: var(--ink); font-size: 14px; cursor: pointer; white-space: nowrap; box-shadow: 0 6px 14px -10px rgba(46, 31, 18, .5); }
+.music-hint:hover { border-style: solid; }
+.music-hint.on { background: var(--btn); color: var(--btn-ink); border-color: var(--btn); }
+@media (max-width: 600px) { .music-hint { left: auto; right: 8px; transform: translateY(-140%); font-size: 13px; } }
+@media (max-width: 600px) { .opening { --flag-w: 168px; } }

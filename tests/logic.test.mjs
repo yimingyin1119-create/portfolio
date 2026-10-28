@@ -119,3 +119,13 @@ test('interviewers see six chapters after the opening; the personal ones are fol
   assert.deepEqual(foldedFor('friend'), []);
   assert.deepEqual(foldedFor('???'), folded);
 });
+
+test('music volume eases in and out without overshooting', async () => {
+  const { fadeLevel } = await import('../assets/js/music.js');
+  assert.equal(fadeLevel(0, 0, .35, 1500), 0);
+  assert.equal(fadeLevel(1500, 0, .35, 1500), .35);
+  assert.equal(fadeLevel(3000, 0, .35, 1500), .35);
+  const mid = fadeLevel(750, 0, .35, 1500);
+  assert.ok(mid > 0 && mid < .35);
+  assert.equal(fadeLevel(600, .35, 0, 600), 0);
+});

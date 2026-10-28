@@ -28,6 +28,7 @@ const HEAD = () => `<!doctype html>
 const NAV = () => `<nav class="bar" aria-label="${t('主导航')}"><div class="bar-in">
   <a class="brand" href="#opening">Yiming</a>
   <div class="seg" role="group" aria-label="${t('访客身份')}"><button type="button" data-mode="interviewer" aria-pressed="true">${t('面试官')}</button><button type="button" data-mode="friend" aria-pressed="false">${t('新朋友')}</button></div>
+  <button type="button" class="music" aria-pressed="false" aria-label="${t('播放背景音乐')}" data-src="assets/audio/shanty.m4a"><svg viewBox="0 0 20 16" aria-hidden="true"><rect class="b1" x="2" y="5" width="3" height="10" rx="1"/><rect class="b2" x="8.5" y="1" width="3" height="14" rx="1"/><rect class="b3" x="15" y="7" width="3" height="8" rx="1"/></svg></button>
   <div class="ach-wrap"><button type="button" class="ach" aria-expanded="false" aria-controls="ach-list"><span class="ach-k">${t('成就')}</span> <b class="ach-n">0/${RULES.length}</b></button>
     <ol class="ach-list" id="ach-list" hidden>${RULES.map(r => `<li data-ach="${r.id}">${isEn() ? r.en : r.title}</li>`).join('')}</ol></div>
   ${isEn() ? '<a class="lang" href="index.html" hreflang="zh-CN" lang="zh-CN">中文</a>' : '<a class="lang" href="en.html" hreflang="en" lang="en">EN</a>'}

@@ -7,6 +7,7 @@ import { levelFor, techRows, cueRules } from '../assets/js/bridge.js';
 export const opening = () => `<section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
   <div class="frame boot"><span class="curl top" aria-hidden="true"></span><span class="curl bottom" aria-hidden="true"></span>
     <canvas class="flag" data-title="EARTH ONLINE" data-sub="· VOYAGE 2027 ·" width="300" height="190" aria-hidden="true"></canvas>
+    <button type="button" class="music-hint">♪ ${t('听一段航海的声音')}</button>
     <ul class="hud" aria-label="${t('玩家数值')}"><li>Class of <b>2027</b></li><li><b>26</b> ${t('国')}</li><li><b>4</b> ${t('段实习')}</li></ul>
     <div class="player">
       <figure class="pframe tilt">${img('portrait', t('尹伊茗'), { eager: true, sizes: '(max-width: 720px) 60vw, 300px' })}<figcaption class="plate">${t('PLAYER · 尹伊茗')}</figcaption></figure>

@@ -16,13 +16,14 @@
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css?v=daa73062c7">
 <link rel="stylesheet" href="assets/css/layout.css?v=6b45028c15">
-<link rel="stylesheet" href="assets/css/components.css?v=a022d9bee2">
-<link rel="stylesheet" href="assets/css/print.css?v=db4b964676" media="print">
+<link rel="stylesheet" href="assets/css/components.css?v=17c3f6df7e">
+<link rel="stylesheet" href="assets/css/print.css?v=0a2854a3f4" media="print">
 </head>
 <body>
 <nav class="bar" aria-label="Main navigation"><div class="bar-in">
   <a class="brand" href="#opening">Yiming</a>
   <div class="seg" role="group" aria-label="Who’s visiting"><button type="button" data-mode="interviewer" aria-pressed="true">Hiring</button><button type="button" data-mode="friend" aria-pressed="false">Friend</button></div>
+  <button type="button" class="music" aria-pressed="false" aria-label="Play music" data-src="assets/audio/shanty.m4a"><svg viewBox="0 0 20 16" aria-hidden="true"><rect class="b1" x="2" y="5" width="3" height="10" rx="1"/><rect class="b2" x="8.5" y="1" width="3" height="14" rx="1"/><rect class="b3" x="15" y="7" width="3" height="8" rx="1"/></svg></button>
   <div class="ach-wrap"><button type="button" class="ach" aria-expanded="false" aria-controls="ach-list"><span class="ach-k">Achievements</span> <b class="ach-n">0/7</b></button>
     <ol class="ach-list" id="ach-list" hidden><li data-ach="novice-done">Left the starter village</li><li data-ach="first-card">Opened a first save file</li><li data-ach="five-cards">Opened 5 save files</li><li data-ach="ten-countries">Lit up 10 countries</li><li data-ach="world-tour">Lit up all 26 countries</li><li data-ach="all-quests">Finished every main quest</li><li data-ach="add-friend">Made a friend</li></ol></div>
   <a class="lang" href="index.html" hreflang="zh-CN" lang="zh-CN">中文</a>
@@ -35,6 +36,7 @@
 <section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
   <div class="frame boot"><span class="curl top" aria-hidden="true"></span><span class="curl bottom" aria-hidden="true"></span>
     <canvas class="flag" data-title="EARTH ONLINE" data-sub="· VOYAGE 2027 ·" width="300" height="190" aria-hidden="true"></canvas>
+    <button type="button" class="music-hint">♪ Hear a sea shanty</button>
     <ul class="hud" aria-label="Player stats"><li>Class of <b>2027</b></li><li><b>26</b> countries</li><li><b>4</b> internships</li></ul>
     <div class="player">
       <figure class="pframe tilt"><img src="assets/img/portrait-s.webp" srcset="assets/img/portrait-s.webp 480w, assets/img/portrait-l.webp 1200w" sizes="(max-width: 720px) 60vw, 300px" width="1200" height="1500" alt="Yiming Yin" fetchpriority="high" decoding="async"><figcaption class="plate">PLAYER · YIMING YIN</figcaption></figure>
@@ -516,7 +518,7 @@
 </main>
 <p class="the-end" aria-hidden="true">Bon Voyage</p>
 <footer class="foot">© 2026 Yiming Yin · All work is my own or one I took part in, and team projects name my role. The Voucher Campaign Workbench (Pingjiang Road night-tour vouchers) is a sample project, Pain-Point Claim is a concept demo, and the Meal Buddy demo runs on preset data.</footer>
-<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=599bc4e641","./assets/js/main.js":"./assets/js/main.js?v=2927599cc2","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/opening.js":"./assets/js/opening.js?v=901f9f0ef7","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.en.js?v=a9b49b34b0","./data/places.js":"./data/places.en.js?v=02c8c1fa12","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
-<script type="module" src="assets/js/main.js?v=2927599cc2"></script>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=599bc4e641","./assets/js/main.js":"./assets/js/main.js?v=e6c6f56f15","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=901f9f0ef7","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.en.js?v=a9b49b34b0","./data/places.js":"./data/places.en.js?v=02c8c1fa12","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="module" src="assets/js/main.js?v=e6c6f56f15"></script>
 </body>
 </html>

@@ -293,3 +293,16 @@ test('interviewer mode folds the personal chapters behind a 「更多关于我�
   const en = read('en.html');
   assert.ok(textOf(en.slice(en.indexOf('<aside class="more-about"'), en.indexOf('</aside>', en.indexOf('<aside class="more-about"')))).includes('More about me'));
 });
+
+test('music: a nav toggle, off by default, a hint by the flag, and a small loop that only loads on demand', async () => {
+  const { statSync, existsSync } = await import('node:fs');
+  for (const page of [html, read('en.html')]) {
+    const nav = page.slice(page.indexOf('<nav class="bar"'), page.indexOf('</nav>'));
+    const m = nav.match(/<button[^>]+class="music"[^>]*>/);
+    assert.ok(m && m[0].includes('aria-pressed="false"') && m[0].includes('data-src="assets/audio/shanty.m4a"'));
+    assert.ok(/<button[^>]+class="music-hint"/.test(page.slice(page.indexOf('data-chapter="opening"'), page.indexOf('</section>', page.indexOf('data-chapter="opening"')))));
+  }
+  assert.ok(!/<audio[^>]+(autoplay|preload="auto")/.test(html));
+  const file = new URL('../assets/audio/shanty.m4a', import.meta.url);
+  assert.ok(existsSync(file) && statSync(file).size < 2.5 * 1024 * 1024);
+});
