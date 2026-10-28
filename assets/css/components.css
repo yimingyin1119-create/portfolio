@@ -575,11 +575,11 @@ html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; 
 .pg-n { position: absolute; bottom: 14px; font: 600 12px/1 var(--f-num); letter-spacing: .12em; color: var(--paper-muted); }
 .pg.l .pg-n { left: 26px; } .pg.r .pg-n { right: 26px; }
 .pg-n::before, .pg-n::after { content: " — "; }
-.case-leaf .vis { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 4px; background: rgba(90, 64, 34, .08); background-size: 100% 100%; background-repeat: no-repeat; }
-.case-leaf .vis img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border: 1.5px solid var(--line); padding: 4px; background: #fff; transform: rotate(-1deg); box-shadow: 0 8px 16px -10px rgba(46, 31, 18, .6); }
-.case-leaf .vis.type { padding: 22px; aspect-ratio: auto; }
-.case-leaf .vis.type .tx { font-family: var(--f-display); font-weight: 900; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; text-align: center; color: var(--paper-ink); }
-.case-leaf .vis.type .tx em { font-style: inherit; color: var(--accent); }
+.pg .vis { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 4px; background: rgba(90, 64, 34, .08); background-size: 100% 100%; background-repeat: no-repeat; }
+.pg .vis img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border: 1.5px solid var(--line); padding: 4px; background: #fff; transform: rotate(-1deg); box-shadow: 0 8px 16px -10px rgba(46, 31, 18, .6); }
+.pg .vis.type { padding: 22px; aspect-ratio: auto; }
+.pg .vis.type .tx { font-family: var(--f-display); font-weight: 900; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.3; text-align: center; color: var(--paper-ink); }
+.pg .vis.type .tx em { font-style: inherit; color: var(--accent); }
 .leaf-title { margin: 0; font-family: var(--f-display); font-weight: 900; font-size: clamp(21px, 2.2vw, 28px); line-height: 1.28; }
 .leaf-note { margin: 0; font-weight: 700; color: var(--accent); }
 .leaf-one { margin: 0; font-size: 14.5px; line-height: 1.75; color: var(--paper-muted); }
@@ -666,7 +666,7 @@ html.js .logbook.ready .leaves { position: absolute; left: 0; right: 0; top: 0; 
 .lens { position: relative; display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(52, 40, 22, .55), inset 0 4px 12px rgba(40, 30, 14, .28); }
 .lens::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, transparent 55%, rgba(58, 44, 26, .12) 78%, rgba(46, 34, 16, .32) 100%); }
 .lens::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(36% 26% at 29% 19%, rgba(255, 255, 255, .32), transparent 76%), radial-gradient(22% 15% at 75% 86%, rgba(255, 255, 255, .12), transparent 80%); }
-.half .case-leaf .vis, .half .vis { flex: 1 1 0; min-height: 0; }
+.half .vis { flex: 1 1 0; min-height: 0; }
 .half .vis img { max-height: 100%; }
 @media (max-width: 720px) { .half .vis { flex: none; height: 240px; } }
 
@@ -775,3 +775,28 @@ html:not(.js) .music, html:not(.js) .music-hint { display: none; }
 .music-hint.on { background: var(--btn); color: var(--btn-ink); border-color: var(--btn); }
 @media (max-width: 600px) { .music-hint { left: auto; right: 8px; transform: translateY(-140%); font-size: 13px; } }
 @media (max-width: 600px) { .opening { --flag-w: 168px; } }
+
+/* ===== logbook dressing: corner flourishes, a ruled margin, the odd coffee ring, a seal and a drawing per spread ===== */
+.pg { --corners: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg transform='rotate(0 22 22)' fill='none' stroke='%236b4a2a' stroke-opacity='.85' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M4 34C4 17 17 4 34 4'/%3E%3Cpath d='M10 34C10 21 21 10 34 10'/%3E%3Cpath d='M4 34q6-2 6-8M34 4q-2 6-8 6'/%3E%3Ccircle cx='4' cy='38' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3Ccircle cx='38' cy='4' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3C/g%3E%3C/svg%3E") left 6px top 6px / 54px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg transform='rotate(90 22 22)' fill='none' stroke='%236b4a2a' stroke-opacity='.85' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M4 34C4 17 17 4 34 4'/%3E%3Cpath d='M10 34C10 21 21 10 34 10'/%3E%3Cpath d='M4 34q6-2 6-8M34 4q-2 6-8 6'/%3E%3Ccircle cx='4' cy='38' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3Ccircle cx='38' cy='4' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3C/g%3E%3C/svg%3E") right 6px top 6px / 54px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg transform='rotate(270 22 22)' fill='none' stroke='%236b4a2a' stroke-opacity='.85' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M4 34C4 17 17 4 34 4'/%3E%3Cpath d='M10 34C10 21 21 10 34 10'/%3E%3Cpath d='M4 34q6-2 6-8M34 4q-2 6-8 6'/%3E%3Ccircle cx='4' cy='38' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3Ccircle cx='38' cy='4' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3C/g%3E%3C/svg%3E") left 6px bottom 6px / 54px no-repeat, url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 44 44'%3E%3Cg transform='rotate(180 22 22)' fill='none' stroke='%236b4a2a' stroke-opacity='.85' stroke-width='1.2' stroke-linecap='round'%3E%3Cpath d='M4 34C4 17 17 4 34 4'/%3E%3Cpath d='M10 34C10 21 21 10 34 10'/%3E%3Cpath d='M4 34q6-2 6-8M34 4q-2 6-8 6'/%3E%3Ccircle cx='4' cy='38' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3Ccircle cx='38' cy='4' r='1.6' fill='%236b4a2a' fill-opacity='.85' stroke='none'/%3E%3C/g%3E%3C/svg%3E") right 6px bottom 6px / 54px no-repeat;
+  background: var(--corners), url("../tex/parchment.webp") 0 0 / 512px 512px, var(--card); }
+.pg.r { background: var(--corners), linear-gradient(90deg, transparent 15px, rgba(154, 58, 34, .22) 15px 16px, transparent 16px 19px, rgba(154, 58, 34, .14) 19px 20px, transparent 20px) 0 0 / 100% 100% no-repeat, url("../tex/parchment.webp") 0 0 / 512px 512px, var(--card); }
+.pg.l.stained { background: var(--corners), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%238a5a26'%3E%3Ccircle cx='75' cy='75' r='56' stroke-width='5' stroke-opacity='.10'/%3E%3Ccircle cx='77' cy='73' r='52' stroke-width='2' stroke-opacity='.08'/%3E%3Cpath d='M30 98c-6 10-4 18 4 22' stroke-width='3' stroke-opacity='.08'/%3E%3C/g%3E%3C/svg%3E") right 18% bottom 16% / 150px no-repeat, url("../tex/parchment.webp") 0 0 / 512px 512px, var(--card); }
+.pg.r.stained { background: var(--corners), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150' viewBox='0 0 150 150'%3E%3Cg fill='none' stroke='%238a5a26'%3E%3Ccircle cx='75' cy='75' r='56' stroke-width='5' stroke-opacity='.10'/%3E%3Ccircle cx='77' cy='73' r='52' stroke-width='2' stroke-opacity='.08'/%3E%3Cpath d='M30 98c-6 10-4 18 4 22' stroke-width='3' stroke-opacity='.08'/%3E%3C/g%3E%3C/svg%3E") right 6% top 42% / 150px no-repeat, linear-gradient(90deg, transparent 15px, rgba(154, 58, 34, .22) 15px 16px, transparent 16px 19px, rgba(154, 58, 34, .14) 19px 20px, transparent 20px) 0 0 / 100% 100% no-repeat, url("../tex/parchment.webp") 0 0 / 512px 512px, var(--card); }
+.pg.l { box-shadow: inset -28px 0 28px -22px rgba(70, 45, 20, .45); }
+.pg.r { box-shadow: inset 28px 0 28px -22px rgba(70, 45, 20, .45); }
+.seal { position: absolute; top: 10px; right: 12px; width: 56px; height: 56px; transform: rotate(-12deg); filter: drop-shadow(0 2px 2px rgba(46, 31, 18, .35)); pointer-events: none; }
+.seal .wax { fill: #8e2f1c; }
+.seal .rim { fill: none; stroke: rgba(255, 220, 190, .45); stroke-width: 1.5; }
+.seal text { fill: #f3d9c2; font: 400 11px/1 var(--f-label); letter-spacing: .12em; }
+.seal .t2 { font-size: 15px; letter-spacing: .04em; }
+.pg-tag { padding-right: 60px; }
+.doodle { position: absolute; top: 14px; right: 16px; width: 76px; height: auto; opacity: .85; transform: rotate(4deg); pointer-events: none; }
+.doodle * { fill: none; stroke: var(--line); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.doodle .a { stroke: var(--red); }
+.pg.r .leaf-title { padding-right: 78px; }
+.leaf-title::after { content: ""; display: block; width: 150px; height: 12px; margin-top: 4px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='12' viewBox='0 0 160 12'%3E%3Cpath d='M2 7c18-8 30 6 48 0s30-8 48 0 28 6 44-2q8-4 14 2' fill='none' stroke='%239a3a22' stroke-opacity='.75' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 150px 12px no-repeat; }
+@media (max-width: 720px) { .doodle { width: 60px; } .pg.r .leaf-title { padding-right: 62px; } .seal { width: 46px; height: 46px; } }
+html[lang="en"] .pg.r .leaf-title { padding-right: 64px; font-size: clamp(18px, 1.75vw, 22px); }
+html[lang="en"] .doodle { width: 62px; }
+html[lang="en"] .leaf-title::after { margin-top: 2px; }
+.pg.l .pg-n { left: 62px; } .pg.r .pg-n { right: 62px; } .pg-n { bottom: 16px; }

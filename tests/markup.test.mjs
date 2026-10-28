@@ -306,3 +306,14 @@ test('music: a nav toggle, off by default, a hint by the flag, and a small loop 
   const file = new URL('../assets/audio/shanty.m4a', import.meta.url);
   assert.ok(existsSync(file) && statSync(file).size < 2.5 * 1024 * 1024);
 });
+
+test('every logbook spread is decorated: a wax seal with its number on the left page, a drawing for its kind on the right', async () => {
+  const { CASES } = await import('../data/content.js');
+  const c = chapterHtml('cases');
+  CASES.filter(x => !x.feat).forEach((x, i) => {
+    const s = c.indexOf(`<article class="case-leaf" data-id="${x.id}"`);
+    const leaf = c.slice(s, c.indexOf('</article>', s));
+    assert.ok(new RegExp(`<svg class="seal"[^>]*aria-hidden="true"[\\s\\S]*?>${String(i + 1).padStart(2, '0')}<`).test(leaf), `${x.id} seal`);
+    assert.ok(new RegExp(`<svg class="doodle ${x.cat}"[^>]*aria-hidden="true"`).test(leaf), `${x.id} doodle`);
+  });
+});

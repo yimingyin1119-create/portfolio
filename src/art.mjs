@@ -64,3 +64,19 @@ const SEA = {
 export const SEA_ORDER = ['ship', 'serpent', 'compass', 'whale', 'anchor', 'waves'];
 export const sea = name => `<svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false">${shapes(SEA[name])}</svg>`;
 export const treasure = () => `<span class="treasure" aria-hidden="true"><canvas class="flag small" data-title="TREASURE" data-sub="" width="150" height="96"></canvas><svg viewBox="0 0 120 120" focusable="false"><path d="M24 24C48 46 74 74 98 98" pathLength="1"/><path d="M98 22C74 48 48 72 22 96" pathLength="1"/></svg><b>${t('宝藏在这里')}</b></span>`;
+
+// Logbook dressing. A drawing per kind of case (120×90, same hand as the chart ornaments)…
+const DOODLE = {
+  campaign: SEA.ship,
+  insight: SEA.compass,
+  content: [['path', 'M86 8C64 14 46 34 38 62l-4 14 10-10c18-6 34-24 42-58z'], ['path', 'M84 12C70 26 56 44 40 70', 1], ['path', 'M52 40l10 2M46 52l10 1M62 28l9 3'],
+    ['path', 'M14 62h26v20c0 4-3 6-6 6H20c-3 0-6-2-6-6z'], ['path', 'M18 62v-6h18v6'], ['path', 'M18 74h18', 1]],
+  creative: [['path', 'M40 48c0-18 10-30 22-30s22 12 22 30c0 6-4 10-8 12H48c-4-2-8-6-8-12z'], ['circle', 'cx="54" cy="40" r="3"'], ['circle', 'cx="70" cy="40" r="3"'],
+    ['path', 'M46 60c-6 10-16 12-22 6M56 62c-2 12-8 20-16 22M68 62c2 12 8 20 16 22M78 60c6 10 16 12 22 6', 1], ['path', 'M30 30q4-6 8 0M94 22q4-6 8 0']],
+};
+export const doodle = cat => `<svg class="doodle ${cat}" viewBox="0 0 120 90" aria-hidden="true" focusable="false">${shapes(DOODLE[cat] ?? DOODLE.campaign)}</svg>`;
+
+// …and a wax seal pressed into the corner of each spread, with the log number.
+export const seal = n => `<svg class="seal" viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+  <path class="wax" d="M40 4c7 0 9 5 15 6s11-2 15 4-1 10 1 16 7 9 4 15-9 6-12 11-2 12-9 15-11-2-16 0-9 7-16 4-6-9-11-12-12-2-15-9 2-11 0-16-7-9-4-15 9-6 12-11 2-12 9-15 11 2 16 0 9-7 16-4z"/>
+  <circle class="rim" cx="40" cy="40" r="23"/><text x="40" y="36" text-anchor="middle" class="t1">LOG</text><text x="40" y="52" text-anchor="middle" class="t2">${String(n).padStart(2, '0')}</text></svg>`;

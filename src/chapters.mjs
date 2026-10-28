@@ -1,6 +1,6 @@
 // Static HTML for every chapter, rendered at build time from data/. Interactions are layered on by assets/js.
 import { chapter, esc, img } from './html.mjs';
-import { icon, stamp, treasure } from './art.mjs';
+import { icon, stamp, treasure, doodle, seal } from './art.mjs';
 import { t, data, places, isEn } from './i18n.mjs';
 import { levelFor, techRows, cueRules } from '../assets/js/bridge.js';
 
@@ -120,8 +120,8 @@ const leaf = (c, i) => {
     ? `<div class="vis type${c.art ? ` art-${c.art}` : ''}"${c.art && c.art !== 'edit' ? ` data-art="${c.art}" data-seed="${c.seed || 1}"` : ''}><span class="tx">${c.type}</span></div>`
     : `<div class="vis${c.fit ? ' fit' : ''}">${img(c.img, '', { sizes: '(max-width: 720px) 90vw, 420px' })}</div>`;
   return `<article class="case-leaf" data-id="${c.id}" data-cat="${c.cat}">
-    <div class="pg l"><p class="pg-tag">${esc(c.tag)}</p>${vis}<p class="leaf-one">${esc(c.one)}</p><span class="pg-n">${2 * i + 1}</span></div>
-    <div class="pg r"><h3 class="leaf-title">${esc(c.title)}</h3><p class="leaf-note">${esc(c.note)}</p>
+    <div class="pg l${i % 3 === 1 ? ' stained' : ''}">${seal(i + 1)}<p class="pg-tag">${esc(c.tag)}</p>${vis}<p class="leaf-one">${esc(c.one)}</p><span class="pg-n">${2 * i + 1}</span></div>
+    <div class="pg r${i % 3 === 2 ? ' stained' : ''}">${doodle(c.cat)}<h3 class="leaf-title">${esc(c.title)}</h3><p class="leaf-note">${esc(c.note)}</p>
       <p class="leaf-role"><b>${esc(c.meta[0][0])}</b>${esc(c.meta[0][1])}</p>
       <ul class="leaf-did">${c.did.slice(0, 3).map(d => `<li>${esc(d)}</li>`).join('')}</ul>
       <p class="leaf-num"><b>${esc(c.num[0])}</b><span>${esc(c.num[1])}</span></p>
