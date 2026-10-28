@@ -32,13 +32,17 @@ def fibres(count, length, width, alpha):
                 d.line([(x + ox, y + oy), (x + dx + ox, y + dy + oy)], fill=(tone, a), width=width)
     return layer
 
-def paper(base, mottle, grain, fib, name, q):
-    m = periodic_noise(5) * mottle + periodic_noise(18) * mottle * .45
-    g = np.array(Image.fromarray(np.clip(rng.normal(128, grain * 8, (N, N)), 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(.6)), float) / 8 - 16
+def paper(base, mottle, grain, fib, name, q, fine=False, fib_blur=.4):
+    if fine:   # smooth paper: only broad soft clouds, plus a whisper of micro-grain
+        m = periodic_noise(2.2) * mottle + periodic_noise(6) * mottle * .22
+        g = np.array(Image.fromarray(np.clip(rng.normal(128, grain * 30, (N, N)), 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(.35)), float) / 30 - 128 / 30
+    else:
+        m = periodic_noise(5) * mottle + periodic_noise(18) * mottle * .45
+        g = np.array(Image.fromarray(np.clip(rng.normal(128, grain * 8, (N, N)), 0, 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(.6)), float) / 8 - 16
     img = np.clip(np.array(base, float)[None, None, :] * (1 + (m + g)[..., None] / 100), 0, 255).astype(np.uint8)
     im = Image.fromarray(img, 'RGB')
     for count, length, width, alpha in fib:
-        lay = fibres(count, length, width, alpha).filter(ImageFilter.GaussianBlur(.4))
+        lay = fibres(count, length, width, alpha).filter(ImageFilter.GaussianBlur(fib_blur))
         tone = Image.new('RGB', (N, N))
         l, a = lay.split()
         tone.paste(Image.merge('RGB', (l, l, l)))
@@ -47,5 +51,5 @@ def paper(base, mottle, grain, fib, name, q):
     im.save(OUT / name, 'WEBP', quality=q, method=6)
     print(name, (OUT / name).stat().st_size // 1024, 'KB')
 
-paper((206, 174, 130), 3.2, .3, [(700, (14, 44), 1, (6, 15)), (140, (30, 80), 1, (5, 11))], 'kraft.webp', 86)
-paper((245, 234, 208), 1.8, .2, [(350, (14, 40), 1, (3, 8))], 'parchment.webp', 86)
+paper((206, 174, 130), 2.6, .5, [(260, (30, 90), 1, (5, 11)), (60, (60, 140), 1, (4, 8))], 'kraft.webp', 88, fine=True, fib_blur=.7)
+paper((245, 234, 208), 1.6, .3, [(160, (30, 90), 1, (3, 7))], 'parchment.webp', 88, fine=True, fib_blur=.7)
