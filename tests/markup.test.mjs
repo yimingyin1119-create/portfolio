@@ -339,3 +339,11 @@ test('the title screen comes before the chapters, with both buttons and artwork 
   assert.ok(!/https?:\/\/[^"')\s]*higgs/.test(css + read('assets/js/voyage.js') + html));
   assert.ok(read('assets/css/print.css').includes('.voyage { display: none'));
 });
+
+test('the typewriter headline and the photo gallery keep their plain markup underneath', () => {
+  assert.match(html, /<h1 id="h-opening">[^<]+<br>[^<]+<\/h1>/);            // typed in the browser; readable without JS
+  assert.ok(html.includes('<div class="vfs">'));                               // gallery source and print/no-WebGL fallback
+  const js = read('assets/js/main.js');
+  assert.ok(js.includes('initHeadline') && js.includes('initPhotoGallery'));
+  assert.ok(!/​/.test(read('assets/js/typetext.js')));                   // no stray zero-width characters in the font cut
+});

@@ -270,4 +270,6 @@ export const EN = {
   '营销策划 · 导演 · AI 新解锁': 'Marketing · Director · AI, newly unlocked',
   '这一路带回的东西，都在下面的章节里': 'Everything from the voyage is in the chapters below',
   '查看玩家档案 →': 'See the player file →',
+  '看照片': 'Photo gallery',
+  '在摄影那一节左右拖动照片，点一张看大图，再点一下或按 Esc 回到原位。': 'In the photography section, drag the photos sideways and tap one to see it whole; tap again or press Esc to put it back.',
 };

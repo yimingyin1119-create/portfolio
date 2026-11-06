@@ -49,6 +49,7 @@ function initUnfurl() {
   const check = () => {
     if (boot.getBoundingClientRect().top > innerHeight * .75) return;
     boot.classList.add('go');
+    boot.dispatchEvent(new Event('unfurl'));
     removeEventListener('scroll', check); removeEventListener('resize', check);
   };
   addEventListener('scroll', check, { passive: true }); addEventListener('resize', check);

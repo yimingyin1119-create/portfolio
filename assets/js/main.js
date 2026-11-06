@@ -10,6 +10,8 @@ import { initFlags } from './flag.js';
 import { initMusic } from './music.js';
 import { initGuide } from './guide.js';
 import { initVoyage } from './voyage.js';
+import { initHeadline } from './typetext.js';
+import { initPhotoGallery } from './gallery.js';
 import { createTracker, progress } from './achievements.js';
 import { store } from './storage.js';
 import { L } from './i18n.js';
@@ -58,6 +60,8 @@ run('flags', () => initFlags());
 run('music', () => initMusic());
 run('guide', () => initGuide());
 run('voyage', () => initVoyage());
+run('headline', () => initHeadline());
+run('photos', () => initPhotoGallery());
 run('reveal', () => initReveal(document));
 
 // The map pulls in ~110 KB of geometry; load it on its own so a failure there never takes the rest down.
