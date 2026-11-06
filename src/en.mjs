@@ -231,7 +231,7 @@ export const EN = {
   '试玩 AI 作品': 'Try the AI builds',
   '三张「可以体验」卡片都能直接打开玩，卡片里写了第一步做什么。': 'All three “Playable” cards open right away, and each tells you what to try first.',
   '翻任务卡': 'Flip the quest cards',
-  '点主线任务卡底部的「翻面看结果」，看每段实习的整体结果。': 'Tap “Flip for results” at the bottom of a quest card to see each internship’s overall results.',
+  '点卡片或底部的「翻面看结果」，也可以左右拖动卡片把它翻过来，看每段实习的整体结果。': 'Tap a quest card or its “Flip for results”, or drag it sideways to turn it over, to see each internship’s overall results.',
   '拖动镜片看弹窗里藏的设计；切到「找茬」自己把它们点出来。': 'Drag the lens to reveal the design tricks in the pop-up, or switch to “Spot it” and find them yourself.',
   '翻航海日志': 'Leaf through the logbook',
   '拖动书页、点左右箭头或用方向键翻页；上面的筛选可以只看某一类案例。': 'Drag a page, tap the arrows or use the arrow keys to turn; the filters above narrow it to one kind of case.',
@@ -272,4 +272,5 @@ export const EN = {
   '查看玩家档案 →': 'See the player file →',
   '看照片': 'Photo gallery',
   '在摄影那一节左右拖动照片，点一张看大图，再点一下或按 Esc 回到原位。': 'In the photography section, drag the photos sideways and tap one to see it whole; tap again or press Esc to put it back.',
+  '翻回正面': 'Flip back',
 };

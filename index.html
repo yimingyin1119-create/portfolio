@@ -17,8 +17,8 @@
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css?v=daa73062c7">
 <link rel="stylesheet" href="assets/css/layout.css?v=6b45028c15">
-<link rel="stylesheet" href="assets/css/components.css?v=4960e68361">
-<link rel="stylesheet" href="assets/css/print.css?v=c43e03e59e" media="print">
+<link rel="stylesheet" href="assets/css/components.css?v=e889b1df11">
+<link rel="stylesheet" href="assets/css/print.css?v=eff537b35f" media="print">
 </head>
 <body>
 <nav class="bar" aria-label="主导航"><div class="bar-in">
@@ -35,7 +35,7 @@
 <dialog class="guide" aria-labelledby="guide-title">
   <div class="g-in">
     <header class="g-head"><p class="kicker">EXPLORER'S GUIDE</p><h2 id="guide-title">探索指南</h2><p class="g-sub">这张地图上能玩的东西都在这里。点「去看看」直接过去。</p><button type="button" class="chip g-x" data-close>关闭</button></header>
-    <ol class="g-list"><li class="g-item"><span class="g-n">01</span><div><b>选身份</b><p>点「我是面试官」或「我是新朋友」，章节会按你的身份重新排列。</p></div><a class="g-go" href="#opening">去看看 →</a></li><li class="g-item"><span class="g-n">02</span><div><b>看属性</b><p>点首屏四个属性卡上的「?」，看每一项背后的证据。</p></div><a class="g-go" href="#opening">去看看 →</a></li><li class="g-item"><span class="g-n">03</span><div><b>试玩 AI 作品</b><p>三张「可以体验」卡片都能直接打开玩，卡片里写了第一步做什么。</p></div><a class="g-go" href="#skills">去看看 →</a></li><li class="g-item"><span class="g-n">04</span><div><b>翻任务卡</b><p>点主线任务卡底部的「翻面看结果」，看每段实习的整体结果。</p></div><a class="g-go" href="#quests">去看看 →</a></li><li class="g-item"><span class="g-n">05</span><div><b>透视镜</b><p>拖动镜片看弹窗里藏的设计；切到「找茬」自己把它们点出来。</p></div><a class="g-go" href="#lens">去看看 →</a></li><li class="g-item"><span class="g-n">06</span><div><b>翻航海日志</b><p>拖动书页、点左右箭头或用方向键翻页；上面的筛选可以只看某一类案例。</p></div><a class="g-go" href="#logbook">去看看 →</a></li><li class="g-item"><span class="g-n">07</span><div><b>放大镜</b><p>在电脑上拖动书上的放大镜，看截图里的小字。</p></div><a class="g-go" href="#logbook">去看看 →</a></li><li class="g-item"><span class="g-n">08</span><div><b>打开案例详情</b><p>点任意案例卡或「看完整案例 →」，在侧边抽屉里读完整内容，左右键翻页。</p></div><a class="g-go" href="#cases">去看看 →</a></li><li class="g-item"><span class="g-n">09</span><div><b>传令滑块</b><p>拖动滑块，看同一件事写给客户、技术和达人的三份文案怎么跟着变。</p></div><a class="g-go" href="#bridge">去看看 →</a></li><li class="g-item"><span class="g-n">10</span><div><b>航海图</b><p>点国家飞过去，点带照片的图钉打开存档卡，拖底部时间轴看每年点亮了哪里。</p></div><a class="g-go" href="#map">去看看 →</a></li><li class="g-item"><span class="g-n">11</span><div><b>看照片</b><p>在摄影那一节左右拖动照片，点一张看大图，再点一下或按 Esc 回到原位。</p></div><a class="g-go" href="#viewfinder">去看看 →</a></li><li class="g-item"><span class="g-n">12</span><div><b>漂流瓶</b><p>左右拖动绳子上的卡片，点一张把它放到上面的屏幕。</p></div><a class="g-go" href="#bottles">去看看 →</a></li><li class="g-item"><span class="g-n">13</span><div><b>加个好友</b><p>一键复制微信号或邮箱。</p></div><a class="g-go" href="#contact">去看看 →</a></li><li class="g-item"><span class="g-n">14</span><div><b>背景音乐</b><p>点导航栏的音柱按钮，或旗子旁的「♪」，播放一首航海歌。</p></div></li><li class="g-item"><span class="g-n">15</span><div><b>中英切换</b><p>点导航栏的「EN / 中文」，换语言后停在同一章节。</p></div></li><li class="g-item"><span class="g-n">16</span><div><b>成就</b><p>做上面这些事会解锁成就，导航栏的「成就」里能看到进度。</p></div></li></ol>
+    <ol class="g-list"><li class="g-item"><span class="g-n">01</span><div><b>选身份</b><p>点「我是面试官」或「我是新朋友」，章节会按你的身份重新排列。</p></div><a class="g-go" href="#opening">去看看 →</a></li><li class="g-item"><span class="g-n">02</span><div><b>看属性</b><p>点首屏四个属性卡上的「?」，看每一项背后的证据。</p></div><a class="g-go" href="#opening">去看看 →</a></li><li class="g-item"><span class="g-n">03</span><div><b>试玩 AI 作品</b><p>三张「可以体验」卡片都能直接打开玩，卡片里写了第一步做什么。</p></div><a class="g-go" href="#skills">去看看 →</a></li><li class="g-item"><span class="g-n">04</span><div><b>翻任务卡</b><p>点卡片或底部的「翻面看结果」，也可以左右拖动卡片把它翻过来，看每段实习的整体结果。</p></div><a class="g-go" href="#quests">去看看 →</a></li><li class="g-item"><span class="g-n">05</span><div><b>透视镜</b><p>拖动镜片看弹窗里藏的设计；切到「找茬」自己把它们点出来。</p></div><a class="g-go" href="#lens">去看看 →</a></li><li class="g-item"><span class="g-n">06</span><div><b>翻航海日志</b><p>拖动书页、点左右箭头或用方向键翻页；上面的筛选可以只看某一类案例。</p></div><a class="g-go" href="#logbook">去看看 →</a></li><li class="g-item"><span class="g-n">07</span><div><b>放大镜</b><p>在电脑上拖动书上的放大镜，看截图里的小字。</p></div><a class="g-go" href="#logbook">去看看 →</a></li><li class="g-item"><span class="g-n">08</span><div><b>打开案例详情</b><p>点任意案例卡或「看完整案例 →」，在侧边抽屉里读完整内容，左右键翻页。</p></div><a class="g-go" href="#cases">去看看 →</a></li><li class="g-item"><span class="g-n">09</span><div><b>传令滑块</b><p>拖动滑块，看同一件事写给客户、技术和达人的三份文案怎么跟着变。</p></div><a class="g-go" href="#bridge">去看看 →</a></li><li class="g-item"><span class="g-n">10</span><div><b>航海图</b><p>点国家飞过去，点带照片的图钉打开存档卡，拖底部时间轴看每年点亮了哪里。</p></div><a class="g-go" href="#map">去看看 →</a></li><li class="g-item"><span class="g-n">11</span><div><b>看照片</b><p>在摄影那一节左右拖动照片，点一张看大图，再点一下或按 Esc 回到原位。</p></div><a class="g-go" href="#viewfinder">去看看 →</a></li><li class="g-item"><span class="g-n">12</span><div><b>漂流瓶</b><p>左右拖动绳子上的卡片，点一张把它放到上面的屏幕。</p></div><a class="g-go" href="#bottles">去看看 →</a></li><li class="g-item"><span class="g-n">13</span><div><b>加个好友</b><p>一键复制微信号或邮箱。</p></div><a class="g-go" href="#contact">去看看 →</a></li><li class="g-item"><span class="g-n">14</span><div><b>背景音乐</b><p>点导航栏的音柱按钮，或旗子旁的「♪」，播放一首航海歌。</p></div></li><li class="g-item"><span class="g-n">15</span><div><b>中英切换</b><p>点导航栏的「EN / 中文」，换语言后停在同一章节。</p></div></li><li class="g-item"><span class="g-n">16</span><div><b>成就</b><p>做上面这些事会解锁成就，导航栏的「成就」里能看到进度。</p></div></li></ol>
   </div>
 </dialog>
 <div class="chart-edge" aria-hidden="true"></div>
@@ -102,61 +102,69 @@
 <section class="chapter" id="quests" data-chapter="quests" aria-labelledby="h-quests"><span class="water l"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M22 62h76l-11 14H33z" pathLength="1"/><path d="M46 62V14M74 62V22" pathLength="1"/><path d="M48 18c15 6 15 18 0 22zM48 44c17 5 17 14 0 18zM76 26c12 5 12 15 0 19zM76 48c12 4 12 10 0 14z" pathLength="1"/><path d="M46 14l11 4-11 4" pathLength="1" class="a"/><path d="M6 82q7-6 14 0t14 0 14 0 14 0 14 0 14 0 14 0 14 0" pathLength="1"/></svg></span>
   <header class="ch-head" data-reveal><svg class="ch-art" viewBox="0 0 120 120" aria-hidden="true" focusable="false"><circle cx="60" cy="60" r="30" pathLength="1"/><circle cx="60" cy="60" r="9" pathLength="1" class="a"/><path d="M60 8v104M8 60h104M23 23l74 74M97 23l-74 74" pathLength="1"/><circle cx="60" cy="60" r="22" pathLength="1"/></svg><p class="kicker">MAIN QUEST</p><h2 id="h-quests">主线任务 · 平台</h2><p class="ch-sub">四段实习，倒着看。卡片正面是我做了什么，翻过来是项目整体的结果。</p></header>
   <div class="quests"><article class="quest" data-quest="douyin" data-reveal>
+    <span class="fc-shadow" aria-hidden="true"></span>
     <div class="quest-in">
       <div class="side front">
         <header class="q-head"><h3>抖音<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">2026 夏 · 北京<br>品牌与营销部 · 政务文旅营销实习生</p></header>
         <figure class="pframe q-photo"><img src="assets/img/douyin-lobby-s.webp" srcset="assets/img/douyin-lobby-s.webp 480w, assets/img/douyin-lobby-l.webp 1200w" sizes="(max-width: 720px) 40vw, 180px" width="1200" height="800" alt="抖音实习" loading="lazy" decoding="async"></figure>
         <p class="side-k">我做了什么</p><ul class="ticks"><li>「心动陕西畅游计划」联合营销落地（不是总负责人）：合作协议、全套物料对接与多轮送审、线上会场搭建、线下活动执行</li><li>独立撰写 4 套区域消费券营销方案：预算、资源组合、达人配置、内容排期</li><li>达人种草：筛选达人、定制 Brief，推进主会场按期上线</li><li>从 0 搭建 AI Agent 区域商机监测，按周产出区域报告</li></ul>
+        <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
       <div class="side back">
         <p class="side-k">项目整体结果</p><ul class="ticks"><li>心动陕西：亿级曝光，陕西旅游搜索热度提升过半</li><li>3 天直播 GMV 数百万级，同比大幅增长</li><li>达人投稿数十条，累计数千万播放</li></ul>
         <p class="src">数据来源：项目整体数据，团队共同完成</p>
         <button type="button" class="chip" data-open="shaanxi">看完整案例 →</button>
+        <button type="button" class="flip" aria-pressed="true"><span>翻回正面</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
     </div>
-    <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button>
   </article><article class="quest" data-quest="kuaishou" data-reveal>
+    <span class="fc-shadow" aria-hidden="true"></span>
     <div class="quest-in">
       <div class="side front">
         <header class="q-head"><h3>快手<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">2025 夏 · 北京<br>政府关系实习生</p></header>
         <figure class="pframe q-photo"><img src="assets/img/kuaishou-s.webp" srcset="assets/img/kuaishou-s.webp 480w, assets/img/kuaishou-l.webp 1200w" sizes="(max-width: 720px) 40vw, 180px" width="1200" height="809" alt="快手实习" loading="lazy" decoding="async"></figure>
         <p class="side-k">我做了什么</p><ul class="ticks"><li>快手电商「宝藏小城」临沂站（平台 S 级项目首站）：参与策划启动会、72 小时溯源直播、货车巡游</li><li>主笔《临沂柳编快手赋能计划》产业带子方案</li><li>参与景区直播场地谈判，以平台流量置换场地资源，联动当地官方账号共同传播</li></ul>
+        <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
       <div class="side back">
         <p class="side-k">项目整体结果</p><ul class="ticks"><li>项目整体曝光 42.3 亿</li><li>登快手热搜 31 个</li></ul>
         <p class="src">数据来源：项目整体数据，团队共同完成</p>
         
+        <button type="button" class="flip" aria-pressed="true"><span>翻回正面</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
     </div>
-    <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button>
   </article><article class="quest" data-quest="chinadaily" data-reveal>
+    <span class="fc-shadow" aria-hidden="true"></span>
     <div class="quest-in">
       <div class="side front">
         <header class="q-head"><h3>中国日报<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">2024 夏 · 远程<br>海外社交媒体部 · 新媒体运营实习生</p></header>
         
         <p class="side-k">我做了什么</p><ul class="ticks"><li>提报中国科技与产业选题（如《国产机械狗》），中英双语本土化转译</li><li>短视频选题、脚本、剪辑、文案全流程</li></ul>
+        <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
       <div class="side back">
         <p class="side-k">项目整体结果</p><ul class="ticks"><li>TikTok 视频 10+ 条（官方主账号 340 万粉丝）</li><li>X 英文社媒文案 13 篇</li></ul>
         <p class="src">数据来源：TikTok、X 公开数据</p>
         <button type="button" class="chip" data-open="chinadaily">看完整案例 →</button>
+        <button type="button" class="flip" aria-pressed="true"><span>翻回正面</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
     </div>
-    <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button>
   </article><article class="quest" data-quest="weibo" data-reveal>
+    <span class="fc-shadow" aria-hidden="true"></span>
     <div class="quest-in">
       <div class="side front">
         <header class="q-head"><h3>新浪微博<svg class="stamp" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="44"/><circle cx="50" cy="50" r="36"/><path d="M50.0 39.0 L52.6 46.4 L60.5 46.6 L54.3 51.4 L56.5 58.9 L50.0 54.5 L43.5 58.9 L45.7 51.4 L39.5 46.6 L47.4 46.4 Z"/><text x="50" y="34" text-anchor="middle">QUEST</text><text x="50" y="78" text-anchor="middle">CLEAR</text></svg></h3><p class="q-meta">2024 夏 · 南京<br>KA 项目运营组实习生</p></header>
         <figure class="pframe q-photo"><img src="assets/img/weibo-yantai-s.webp" srcset="assets/img/weibo-yantai-s.webp 480w, assets/img/weibo-yantai-l.webp 1080w" sizes="(max-width: 720px) 40vw, 180px" width="1080" height="1167" alt="新浪微博实习" loading="lazy" decoding="async"></figure>
         <p class="side-k">我做了什么</p><ul class="ticks"><li>常熟城市品牌项目：策划线下打卡线路与线上话题方向</li><li>统筹 6 位百万粉级大 V，管理活动现场议程与 KOL 节奏</li><li>常熟、昆山、徐州 3 地选题与 KOL 匹配；输出抖音、小红书、B 站竞品分析</li></ul>
+        <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
       <div class="side back">
         <p class="side-k">项目整体结果</p><ul class="ticks"><li>常熟主话题阅读 4310 万，同城热搜 10 小时</li><li>所属 IP 矩阵累计浏览 20 亿+</li></ul>
         <p class="src">数据来源：微博话题页阅读数、同城热搜在榜时长</p>
         <button type="button" class="chip" data-open="changshu">看完整案例 →</button>
+        <button type="button" class="flip" aria-pressed="true"><span>翻回正面</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
     </div>
-    <button type="button" class="flip" aria-pressed="false"><span>翻面看结果</span> <span aria-hidden="true">↻</span></button>
   </article></div>
 </section>
 <section class="chapter" id="posters" data-chapter="posters" aria-labelledby="h-posters"><span class="water r"><svg class="sea" viewBox="0 0 120 90" aria-hidden="true" focusable="false"><path d="M12 62c10-24 58-28 80-8 6-8 14-11 20-9-4 6-6 12-4 18-8 0-14-2-18-6-18 18-68 16-78 5z" pathLength="1"/><circle cx="30" cy="56" r="1.8" pathLength="1"/><path d="M44 34c-2-8 4-10 2-16M44 34c4-6 10-4 12-10" pathLength="1" class="a"/><path d="M6 84q7-6 14 0t14 0 14 0 14 0" pathLength="1"/></svg></span>
@@ -560,7 +568,7 @@
 </main>
 <p class="the-end" aria-hidden="true">Bon Voyage</p>
 <footer class="foot">© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，饭搭子演示版的数据为预置</footer>
-<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/gallery.js":"./assets/js/gallery.js?v=336c8f1096","./assets/js/guide.js":"./assets/js/guide.js?v=5423e36a7f","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=7b6b10514b","./assets/js/main.js":"./assets/js/main.js?v=4fae33d46f","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=411d0457eb","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./assets/js/typetext.js":"./assets/js/typetext.js?v=f1628101fc","./assets/js/voyage.js":"./assets/js/voyage.js?v=f8625aed53","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/gallery.js":"./assets/js/gallery.js?v=336c8f1096","./assets/js/guide.js":"./assets/js/guide.js?v=5423e36a7f","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=7b6b10514b","./assets/js/main.js":"./assets/js/main.js?v=4fae33d46f","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=411d0457eb","./assets/js/quests.js":"./assets/js/quests.js?v=7e3bf3636d","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./assets/js/typetext.js":"./assets/js/typetext.js?v=f1628101fc","./assets/js/voyage.js":"./assets/js/voyage.js?v=f8625aed53","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
 <script type="module" src="assets/js/main.js?v=4fae33d46f"></script>
 </body>
 </html>

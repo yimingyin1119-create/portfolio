@@ -46,19 +46,21 @@ export const opening = () => `<section class="chapter opening" id="opening" data
 const list = items => `<ul class="ticks">${items.map(t => `<li>${esc(t)}</li>`).join('')}</ul>`;
 
 export const quests = () => chapter('quests', 'MAIN QUEST', t('主线任务 · 平台'), `<div class="quests">${data().QUESTS.map(q => `<article class="quest" data-quest="${q.id}" data-reveal>
+    <span class="fc-shadow" aria-hidden="true"></span>
     <div class="quest-in">
       <div class="side front">
         <header class="q-head"><h3>${esc(q.company)}${stamp()}</h3><p class="q-meta">${esc(q.period)} · ${esc(q.place)}<br>${esc(q.role)}</p></header>
         ${q.photo ? `<figure class="pframe q-photo">${img(q.photo, `${q.company}${t('实习')}`, { sizes: '(max-width: 720px) 40vw, 180px' })}</figure>` : ''}
         <p class="side-k">${t('我做了什么')}</p>${list(q.did)}
+        <button type="button" class="flip" aria-pressed="false"><span>${t('翻面看结果')}</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
       <div class="side back">
         <p class="side-k">${t('项目整体结果')}</p>${list(q.result)}
         ${q.source ? `<p class="src">${t('数据来源：')}${esc(q.source)}</p>` : ''}
         ${q.caseId ? `<button type="button" class="chip" data-open="${q.caseId}">${t('看完整案例 →')}</button>` : ''}
+        <button type="button" class="flip" aria-pressed="true"><span>${t('翻回正面')}</span> <span aria-hidden="true">↻</span></button><span class="fc-glare" aria-hidden="true"></span>
       </div>
     </div>
-    <button type="button" class="flip" aria-pressed="false"><span>${t('翻面看结果')}</span> <span aria-hidden="true">↻</span></button>
   </article>`).join('')}</div>`, { sub: t('四段实习，倒着看。卡片正面是我做了什么，翻过来是项目整体的结果。') });
 const LAMP = '<svg class="lamp" viewBox="0 0 80 60" aria-hidden="true"><path d="M40 4v4M40 8L18 46M40 8l22 38" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="40" cy="6" r="3.5" fill="currentColor"/></svg>';
 
