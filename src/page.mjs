@@ -18,6 +18,7 @@ const HEAD = () => `<!doctype html>
 <link rel="preload" href="assets/fonts/latin-pirata-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/text-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/display-old.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/voyage/ship.webp" as="image">
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/layout.css">
@@ -82,6 +83,7 @@ export function renderPage() {
 <body>
 ${NAV()}
 <div class="chart-edge" aria-hidden="true"></div>
+${ch.voyage()}
 <main id="chapters">
 <svg class="route" aria-hidden="true" focusable="false"></svg>
 ${body}

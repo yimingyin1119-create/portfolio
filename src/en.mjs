@@ -262,4 +262,12 @@ export const EN = {
   '成就': 'Achievements',
   '联系我': 'Contact',
   '© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，饭搭子演示版的数据为预置': '© 2026 Yiming Yin · All work is my own or one I took part in, and team projects name my role. The Voucher Campaign Workbench (Pingjiang Road night-tour vouchers) is a sample project, Pain-Point Claim is a concept demo, and the Meal Buddy demo runs on preset data.',
+  '出发，': 'Set out',
+  '去地球 Online': 'for Earth Online',
+  '出发 →': 'Set sail →',
+  '玩家上线': 'Player online,',
+  '新的航程': 'a new voyage',
+  '营销策划 · 导演 · AI 新解锁': 'Marketing · Director · AI, newly unlocked',
+  '这一路带回的东西，都在下面的章节里': 'Everything from the voyage is in the chapters below',
+  '查看玩家档案 →': 'See the player file →',
 };

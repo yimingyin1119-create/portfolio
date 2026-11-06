@@ -329,3 +329,13 @@ test('an explorer guide lists every interaction, each linking to where it lives,
     assert.ok(/<button[^>]+class="guide-open"/.test(page.slice(page.indexOf('data-chapter="opening"'), page.indexOf('</section>', page.indexOf('data-chapter="opening"')))));
   }
 });
+
+test('the title screen comes before the chapters, with both buttons and artwork served from this site', () => {
+  const v = html.indexOf('class="voyage"');
+  assert.ok(v > 0 && v < html.indexOf('<main id="chapters">'));
+  assert.ok(html.includes('class="vy-pill" data-go="1"') && html.includes('class="vy-pill" href="#opening"'));
+  const css = read('assets/css/components.css');
+  for (const img of ['ship', 'captain', 'plants']) assert.ok(css.includes(`../img/voyage/${img}.webp`), img);
+  assert.ok(!/https?:\/\/[^"')\s]*higgs/.test(css + read('assets/js/voyage.js') + html));
+  assert.ok(read('assets/css/print.css').includes('.voyage { display: none'));
+});

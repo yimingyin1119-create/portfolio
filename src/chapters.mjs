@@ -4,6 +4,24 @@ import { icon, stamp, treasure, doodle, seal } from './art.mjs';
 import { t, data, places, isEn } from './i18n.mjs';
 import { levelFor, techRows, cueRules } from '../assets/js/bridge.js';
 
+// The title screen before the opening scroll: a galleon on live ink waves; 「出发」 sails it off and brings in the island.
+// Animated by assets/js/voyage.js; the artwork is cut from three sprite sheets in assets/img/voyage.
+export const voyage = () => `<section class="voyage" id="voyage" aria-labelledby="vy-h1">
+  <div class="vy-frame">
+    <div class="vy-scene">
+      <div class="vy-cloud" aria-hidden="true"><svg viewBox="0 0 300 80" width="300" height="80"><path d="M0 79c14-3 26-3 38-10-4-16 10-30 30-26 6-22 42-34 62-16 16-12 42-6 50 14 10-2 18 2 22 8 24 22 66 26 98 30z"/></svg></div>
+      <svg class="vy-w vy-back" aria-hidden="true" focusable="false"></svg>
+      <div class="vy-t1"><p class="vy-eb">VOYAGE 2027</p><h2 class="vy-h" id="vy-h1">${t('出发，')}<br>${t('去地球 Online')}</h2><button type="button" class="vy-pill" data-go="1">${t('出发 →')}</button></div>
+      <div class="vy-spr vy-ship" aria-hidden="true"></div>
+      <svg class="vy-w vy-front" aria-hidden="true" focusable="false"></svg>
+      <div class="vy-spr vy-palm" aria-hidden="true"></div><div class="vy-spr vy-capt" aria-hidden="true"></div><div class="vy-spr vy-chest" aria-hidden="true"></div><div class="vy-spr vy-bushL" aria-hidden="true"></div><div class="vy-spr vy-bushR" aria-hidden="true"></div>
+      <div class="vy-t2"><h2 class="vy-h">${t('玩家上线')}<br>${t('新的航程')}</h2><p class="vy-p">${t('营销策划 · 导演 · AI 新解锁')}<br>${t('这一路带回的东西，都在下面的章节里')}</p><span class="vy-btnw"><i class="vy-tick a"></i><i class="vy-tick b"></i><i class="vy-tick c"></i><a class="vy-pill" href="#opening">${t('查看玩家档案 →')}</a></span></div>
+    </div>
+    <canvas class="vy-shade" width="64" height="36" aria-hidden="true"></canvas>
+    <div class="vy-ping" aria-hidden="true"></div><div class="vy-cur" aria-hidden="true"></div>
+  </div>
+</section>`;
+
 export const opening = () => `<section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
   <div class="frame boot"><span class="curl top" aria-hidden="true"><span class="roll"></span></span><span class="curl bottom" aria-hidden="true"><span class="lip"></span><span class="roll"></span><span class="tie"></span></span>
     <canvas class="flag" data-title="EARTH ONLINE" data-sub="· VOYAGE 2027 ·" width="300" height="190" aria-hidden="true"></canvas>

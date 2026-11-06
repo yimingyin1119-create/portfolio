@@ -13,11 +13,12 @@
 <link rel="preload" href="assets/fonts/latin-pirata-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/text-500.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/display-old.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/img/voyage/ship.webp" as="image">
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css?v=daa73062c7">
 <link rel="stylesheet" href="assets/css/layout.css?v=6b45028c15">
-<link rel="stylesheet" href="assets/css/components.css?v=d2d9ac37c2">
-<link rel="stylesheet" href="assets/css/print.css?v=a6f20566e5" media="print">
+<link rel="stylesheet" href="assets/css/components.css?v=242ab96a91">
+<link rel="stylesheet" href="assets/css/print.css?v=3ee62167ca" media="print">
 </head>
 <body>
 <nav class="bar" aria-label="主导航"><div class="bar-in">
@@ -38,6 +39,21 @@
   </div>
 </dialog>
 <div class="chart-edge" aria-hidden="true"></div>
+<section class="voyage" id="voyage" aria-labelledby="vy-h1">
+  <div class="vy-frame">
+    <div class="vy-scene">
+      <div class="vy-cloud" aria-hidden="true"><svg viewBox="0 0 300 80" width="300" height="80"><path d="M0 79c14-3 26-3 38-10-4-16 10-30 30-26 6-22 42-34 62-16 16-12 42-6 50 14 10-2 18 2 22 8 24 22 66 26 98 30z"/></svg></div>
+      <svg class="vy-w vy-back" aria-hidden="true" focusable="false"></svg>
+      <div class="vy-t1"><p class="vy-eb">VOYAGE 2027</p><h2 class="vy-h" id="vy-h1">出发，<br>去地球 Online</h2><button type="button" class="vy-pill" data-go="1">出发 →</button></div>
+      <div class="vy-spr vy-ship" aria-hidden="true"></div>
+      <svg class="vy-w vy-front" aria-hidden="true" focusable="false"></svg>
+      <div class="vy-spr vy-palm" aria-hidden="true"></div><div class="vy-spr vy-capt" aria-hidden="true"></div><div class="vy-spr vy-chest" aria-hidden="true"></div><div class="vy-spr vy-bushL" aria-hidden="true"></div><div class="vy-spr vy-bushR" aria-hidden="true"></div>
+      <div class="vy-t2"><h2 class="vy-h">玩家上线<br>新的航程</h2><p class="vy-p">营销策划 · 导演 · AI 新解锁<br>这一路带回的东西，都在下面的章节里</p><span class="vy-btnw"><i class="vy-tick a"></i><i class="vy-tick b"></i><i class="vy-tick c"></i><a class="vy-pill" href="#opening">查看玩家档案 →</a></span></div>
+    </div>
+    <canvas class="vy-shade" width="64" height="36" aria-hidden="true"></canvas>
+    <div class="vy-ping" aria-hidden="true"></div><div class="vy-cur" aria-hidden="true"></div>
+  </div>
+</section>
 <main id="chapters">
 <svg class="route" aria-hidden="true" focusable="false"></svg>
 <section class="chapter opening" id="opening" data-chapter="opening" aria-labelledby="h-opening">
@@ -544,7 +560,7 @@
 </main>
 <p class="the-end" aria-hidden="true">Bon Voyage</p>
 <footer class="foot">© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，饭搭子演示版的数据为预置</footer>
-<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/guide.js":"./assets/js/guide.js?v=5423e36a7f","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=7b6b10514b","./assets/js/main.js":"./assets/js/main.js?v=c33b602484","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=901f9f0ef7","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
-<script type="module" src="assets/js/main.js?v=c33b602484"></script>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/guide.js":"./assets/js/guide.js?v=5423e36a7f","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=7b6b10514b","./assets/js/main.js":"./assets/js/main.js?v=d88c634c42","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=b91bdede43","./assets/js/quests.js":"./assets/js/quests.js?v=7f6e7ef911","./assets/js/reel.js":"./assets/js/reel.js?v=399ca9270c","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./assets/js/voyage.js":"./assets/js/voyage.js?v=f8625aed53","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="module" src="assets/js/main.js?v=d88c634c42"></script>
 </body>
 </html>

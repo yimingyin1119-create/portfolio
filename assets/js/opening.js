@@ -42,7 +42,21 @@ export function setMode(next, { scroll = false } = {}) {
   setTimeout(() => { swap(); main.classList.remove('reordering'); }, 250);
 }
 
+// The opening scroll stays rolled up until it comes into view, so it unfurls in front of the reader.
+function initUnfurl() {
+  const boot = document.querySelector('#opening .boot');
+  if (!boot) return;
+  const check = () => {
+    if (boot.getBoundingClientRect().top > innerHeight * .75) return;
+    boot.classList.add('go');
+    removeEventListener('scroll', check); removeEventListener('resize', check);
+  };
+  addEventListener('scroll', check, { passive: true }); addEventListener('resize', check);
+  check();
+}
+
 export function initOpening() {
+  initUnfurl();
   initAttributes(document.getElementById('opening'));
   const pick = mode => { saveMode(store, mode); setMode(mode, { scroll: true }); };
   for (const b of document.querySelectorAll('[data-pick]')) b.addEventListener('click', () => pick(b.dataset.pick));
