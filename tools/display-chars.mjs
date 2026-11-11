@@ -7,6 +7,8 @@ import * as EN from '../data/content.en.js';
 // Elements styled with var(--f-display); keep in sync with the CSS.
 const TAGS = ['h1', 'h2', 'h3'];
 const CLASSES = ['attr-v', 'tx', 'big', 'screen-tx', 'frame-tx', 'more-t'];
+// <b> inside these blocks is set in the title face too (the novice badges' names, the treasure label)
+const BOLD_IN = ['badge', 'treasure'];
 
 const text = s => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
 
@@ -14,6 +16,7 @@ export function displayChars(html = ['index.html', 'en.html'].map(f => readFileS
   const parts = [];
   for (const t of TAGS) for (const m of html.matchAll(new RegExp(`<${t}\\b[^>]*>([\\s\\S]*?)</${t}>`, 'g'))) parts.push(text(m[1]));
   for (const c of CLASSES) for (const m of html.matchAll(new RegExp(`<(\\w+)[^>]*class="(?:[^"]*\\s)?${c}(?:\\s[^"]*)?"[^>]*>([\\s\\S]*?)</\\1>`, 'g'))) parts.push(text(m[2]));
+  for (const c of BOLD_IN) for (const m of html.matchAll(new RegExp(`<(\\w+)[^>]*class="(?:[^"]*\\s)?${c}(?:\\s[^"]*)?"[^>]*>([\\s\\S]*?)</\\1>`, 'g'))) for (const n of m[2].matchAll(/<b\b[^>]*>([\s\S]*?)<\/b>/g)) parts.push(text(n[1]));
   // built in the browser: map archive cards, the projector screen, the badge list
   for (const s of Object.values(STORIES)) parts.push(s.title);
   for (const w of WORKS) parts.push(w.title, w.platform);
