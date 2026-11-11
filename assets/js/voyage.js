@@ -55,7 +55,7 @@ const back = k => 1 + 2.4 * Math.pow(k - 1, 3) + 1.4 * Math.pow(k - 1, 2);
 const tf = (x, y, r = 0, s = 1) => `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) rotate(${r.toFixed(3)}deg) scale(${s.toFixed(4)})`;
 
 export function initVoyage() {
-  const root = document.querySelector('.voyage');
+  const root = document.querySelector('.vy-hero');
   if (!root) return;
   const frame = root.querySelector('.vy-frame'), scene = root.querySelector('.vy-scene');
   const $ = s => root.querySelector(s);

@@ -6,7 +6,7 @@ import { levelFor, techRows, cueRules } from '../assets/js/bridge.js';
 
 // The title screen before the opening scroll: a galleon on live ink waves; 「出发」 sails it off and brings in the island.
 // Animated by assets/js/voyage.js; the artwork is cut from three sprite sheets in assets/img/voyage.
-export const voyage = () => `<section class="voyage" id="voyage" aria-labelledby="vy-h1">
+export const voyage = () => `<section class="vy-hero" id="voyage" aria-labelledby="vy-h1">
   <div class="vy-frame">
     <div class="vy-scene">
       <div class="vy-cloud" aria-hidden="true"><svg viewBox="0 0 300 80" width="300" height="80"><path d="M0 79c14-3 26-3 38-10-4-16 10-30 30-26 6-22 42-34 62-16 16-12 42-6 50 14 10-2 18 2 22 8 24 22 66 26 98 30z"/></svg></div>

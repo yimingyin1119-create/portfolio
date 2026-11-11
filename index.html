@@ -17,8 +17,8 @@
 <script>/* roll the scroll up before first paint so it can unfurl; main.js confirms, or this backs out after 3 s */(function(d){if(matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;d.classList.add('motion');setTimeout(function(){if(!d.classList.contains('js'))d.classList.remove('motion')},3000)})(document.documentElement)</script>
 <link rel="stylesheet" href="assets/css/tokens.css?v=daa73062c7">
 <link rel="stylesheet" href="assets/css/layout.css?v=6b45028c15">
-<link rel="stylesheet" href="assets/css/components.css?v=70ca8fc985">
-<link rel="stylesheet" href="assets/css/print.css?v=eff537b35f" media="print">
+<link rel="stylesheet" href="assets/css/components.css?v=1ea3cc1d79">
+<link rel="stylesheet" href="assets/css/print.css?v=dca8f027f4" media="print">
 </head>
 <body>
 <nav class="bar" aria-label="主导航"><div class="bar-in">
@@ -39,7 +39,7 @@
   </div>
 </dialog>
 <div class="chart-edge" aria-hidden="true"></div>
-<section class="voyage" id="voyage" aria-labelledby="vy-h1">
+<section class="vy-hero" id="voyage" aria-labelledby="vy-h1">
   <div class="vy-frame">
     <div class="vy-scene">
       <div class="vy-cloud" aria-hidden="true"><svg viewBox="0 0 300 80" width="300" height="80"><path d="M0 79c14-3 26-3 38-10-4-16 10-30 30-26 6-22 42-34 62-16 16-12 42-6 50 14 10-2 18 2 22 8 24 22 66 26 98 30z"/></svg></div>
@@ -568,7 +568,7 @@
 </main>
 <p class="the-end" aria-hidden="true">Bon Voyage</p>
 <footer class="foot">© 2026 尹伊茗 · 作品为本人创作或参与完成，团队项目均注明个人角色；消费券工作台（平江路夜游券）为示例项目，痛点认领为概念 Demo，饭搭子演示版的数据为预置</footer>
-<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/gallery.js":"./assets/js/gallery.js?v=336c8f1096","./assets/js/guide.js":"./assets/js/guide.js?v=5423e36a7f","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=7b6b10514b","./assets/js/main.js":"./assets/js/main.js?v=4fae33d46f","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=411d0457eb","./assets/js/quests.js":"./assets/js/quests.js?v=7e3bf3636d","./assets/js/reel.js":"./assets/js/reel.js?v=dcb52b2b58","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./assets/js/typetext.js":"./assets/js/typetext.js?v=f1628101fc","./assets/js/voyage.js":"./assets/js/voyage.js?v=f8625aed53","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
+<script type="importmap">{"imports":{"./assets/js/achievements.js":"./assets/js/achievements.js?v=b235bff68e","./assets/js/bridge.js":"./assets/js/bridge.js?v=f630d2b010","./assets/js/cases.js":"./assets/js/cases.js?v=59e676e389","./assets/js/count.js":"./assets/js/count.js?v=0f1988f671","./assets/js/flag.js":"./assets/js/flag.js?v=04229a1872","./assets/js/gallery.js":"./assets/js/gallery.js?v=336c8f1096","./assets/js/guide.js":"./assets/js/guide.js?v=5423e36a7f","./assets/js/i18n.js":"./assets/js/i18n.js?v=cccfabebc9","./assets/js/logbook.js":"./assets/js/logbook.js?v=7b6b10514b","./assets/js/main.js":"./assets/js/main.js?v=4fae33d46f","./assets/js/map.js":"./assets/js/map.js?v=68bd53099c","./assets/js/modes.js":"./assets/js/modes.js?v=32e2ecef70","./assets/js/motion.js":"./assets/js/motion.js?v=1f8d82235d","./assets/js/music.js":"./assets/js/music.js?v=84b2d94302","./assets/js/opening.js":"./assets/js/opening.js?v=411d0457eb","./assets/js/quests.js":"./assets/js/quests.js?v=7e3bf3636d","./assets/js/reel.js":"./assets/js/reel.js?v=dcb52b2b58","./assets/js/route.js":"./assets/js/route.js?v=9d0838a9d0","./assets/js/storage.js":"./assets/js/storage.js?v=646e3537fe","./assets/js/timeline.js":"./assets/js/timeline.js?v=3a18c3c069","./assets/js/typetext.js":"./assets/js/typetext.js?v=f1628101fc","./assets/js/voyage.js":"./assets/js/voyage.js?v=372f339e29","./data/content.js":"./data/content.js?v=7d3150719e","./data/places.js":"./data/places.js?v=a94c2bdf10","./assets/map/world.js":"./assets/map/world.js?v=ff9de8aca6"}}</script>
 <script type="module" src="assets/js/main.js?v=4fae33d46f"></script>
 </body>
 </html>

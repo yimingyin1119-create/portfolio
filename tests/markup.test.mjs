@@ -331,13 +331,13 @@ test('an explorer guide lists every interaction, each linking to where it lives,
 });
 
 test('the title screen comes before the chapters, with both buttons and artwork served from this site', () => {
-  const v = html.indexOf('class="voyage"');
+  const v = html.indexOf('class="vy-hero"');
   assert.ok(v > 0 && v < html.indexOf('<main id="chapters">'));
   assert.ok(html.includes('class="vy-pill" data-go="1"') && html.includes('class="vy-pill" href="#opening"'));
   const css = read('assets/css/components.css');
   for (const img of ['ship', 'captain', 'plants']) assert.ok(css.includes(`../img/voyage/${img}.webp`), img);
   assert.ok(!/https?:\/\/[^"')\s]*higgs/.test(css + read('assets/js/voyage.js') + html));
-  assert.ok(read('assets/css/print.css').includes('.voyage { display: none'));
+  assert.ok(read('assets/css/print.css').includes('.vy-hero { display: none'));
 });
 
 test('the typewriter headline and the photo gallery keep their plain markup underneath', () => {
@@ -346,4 +346,10 @@ test('the typewriter headline and the photo gallery keep their plain markup unde
   const js = read('assets/js/main.js');
   assert.ok(js.includes('initHeadline') && js.includes('initPhotoGallery'));
   assert.ok(!/​/.test(read('assets/js/typetext.js')));                   // no stray zero-width characters in the font cut
+});
+
+test('the title screen and the abroad chapter do not share a class name', () => {
+  assert.equal((html.match(/class="voyage"/g) ?? []).length, 1);                         // the abroad chapter's card grid
+  assert.ok(html.indexOf('class="voyage"') > html.indexOf('<main id="chapters">'));
+  assert.ok(!/^\.voyage \{[^}]*height/m.test(read('assets/css/components.css')));        // nothing sizes that grid to a screen
 });
